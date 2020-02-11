@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_select_trainer_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/select_trainer_header"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+        android:id="@+id/searchview_select_trainer_search_trainer"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_trainer_trainerheader">
+
+    </SearchView>
+
+    <TextView
+        android:id="@+id/tv_select_trainer_trainerheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/menu_trainers"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_select_trainer_skill_list" />
+
+    <TextView
+        android:id="@+id/tv_select_trainer_skillsheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/select_trainer_skillset"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_trainer_header" />
+
+    <Button
+        android:id="@+id/btn_select_trainer_addskill"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/button"
+        android:text="@string/plus"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_select_trainer_skillsheader"
+        app:layout_constraintStart_toEndOf="@+id/tv_select_trainer_skillsheader"
+        app:layout_constraintTop_toTopOf="@+id/tv_select_trainer_skillsheader"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_select_trainer_skill_list"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_trainer_skillsheader" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_select_trainer_trainerlist"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchview_select_trainer_search_trainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
