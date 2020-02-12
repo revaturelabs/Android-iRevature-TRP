@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">RevatureTrainingRoomPlanner</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_email"> Enter Username</string>
+    <string name="prompt_password"> Enter Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
@@ -31,7 +31,7 @@
     <string name="submit">Submit</string>
     <string name="forgot_password_title">Forgot Password</string>
     <string name="reset_pass_title">Reset Password</string>
-    <string name="login_reset">Password Reset</string>
+    <string name="login_reset">Forgot Password</string>
     <string name="login_signin">Sign In</string>
     <string name="trainerlookup_defaultname">Firstname Lastname</string>
     <string name="trainerlookup_default_email">Email default</string>

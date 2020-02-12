@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/prompt_email"
+        android:background="@drawable/login_et_style"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_login_password"
@@ -53,6 +54,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/prompt_password"
+        android:background="@drawable/login_et_style"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_login_password"
@@ -103,5 +105,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_login_password" />
+
+    <CheckBox
+        android:id="@+id/checkbox_login_remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Remember me"
+        app:layout_constraintTop_toBottomOf="@+id/et_login_password"
+        tools:layout_editor_absoluteX="126dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
