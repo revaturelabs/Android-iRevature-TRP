@@ -34,39 +34,41 @@
 
     <EditText
         android:id="@+id/et_login_email"
-        style="@style/AppTheme.NoActionBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="125dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:background="@drawable/login_et_style"
-        android:hint="@string/prompt_email"
+        android:hint="@string/prompt_username"
         android:inputType="textEmailAddress"
         android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:textAlignment="textStart"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/img_login_user_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
+        app:layout_constraintVertical_bias="0.243" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/et_login_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:background="@drawable/login_et_style"
         android:ems="12"
         android:hint="@string/prompt_password"
         android:inputType="textPassword"
         android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/et_login_email"
         app:layout_constraintStart_toStartOf="@+id/et_login_email"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_email" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_email" tools:targetApi="o" />
 
     <Button
         android:id="@+id/btn_login_signin"
@@ -86,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Keep Logged In"
+        android:text="@string/login_checkbox"
         app:layout_constraintStart_toStartOf="@+id/et_login_password"
         app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
@@ -98,7 +100,8 @@
         app:layout_constraintEnd_toEndOf="@+id/img_login_user_icon"
         app:layout_constraintStart_toStartOf="@+id/img_login_user_icon"
         app:layout_constraintTop_toTopOf="@+id/et_login_password"
-        app:srcCompat="@drawable/ic_menu_manage" />
+        app:srcCompat="@drawable/ic_menu_manage"
+        android:contentDescription="TODO" />
 
     <ImageView
         android:id="@+id/img_login_user_icon"
@@ -108,7 +111,8 @@
         app:layout_constraintStart_toStartOf="@+id/tv_login_header"
         app:layout_constraintTop_toTopOf="@+id/et_login_email"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/ic_menu_camera"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/tv_login_header"
@@ -116,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-        android:text="Sign In"
+        android:text="@string/action_sign_in_short"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
