@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SearchView
-        android:id="@+id/searchview_batches_search_batch"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </SearchView>
+        <SearchView
+            android:id="@+id/searchview_batches_search_batch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_batches_list_batches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        </SearchView>
 
-    <FrameLayout
-        android:id="@+id/framelayout_batches_batch_detail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_batches_list_batches"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    </FrameLayout>
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

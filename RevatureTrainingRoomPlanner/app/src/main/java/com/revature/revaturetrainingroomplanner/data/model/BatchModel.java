@@ -26,20 +26,6 @@ public class BatchModel implements SortedListAdapter.ViewModel {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BatchModel that = (BatchModel) o;
-        return mId == that.mId &&
-                Objects.equals(mText, that.mText);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(mId, mText);
-    }
-
-    @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof BatchModel) {
             final BatchModel other = (BatchModel) model;

@@ -31,5 +31,7 @@ public class BatchesAdapter extends SortedListAdapter<BatchModel> {
         final BatchRowBinding binding = BatchRowBinding.inflate(inflater, parent, false);
         return new BatchViewHolder(binding);
     }
+
+    
 }
 

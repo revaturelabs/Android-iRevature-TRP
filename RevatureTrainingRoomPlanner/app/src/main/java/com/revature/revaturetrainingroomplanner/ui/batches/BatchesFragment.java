@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -27,7 +28,10 @@ import java.util.List;
 public class BatchesFragment extends Fragment {
 
     private static final String[] BATCHES = new String[]{
-            "2001Mobile"
+            "2001Mobile",
+            "2100FullStack",
+            "2200FrontEnd",
+            "4150Backend"
     };
 
     private static final Comparator<BatchModel> ALPHABETICAL_COMPARATOR = new Comparator<BatchModel>() {
@@ -51,51 +55,51 @@ public class BatchesFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 //        batchesViewModel =
 //                ViewModelProviders.of(this).get(BatchesViewModel.class);
+//        View root = inflater.inflate(R.layout.fragment_batches, container, false);
+
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
         View root = inflater.inflate(R.layout.fragment_batches, container, false);
 
-//        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_batches, container, false);
-//
-//        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR);
-//
-//        RecyclerView recyclerView = mBinding.getRoot().findViewById(R.id.recyclerview_batches_list_batches);
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        recyclerView.setAdapter(mAdapter);
-//
-//        mModels = new ArrayList<>();
-//        int id = 0;
-//        for (String batch: BATCHES) {
-//            mModels.add(new BatchModel(id, batch));
-//            id++;
-//        }
-//        mAdapter.edit()
-//                .add(mModels)
-//                .commit();
-//
-//        searchView = root.findViewById(R.id.searchview_batches_search_batch);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String query) {
-//                final List<BatchModel> filteredModelList = filter(mModels, query);
-//                mAdapter.edit()
-//                        .replaceAll(filteredModelList)
-//                        .commit();
-//                recyclerView.scrollToPosition(0);
-//                return true;
-//            }
-//        });
+        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR);
+
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerview_batches_list_batches);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        recyclerView.setAdapter(mAdapter);
+
+        mModels = new ArrayList<>();
+        int id = 0;
+        for (String batch: BATCHES) {
+            mModels.add(new BatchModel(id, batch));
+            id++;
+        }
+        mAdapter.edit()
+                .add(mModels)
+                .commit();
+
+        searchView = root.findViewById(R.id.searchview_batches_search_batch);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                final List<BatchModel> filteredModelList = filter(mModels, query);
+                mAdapter.edit()
+                        .replaceAll(filteredModelList)
+                        .commit();
+                recyclerView.scrollToPosition(0);
+                return true;
+            }
+        });
 
         frameLayout = root.findViewById(R.id.framelayout_batches_batch_detail);
-//        final TextView textView = root.findViewById(R.id.text_batches);
-//        batchesViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
+
         return root;
     }
-
+//
     private static List<BatchModel> filter(List<BatchModel> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
