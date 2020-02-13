@@ -1,10 +1,6 @@
 package com.revature.revaturetrainingroomplanner.ui.rooms;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RoomInfoFragment extends Fragment {
+public class RoomInfoFragment extends Fragment implements BatchesAdapter.OnItemListener {
 
     Spinner roomSpinner, locationSpinner;
 
@@ -86,4 +85,8 @@ public class RoomInfoFragment extends Fragment {
 
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
 }

@@ -4,12 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +11,17 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.RoomModel;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter.OnItemListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -54,6 +54,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private Animator mAnimator;
     private SearchView searchView;
     private ProgressBar mProgressBar;
+    private OnItemListener mOnItemListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,12 +62,14 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.room_row, container, false);
 
+        mOnItemListener = (OnItemListener) getParentFragment();
+
         View root = inflater.inflate(R.layout.fragment_rooms_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);
         searchView = root.findViewById(R.id.searchview_rooms_with_search_search_room);
         mProgressBar = root.findViewById(R.id.progressbar_rooms_with_search_progress);
 
-        mAdapter = new RoomsAdapter(getContext(), ALPHABETICAL_COMPARATOR);
+        mAdapter = new RoomsAdapter(getContext(), ALPHABETICAL_COMPARATOR, mOnItemListener);
 
         mAdapter.addCallback(this);
 

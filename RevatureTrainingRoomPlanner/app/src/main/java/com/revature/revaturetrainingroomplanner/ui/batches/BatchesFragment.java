@@ -3,15 +3,14 @@ package com.revature.revaturetrainingroomplanner.ui.batches;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -20,17 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.MainActivity;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class BatchesFragment extends Fragment implements SortedListAdapter.Callback {
+public class BatchesFragment extends Fragment implements SortedListAdapter.Callback, BatchesAdapter.OnItemListener {
 
     private static final String[] BATCHES = new String[]{
             "2001Mobile",
@@ -63,17 +62,15 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
 //        View root = inflater.inflate(R.layout.fragment_batches, container, false);
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
-        
+
         View root = inflater.inflate(R.layout.fragment_batches, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_list_batches);
         searchView = root.findViewById(R.id.searchview_batches_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_progress);
         
-        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR);
+        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, this);
 
         mAdapter.addCallback(this);
-
-        
 
         layoutManager = new LinearLayoutManager(root.getContext());
 
@@ -171,5 +168,11 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
             }
         }
         return filteredModelList;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
     }
 }
