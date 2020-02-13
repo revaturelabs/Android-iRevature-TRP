@@ -3,7 +3,6 @@ package com.revature.revaturetrainingroomplanner.ui.batches;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,12 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.MainActivity;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
@@ -54,6 +54,7 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
     private Animator mAnimator;
     private SearchView searchView;
     private ProgressBar mProgressBar;
+    private NavController mNavController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_list_batches);
         searchView = root.findViewById(R.id.searchview_batches_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_progress);
+        mNavController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         
         mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, this);
 
@@ -172,7 +174,6 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
+        mNavController.navigate(R.id.nav_rooms);
     }
 }

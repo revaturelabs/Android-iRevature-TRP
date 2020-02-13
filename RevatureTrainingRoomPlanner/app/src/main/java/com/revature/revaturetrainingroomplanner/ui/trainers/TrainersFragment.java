@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
 
-public class TrainersFragment extends Fragment implements BatchesAdapter.OnItemListener {
+public class TrainersFragment extends Fragment implements TrainersAdapter.OnItemListener {
 
     private TrainersViewModel trainersViewModel;
 
