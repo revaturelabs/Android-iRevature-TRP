@@ -11,15 +11,15 @@
         android:label="@string/menu_batches"
         tools:layout="@layout/fragment_batches" >
         <action
-            android:id="@+id/action_nav_batches_to_nav_rooms"
+            android:id="@+id/action_nav_batches_to_nav_rooms2"
             app:destination="@id/nav_rooms" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_rooms"
-        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment"
+        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment"
         android:label="@string/menu_rooms"
-        tools:layout="@layout/fragment_room_info" />
+        tools:layout="@layout/fragment_rooms" />
 
     <fragment
         android:id="@+id/nav_trainers"

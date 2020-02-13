@@ -33,10 +33,10 @@ import java.util.List;
 public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     private static final String[] ROOMS = new String[]{
-            "2001Mobile",
-            "2100FullStack",
-            "2200FrontEnd",
-            "4150Backend"
+            "Phirom",
+            "Suck",
+            "My",
+            "Boobs"
     };
 
     private static final Comparator<RoomModel> ALPHABETICAL_COMPARATOR = new Comparator<RoomModel>() {
