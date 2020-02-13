@@ -4,33 +4,56 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SortedList;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
-import com.revature.revaturetrainingroomplanner.ui.adapter.viewholder.BatchViewHolder;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class BatchesAdapter extends SortedListAdapter<BatchModel> {
 
-    public BatchesAdapter(Context context, Comparator<BatchModel> comparator) {
+    private OnItemListener mOnItemListener;
+
+    public BatchesAdapter(Context context, Comparator<BatchModel> comparator, OnItemListener onItemListener) {
         super(context, BatchModel.class, comparator);
+        mOnItemListener = onItemListener;
     }
 
     @Override
     protected ViewHolder<? extends BatchModel> onCreateViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
         final BatchRowBinding binding = BatchRowBinding.inflate(inflater, parent, false);
-        return new BatchViewHolder(binding);
+        return new BatchViewHolder(binding, mOnItemListener);
     }
 
+    public static class BatchViewHolder extends ViewHolder<BatchModel> implements View.OnClickListener {
+
+        private final BatchRowBinding mBinding;
+        private OnItemListener mOnItemListener;
+
+        public BatchViewHolder(BatchRowBinding binding, OnItemListener onItemListener) {
+            super(binding.getRoot());
+            mBinding = binding;
+            mOnItemListener = onItemListener;
+
+            mBinding.getRoot().setOnClickListener(this);
+        }
+
+        @Override
+        protected void performBind(@NonNull BatchModel item) {
+            mBinding.setModel(item);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnItemListener.onItemClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnItemListener {
+        void onItemClick(int position);
+    }
 }
 

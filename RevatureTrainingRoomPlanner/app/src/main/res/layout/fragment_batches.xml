@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <SearchView
-        android:id="@+id/searchview_batches_search_batch"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </SearchView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_batches_list_batches"
+        <FrameLayout
+            android:id="@+id/framelayout_batches_holdRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_batches_list_batches"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/progressbar_batches_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+            </androidx.recyclerview.widget.RecyclerView>
 
-    </FrameLayout>
+            <ProgressBar
+                android:id="@+id/progressbar_batches_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
-</LinearLayout>
+        </FrameLayout>
+
+        <SearchView
+            android:id="@+id/searchview_batches_search_batch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </SearchView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
