@@ -65,6 +65,7 @@
         android:inputType="textPassword"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
+        android:textAlignment="textStart"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/et_login_email"
         app:layout_constraintStart_toStartOf="@+id/et_login_email"

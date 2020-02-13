@@ -3,25 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/nav_menu_group_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_batches"
             android:title="@string/menu_assign_batch" />
         <item
             android:id="@+id/nav_lookup"
             android:title="@string/nav_menu_lookup" />
+
+    </group>
+    <group
+        android:id="@+id/nav_menu_group_middle">
         <item
             android:id="@+id/nav_account"
             android:title="@string/nav_menu_account" />
         <item
             android:id="@+id/nav_settings"
             android:title="@string/nav_menu_settings" />
+    </group>
+    <group
+        android:id="@+id/nav_menu_group_bottom">
         <item
             android:id="@+id/nav_logout"
             android:title="@string/nav_menu_logout" />
     </group>
 
-<!--    <item android:title="Communicate">-->
+    <!--    <item android:title="Communicate">-->
 <!--        <menu/>-->
 <!--    </item>-->
 
