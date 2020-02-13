@@ -9,13 +9,17 @@
         android:id="@+id/nav_batches"
         android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment"
         android:label="@string/menu_batches"
-        tools:layout="@layout/fragment_batches" />
+        tools:layout="@layout/fragment_batches" >
+        <action
+            android:id="@+id/action_nav_batches_to_nav_rooms"
+            app:destination="@id/nav_rooms" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_rooms"
-        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment"
+        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment"
         android:label="@string/menu_rooms"
-        tools:layout="@layout/fragment_rooms" />
+        tools:layout="@layout/fragment_room_info" />
 
     <fragment
         android:id="@+id/nav_trainers"

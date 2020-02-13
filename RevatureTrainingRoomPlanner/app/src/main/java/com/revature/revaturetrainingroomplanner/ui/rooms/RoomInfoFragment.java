@@ -1,5 +1,6 @@
 package com.revature.revaturetrainingroomplanner.ui.rooms;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment;
 import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersFragment;
 
 /**
@@ -33,11 +35,11 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_room_info, container, false);
-        Button assign = getView().findViewById(R.id.btn_room_info_assign);
+        Button assign = rootView.findViewById(R.id.btn_room_info_assign);
         assign.setOnClickListener(this);
 
-        TextView maxSeats = getView().findViewById(R.id.tv_room_info_seats);
-        TextView confirmed = getView().findViewById(R.id.tv_room_info_confirmed);
+        TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
+        TextView confirmed = rootView.findViewById(R.id.tv_room_info_confirmed);
 
         // TODO: set seats and room confirmation based on room
         String max = "Max seats: " + "##";
@@ -50,14 +52,16 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
+        // Once Trainers Fragment ready navigate there
+
         Toast.makeText(getContext(), "Room assigned", Toast.LENGTH_SHORT).show();
         // TODO: move to trainer fragment, store room and batch
-
-        Fragment fragment = new TrainersFragment();
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.nav_host_fragment_container, fragment);
+        Fragment fragment = new BatchesFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.nav_host_fragment, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
+
     }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/batches_layout">
 
     <SearchView
         android:id="@+id/searchview_batches_search_batch"
@@ -50,5 +51,10 @@
         </FrameLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

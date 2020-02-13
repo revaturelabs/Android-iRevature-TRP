@@ -5,22 +5,26 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.google.android.material.navigation.NavigationView;
 import com.revature.revaturetrainingroomplanner.MainActivity;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
@@ -177,8 +181,15 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
     @Override
     public void onItemClick(int position) {
 
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
+        String msg = BATCHES[position] + " selected";
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+
+        Fragment fragment = new RoomInfoFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.nav_host_fragment, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
+
 
     }
 }
