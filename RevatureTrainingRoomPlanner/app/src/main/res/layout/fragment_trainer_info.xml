@@ -5,33 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_trainer_lookup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/trainer_room_lookup_header"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
-        android:id="@+id/img_trainer_lookup_profile"
+        android:id="@+id/img_trainers_profile"
         android:layout_width="118dp"
         android:layout_height="116dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainer_lookup_title"
-        tools:srcCompat="@tools:sample/avatars[2]"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/avatars[2]" />
 
     <TextView
-        android:id="@+id/tv_trainer_lookup_name"
+        android:id="@+id/tv_trainers_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -41,10 +28,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_trainer_lookup_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/img_trainers_profile" />
 
     <TextView
-        android:id="@+id/tv_trainerlookup_email"
+        android:id="@+id/tv_trainers_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -53,10 +40,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainerlookup_emailheader" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_emailheader" />
 
     <TextView
-        android:id="@+id/tv_trainerlookup_location"
+        android:id="@+id/tv_trainers_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -65,10 +52,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainer_lookup_location_header" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_location_header" />
 
     <TextView
-        android:id="@+id/tv_trainerlookup_skills"
+        android:id="@+id/tv_trainers_skills"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -77,11 +64,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainerlookup_skillsheader" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_skillsheader" />
 
 
     <TextView
-        android:id="@+id/tv_trainer_lookup_location_header"
+        android:id="@+id/tv_trainers_location_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -90,11 +77,11 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainer_lookup_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_name" />
 
 
     <TextView
-        android:id="@+id/tv_trainerlookup_emailheader"
+        android:id="@+id/tv_trainers_emailheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -103,10 +90,10 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainerlookup_location" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_location" />
 
     <TextView
-        android:id="@+id/tv_trainerlookup_skillsheader"
+        android:id="@+id/tv_trainers_skillsheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -115,6 +102,18 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainerlookup_email" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_email" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
