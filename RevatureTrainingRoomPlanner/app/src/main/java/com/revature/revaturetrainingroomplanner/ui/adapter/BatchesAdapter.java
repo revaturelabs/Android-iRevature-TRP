@@ -32,6 +32,5 @@ public class BatchesAdapter extends SortedListAdapter<BatchModel> {
         return new BatchViewHolder(binding);
     }
 
-    
 }
 

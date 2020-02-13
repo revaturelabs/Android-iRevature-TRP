@@ -1,79 +1,74 @@
-package com.revature.revaturetrainingroomplanner.ui.batches;
+package com.revature.revaturetrainingroomplanner.ui.rooms;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
+
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
-import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
-import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.data.model.RoomModel;
+import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class BatchesFragment extends Fragment implements SortedListAdapter.Callback {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
-    private static final String[] BATCHES = new String[]{
+    private static final String[] ROOMS = new String[]{
             "2001Mobile",
             "2100FullStack",
             "2200FrontEnd",
             "4150Backend"
     };
 
-    private static final Comparator<BatchModel> ALPHABETICAL_COMPARATOR = new Comparator<BatchModel>() {
+    private static final Comparator<RoomModel> ALPHABETICAL_COMPARATOR = new Comparator<RoomModel>() {
         @Override
-        public int compare(BatchModel a, BatchModel b) {
+        public int compare(RoomModel a, RoomModel b) {
             return a.getText().compareTo(b.getText());
         }
     };
 
-    private BatchesViewModel batchesViewModel;
-    private List<BatchModel> mModels;
+    private List<RoomModel> mModels;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private BatchesAdapter mAdapter;
-    private BatchRowBinding mBinding;
+    private RoomsAdapter mAdapter;
+    private RoomRowBinding mBinding;
     private Animator mAnimator;
     private SearchView searchView;
     private ProgressBar mProgressBar;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-//        batchesViewModel =
-//                ViewModelProviders.of(this).get(BatchesViewModel.class);
-//        View root = inflater.inflate(R.layout.fragment_batches, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
-        
-        View root = inflater.inflate(R.layout.fragment_batches, container, false);
-        mRecyclerView = root.findViewById(R.id.recyclerview_batches_list_batches);
-        searchView = root.findViewById(R.id.searchview_batches_search_batch);
-        mProgressBar = root.findViewById(R.id.progressbar_batches_progress);
-        
-        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.room_row, container, false);
+
+        View root = inflater.inflate(R.layout.fragment_rooms_with_search, container, false);
+        mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);
+        searchView = root.findViewById(R.id.searchview_rooms_with_search_search_room);
+        mProgressBar = root.findViewById(R.id.progressbar_rooms_with_search_progress);
+
+        mAdapter = new RoomsAdapter(getContext(), ALPHABETICAL_COMPARATOR);
 
         mAdapter.addCallback(this);
-
-        
 
         layoutManager = new LinearLayoutManager(root.getContext());
 
@@ -82,8 +77,8 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
 
         mModels = new ArrayList<>();
         int id = 0;
-        for (String batch: BATCHES) {
-            mModels.add(new BatchModel(id, batch));
+        for (String room: ROOMS) {
+            mModels.add(new RoomModel(id, room));
             id++;
         }
         mAdapter.edit()
@@ -98,7 +93,7 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<BatchModel> filteredModelList = filter(mModels, query);
+                final List<RoomModel> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -160,11 +155,11 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
         mAnimator.start();
     }
 
-    private static List<BatchModel> filter(List<BatchModel> models, String query) {
+    private static List<RoomModel> filter(List<RoomModel> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<BatchModel> filteredModelList = new ArrayList<>();
-        for (BatchModel model : models) {
+        final List<RoomModel> filteredModelList = new ArrayList<>();
+        for (RoomModel model : models) {
             final String text = model.getText().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
@@ -172,4 +167,5 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
         }
         return filteredModelList;
     }
+
 }
