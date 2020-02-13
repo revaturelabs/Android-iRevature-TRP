@@ -15,6 +15,8 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +26,8 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment;
+import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersFragment;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -172,7 +176,9 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
 
     @Override
     public void onItemClick(int position) {
+
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+
     }
 }
