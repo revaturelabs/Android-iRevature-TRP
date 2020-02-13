@@ -1,6 +1,7 @@
 package com.revature.revaturetrainingroomplanner.ui.batches;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +26,7 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,8 +134,22 @@ public class BatchesFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_batches_assign :
                 Log.d("debug", "found button click");
                 Snackbar.make(getView(), "Batch selected, switch fragment plz", Snackbar.LENGTH_LONG).show();
-
+                goToLocationFragment();
                 break;
         }
+    }
+
+    private void goToLocationFragment() {
+
+        // TODO: switch to location/room fragment
+        // breaks app, but i think we need this code
+
+//        Fragment fragment = new RoomInfoFragment();
+//        FragmentManager fm = getActivity().getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.nav_host_fragment_container, fragment);
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//        ft.commit();
+
     }
 }
