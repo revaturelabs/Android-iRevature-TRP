@@ -2,12 +2,15 @@ package com.revature.revaturetrainingroomplanner.ui.batches;
 
 import android.animation.Animator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
@@ -25,7 +29,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class BatchesFragment extends Fragment {
+public class BatchesFragment extends Fragment implements View.OnClickListener {
 
     private static final String[] BATCHES = new String[]{
             "2001Mobile",
@@ -37,7 +41,7 @@ public class BatchesFragment extends Fragment {
     private static final Comparator<BatchModel> ALPHABETICAL_COMPARATOR = new Comparator<BatchModel>() {
         @Override
         public int compare(BatchModel a, BatchModel b) {
-        return a.getText().compareTo(b.getText());
+            return a.getText().compareTo(b.getText());
         }
     };
 
@@ -50,6 +54,7 @@ public class BatchesFragment extends Fragment {
     private Animator mAnimator;
     SearchView searchView;
     FrameLayout frameLayout;
+    Button assign;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +71,9 @@ public class BatchesFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         recyclerView.setAdapter(mAdapter);
+
+        assign = root.findViewById(R.id.btn_batches_assign);
+        assign.setOnClickListener(this);
 
         mModels = new ArrayList<>();
         int id = 0;
@@ -95,11 +103,11 @@ public class BatchesFragment extends Fragment {
             }
         });
 
-        frameLayout = root.findViewById(R.id.framelayout_batches_batch_detail);
+//        frameLayout = root.findViewById(R.id.framelayout_batches_batch_detail);
 
         return root;
     }
-//
+    //
     private static List<BatchModel> filter(List<BatchModel> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
@@ -111,5 +119,19 @@ public class BatchesFragment extends Fragment {
             }
         }
         return filteredModelList;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("debug", "button click");
+
+        switch (v.getId()){
+
+            case R.id.btn_batches_assign :
+                Log.d("debug", "found button click");
+                Snackbar.make(getView(), "Batch selected, switch fragment plz", Snackbar.LENGTH_LONG).show();
+
+                break;
+        }
     }
 }

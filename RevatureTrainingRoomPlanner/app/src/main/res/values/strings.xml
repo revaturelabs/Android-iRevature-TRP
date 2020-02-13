@@ -53,4 +53,8 @@
     <string name="forgot_password_header">Please enter your e-mail</string>
     <string name="login_checkbox">Keep Logged In</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="room_info_header">Revature Locations</string>
+
 </resources>

@@ -18,7 +18,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_batches_list_batches"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_batches_assign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/assign_button_style"
+            android:ems="8"
+            android:text="@string/menu_assign_batch"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
