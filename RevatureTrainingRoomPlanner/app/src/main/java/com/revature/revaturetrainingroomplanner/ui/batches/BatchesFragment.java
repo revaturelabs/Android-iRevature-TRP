@@ -13,6 +13,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -50,7 +51,7 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private BatchesAdapter mAdapter;
-    private BatchRowBinding mBinding;
+    private ViewDataBinding mBinding;
     private Animator mAnimator;
     private SearchView searchView;
     private ProgressBar mProgressBar;

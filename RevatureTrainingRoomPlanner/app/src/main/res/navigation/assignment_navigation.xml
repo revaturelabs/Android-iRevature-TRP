@@ -67,5 +67,10 @@
         android:name="com.revature.revaturetrainingroomplanner.ui.login.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/roomLookupFragment"
+        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomLookupFragment"
+        android:label="fragment_room_lookup"
+        tools:layout="@layout/fragment_room_lookup" />
 
 </navigation>
