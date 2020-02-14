@@ -19,6 +19,7 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 
     private BatchesViewModel batchesViewModel;
     private NavController mNavController;
+    private View batchInfo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,7 +27,13 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 //                ViewModelProviders.of(this).get(BatchesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_batches, container, false);
 
+        batchInfo = root.findViewById(R.id.include_batches_batch_info);
+
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
+
+        root.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) -> {
+            mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms());
+        });
 
 //        final TextView textView = root.findViewById(R.id.text_send);
 //        batchesViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
@@ -35,9 +42,6 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 
     @Override
     public void onItemClick(int position) {
-
-        Bundle args = new Bundle();
-//        mNavController.navigate(R.id.action_nav_batches_to_nav_batch_info);
-
+        batchInfo.setVisibility(View.VISIBLE);
     }
 }

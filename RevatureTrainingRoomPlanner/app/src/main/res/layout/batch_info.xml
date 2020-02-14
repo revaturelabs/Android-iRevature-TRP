@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textview_batch_info_batch_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Details"
@@ -22,7 +22,7 @@
         android:text="@string/batches_details" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_batch_info_assign_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"

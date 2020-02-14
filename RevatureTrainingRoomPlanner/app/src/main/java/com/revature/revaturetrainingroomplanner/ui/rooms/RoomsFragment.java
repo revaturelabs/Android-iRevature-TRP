@@ -23,13 +23,12 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_rooms, container, false);
+
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
         return root;
     }
 
     @Override
     public void onItemClick(int position) {
-        Bundle args = new Bundle();
-        mNavController.navigate(R.id.action_nav_rooms_to_nav_rooms_info, args);
     }
 }
