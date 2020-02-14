@@ -13,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirections;
 
 import java.util.Objects;
 
@@ -36,7 +37,9 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
 
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
 
-        assign.setOnClickListener(this);
+        rootView.findViewById(R.id.btn_room_info_assign).setOnClickListener((v) -> {
+            mNavController.navigate(RoomInfoFragmentDirections.actionNavRoomsInfoToNavTrainers());
+        });
 
         TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
         TextView confirmed = rootView.findViewById(R.id.tv_room_info_confirmed);
