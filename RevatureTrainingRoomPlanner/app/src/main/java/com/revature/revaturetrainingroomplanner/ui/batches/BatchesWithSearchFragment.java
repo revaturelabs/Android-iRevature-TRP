@@ -1,4 +1,4 @@
-package com.revature.revaturetrainingroomplanner.ui.campuses;
+package com.revature.revaturetrainingroomplanner.ui.batches;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,16 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.CampusModel;
-import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
-import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.data.model.BatchModel;
+import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter.OnItemListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
+public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     private static final String[] BATCHES = new String[]{
             "2001Mobile",
@@ -37,14 +37,14 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
             "4150Backend"
     };
 
-    private static final Comparator<CampusModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<BatchModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
-//    private CampusesViewModel campusesViewModel;
-    private List<CampusModel> mModels;
+    private BatchesViewModel batchesViewModel;
+    private List<BatchModel> mModels;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private CampusesAdapter mAdapter;
-    private CampusRowBinding mBinding;
+    private BatchesAdapter mAdapter;
+    private BatchRowBinding mBinding;
     private Animator mAnimator;
     private SearchView searchView;
     private ProgressBar mProgressBar;
@@ -52,20 +52,20 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        campusesViewModel =
-//                ViewModelProviders.of(this).get(CampusesViewModel.class);
-//        View root = inflater.inflate(R.layout.fragment_campuses, container, false);
+//        batchesViewModel =
+//                ViewModelProviders.of(this).get(BatchesViewModel.class);
+//        View root = inflater.inflate(R.layout.fragment_batches, container, false);
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.campus_row, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
 
         mOnItemListener = (OnItemListener) getParentFragment();
 
-        View root = inflater.inflate(R.layout.fragment_campuses_with_search, container, false);
-        mRecyclerView = root.findViewById(R.id.recyclerview_campuses_with_search_list_campuses);
-        searchView = root.findViewById(R.id.searchview_campuses_with_search_search_campus);
-        mProgressBar = root.findViewById(R.id.progressbar_campuses_with_search_progress);
+        View root = inflater.inflate(R.layout.fragment_batches, container, false);
+        mRecyclerView = root.findViewById(R.id.recyclerview_batches_list_batches);
+        searchView = root.findViewById(R.id.searchview_batches_search_batch);
+        mProgressBar = root.findViewById(R.id.progressbar_batches_progress);
 
-        mAdapter = new CampusesAdapter(getContext(), ALPHABETICAL_COMPARATOR, mOnItemListener);
+        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, mOnItemListener);
 
         mAdapter.addCallback(this);
 
@@ -76,8 +76,8 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
         mModels = new ArrayList<>();
         int id = 0;
-        for (String campus: BATCHES) {
-            mModels.add(new CampusModel(id, campus));
+        for (String batch: BATCHES) {
+            mModels.add(new BatchModel(id, batch));
             id++;
         }
         mAdapter.edit()
@@ -92,7 +92,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<CampusModel> filteredModelList = filter(mModels, query);
+                final List<BatchModel> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -154,11 +154,11 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.start();
     }
 
-    private static List<CampusModel> filter(List<CampusModel> models, String query) {
+    private static List<BatchModel> filter(List<BatchModel> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<CampusModel> filteredModelList = new ArrayList<>();
-        for (CampusModel model : models) {
+        final List<BatchModel> filteredModelList = new ArrayList<>();
+        for (BatchModel model : models) {
             final String text = model.getText().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);

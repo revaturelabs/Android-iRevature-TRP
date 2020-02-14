@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/batches_layout">
 
     <SearchView
-        android:id="@+id/searchview_rooms_with_search_search_room"
+        android:id="@+id/searchview_batches_with_search_search_batch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="@string/search_room_hint"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,7 +17,7 @@
     </SearchView>
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/framelayout_batches_holdRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -26,17 +25,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room">
+        app:layout_constraintTop_toBottomOf="@+id/searchview_batches_with_search_search_batch">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_rooms_with_search_list_rooms"
+            android:id="@+id/recyclerview_batches_with_search_list_batches"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <ProgressBar
-            android:id="@+id/progressbar_rooms_with_search_progress"
+            android:id="@+id/progressbar_batches_with_search_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
