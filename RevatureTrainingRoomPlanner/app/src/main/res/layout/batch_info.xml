@@ -7,25 +7,53 @@
         android:id="@+id/textview_batch_info_batch_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="32dp"
         android:text="Details"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/tv_batch_info_associates"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:text="@string/batches_details" />
+        android:paddingTop="10dp"
+        android:text="@string/batches_details"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_batch_info_skills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Skills Required:"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_batch_info_skills_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="50dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/btn_batch_info_assign_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/assign_button_style"
         android:ems="6"
         android:text="Assign Room"

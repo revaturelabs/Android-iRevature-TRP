@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,9 +40,14 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 //        batchesViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
         return root;
     }
-
     @Override
     public void onItemClick(int position) {
         batchInfo.setVisibility(View.VISIBLE);
+
+        // set number of associates based on whats clicked
+        TextView associates = batchInfo.findViewById(R.id.tv_batch_info_associates);
+        String associatesNum = "Associates: " + 0; // parse endpoint
+        associates.setText(associatesNum);
+
     }
 }
