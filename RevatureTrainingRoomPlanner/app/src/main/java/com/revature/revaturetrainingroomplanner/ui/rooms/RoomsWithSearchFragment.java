@@ -100,6 +100,8 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
                 return true;
             }
         });
+        searchView.setQueryHint("Look for room");
+
 
         return root;
     }

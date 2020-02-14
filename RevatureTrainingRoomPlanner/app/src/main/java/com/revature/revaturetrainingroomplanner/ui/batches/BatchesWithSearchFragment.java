@@ -101,6 +101,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
             }
         });
 
+        searchView.setQueryHint("Look for batch");
+
         return root;
     }
 

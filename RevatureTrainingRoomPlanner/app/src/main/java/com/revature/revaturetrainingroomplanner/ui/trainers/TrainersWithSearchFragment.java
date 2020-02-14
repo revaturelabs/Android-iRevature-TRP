@@ -100,6 +100,8 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
                 return true;
             }
         });
+        searchView.setQueryHint("Look for trainer");
+
 
         return root;
     }

@@ -101,6 +101,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
                 return true;
             }
         });
+        searchView.setQueryHint("Look for campus");
 
         return root;
     }
