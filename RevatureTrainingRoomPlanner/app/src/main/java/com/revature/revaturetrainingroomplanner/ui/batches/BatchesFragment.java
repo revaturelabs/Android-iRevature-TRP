@@ -175,6 +175,6 @@ public class BatchesFragment extends Fragment implements SortedListAdapter.Callb
     @Override
     public void onItemClick(int position) {
         Bundle args = new Bundle();
-        mNavController.navigate(R.id.nav_rooms, args);
+        mNavController.navigate(R.id.action_nav_batches_to_nav_rooms);
     }
 }

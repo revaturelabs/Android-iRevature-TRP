@@ -59,7 +59,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        
+
         mBinding = DataBindingUtil.inflate(inflater, R.layout.room_row, container, false);
 
         mOnItemListener = (OnItemListener) getParentFragment();
