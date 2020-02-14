@@ -1,27 +1,18 @@
 package com.revature.revaturetrainingroomplanner.ui.rooms;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment;
-import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersFragment;
 
 import java.util.Objects;
 
@@ -67,7 +58,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
         Toast.makeText(getContext(), "Room assigned", Toast.LENGTH_SHORT).show();
 
         Bundle args = new Bundle();
-        mNavController.navigate(R.id.nav_trainers, args);
+        mNavController.navigate(R.id.action_nav_rooms_info_to_nav_trainers);
 
     }
 }

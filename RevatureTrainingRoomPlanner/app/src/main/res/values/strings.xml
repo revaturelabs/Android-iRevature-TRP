@@ -20,7 +20,7 @@
     <string name="menu_assign_batch">Assign Batch</string>
     <string name="menu_batches">Batches</string>
     <string name="menu_rooms">Rooms</string>
-    <string name="menu_trainers">Trainer Info</string>
+    <string name="menu_trainers">Trainers</string>
     <string name="menu_lookup">Trainer/Room Lookup</string>
     <string name="menu_account">Account</string>
     <string name="menu_settings">Settings</string>
@@ -52,10 +52,11 @@
     <string name="nav_menu_logout">Logout</string>
     <string name="forgot_password_header">Please enter your e-mail</string>
     <string name="login_checkbox">Keep Logged In</string>
+    <string name="room_info_header">ROOM 12</string>
+    <string name="menu_rooms_info">Room Info</string>
+    <string name="search_room_hint">Search for a room</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="room_info_header">ROOM 123</string>
-    <string name="menu_rooms_info">Room Info</string>
 
 </resources>

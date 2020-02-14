@@ -38,7 +38,7 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
     public void onItemClick(int position) {
 
         Bundle args = new Bundle();
-        mNavController.navigate(R.id.nav_trainers_info, args);
+        mNavController.navigate(R.id.action_nav_trainers_to_nav_trainer_info);
 
     }
 }
