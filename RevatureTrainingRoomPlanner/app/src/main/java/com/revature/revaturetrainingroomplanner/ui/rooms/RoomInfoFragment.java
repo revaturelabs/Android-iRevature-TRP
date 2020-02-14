@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -21,10 +23,14 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment;
 import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersFragment;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RoomInfoFragment extends Fragment implements View.OnClickListener{
+
+    private NavController mNavController;
 
     public RoomInfoFragment() {
         // Required empty public constructor
@@ -36,6 +42,9 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_room_info, container, false);
         Button assign = rootView.findViewById(R.id.btn_room_info_assign);
+
+        mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
+
         assign.setOnClickListener(this);
 
         TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
@@ -56,12 +65,9 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
         // Once Trainers Fragment ready navigate there
 
         Toast.makeText(getContext(), "Room assigned", Toast.LENGTH_SHORT).show();
-        // TODO: move to trainer fragment, store room and batch
-        Fragment fragment = new BatchesFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.nav_host_fragment, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commit();
+
+        Bundle args = new Bundle();
+        mNavController.navigate(R.id.nav_trainers, args);
 
     }
 }
