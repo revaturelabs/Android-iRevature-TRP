@@ -37,7 +37,9 @@
         tools:layout="@layout/fragment_rooms" >
         <action
             android:id="@+id/action_nav_rooms_info_to_nav_trainers"
-            app:destination="@id/nav_trainers" />
+            app:destination="@id/nav_trainers"
+            app:popUpTo="@+id/nav_rooms_info"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
