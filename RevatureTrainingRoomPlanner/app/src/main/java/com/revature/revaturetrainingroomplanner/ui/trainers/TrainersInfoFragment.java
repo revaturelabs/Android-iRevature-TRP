@@ -54,7 +54,7 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
 
         Toast.makeText(getContext(), "Trainer assigned to batch", Toast.LENGTH_LONG).show();
         Bundle args = new Bundle();
-        mNavController.navigate(R.id.nav_rooms_info, args);
+        mNavController.navigate(R.id.nav_batches, args);
 
     }
 }
