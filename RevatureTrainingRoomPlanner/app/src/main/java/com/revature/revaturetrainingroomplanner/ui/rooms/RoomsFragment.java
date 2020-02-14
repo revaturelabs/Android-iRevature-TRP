@@ -30,6 +30,6 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     @Override
     public void onItemClick(int position) {
         Bundle args = new Bundle();
-        mNavController.navigate(R.id.nav_rooms_info, args);
+        mNavController.navigate(R.id.action_nav_rooms_to_nav_rooms_info, args);
     }
 }
