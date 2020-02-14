@@ -61,7 +61,11 @@
         android:id="@+id/lookupFragment"
         android:name="com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragment"
         android:label="fragment_lookup"
-        tools:layout="@layout/fragment_lookup" />
+        tools:layout="@layout/fragment_lookup" >
+        <action
+            android:id="@+id/action_lookupFragment_to_roomLookupFragment"
+            app:destination="@id/roomLookupFragment" />
+    </fragment>
     <activity
         android:id="@+id/loginActivity"
         android:name="com.revature.revaturetrainingroomplanner.ui.login.LoginActivity"
