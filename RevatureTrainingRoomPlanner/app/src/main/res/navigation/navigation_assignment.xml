@@ -12,8 +12,7 @@
         tools:layout="@layout/fragment_batches" >
         <action
             android:id="@+id/action_nav_batches_to_nav_rooms"
-            app:destination="@id/nav_rooms"
-            app:enterAnim="@anim/fragment_fade_enter" />
+            app:destination="@id/nav_rooms" />
     </fragment>
 
     <fragment
@@ -23,8 +22,7 @@
         tools:layout="@layout/fragment_rooms">
         <action
             android:id="@+id/action_nav_rooms_to_nav_rooms_info"
-            app:destination="@id/nav_room_info"
-            app:enterAnim="@anim/fragment_open_enter" />
+            app:destination="@id/nav_room_info" />
     </fragment>
 
     <fragment
@@ -35,7 +33,6 @@
         <action
             android:id="@+id/action_nav_rooms_info_to_nav_trainers"
             app:destination="@id/nav_trainers"
-            app:enterAnim="@anim/fragment_fade_enter"
             app:popUpTo="@+id/nav_rooms" />
     </fragment>
 
@@ -53,6 +50,11 @@
         android:id="@+id/nav_trainer_info"
         android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragment"
         android:label="@string/menu_trainers"
-        tools:layout="@layout/fragment_trainer_info" />
+        tools:layout="@layout/fragment_trainer_info" >
+        <action
+            android:id="@+id/action_nav_trainer_info_to_nav_batches"
+            app:destination="@id/nav_batches"
+            app:popUpTo="@+id/nav_batches" />
+    </fragment>
 
 </navigation>

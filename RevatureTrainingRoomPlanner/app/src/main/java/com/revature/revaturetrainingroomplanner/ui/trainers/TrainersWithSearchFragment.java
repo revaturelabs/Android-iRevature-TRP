@@ -11,6 +11,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,12 +40,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
             "4150Backend"
     };
 
-    private static final Comparator<TrainerModel> ALPHABETICAL_COMPARATOR = new Comparator<TrainerModel>() {
-        @Override
-        public int compare(TrainerModel a, TrainerModel b) {
-            return a.getText().compareTo(b.getText());
-        }
-    };
+    private static final Comparator<TrainerModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
     private List<TrainerModel> mModels;
     private RecyclerView mRecyclerView;
@@ -57,12 +53,12 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
     private OnItemListener mOnItemListener;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.trainer_row, container, false);
 
-        mOnItemListener = (OnItemListener) getParentFragment();
+        mOnItemListener = (getParentFragment() instanceof OnItemListener)? (OnItemListener) getParentFragment() : (OnItemListener) getParentFragment().getParentFragment();
 
         View root = inflater.inflate(R.layout.fragment_trainers_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);

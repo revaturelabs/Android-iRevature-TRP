@@ -12,7 +12,6 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
-import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirections;
 
 import java.util.Objects;
 
@@ -30,7 +29,7 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onRoomClick(int position) {
         mNavController.navigate(R.id.action_nav_rooms_to_nav_rooms_info);
     }
 }

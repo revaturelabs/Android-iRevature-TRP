@@ -22,8 +22,9 @@ public class BatchesAdapter extends SortedListAdapter<BatchModel> {
         mOnItemListener = onItemListener;
     }
 
+    @NonNull
     @Override
-    protected ViewHolder<? extends BatchModel> onCreateViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
+    protected ViewHolder<? extends BatchModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final BatchRowBinding binding = BatchRowBinding.inflate(inflater, parent, false);
         return new BatchViewHolder(binding, mOnItemListener);
     }
@@ -33,7 +34,7 @@ public class BatchesAdapter extends SortedListAdapter<BatchModel> {
         private final BatchRowBinding mBinding;
         private OnItemListener mOnItemListener;
 
-        public BatchViewHolder(BatchRowBinding binding, OnItemListener onItemListener) {
+        BatchViewHolder(BatchRowBinding binding, OnItemListener onItemListener) {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
@@ -48,12 +49,12 @@ public class BatchesAdapter extends SortedListAdapter<BatchModel> {
 
         @Override
         public void onClick(View v) {
-            mOnItemListener.onItemClick(getAdapterPosition());
+            mOnItemListener.onBatchClick(getAdapterPosition());
         }
     }
 
     public interface OnItemListener {
-        void onItemClick(int position);
+        void onBatchClick(int position);
     }
 }
 

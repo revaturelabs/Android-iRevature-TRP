@@ -29,19 +29,18 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
         View root = inflater.inflate(R.layout.fragment_batches, container, false);
 
         batchInfo = root.findViewById(R.id.include_batches_batch_info);
-
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
 
-        root.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) -> {
-            mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms());
-        });
+        batchInfo.setVisibility(View.GONE);
+
+        root.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) -> mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms()));
 
 //        final TextView textView = root.findViewById(R.id.text_send);
 //        batchesViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
         return root;
     }
     @Override
-    public void onItemClick(int position) {
+    public void onBatchClick(int position) {
         batchInfo.setVisibility(View.VISIBLE);
 
         // set number of associates based on whats clicked

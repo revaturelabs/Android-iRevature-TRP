@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_search_menus"
+    app:startDestination="@id/lookup_trainers_with_search">
+
+    <fragment
+        android:id="@+id/lookup_trainers_with_search"
+        android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersWithSearchFragment"
+        android:label="fragment_trainers"
+        tools:layout="@layout/fragment_trainers_with_search">
+        <action
+            android:id="@+id/action_lookup_trainers_with_search_to_lookup_rooms_with_search"
+            app:destination="@id/lookup_rooms_with_search" />
+    </fragment>
+    <fragment
+        android:id="@+id/lookup_rooms_with_search"
+        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragment"
+        android:label="fragment_rooms"
+        tools:layout="@layout/fragment_rooms_with_search">
+        <action
+            android:id="@+id/action_lookup_rooms_with_search_to_lookup_trainers_with_search"
+            app:destination="@id/lookup_trainers_with_search" />
+    </fragment>
+</navigation>

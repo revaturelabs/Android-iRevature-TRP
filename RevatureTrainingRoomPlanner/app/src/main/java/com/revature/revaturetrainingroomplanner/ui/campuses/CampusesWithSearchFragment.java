@@ -31,10 +31,11 @@ import java.util.List;
 public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     private static final String[] CAMPUSES = new String[]{
-            "2001Mobile",
-            "2100FullStack",
-            "2200FrontEnd",
-            "4150Backend"
+            "USF",
+            "WVU",
+            "TX",
+            "NYU",
+            "UTA"
     };
 
     private static final Comparator<CampusModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());

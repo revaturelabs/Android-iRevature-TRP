@@ -10,10 +10,10 @@
         android:label="Trainer/Room Lookup"
         tools:layout="@layout/fragment_lookup">
         <action
-            android:id="@+id/action_nav_lookup_to_roomInfoFragment2"
+            android:id="@+id/action_nav_lookup_to_nav_room_info"
             app:destination="@id/nav_room_info" />
         <action
-            android:id="@+id/action_nav_lookup_to_trainersInfoFragment2"
+            android:id="@+id/action_nav_lookup_to_nav_trainer_info"
             app:destination="@id/nav_trainer_info" />
     </fragment>
     <fragment

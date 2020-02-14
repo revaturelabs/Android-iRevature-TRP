@@ -12,7 +12,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirections;
 
 import java.util.Objects;
 
@@ -21,7 +20,7 @@ import java.util.Objects;
  */
 public class TrainersInfoFragment extends Fragment implements View.OnClickListener{
 
-    NavController mNavController;
+    private NavController mNavController;
 
     public TrainersInfoFragment() {
         // Required empty public constructor
@@ -42,11 +41,7 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-
         Toast.makeText(getContext(), "Trainer assigned to batch", Toast.LENGTH_LONG).show();
-        // update "database"
-        Bundle args = new Bundle();
-        mNavController.navigate(R.id.nav_batches, args);
-
+        mNavController.navigate(TrainersInfoFragmentDirections.actionNavTrainerInfoToNavBatches());
     }
 }

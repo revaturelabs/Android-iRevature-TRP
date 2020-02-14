@@ -15,15 +15,16 @@ import java.util.Comparator;
 
 public class RoomsAdapter extends SortedListAdapter<RoomModel> {
 
-    OnItemListener mOnItemListener;
+    private OnItemListener mOnItemListener;
 
     public RoomsAdapter(Context context, Comparator<RoomModel> comparator, OnItemListener onItemListener) {
         super(context, RoomModel.class, comparator);
         mOnItemListener = onItemListener;
     }
 
+    @NonNull
     @Override
-    protected SortedListAdapter.ViewHolder<? extends RoomModel> onCreateViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
+    protected SortedListAdapter.ViewHolder<? extends RoomModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final RoomRowBinding binding = RoomRowBinding.inflate(inflater, parent, false);
         return new RoomViewHolder(binding, mOnItemListener);
     }
@@ -33,7 +34,7 @@ public class RoomsAdapter extends SortedListAdapter<RoomModel> {
         private final RoomRowBinding mBinding;
         private OnItemListener mOnItemListener;
 
-        public RoomViewHolder(RoomRowBinding binding, OnItemListener onItemListener) {
+        RoomViewHolder(RoomRowBinding binding, OnItemListener onItemListener) {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
@@ -48,11 +49,11 @@ public class RoomsAdapter extends SortedListAdapter<RoomModel> {
 
         @Override
         public void onClick(View v) {
-            mOnItemListener.onItemClick(getAdapterPosition());
+            mOnItemListener.onRoomClick(getAdapterPosition());
         }
     }
 
     public interface OnItemListener {
-        void onItemClick(int position);
+        void onRoomClick(int position);
     }
 }

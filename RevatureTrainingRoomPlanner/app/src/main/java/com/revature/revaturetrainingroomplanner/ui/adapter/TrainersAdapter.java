@@ -22,8 +22,9 @@ public class TrainersAdapter extends SortedListAdapter<TrainerModel> {
         mOnItemListener = onItemListener;
     }
 
+    @NonNull
     @Override
-    protected SortedListAdapter.ViewHolder<? extends TrainerModel> onCreateViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
+    protected SortedListAdapter.ViewHolder<? extends TrainerModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final TrainerRowBinding binding = TrainerRowBinding.inflate(inflater, parent, false);
         return new TrainerViewHolder(binding, mOnItemListener);
     }
@@ -33,7 +34,7 @@ public class TrainersAdapter extends SortedListAdapter<TrainerModel> {
         private final TrainerRowBinding mBinding;
         private OnItemListener mOnItemListener;
 
-        public TrainerViewHolder(TrainerRowBinding binding, OnItemListener onItemListener) {
+        TrainerViewHolder(TrainerRowBinding binding, OnItemListener onItemListener) {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
@@ -48,11 +49,11 @@ public class TrainersAdapter extends SortedListAdapter<TrainerModel> {
 
         @Override
         public void onClick(View v) {
-            mOnItemListener.onItemClick(getAdapterPosition());
+            mOnItemListener.onTrainerClick(getAdapterPosition());
         }
     }
 
     public interface OnItemListener {
-        void onItemClick(int position);
+        void onTrainerClick(int position);
     }
 }

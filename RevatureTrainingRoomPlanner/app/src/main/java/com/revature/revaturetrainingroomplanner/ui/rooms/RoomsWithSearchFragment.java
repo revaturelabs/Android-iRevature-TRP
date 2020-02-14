@@ -11,6 +11,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,12 +40,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
             "Boobs"
     };
 
-    private static final Comparator<RoomModel> ALPHABETICAL_COMPARATOR = new Comparator<RoomModel>() {
-        @Override
-        public int compare(RoomModel a, RoomModel b) {
-            return a.getText().compareTo(b.getText());
-        }
-    };
+    private static final Comparator<RoomModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
     private List<RoomModel> mModels;
     private RecyclerView mRecyclerView;
@@ -57,12 +53,12 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private OnItemListener mOnItemListener;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.room_row, container, false);
 
-        mOnItemListener = (OnItemListener) getParentFragment();
+        mOnItemListener = (getParentFragment() instanceof OnItemListener)? (OnItemListener) getParentFragment() : (OnItemListener) getParentFragment().getParentFragment();
 
         View root = inflater.inflate(R.layout.fragment_rooms_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);
