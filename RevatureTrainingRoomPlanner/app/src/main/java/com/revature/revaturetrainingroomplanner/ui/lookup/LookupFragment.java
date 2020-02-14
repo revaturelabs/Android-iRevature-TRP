@@ -50,6 +50,7 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
         mTabLayout = root.findViewById(R.id.tablayout_lookup_categories);
         mSearchNavController = Navigation.findNavController(root.findViewById(navhost_lookup_search_fragment));
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
+        View campusWithSearchFragment = root.findViewById(R.id.fragment_lookup_campuses_with_search);
 
         trainersTab = mTabLayout.newTab();
         trainersTab.setText(R.string.menu_trainers);
@@ -97,7 +98,9 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
 
     @Override
     public void onTrainerClick(int position) {
-        mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavTrainerInfo());
+        LookupFragmentDirections.ActionNavLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavLookupToNavTrainerInfo();
+        actionNavLookupToNavTrainerInfo.setDisplayButton(false);
+        mMainNavController.navigate(actionNavLookupToNavTrainerInfo);
     }
 
     @Override

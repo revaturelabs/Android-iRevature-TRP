@@ -13,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragmentDirections;
 
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ import java.util.Objects;
  */
 public class RoomInfoFragment extends Fragment implements View.OnClickListener{
 
+    private Button assignBtn;
     private NavController mNavController;
 
     public RoomInfoFragment() {
@@ -32,11 +34,14 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_room_info, container, false);
-        Button assign = rootView.findViewById(R.id.btn_room_info_assign);
 
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
 
-        rootView.findViewById(R.id.btn_room_info_assign).setOnClickListener((v) -> mNavController.navigate(RoomInfoFragmentDirections.actionNavRoomsInfoToNavTrainers()));
+        assignBtn = rootView.findViewById(R.id.btn_room_info_assign);
+        if(!LookupFragmentDirections.actionNavLookupToNavRoomInfo().getDisplayButton()) {
+            assignBtn.setVisibility(View.GONE);
+        }
+        assignBtn.setOnClickListener(this);
 
         TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
         TextView confirmed = rootView.findViewById(R.id.tv_room_info_confirmed);

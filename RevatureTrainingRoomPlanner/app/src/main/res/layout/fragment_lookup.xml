@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentview_lookup_campuses_with_search"
+    <fragment
+        android:id="@+id/fragment_lookup_campuses_with_search"
         android:name="com.revature.revaturetrainingroomplanner.ui.campuses.CampusesWithSearchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
