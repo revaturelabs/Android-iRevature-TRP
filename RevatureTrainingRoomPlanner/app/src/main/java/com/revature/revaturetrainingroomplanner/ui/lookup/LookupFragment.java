@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.revature.revaturetrainingroomplanner.R;
-
+import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter.OnItemListener;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LookupFragment extends Fragment {
+public class LookupFragment extends Fragment implements OnItemListener {
 
 
     public LookupFragment() {
@@ -29,4 +29,8 @@ public class LookupFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_lookup, container, false);
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
 }

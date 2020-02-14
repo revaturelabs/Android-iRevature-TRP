@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
+    android:id="@+id/navigation_assignment"
     app:startDestination="@id/nav_batches">
 
     <fragment
@@ -14,9 +14,6 @@
             android:id="@+id/action_nav_batches_to_nav_rooms"
             app:destination="@id/nav_rooms"
             app:enterAnim="@anim/fragment_fade_enter" />
-        <action
-            android:id="@+id/action_nav_batches_to_lookupFragment"
-            app:destination="@id/lookupFragment" />
     </fragment>
 
     <fragment
@@ -26,12 +23,12 @@
         tools:layout="@layout/fragment_rooms">
         <action
             android:id="@+id/action_nav_rooms_to_nav_rooms_info"
-            app:destination="@id/nav_rooms_info"
+            app:destination="@id/nav_room_info"
             app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_rooms_info"
+        android:id="@+id/nav_room_info"
         android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment"
         android:label="@string/menu_rooms_info"
         tools:layout="@layout/fragment_rooms" >
@@ -57,20 +54,5 @@
         android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragment"
         android:label="@string/menu_trainers"
         tools:layout="@layout/fragment_trainer_info" />
-    <fragment
-        android:id="@+id/lookupFragment"
-        android:name="com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragment"
-        android:label="fragment_lookup"
-        tools:layout="@layout/fragment_lookup" />
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.revature.revaturetrainingroomplanner.ui.login.LoginActivity"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
-    <fragment
-        android:id="@+id/roomLookupFragment"
-        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomLookupFragment"
-        android:label="fragment_room_lookup"
-        tools:layout="@layout/fragment_room_lookup" />
 
 </navigation>

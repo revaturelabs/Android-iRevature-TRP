@@ -30,7 +30,7 @@ import java.util.List;
 
 public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
-    private static final String[] BATCHES = new String[]{
+    private static final String[] CAMPUSES = new String[]{
             "2001Mobile",
             "2100FullStack",
             "2200FrontEnd",
@@ -76,7 +76,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
         mModels = new ArrayList<>();
         int id = 0;
-        for (String campus: BATCHES) {
+        for (String campus: CAMPUSES) {
             mModels.add(new CampusModel(id, campus));
             id++;
         }

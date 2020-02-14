@@ -60,10 +60,10 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         mOnItemListener = (OnItemListener) getParentFragment();
 
-        View root = inflater.inflate(R.layout.fragment_batches, container, false);
-        mRecyclerView = root.findViewById(R.id.recyclerview_batches_list_batches);
-        searchView = root.findViewById(R.id.searchview_batches_search_batch);
-        mProgressBar = root.findViewById(R.id.progressbar_batches_progress);
+        View root = inflater.inflate(R.layout.fragment_batches_with_search, container, false);
+        mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
+        searchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
+        mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
 
         mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, mOnItemListener);
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_lookup"
+    app:startDestination="@id/nav_lookup">
+    <fragment
+        android:id="@+id/nav_lookup"
+        android:name="com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragment"
+        android:label="Trainer/Room Lookup"
+        tools:layout="@layout/fragment_lookup">
+        <action
+            android:id="@+id/action_nav_lookup_to_roomInfoFragment2"
+            app:destination="@id/nav_room_info" />
+        <action
+            android:id="@+id/action_nav_lookup_to_trainersInfoFragment2"
+            app:destination="@id/nav_trainer_info" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_room_info"
+        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment"
+        android:label="Room Info"
+        tools:layout="@layout/fragment_room_info" />
+    <fragment
+        android:id="@+id/nav_trainer_info"
+        android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragment"
+        android:label="Trainer Info"
+        tools:layout="@layout/fragment_trainer_info" />
+</navigation>
