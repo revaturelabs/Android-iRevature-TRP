@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
@@ -26,3 +25,71 @@
     </FrameLayout>
 
 </layout>
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:fadingEdge="horizontal|vertical"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="5dp"
+        app:contentPadding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_campus_row_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:text="description"
+            android:textColor="#000"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <TextView
+            android:id="@+id/tv_campus_row_location_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            tools:text="Tampa, Florida" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="195dp"
+            android:layout_height="112dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="32dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/tampa" />
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+-->

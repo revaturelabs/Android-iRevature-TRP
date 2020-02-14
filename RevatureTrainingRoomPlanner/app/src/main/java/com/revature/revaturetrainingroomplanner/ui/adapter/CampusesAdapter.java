@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.data.model.CampusModel;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 
 import java.util.Comparator;
+
+import androidx.annotation.NonNull;
 
 public class CampusesAdapter extends SortedListAdapter<CampusModel> {
 
