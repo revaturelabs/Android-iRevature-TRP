@@ -6,5 +6,6 @@
 
     <include app:graph="@navigation/navigation_assignment" />
     <include app:graph="@navigation/navigation_lookup"/>
+    <include app:graph="@navigation/navigation_search_menus" />
 
 </navigation>

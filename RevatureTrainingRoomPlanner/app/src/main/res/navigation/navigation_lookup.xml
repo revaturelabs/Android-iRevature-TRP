@@ -15,21 +15,11 @@
             android:id="@+id/action_nav_lookup_to_nav_room_info"
             app:destination="@id/nav_room_info" >
 
-            <argument
-                android:name="displayButton"
-                app:argType="boolean"
-                android:defaultValue="false" />
-
         </action>
 
         <action
             android:id="@+id/action_nav_lookup_to_nav_trainer_info"
             app:destination="@id/nav_trainer_info" >
-
-            <argument
-                android:name="displayButton"
-                app:argType="boolean"
-                android:defaultValue="false" />
 
         </action>
 
@@ -53,6 +43,11 @@
         android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragment"
         android:label="Trainer Info"
         tools:layout="@layout/fragment_trainer_info" >
+
+        <argument
+            android:name="displayButton"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 
 </navigation>

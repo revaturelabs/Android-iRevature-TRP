@@ -36,6 +36,8 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
 
     @Override
     public void onTrainerClick(int position) {
-        mNavController.navigate(TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo());
+        TrainersFragmentDirections.ActionNavTrainersToNavTrainerInfo actionNavTrainersToNavTrainerInfo = TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo();
+        actionNavTrainersToNavTrainerInfo.setDisplayButton(true);
+        mNavController.navigate(actionNavTrainersToNavTrainerInfo);
     }
 }

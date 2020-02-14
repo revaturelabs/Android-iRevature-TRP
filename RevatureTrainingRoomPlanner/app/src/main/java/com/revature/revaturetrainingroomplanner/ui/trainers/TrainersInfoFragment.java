@@ -12,7 +12,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragmentDirections;
 
 import java.util.Objects;
 
@@ -36,7 +35,7 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
         assignBtn = rootView.findViewById(R.id.btn_trainer_info_assign);
 
-        if(!LookupFragmentDirections.actionNavLookupToNavTrainerInfo().getDisplayButton()) {
+        if(!TrainersInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {
             assignBtn.setVisibility(View.GONE);
         }
 

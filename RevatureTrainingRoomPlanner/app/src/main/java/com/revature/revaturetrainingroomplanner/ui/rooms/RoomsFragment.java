@@ -30,6 +30,8 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
 
     @Override
     public void onRoomClick(int position) {
-        mNavController.navigate(R.id.action_nav_rooms_to_nav_rooms_info);
+        RoomsFragmentDirections.ActionNavRoomsToNavRoomsInfo actionNavRoomsToNavRoomsInfo = RoomsFragmentDirections.actionNavRoomsToNavRoomsInfo();
+        actionNavRoomsToNavRoomsInfo.setDisplayButton(true);
+        mNavController.navigate(actionNavRoomsToNavRoomsInfo);
     }
 }
