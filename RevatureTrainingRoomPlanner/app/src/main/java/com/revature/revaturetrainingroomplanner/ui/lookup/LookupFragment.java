@@ -61,17 +61,23 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
         mTabLayout.addTab(trainersTab);
         mTabLayout.addTab(roomsTab);
 
+        if (savedInstanceState != null) {
+            mTabLayout.selectTab(mTabLayout.getTabAt(savedInstanceState.getInt("last tab")));
+        }
+
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                  switch(mTabLayout.getSelectedTabPosition()) {
                      case 0: {
                          mSearchNavController.navigate(RoomsWithSearchFragmentDirections.actionLookupRoomsWithSearchToLookupTrainersWithSearch());
+//                         savedInstanceState.putInt("last tab", mTabLayout.getSelectedTabPosition());
                      }
                      break;
 
                      case 1: {
                          mSearchNavController.navigate(TrainersWithSearchFragmentDirections.actionLookupTrainersWithSearchToLookupRoomsWithSearch());
+//                         savedInstanceState.putInt("last tab", mTabLayout.getSelectedTabPosition());
                      }
                      break;
                  }
@@ -106,6 +112,7 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
     @Override
     public void onRoomClick(int position) {
         mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavRoomInfo());
+        mTabLayout.selectTab(trainersTab);
     }
 
 }

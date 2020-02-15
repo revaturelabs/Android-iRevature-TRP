@@ -13,13 +13,15 @@
 
         <action
             android:id="@+id/action_nav_lookup_to_nav_room_info"
-            app:destination="@id/nav_room_info" >
+            app:destination="@id/nav_room_info"
+            app:popUpToInclusive="true">
 
         </action>
 
         <action
             android:id="@+id/action_nav_lookup_to_nav_trainer_info"
-            app:destination="@id/nav_trainer_info" >
+            app:destination="@id/nav_trainer_info"
+            app:popUpToInclusive="false">
 
         </action>
 
