@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_trainers_with_search">
         <action
             android:id="@+id/action_lookup_trainers_with_search_to_lookup_rooms_with_search"
-            app:destination="@id/lookup_rooms_with_search" />
+            app:destination="@id/lookup_rooms_with_search"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_search_menus" />
     </fragment>
     <fragment
         android:id="@+id/lookup_rooms_with_search"
@@ -21,6 +26,11 @@
         tools:layout="@layout/fragment_rooms_with_search">
         <action
             android:id="@+id/action_lookup_rooms_with_search_to_lookup_trainers_with_search"
-            app:destination="@id/lookup_trainers_with_search" />
+            app:destination="@id/lookup_trainers_with_search"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/navigation_search_menus" />
     </fragment>
 </navigation>

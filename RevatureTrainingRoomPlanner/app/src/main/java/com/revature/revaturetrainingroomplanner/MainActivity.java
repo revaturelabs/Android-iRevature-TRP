@@ -3,7 +3,6 @@ package com.revature.revaturetrainingroomplanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_assignment, R.id.navigation_lookup)
+                R.id.nav_batches, R.id.nav_lookup)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         logoutSetup();
 
+//        navController.navigate(R.id.nav_batches);
     }
 
     @Override
@@ -58,13 +58,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logoutSetup() {
-        mNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                return true;
-            }
+        mNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            return false;
         });
     }
 }

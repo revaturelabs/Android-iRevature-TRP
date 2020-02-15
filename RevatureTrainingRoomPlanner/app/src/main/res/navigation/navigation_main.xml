@@ -1,11 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
     app:startDestination="@id/navigation_assignment">
 
-    <include app:graph="@navigation/navigation_assignment" />
-    <include app:graph="@navigation/navigation_lookup"/>
-    <include app:graph="@navigation/navigation_search_menus" />
+    <navigation android:id="@+id/navigation_assignment"
+        app:startDestination="@id/nav_batches">
+        <fragment
+            android:id="@+id/nav_batches"
+            android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment"
+            tools:layout="@layout/fragment_batches"
+            android:label="@string/menu_batches">
+            <action
+                android:id="@+id/action_nav_batches_to_nav_rooms"
+                app:destination="@id/nav_rooms"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
+        <fragment
+            android:id="@+id/nav_rooms"
+            android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment"
+            tools:layout="@layout/fragment_rooms"
+            android:label="@string/menu_rooms">
+            <action
+                android:id="@+id/action_nav_rooms_to_nav_rooms_info"
+                app:destination="@id/nav_room_info"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
+        <fragment
+            android:id="@+id/nav_room_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment"
+            tools:layout="@layout/fragment_room_info"
+            android:label="@string/menu_rooms_info">
+
+            <argument
+                android:name="displayButton"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+            <action
+                android:id="@+id/action_nav_rooms_info_to_nav_trainers"
+                app:destination="@id/nav_trainers"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/nav_rooms" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/nav_trainers"
+            android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersFragment"
+            tools:layout="@layout/fragment_trainers"
+            android:label="@string/menu_trainers">
+            <action
+                android:id="@+id/action_nav_trainers_to_nav_trainer_info"
+                app:destination="@+id/nav_trainer_info"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" >
+            </action>
+        </fragment>
+        <fragment
+            android:id="@+id/nav_trainer_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragment"
+            tools:layout="@layout/fragment_trainer_info"
+            android:label="@string/menu_trainer_info">
+
+            <argument
+                android:name="displayButton"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+            <action
+                android:id="@+id/action_nav_trainer_info_to_nav_batches"
+                app:destination="@id/nav_batches"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/navigation_lookup"
+        app:startDestination="@id/nav_lookup">
+        <fragment
+            android:id="@+id/nav_lookup"
+            android:name="com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragment"
+            tools:layout="@layout/fragment_lookup"
+            android:label="Trainer/Room Lookup">
+
+            <action
+                android:id="@+id/action_nav_lookup_to_nav_room_info"
+                app:destination="@id/nav_room_info"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" >
+
+            </action>
+
+            <action
+                android:id="@+id/action_nav_lookup_to_nav_trainer_info"
+                app:destination="@id/nav_trainer_info"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" >
+
+            </action>
+
+        </fragment>
+        <fragment
+            android:id="@+id/nav_room_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomInfoFragment"
+            tools:layout="@layout/fragment_room_info"
+            android:label="Room Info">
+
+            <argument
+                android:name="displayButton"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/nav_trainer_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragment"
+            tools:layout="@layout/fragment_trainer_info"
+            android:label="Trainer Info">
+
+            <argument
+                android:name="displayButton"
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </fragment>
+    </navigation>
 
 </navigation>
