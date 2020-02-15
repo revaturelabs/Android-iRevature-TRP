@@ -35,6 +35,8 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
         assignBtn = rootView.findViewById(R.id.btn_trainer_info_assign);
 
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+
         if(!TrainersInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {
             assignBtn.setVisibility(View.GONE);
         }

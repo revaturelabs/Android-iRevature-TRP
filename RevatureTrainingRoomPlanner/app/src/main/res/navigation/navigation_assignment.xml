@@ -39,6 +39,7 @@
         <action
             android:id="@+id/action_nav_rooms_info_to_nav_trainers"
             app:destination="@id/nav_trainers"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@+id/nav_rooms" />
 
     </fragment>
