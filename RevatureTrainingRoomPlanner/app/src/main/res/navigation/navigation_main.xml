@@ -45,13 +45,13 @@
                 app:argType="boolean" />
 
             <action
-                android:id="@+id/action_nav_rooms_info_to_nav_trainers"
+                android:id="@+id/action_nav_room_info_to_nav_trainers"
                 app:destination="@id/nav_trainers"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
-                app:popUpTo="@+id/nav_rooms" />
+                app:popUpTo="@id/nav_rooms" />
 
         </fragment>
         <fragment
@@ -78,14 +78,10 @@
                 android:name="displayButton"
                 android:defaultValue="false"
                 app:argType="boolean" />
-
             <action
                 android:id="@+id/action_nav_trainer_info_to_nav_batches"
-                app:destination="@id/nav_batches"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
+                app:popUpTo="@id/nav_batches" />
+
         </fragment>
     </navigation>
     <navigation android:id="@+id/navigation_lookup"
@@ -141,5 +137,16 @@
                 app:argType="boolean" />
         </fragment>
     </navigation>
+    <activity
+        android:id="@+id/nav_login_activity"
+        android:name="com.revature.revaturetrainingroomplanner.ui.login.LoginActivity"
+        android:label="Login Activity"
+        tools:layout="@layout/content_login" />
+    <action
+        android:id="@+id/action_global_nav_login_activity"
+        app:destination="@id/nav_login_activity"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popUpToInclusive="false" />
 
 </navigation>

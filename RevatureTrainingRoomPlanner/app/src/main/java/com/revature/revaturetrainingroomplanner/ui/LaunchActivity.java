@@ -1,4 +1,4 @@
-package com.revature.revaturetrainingroomplanner;
+package com.revature.revaturetrainingroomplanner.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,21 +6,19 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.revature.revaturetrainingroomplanner.R;
 
 public class LaunchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.launch_page);
+        setContentView(R.layout.activity_launch);
 
         new Handler().postDelayed(() -> {
-            /* Create an Intent that will start the Menu-Activity. */
-            Intent mainIntent = new Intent(LaunchActivity.this, MainActivity.class);
-            startActivity(mainIntent);
+            Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         }, 1500);
-
     }
-
 }

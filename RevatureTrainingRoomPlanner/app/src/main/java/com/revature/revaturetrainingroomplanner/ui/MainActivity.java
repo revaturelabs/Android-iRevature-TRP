@@ -1,6 +1,5 @@
-package com.revature.revaturetrainingroomplanner;
+package com.revature.revaturetrainingroomplanner.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -13,10 +12,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.revature.revaturetrainingroomplanner.ui.login.LoginActivity;
+import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
+import com.revature.revaturetrainingroomplanner.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
     private NavigationView mNavigationView;
 
@@ -34,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_batches, R.id.nav_lookup)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(mNavigationView, navController);
+        mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
         logoutSetup();
 
@@ -59,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void logoutSetup() {
         mNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            mNavController.navigate(NavigationMainDirections.actionGlobalNavLoginActivity());
             return false;
         });
     }

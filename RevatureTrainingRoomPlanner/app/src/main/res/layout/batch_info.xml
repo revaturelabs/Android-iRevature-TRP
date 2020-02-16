@@ -38,15 +38,20 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_batch_info_skills_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="50dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_batch_info_skills_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
 
     <Button
         android:id="@+id/btn_batch_info_assign_room"

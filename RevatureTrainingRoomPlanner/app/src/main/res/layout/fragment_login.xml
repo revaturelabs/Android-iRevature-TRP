@@ -5,8 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_default_color_on_primary"
-    tools:context=".ui.login.LoginActivity">
+    android:background="@color/design_default_color_on_primary">
 
     <ProgressBar
         android:id="@+id/loading"
@@ -134,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/img_login_logo" />
 
     <Button
-        android:id="@+id/btn_login_reset"
+        android:id="@+id/btn_login_forgot"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:background="@drawable/forgot_pass_button"
