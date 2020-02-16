@@ -16,8 +16,6 @@
         android:id="@+id/include_batches_batch_info"
         layout="@layout/batch_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:layoutAnimation="@anim/fade_in" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

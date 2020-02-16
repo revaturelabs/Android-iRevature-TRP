@@ -14,9 +14,11 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AppCompatActivity appCompatActivity;
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
     private NavigationView mNavigationView;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        appCompatActivity = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
         logoutSetup();
+
+        hideKeyboardBetweenDestinations();
 
 //        navController.navigate(R.id.nav_batches);
     }
@@ -64,4 +69,11 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
     }
+
+    public void hideKeyboardBetweenDestinations() {
+        mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            KeyboardUtil.hideSoftKeyboard(appCompatActivity);
+        });
+    }
+
 }

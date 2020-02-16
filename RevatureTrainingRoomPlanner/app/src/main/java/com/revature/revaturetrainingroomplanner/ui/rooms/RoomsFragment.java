@@ -20,6 +20,7 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     private RoomsViewModel roomsViewModel;
     private NavController mNavController;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_rooms, container, false);

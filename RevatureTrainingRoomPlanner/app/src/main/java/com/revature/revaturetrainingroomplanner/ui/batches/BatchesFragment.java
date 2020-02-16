@@ -21,6 +21,7 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
     private NavController mNavController;
     private View batchInfo;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 //        batchesViewModel =
