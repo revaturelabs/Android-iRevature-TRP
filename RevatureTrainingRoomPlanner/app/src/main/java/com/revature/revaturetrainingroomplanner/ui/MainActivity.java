@@ -1,9 +1,11 @@
 package com.revature.revaturetrainingroomplanner.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -70,10 +72,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void logoutSetup() {
         mNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item -> {
-            saveSharedPreference.saveLoginDetails("","");
-            Log.d("debug", "deleting login info");
 
-            mNavController.navigate(NavigationMainDirections.actionGlobalNavLoginActivity());
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Are you sure you want to logout?");
+            builder.setPositiveButton("NO", (dialog, which) -> { });
+            builder.setNegativeButton("Yes",
+                    (dialog, which) -> {
+                        saveSharedPreference.saveLoginDetails("","");
+                        Log.d("debug", "deleting login info");
+                        mNavController.navigate(NavigationMainDirections.actionGlobalNavLoginActivity());
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
             return false;
         });
     }
