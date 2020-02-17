@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class LoginFragment extends Fragment {
         passwordEditText = root.findViewById(R.id.et_login_password);
         passwordEditText.setAutofillHints(View.AUTOFILL_HINT_PASSWORD);
         loginButton = root.findViewById(R.id.btn_login_signin);
+        CheckBox checkBox = root.findViewById(R.id.checkbox_login_remember_me);
         Button forgotButton = root.findViewById(R.id.btn_login_forgot);
         loadingProgressBar = root.findViewById(R.id.loading);
         saveSharedPreferences = new SaveSharedPreference(getContext());
@@ -126,7 +128,11 @@ public class LoginFragment extends Fragment {
             loadingProgressBar.setVisibility(View.VISIBLE);
             loginViewModel.login(usernameEditText.getText().toString(),
                     passwordEditText.getText().toString());
-            saveSharedPreferences.saveLoginDetails(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+
+            if(checkBox.isChecked()) {
+                saveSharedPreferences.saveLoginDetails(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            }
+
             Log.d("debug", "Saving login info");
             mNavController.navigate(LoginFragmentDirections.actionLoginFragmentToNavMainActivity());
 
