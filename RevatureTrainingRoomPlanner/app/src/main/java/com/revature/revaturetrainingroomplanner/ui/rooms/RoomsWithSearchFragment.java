@@ -77,7 +77,9 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mModels = new ArrayList<>();
         int id = 0;
         for (String room: ROOMS) {
-            mModels.add(new Room(id, room));
+            Room room1 = new Room(room);
+            room1.setId(id);
+            mModels.add(room1);
             id++;
         }
         mAdapter.edit()

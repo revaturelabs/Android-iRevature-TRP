@@ -4,14 +4,22 @@ import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
+//@Entity(tableName = "trainers")
 public class Trainer implements SortedListAdapter.ViewModel {
-    
-    private final long mId;
+
+//    @ColumnInfo(name = "t_id")
+//    @PrimaryKey(autoGenerate = true)
+    private long mId;
+
+//    @ColumnInfo(name = "t_name")
     private final String mText;
 
-    public Trainer(long id, String text) {
-        mId = id;
+    public Trainer(String text) {
         mText = text;
+    }
+
+    public void setId(long id) {
+        this.mId = id;
     }
 
     public long getId() {

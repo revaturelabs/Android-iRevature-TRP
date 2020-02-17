@@ -78,7 +78,9 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mModels = new ArrayList<>();
         int id = 0;
         for (String campus: CAMPUSES) {
-            mModels.add(new Campus(id, campus));
+            Campus campus1 = new Campus(campus);
+            campus1.setId(id);
+            mModels.add(campus1);
             id++;
         }
         mAdapter.edit()

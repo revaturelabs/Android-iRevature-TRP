@@ -4,14 +4,22 @@ import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
+//@Entity(tableName = "campuses")
 public class Campus implements SortedListAdapter.ViewModel {
 
-    private final long mId;
+//    @ColumnInfo(name = "c_id")
+//    @PrimaryKey(autoGenerate = true)
+    private long mId;
+
+//    @ColumnInfo(name = "c_name")
     private final String mText;
 
-    public Campus(long id, String text) {
-        mId = id;
+    public Campus(String text) {
         mText = text;
+    }
+
+    public void setId(long id) {
+        this.mId = id;
     }
 
     public long getId() {
@@ -39,4 +47,5 @@ public class Campus implements SortedListAdapter.ViewModel {
         }
         return false;
     }
+
 }

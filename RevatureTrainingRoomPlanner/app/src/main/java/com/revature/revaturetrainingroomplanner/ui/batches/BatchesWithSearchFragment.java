@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.AppRepository;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter.OnItemListener;
@@ -35,8 +32,6 @@ import java.util.List;
 public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     /* Constants */
-    private static final String TAG = "BatchesSearchFragment";
-
     private static final String[] BATCHES = new String[]{
             "2001Mobile",
             "2100FullStack",
@@ -49,7 +44,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     /* UI Components */
     private RecyclerView mRecyclerView;
     private BatchRowBinding mBinding;
-    private SearchView searchView;
+    private SearchView mSearchView;
     private ProgressBar mProgressBar;
 
     /* Variables */
@@ -57,16 +52,13 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private List<Batch> mModels;
     private BatchesAdapter mAdapter;
     private Animator mAnimator;
-    private AppRepository mAppRepository;
+//    private AppRepository mAppRepository;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreate: thread: " + Thread.currentThread().getName());
-
         super.onCreate(savedInstanceState);
 
-        mAppRepository = new AppRepository<Batch>(getContext());
+//        mAppRepository = new AppRepository<Batch>(getContext());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -81,27 +73,48 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         View root = inflater.inflate(R.layout.fragment_batches_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
-        searchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
+        mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
 
         mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mAdapter.addCallback(this);
 
-        RecyclerView.LayoutManager LayoutManager = new LinearLayoutManager(root.getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(root.getContext());
 
-        mRecyclerView.setLayoutManager(LayoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        insertFakeBatches();
-
+        int id = 0;
+        mModels = new ArrayList<>();
+        for (String batch: BATCHES) {
+            Batch batch1 = new Batch(batch);
+            batch1.setId(id);
+            mModels.add(batch1);
+            id++;
+        }
         mAdapter.edit()
                 .add(mModels)
                 .commit();
 
-        implementSearchFilter();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-        searchView.setQueryHint("Look for batch");
+            @Override
+            public boolean onQueryTextChange(String query) {
+                final List<Batch> filteredModelList = filter(mModels, query);
+                mAdapter.edit()
+                        .replaceAll(filteredModelList)
+                        .commit();
+                mRecyclerView.scrollToPosition(0);
+                return true;
+            }
+        });
+
+        mSearchView.setQueryHint("Look for batch");
 
         return root;
     }
@@ -169,48 +182,20 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         return filteredModelList;
     }
 
-    private void implementSearchFilter() {
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                final List<Batch> filteredModelList = filter(mModels, query);
-                mAdapter.edit()
-                        .replaceAll(filteredModelList)
-                        .commit();
-                mRecyclerView.scrollToPosition(0);
-                return true;
-            }
-        });
-
-    }
-
-    private void insertFakeBatches() {
-        mModels = new ArrayList<>();
-        for (String batch: BATCHES) {
-            mModels.add(new Batch(batch));
-        }
-    }
-
-    private void retrieveBatches() {
-        mAppRepository.retrieveTask().observe(this, new Observer<List<Batch>>() {
-            @Override
-            public void onChanged(List<Batch> batches) {
-                if (!mModels.isEmpty()) {
-                    mModels.clear();
-                }
-
-                if (batches != null) {
-                    mModels.addAll(batches);
-                }
-
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-    }
+//    private void retrieveBatches() {
+//        mAppRepository.retrieveTask().observe(this, new Observer<List<Batch>>() {
+//            @Override
+//            public void onChanged(List<Batch> batches) {
+//                if (!mModels.isEmpty()) {
+//                    mModels.clear();
+//                }
+//
+//                if (batches != null) {
+//                    mModels.addAll(batches);
+//                }
+//
+//                mAdapter.notifyDataSetChanged();
+//            }
+//        });
+//    }
 }

@@ -57,7 +57,6 @@
     <string name="menu_rooms_info">Room Info</string>
     <string name="search_room_hint">Search for a room</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="batches_details">Associates: ##</string>
     <string name="batch_info_skills_required">Skills Required:</string>
