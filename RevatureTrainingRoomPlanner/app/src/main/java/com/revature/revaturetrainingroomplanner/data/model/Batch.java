@@ -46,4 +46,8 @@ public class Batch implements SortedListAdapter.ViewModel {
         }
         return false;
     }
+
+    public void setmId(long mId) {
+        this.mId = mId;
+    }
 }

@@ -14,8 +14,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
-        tools:srcCompat="@tools:sample/avatars[2]" />
+        app:srcCompat="@drawable/human" />
 
     <TextView
         android:id="@+id/tv_trainers_name"
