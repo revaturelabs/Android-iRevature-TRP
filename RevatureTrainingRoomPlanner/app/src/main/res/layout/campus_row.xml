@@ -16,8 +16,8 @@
         <ImageView
             android:id="@+id/img_campus_row_icon"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="5dp"
             app:srcCompat="@drawable/campus_icon_foreground" />
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:padding="8dp"
             android:text="@{model.text}" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:text="City, State"
             android:textColor="#999999" />
 
