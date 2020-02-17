@@ -13,8 +13,8 @@
             tools:layout="@layout/fragment_batches"
             android:label="@string/menu_batches">
             <action
-                android:id="@+id/action_nav_batches_to_nav_rooms"
-                app:destination="@id/nav_rooms"
+                android:id="@+id/action_nav_batches_to_nav_batch_info"
+                app:destination="@id/nav_batch_info"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -83,22 +83,36 @@
                 app:popUpTo="@id/nav_batches" />
 
         </fragment>
+        <fragment
+            android:id="@+id/nav_batch_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchInfoFragment"
+            android:label="fragment_batch_info"
+            tools:layout="@layout/fragment_batch_info" >
+            <action
+                android:id="@+id/action_batchInfoFragment_to_nav_rooms"
+                app:destination="@id/nav_rooms"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/nav_batches" />
+        </fragment>
     </navigation>
     <navigation android:id="@+id/navigation_lookup"
         app:startDestination="@id/nav_lookup">
         <fragment
-            android:id="@+id/nav_lookup"
+            android:id="@+id/nav_category_lookup"
             android:name="com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragment"
             tools:layout="@layout/fragment_lookup"
             android:label="Trainer/Room Lookup">
 
             <action
                 android:id="@+id/action_nav_lookup_to_nav_room_info"
-                app:destination="@id/nav_room_info"
+                app:destination="@+id/nav_room_info"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" >
+                app:popExitAnim="@anim/slide_out_right">
 
             </action>
 
@@ -109,6 +123,16 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" >
+
+            </action>
+
+            <action
+                android:id="@+id/action_nav_lookup_to_nav_batch_info"
+                app:destination="@id/nav_batch_info"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right">
 
             </action>
 
@@ -136,7 +160,33 @@
                 android:defaultValue="false"
                 app:argType="boolean" />
         </fragment>
+        <fragment
+            android:id="@+id/nav_batch_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchInfoFragment"
+            android:label="fragment_batch_info"
+            tools:layout="@layout/fragment_batch_info" >
+            <argument
+                android:name="displayButton"
+                app:argType="boolean"
+                android:defaultValue="false" />
+        </fragment>
+        <fragment
+            android:id="@+id/nav_lookup"
+            android:name="com.revature.revaturetrainingroomplanner.ui.campuses.CampusesFragment"
+            android:label="fragment_campuses"
+            tools:layout="@layout/fragment_campuses">
+
+            <action
+                android:id="@+id/action_campusesFragment_to_nav_lookup"
+                app:destination="@+id/nav_category_lookup"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+
+        </fragment>
     </navigation>
+
     <activity
         android:id="@+id/nav_login_activity"
         android:name="com.revature.revaturetrainingroomplanner.ui.login.LoginActivity"
@@ -146,7 +196,6 @@
         android:id="@+id/action_global_nav_login_activity"
         app:destination="@id/nav_login_activity"
         app:enterAnim="@anim/slide_in_left"
-        app:exitAnim="@anim/slide_out_right"
-        app:popUpToInclusive="false" />
+        app:exitAnim="@anim/slide_out_right" />
 
 </navigation>

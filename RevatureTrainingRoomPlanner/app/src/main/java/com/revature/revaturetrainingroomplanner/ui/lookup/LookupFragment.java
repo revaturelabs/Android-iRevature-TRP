@@ -5,19 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.tabs.TabLayout;
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
-import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragmentDirections;
-import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersWithSearchFragmentDirections;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirections;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragment;
 
 import java.util.Objects;
 
@@ -26,16 +30,19 @@ import static com.revature.revaturetrainingroomplanner.R.id.navhost_lookup_searc
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LookupFragment extends Fragment implements View.OnClickListener, CampusesAdapter.OnItemListener, TrainersAdapter.OnItemListener, RoomsAdapter.OnItemListener {
+public class LookupFragment extends Fragment implements TrainersAdapter.OnItemListener, BatchesAdapter.OnItemListener, RoomsAdapter.OnItemListener {
+
+    private final int TRAINER_TAB_LOCATION = 0;
+    private final int BATCH_TAB_LOCATION = 1;
+    private final int ROOM_TAB_LOCATION = 2;
 
     private NavController mMainNavController;
     private NavController mSearchNavController;
     private TabLayout mTabLayout;
-    private TabLayout.Tab trainersTab;
-    private TabLayout.Tab roomsTab;
+    private TabLayout.Tab mTrainersTab;
+    private TabLayout.Tab mRoomsTab;
+    private TabLayout.Tab mBatchesTab;
     private View mNavHost;
-    LinearLayout mCampusContainer;
-    LinearLayout mCategoriesContainer;
 
     public LookupFragment() {
         // Required empty public constructor
@@ -48,28 +55,23 @@ public class LookupFragment extends Fragment implements View.OnClickListener, Ca
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_lookup, container, false);
 
-//        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
         mNavHost = root.findViewById(navhost_lookup_search_fragment);
         mTabLayout = root.findViewById(R.id.tablayout_lookup_categories);
         mSearchNavController = Navigation.findNavController(root.findViewById(navhost_lookup_search_fragment));
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-        mCampusContainer = root.findViewById(R.id.linearlayout_fragment_lookup_campus_container);
-        mCategoriesContainer = root.findViewById(R.id.linearlayout_fragment_lookup_categories_container);
 
-        mCategoriesContainer.setVisibility(View.GONE);
+        mTrainersTab = mTabLayout.newTab();
+        mTrainersTab.setText(R.string.tab_trainers);
 
-        mCampusContainer.setOnClickListener(this);
-        mCategoriesContainer.setOnClickListener(this);
+        mBatchesTab = mTabLayout.newTab();
+        mBatchesTab.setText(R.string.tab_batches);
 
-        trainersTab = mTabLayout.newTab();
-        trainersTab.setText(R.string.menu_trainers);
+        mRoomsTab = mTabLayout.newTab();
+        mRoomsTab.setText(R.string.tab_rooms);
 
-        roomsTab = mTabLayout.newTab();
-        roomsTab.setText(R.string.menu_rooms);
-
-        mTabLayout.addTab(trainersTab);
-        mTabLayout.addTab(roomsTab);
+        mTabLayout.addTab(mTrainersTab);
+        mTabLayout.addTab(mBatchesTab);
+        mTabLayout.addTab(mRoomsTab);
 
         if (savedInstanceState != null) {
             mTabLayout.selectTab(mTabLayout.getTabAt(savedInstanceState.getInt("last tab")));
@@ -79,15 +81,30 @@ public class LookupFragment extends Fragment implements View.OnClickListener, Ca
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                  switch(mTabLayout.getSelectedTabPosition()) {
-                     case 0: {
-                         mSearchNavController.navigate(RoomsWithSearchFragmentDirections.actionLookupRoomsWithSearchToLookupTrainersWithSearch());
-//                         savedInstanceState.putInt("last tab", mTabLayout.getSelectedTabPosition());
+                     case TRAINER_TAB_LOCATION: {
+                         if (tab.getPosition() == BATCH_TAB_LOCATION) {
+                             mSearchNavController.navigate(R.id.action_batchesFragment_to_trainersFragment);
+                         } else if (tab.getPosition() == ROOM_TAB_LOCATION) {
+                             mSearchNavController.navigate(R.id.action_roomsFragment_to_trainersFragment);
+                         }
                      }
                      break;
 
-                     case 1: {
-                         mSearchNavController.navigate(TrainersWithSearchFragmentDirections.actionLookupTrainersWithSearchToLookupRoomsWithSearch());
-//                         savedInstanceState.putInt("last tab", mTabLayout.getSelectedTabPosition());
+                     case BATCH_TAB_LOCATION: {
+                         if (tab.getPosition() == TRAINER_TAB_LOCATION) {
+                             mSearchNavController.navigate(R.id.action_trainersFragment_to_batchesFragment);
+                         } else if (tab.getPosition() == ROOM_TAB_LOCATION) {
+                             mSearchNavController.navigate(R.id.action_roomsFragment_to_batchesFragment);
+                         }
+                     }
+                     break;
+
+                     case ROOM_TAB_LOCATION: {
+                         if (tab.getPosition() == TRAINER_TAB_LOCATION) {
+                             mSearchNavController.navigate(R.id.action_trainersFragment_to_roomsFragment);
+                         } else if (tab.getPosition() == BATCH_TAB_LOCATION) {
+                             mSearchNavController.navigate(R.id.action_batchesFragment_to_roomsFragment);
+                         }
                      }
                      break;
                  }
@@ -104,65 +121,34 @@ public class LookupFragment extends Fragment implements View.OnClickListener, Ca
             }
         });
 
-        LinearLayout linearLayout = root.findViewById(R.id.linearlayout_lookup_fragment);
-
-//        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//
-//            @Override
-//            public void onGlobalLayout() {
-//                Rect r = new Rect();
-//                linearLayout.getWindowVisibleDisplayFrame(r);
-//                int screenHeight = linearLayout.getRootView().getHeight();
-//                int keypadHeight = screenHeight - r.bottom;
-//                if (keypadHeight > screenHeight * 0.3) {
-//                    Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-//                    campusWithSearchFragment.setVisibility(View.GONE);
-//                } else {
-//                    Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-//                    campusWithSearchFragment.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
-
         return root;
     }
 
     @Override
-    public void onClick(View v) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-        switch (v.getId()) {
-            case R.id.linearlayout_fragment_lookup_campus_container: {
-//                Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                mCategoriesContainer.setVisibility(View.GONE);
-            }
-            break;
-
-            case R.id.linearlayout_fragment_lookup_categories_container: {
-//                Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            }
-            break;
-
-            default:
-        }
-
+        outState.putInt("last tab", mTabLayout.getSelectedTabPosition());
     }
 
-    @Override
-    public void onCampusClick(int position) {
-        mCategoriesContainer.setVisibility(View.VISIBLE);
-    }
+
 
     @Override
     public void onTrainerClick(int position) {
         LookupFragmentDirections.ActionNavLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavLookupToNavTrainerInfo();
-        actionNavLookupToNavTrainerInfo.setDisplayButton(false);
         mMainNavController.navigate(actionNavLookupToNavTrainerInfo);
     }
 
     @Override
+    public void onBatchClick(int position) {
+        LookupFragmentDirections.ActionNavLookupToNavBatchInfo actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavLookupToNavBatchInfo();
+        mMainNavController.navigate(actionNavLookupToNavBatchInfo);
+    }
+
+    @Override
     public void onRoomClick(int position) {
-        mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavRoomInfo());
-        mTabLayout.selectTab(trainersTab);
+        LookupFragmentDirections.ActionNavLookupToNavRoomInfo actionNavLookupToNavRoomInfo = LookupFragmentDirections.actionNavLookupToNavRoomInfo();
+        mMainNavController.navigate(actionNavLookupToNavRoomInfo);
     }
 
 }

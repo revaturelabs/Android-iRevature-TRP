@@ -17,11 +17,8 @@
     <group
         android:id="@+id/nav_menu_group_middle">
         <item
-            android:id="@+id/nav_account"
-            android:title="@string/nav_menu_account" />
-        <item
-            android:id="@+id/nav_settings"
-            android:title="@string/nav_menu_settings" />
+            android:id="@+id/nav_help"
+            android:title="@string/menu_help" />
     </group>
     <group
         android:id="@+id/nav_menu_group_bottom">

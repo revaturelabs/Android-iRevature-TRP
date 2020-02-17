@@ -14,89 +14,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:id="@+id/linearlayout_fragment_lookup_campus_container"
+    <ImageView
+        android:id="@+id/img_campus_line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textview_fragment_lookup_campus_chosen"
+        app:srcCompat="@drawable/line" />
+
+    <TextView
+        android:id="@+id/textview_fragment_lookup_campus_chosen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_campuses"
+        android:textAlignment="center"
+        android:textColor="#999999"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/img_campus_line" />
+
+    <ImageView
+        android:id="@+id/img_campus_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/line" />
+
+    <fragment
+        android:id="@+id/navhost_lookup_search_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_campus_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/campus_title"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/img_campus_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_campus_title"
-            app:srcCompat="@drawable/line" />
-
-        <TextView
-            android:id="@+id/tv_campus_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/menu_campuses"
-            android:textAlignment="center"
-            android:textColor="#999999"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/img_campus_line" />
-
-        <ImageView
-            android:id="@+id/img_campus_line2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_campus_header"
-            app:srcCompat="@drawable/line" />
-
-        <fragment
-            android:id="@+id/fragment_lookup_campuses_with_search"
-            android:name="com.revature.revaturetrainingroomplanner.ui.campuses.CampusesWithSearchFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearlayout_fragment_lookup_categories_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:orientation="vertical">
-
-        <fragment
-            android:id="@+id/navhost_lookup_search_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:animateLayoutChanges="true"
-            android:layoutAnimation="@anim/fade_in"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/navigation_search_menus" />
-    </LinearLayout>
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:animateLayoutChanges="true"
+        android:layoutAnimation="@anim/fade_in"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_search_menus" />
 
 </LinearLayout>
