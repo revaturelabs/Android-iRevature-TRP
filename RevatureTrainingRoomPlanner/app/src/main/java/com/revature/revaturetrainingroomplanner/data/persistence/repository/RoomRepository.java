@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.revature.revaturetrainingroomplanner.data.async.DeleteAllAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
@@ -41,6 +42,10 @@ public class RoomRepository {
 
     public void deleteTask(Room... rooms) {
         new DeleteAsyncTask(mDao).execute(rooms);
+    }
+
+    public void deleteAllTask(Room... rooms) {
+        new DeleteAllAsyncTask(mDao).execute(rooms);
     }
 
 }

@@ -62,6 +62,34 @@
 
     </SearchView>
 
+    <Button
+        android:id="@+id/btn_rooms_with_search_add_fake_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_fake_data_btn"
+        app:layout_constraintBottom_toTopOf="@+id/btn_rooms_with_search_clear_fake_data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/assign_button_style"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"/>
+
+    <Button
+        android:id="@+id/btn_rooms_with_search_clear_fake_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_fake_data_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frameLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        android:background="@drawable/assign_button_style"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"/>
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"

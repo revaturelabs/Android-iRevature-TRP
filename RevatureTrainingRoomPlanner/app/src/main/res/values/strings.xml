@@ -65,5 +65,9 @@
     <string name="submit">submit</string>
     <string name="select_a_location">Select a location</string>
     <string name="trainer_title">Select a trainer</string>
+    <string name="add_fake_data_btn">Add Fake Data</string>
+    <string name="clear_fake_data_button">Clear Fake Data</string>
+    <string name="campus_title">Select a Campus</string>
+    <string name="menu_campuses">Campuses</string>
 
 </resources>

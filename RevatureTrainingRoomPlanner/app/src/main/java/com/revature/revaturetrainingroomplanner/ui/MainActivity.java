@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         logoutSetup();
 
         hideKeyboardBetweenDestinations();
-
+        
 //        navController.navigate(R.id.nav_batches);
     }
 

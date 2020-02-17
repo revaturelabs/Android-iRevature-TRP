@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -97,6 +98,26 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
             }
         });
 
+        LinearLayout linearLayout = root.findViewById(R.id.linearlayout_lookup_fragment);
+
+//        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//
+//            @Override
+//            public void onGlobalLayout() {
+//                Rect r = new Rect();
+//                linearLayout.getWindowVisibleDisplayFrame(r);
+//                int screenHeight = linearLayout.getRootView().getHeight();
+//                int keypadHeight = screenHeight - r.bottom;
+//                if (keypadHeight > screenHeight * 0.3) {
+//                    Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//                    campusWithSearchFragment.setVisibility(View.GONE);
+//                } else {
+//                    Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//                    campusWithSearchFragment.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
+
         return root;
     }
 
@@ -116,6 +137,12 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
     public void onRoomClick(int position) {
         mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavRoomInfo());
         mTabLayout.selectTab(trainersTab);
+    }
+
+    public interface KeyboardVisibilityListener {
+
+        void onKeyboardVisibilityChanged(boolean keyboardVisible);
+
     }
 
 }

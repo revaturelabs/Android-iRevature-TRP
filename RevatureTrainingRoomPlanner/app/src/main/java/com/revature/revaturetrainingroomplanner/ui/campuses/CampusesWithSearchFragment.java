@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter.OnItemListener;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
+public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback, View.OnClickListener {
 
     private static final String[] CAMPUSES = new String[]{
             "USF",
@@ -40,16 +42,25 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
     private static final Comparator<Campus> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
+    private static final String TAG = "CampusesSearchFragment";
+
 //    private CampusesViewModel campusesViewModel;
     private List<Campus> mModels;
     private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private CampusesAdapter mAdapter;
     private CampusRowBinding mBinding;
     private Animator mAnimator;
-    private SearchView searchView;
+    private SearchView mSearchView;
     private ProgressBar mProgressBar;
-    private OnItemListener mOnItemListener;
+    private CampusRepository mCampusRepository;
+    private static int counter = 1;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        mCampusRepository = new CampusRepository(getContext());
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,35 +70,27 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.campus_row, container, false);
 
-        mOnItemListener = (OnItemListener) getParentFragment();
+        OnItemListener onItemListener = (OnItemListener) getParentFragment();
 
         View root = inflater.inflate(R.layout.fragment_campuses_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_campuses_with_search_list_campuses);
-        searchView = root.findViewById(R.id.searchview_campuses_with_search_search_campus);
+        mSearchView = root.findViewById(R.id.searchview_campuses_with_search_search_campus);
         mProgressBar = root.findViewById(R.id.progressbar_campuses_with_search_progress);
+        root.findViewById(R.id.btn_campuses_with_search_add_fake_data).setOnClickListener(this);
+        root.findViewById(R.id.btn_campuses_with_search_clear_fake_data).setOnClickListener(this);
 
-        mAdapter = new CampusesAdapter(getContext(), ALPHABETICAL_COMPARATOR, mOnItemListener);
+        mAdapter = new CampusesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mAdapter.addCallback(this);
 
-        layoutManager = new LinearLayoutManager(root.getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        mModels = new ArrayList<>();
-        int id = 0;
-        for (String campus: CAMPUSES) {
-            Campus campus1 = new Campus(campus);
-            campus1.setId(id);
-            mModels.add(campus1);
-            id++;
-        }
-        mAdapter.edit()
-                .add(mModels)
-                .commit();
+        retrieveCampuses();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -103,7 +106,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
                 return true;
             }
         });
-        searchView.setQueryHint("Look for campus");
+        mSearchView.setQueryHint("Look for campus");
 
         return root;
     }
@@ -158,6 +161,25 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.start();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_campuses_with_search_add_fake_data: {
+                insertFakeData(new Campus("Fake Campus #" + counter));
+                counter++;
+            }
+            break;
+
+            case R.id.btn_campuses_with_search_clear_fake_data: {
+                clearFakeData();
+            }
+            break;
+
+            default:
+
+        }
+    }
+
     private static List<Campus> filter(List<Campus> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
@@ -169,5 +191,27 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
             }
         }
         return filteredModelList;
+    }
+
+    private void retrieveCampuses() {
+
+        mCampusRepository.retrieveAllTask().observe(getViewLifecycleOwner(), campuses -> {
+            if (campuses != null) {
+                mModels = campuses;
+                mAdapter.edit()
+                        .replaceAll(campuses)
+                        .commit();
+            } else {
+                mModels = new ArrayList<>();
+            }
+        });
+    }
+
+    public void insertFakeData(Campus campus) {
+        mCampusRepository.insertCampusTask(campus);
+    }
+
+    public void clearFakeData() {
+        mCampusRepository.deleteAllTask(new Campus(""));
     }
 }

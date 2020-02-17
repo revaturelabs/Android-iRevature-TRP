@@ -20,22 +20,29 @@
         android:id="@+id/btn_batches_with_search_add_fake_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Fake Data"
+        android:text="@string/add_fake_data_btn"
         app:layout_constraintBottom_toTopOf="@+id/btn_batches_with_search_clear_fake_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/assign_button_style"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/btn_batches_with_search_clear_fake_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear Fake Data"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/assign_button_style"
+        android:text="@string/clear_fake_data_button"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/searchview_batches_with_search_search_batch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1"/>
 
     <FrameLayout
         android:id="@+id/framelayout_batches_holdRV"
