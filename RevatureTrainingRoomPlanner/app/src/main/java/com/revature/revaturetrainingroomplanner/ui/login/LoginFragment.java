@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -59,7 +60,7 @@ public class LoginFragment extends Fragment {
         passwordEditText.setAutofillHints(View.AUTOFILL_HINT_PASSWORD);
         loginButton = root.findViewById(R.id.btn_login_signin);
         CheckBox checkBox = root.findViewById(R.id.checkbox_login_remember_me);
-        Button forgotButton = root.findViewById(R.id.btn_login_forgot);
+        TextView forgotButton = root.findViewById(R.id.btn_login_forgot);
         loadingProgressBar = root.findViewById(R.id.loading);
         saveSharedPreferences = new SaveSharedPreference(getContext());
 
