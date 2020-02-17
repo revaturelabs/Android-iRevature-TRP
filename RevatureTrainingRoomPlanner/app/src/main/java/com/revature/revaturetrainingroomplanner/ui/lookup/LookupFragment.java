@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
@@ -27,7 +26,7 @@ import static com.revature.revaturetrainingroomplanner.R.id.navhost_lookup_searc
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LookupFragment extends Fragment implements CampusesAdapter.OnItemListener, TrainersAdapter.OnItemListener, RoomsAdapter.OnItemListener {
+public class LookupFragment extends Fragment implements View.OnClickListener, CampusesAdapter.OnItemListener, TrainersAdapter.OnItemListener, RoomsAdapter.OnItemListener {
 
     private NavController mMainNavController;
     private NavController mSearchNavController;
@@ -35,6 +34,8 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
     private TabLayout.Tab trainersTab;
     private TabLayout.Tab roomsTab;
     private View mNavHost;
+    LinearLayout mCampusContainer;
+    LinearLayout mCategoriesContainer;
 
     public LookupFragment() {
         // Required empty public constructor
@@ -47,14 +48,19 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_lookup, container, false);
 
-        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         mNavHost = root.findViewById(navhost_lookup_search_fragment);
-        mNavHost.setVisibility(View.GONE);
         mTabLayout = root.findViewById(R.id.tablayout_lookup_categories);
         mSearchNavController = Navigation.findNavController(root.findViewById(navhost_lookup_search_fragment));
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-        View campusWithSearchFragment = root.findViewById(R.id.fragment_lookup_campuses_with_search);
+        mCampusContainer = root.findViewById(R.id.linearlayout_fragment_lookup_campus_container);
+        mCategoriesContainer = root.findViewById(R.id.linearlayout_fragment_lookup_categories_container);
+
+        mCategoriesContainer.setVisibility(View.GONE);
+
+        mCampusContainer.setOnClickListener(this);
+        mCategoriesContainer.setOnClickListener(this);
 
         trainersTab = mTabLayout.newTab();
         trainersTab.setText(R.string.menu_trainers);
@@ -122,8 +128,28 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
     }
 
     @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.linearlayout_fragment_lookup_campus_container: {
+//                Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                mCategoriesContainer.setVisibility(View.GONE);
+            }
+            break;
+
+            case R.id.linearlayout_fragment_lookup_categories_container: {
+//                Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            }
+            break;
+
+            default:
+        }
+
+    }
+
+    @Override
     public void onCampusClick(int position) {
-        mNavHost.setVisibility(View.VISIBLE);
+        mCategoriesContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -137,12 +163,6 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
     public void onRoomClick(int position) {
         mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavRoomInfo());
         mTabLayout.selectTab(trainersTab);
-    }
-
-    public interface KeyboardVisibilityListener {
-
-        void onKeyboardVisibilityChanged(boolean keyboardVisible);
-
     }
 
 }

@@ -69,5 +69,6 @@
     <string name="clear_fake_data_button">Clear Fake Data</string>
     <string name="campus_title">Select a Campus</string>
     <string name="menu_campuses">Campuses</string>
+    <string name="fragment_batches_select_a_batch">Select a batch</string>
 
 </resources>

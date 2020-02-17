@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:text="@string/select_a_location"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
@@ -52,13 +53,10 @@
         android:id="@+id/searchview_rooms_with_search_search_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:queryHint="@string/search_room_hint"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_room_line2"
-        >
+        app:layout_constraintTop_toBottomOf="@id/img_room_line2">
 
     </SearchView>
 
@@ -80,26 +78,28 @@
         android:id="@+id/btn_rooms_with_search_clear_fake_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/clear_fake_data_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/frameLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1"
+        android:layout_marginTop="200dp"
         android:background="@drawable/assign_button_style"
+        android:text="@string/clear_fake_data_button"
         android:textColor="@color/colorPrimary"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/searchview_rooms_with_search_search_room"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchview_rooms_with_search_search_room" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room">
+        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_rooms_with_search_list_rooms"
