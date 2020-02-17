@@ -57,7 +57,6 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         // Once Trainers Fragment ready navigate there
-        Toast.makeText(getContext(), "Room assigned", Toast.LENGTH_SHORT).show();
         mNavController.navigate(R.id.action_nav_room_info_to_nav_trainers);
     }
 }
