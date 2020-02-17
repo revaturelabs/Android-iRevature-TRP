@@ -1,4 +1,5 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,18 +8,26 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/campus_row_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true">
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/img_campus_row_icon"
+            android:layout_width="40dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/campus_icon_foreground" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="5dp"
             android:padding="8dp"
-            android:text="@{model.text}"/>
+            android:text="@{model.text}" />
 
     </FrameLayout>
 
