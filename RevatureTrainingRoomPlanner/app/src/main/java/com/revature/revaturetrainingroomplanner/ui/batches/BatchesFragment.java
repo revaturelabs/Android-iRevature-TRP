@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +13,6 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
-
-import java.util.Objects;
 
 public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemListener {
 
@@ -38,7 +33,6 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 
     @Override
     public void onBatchClick(int position) {
-
-        mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavBatchInfo());
+        mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms());
     }
 }

@@ -1,6 +1,5 @@
 package com.revature.revaturetrainingroomplanner.ui;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +20,8 @@ import com.revature.revaturetrainingroomplanner.ui.login.SaveSharedPreference;
 import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final int LOGOUT_MENU_LOCATION = 3;
 
     private AppCompatActivity appCompatActivity;
     private NavController mNavController;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logoutSetup() {
-        mNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item -> {
+        mNavigationView.getMenu().getItem(LOGOUT_MENU_LOCATION).setOnMenuItemClickListener(item -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
