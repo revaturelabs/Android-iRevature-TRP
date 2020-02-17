@@ -63,5 +63,7 @@
     <string name="room_info_assign_room">Assign Room</string>
     <string name="assign_trainer_submit">Assign to batch</string>
     <string name="submit">submit</string>
+    <string name="select_a_location">Select a location</string>
+    <string name="trainer_title">Select a trainer</string>
 
 </resources>

@@ -13,6 +13,16 @@
         android:layout_marginTop="8dp"
         app:srcCompat="@drawable/rev_logo" />
 
+    <TextView
+        android:id="@+id/tv_batch_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="16dp"
+        android:text="Select a batch"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
     <ImageView
         android:id="@+id/img_batch_line1"
         android:layout_width="match_parent"
