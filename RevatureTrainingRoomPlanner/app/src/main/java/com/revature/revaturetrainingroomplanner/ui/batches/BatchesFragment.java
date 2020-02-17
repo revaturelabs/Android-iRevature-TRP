@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+
+import java.util.Objects;
 
 public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemListener {
 
@@ -41,6 +44,7 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
         batchInfo = view.findViewById(R.id.include_batches_batch_info);
         mNavController = Navigation.findNavController(view);
 
+        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         batchInfo.setVisibility(View.GONE);
 
         view.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) -> mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms()));

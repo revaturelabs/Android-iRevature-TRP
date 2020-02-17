@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -44,6 +45,8 @@ public class LookupFragment extends Fragment implements CampusesAdapter.OnItemLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_lookup, container, false);
+
+        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         mNavHost = root.findViewById(navhost_lookup_search_fragment);
         mNavHost.setVisibility(View.GONE);

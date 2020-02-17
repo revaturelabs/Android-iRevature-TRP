@@ -1,7 +1,5 @@
 package com.revature.revaturetrainingroomplanner.ui;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -16,7 +14,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.ui.login.LoginActivity;
 import com.revature.revaturetrainingroomplanner.ui.login.SaveSharedPreference;
 import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
@@ -65,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        KeyboardUtil.hideSoftKeyboard(this);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }

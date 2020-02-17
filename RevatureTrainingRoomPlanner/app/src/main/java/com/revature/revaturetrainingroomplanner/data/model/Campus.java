@@ -1,17 +1,20 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-//@Entity(tableName = "campuses")
+@Entity(tableName = "campuses")
 public class Campus implements SortedListAdapter.ViewModel {
 
-//    @ColumnInfo(name = "c_id")
-//    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "c_id")
+    @PrimaryKey(autoGenerate = true)
     private long mId;
 
-//    @ColumnInfo(name = "c_name")
+    @ColumnInfo(name = "c_name")
     private final String mText;
 
     public Campus(String text) {

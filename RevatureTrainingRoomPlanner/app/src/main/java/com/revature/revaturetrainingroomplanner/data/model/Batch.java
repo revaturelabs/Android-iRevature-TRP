@@ -1,17 +1,20 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-//@Entity(tableName = "batches")
+@Entity(tableName = "batches")
 public class Batch implements SortedListAdapter.ViewModel {
 
-//    @ColumnInfo(name = "b_id")
-//    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "b_id")
+    @PrimaryKey(autoGenerate = true)
     private long mId;
 
-//    @ColumnInfo(name = "b_name")
+    @ColumnInfo(name = "b_name")
     private final String mText;
 
     public Batch(String text) {
