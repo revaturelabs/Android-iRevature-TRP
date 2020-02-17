@@ -16,6 +16,27 @@
 
     </SearchView>
 
+    <Button
+        android:id="@+id/btn_batches_with_search_add_fake_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Fake Data"
+        app:layout_constraintBottom_toTopOf="@+id/btn_batches_with_search_clear_fake_data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_batches_with_search_clear_fake_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Fake Data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/framelayout_batches_holdRV"
         android:layout_width="0dp"

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.revature.revaturetrainingroomplanner.data.async.DeleteAllAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
@@ -45,6 +46,10 @@ public class BatchRepository {
 
     public void deleteTask(Batch... batches) {
         new DeleteAsyncTask(mDao).execute(batches);
+    }
+
+    public void deleteAllTask(Batch... batches) {
+        new DeleteAllAsyncTask(mDao).execute(batches);
     }
 
 }

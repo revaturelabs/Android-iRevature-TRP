@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -49,6 +50,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private BatchRowBinding mBinding;
     private SearchView mSearchView;
     private ProgressBar mProgressBar;
+    private Button mBtnAddFakeData;
+    private Button mBtnClearFakeData;
 
     /* Variables */
     private BatchesViewModel batchesViewModel;
@@ -56,6 +59,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private BatchesAdapter mAdapter;
     private Animator mAnimator;
     private BatchRepository mAppRepository;
+    private static int counter = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +82,17 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
         mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
+        mBtnAddFakeData = root.findViewById(R.id.btn_batches_with_search_add_fake_data);
+        mBtnClearFakeData = root.findViewById(R.id.btn_batches_with_search_clear_fake_data);
+
+        mBtnAddFakeData.setOnClickListener(v -> {
+            insertFakeData(new Batch("Fake Batch #" + counter));
+            counter++;
+        });
+
+        mBtnClearFakeData.setOnClickListener(v -> {
+            clearFakeData();
+        });
 
         mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
@@ -213,20 +228,13 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     }
 
     public void insertFakeData(Batch batch) {
-//        int id = 0;
-//        mModels = new ArrayList<>();
-//        for (String batch: BATCHES) {
-//            mAppRepository.insertBatchTask(new Batch(batch));
-////            Batch batch1 = new Batch(batch);
-////            batch1.setId(id);
-////            mModels.add(batch1);
-////            id++;
-//        }
-//
-////        mAppRepository.insertBatchTask(mModels.toArray(new Batch[mModels.size()]));
+        mAppRepository.insertBatchTask(batch);
+//        mAdapter.edit()
+//                .add(batch)
+//                .commit();
+    }
 
-        mAdapter.edit()
-                .add(batch)
-                .commit();
+    public void clearFakeData() {
+        mAppRepository.deleteAllTask(new Batch(""));
     }
 }
