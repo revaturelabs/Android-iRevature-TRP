@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,12 +14,8 @@ import androidx.navigation.Navigation;
 import com.google.android.material.tabs.TabLayout;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
-import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment;
-import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirections;
-import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragment;
 
 import java.util.Objects;
 
@@ -141,8 +135,8 @@ public class LookupFragment extends Fragment implements TrainersAdapter.OnItemLi
 
     @Override
     public void onBatchClick(int position) {
-        LookupFragmentDirections.ActionNavLookupToNavBatchInfo actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavLookupToNavBatchInfo();
-        mMainNavController.navigate(actionNavLookupToNavBatchInfo);
+//        LookupFragmentDirections actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavLookupToNavBatchInfo();
+        mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavBatchInfo());
     }
 
     @Override

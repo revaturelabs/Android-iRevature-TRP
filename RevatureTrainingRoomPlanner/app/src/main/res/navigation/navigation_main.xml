@@ -161,6 +161,11 @@
                 app:popExitAnim="@anim/slide_out_right" />
 
         </fragment>
+        <fragment
+            android:id="@+id/nav_batch_info"
+            android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchInfo"
+            android:label="fragment_batch_info"
+            tools:layout="@layout/fragment_batch_info" />
     </navigation>
 
     <activity
