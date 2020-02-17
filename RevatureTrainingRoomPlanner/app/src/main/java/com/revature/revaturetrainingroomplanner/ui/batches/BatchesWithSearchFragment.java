@@ -52,13 +52,13 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private List<Batch> mModels;
     private BatchesAdapter mAdapter;
     private Animator mAnimator;
-//    private AppRepository mAppRepository;
+//    private BatchRepository mAppRepository;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        mAppRepository = new AppRepository<Batch>(getContext());
+//        mAppRepository = new BatchRepository<Batch>(getContext());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

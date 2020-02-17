@@ -11,11 +11,16 @@ import java.util.List;
 @Dao
 public interface TrainerDAO extends BaseDAO<Trainer> {
 
+    @Override
     @Query("SELECT * FROM trainers")
-    LiveData<List<Trainer>> getTrainers();
+    LiveData<List<Trainer>> getAll();
 
-    @Query("SELECT * FROM  trainers WHERE t_id = :id")
-    LiveData<List<Trainer>> getTrainerById(int id);
-    // @Query SELECT * FROM trainers WHERE id LIKE :id
-    // getTrainerById("1*")
+    @Override
+    @Query("SELECT * FROM trainers WHERE t_id = :id")
+    LiveData<Trainer> getByID(int id);
+
+    @Override
+    @Query("DELETE FROM trainers")
+    long deleteAll();
+    
 }

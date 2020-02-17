@@ -11,11 +11,16 @@ import java.util.List;
 @Dao
 public interface CampusDAO extends BaseDAO<Campus> {
 
+    @Override
     @Query("SELECT * FROM campuses")
-    LiveData<List<Campus>> getCampuses();
+    LiveData<List<Campus>> getAll();
 
-    @Query("SELECT * FROM  campuses WHERE c_id = :id")
-    LiveData<List<Campus>> getCampusById(int id);
-    // @Query SELECT * FROM campuses WHERE id LIKE :id
-    // getCampusById("1*")
+    @Override
+    @Query("SELECT * FROM campuses WHERE c_id = :id")
+    LiveData<Campus> getByID(int id);
+
+    @Override
+    @Query("DELETE FROM campuses")
+    long deleteAll();
+
 }

@@ -11,11 +11,16 @@ import java.util.List;
 @Dao
 public interface SkillDAO extends BaseDAO<Skill> {
 
+    @Override
     @Query("SELECT * FROM skills")
-    LiveData<List<Skill>> getSkills();
+    LiveData<List<Skill>> getAll();
 
-    @Query("SELECT * FROM  skills WHERE s_id = :id")
-    LiveData<List<Skill>> getSkillById(int id);
-    // @Query SELECT * FROM skills WHERE id LIKE :id
-    // getSkillById("1*")
+    @Override
+    @Query("SELECT * FROM skills WHERE s_id = :id")
+    LiveData<Skill> getByID(int id);
+
+    @Override
+    @Query("DELETE FROM skills")
+    long deleteAll();
+    
 }

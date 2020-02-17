@@ -37,16 +37,16 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
-    public <T> BaseDAO getDAO(T t) {
-        if (t instanceof Batch) {
+    public <T> BaseDAO getDAO(Class t) {
+        if (t.equals(Batch.class)) {
             return getBatchDAO();
-        } else if (t instanceof Campus) {
+        } else if (t.equals(Campus.class)) {
             return getCampusDAO();
-        } else if (t instanceof Room) {
+        } else if (t.equals(com.revature.revaturetrainingroomplanner.data.model.Room.class)) {
             return getRoomDAO();
-        } else if (t instanceof Skill) {
+        } else if (t.equals(Skill.class)) {
             return getSkillDAO();
-        } else if (t instanceof Trainer) {
+        } else if (t.equals(Trainer.class)) {
             return getTrainerDAO();
         }
         return null;

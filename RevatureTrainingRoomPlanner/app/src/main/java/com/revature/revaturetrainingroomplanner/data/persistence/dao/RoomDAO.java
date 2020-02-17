@@ -11,11 +11,16 @@ import java.util.List;
 @Dao
 public interface RoomDAO extends BaseDAO<Room> {
 
+    @Override
     @Query("SELECT * FROM rooms")
-    LiveData<List<Room>> getRooms();
+    LiveData<List<Room>> getAll();
 
-    @Query("SELECT * FROM  rooms WHERE r_id = :id")
-    LiveData<List<Room>> getRoomById(int id);
-    // @Query SELECT * FROM rooms WHERE id LIKE :id
-    // getRoomById("1*")
+    @Override
+    @Query("SELECT * FROM rooms WHERE r_id = :id")
+    LiveData<Room> getByID(int id);
+
+    @Override
+    @Query("DELETE FROM rooms")
+    long deleteAll();
+
 }

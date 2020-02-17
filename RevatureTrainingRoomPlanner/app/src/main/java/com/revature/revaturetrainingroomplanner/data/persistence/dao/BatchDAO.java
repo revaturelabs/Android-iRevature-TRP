@@ -11,11 +11,18 @@ import java.util.List;
 @Dao
 public interface BatchDAO extends BaseDAO<Batch> {
 
+    @Override
     @Query("SELECT * FROM batches")
-    LiveData<List<Batch>> getBatches();
+    LiveData<List<Batch>> getAll();
 
-    @Query("SELECT * FROM  batches WHERE b_id = :id")
-    LiveData<List<Batch>> getBatchById(int id);
+    @Override
+    @Query("SELECT * FROM batches WHERE b_id = :id")
+    LiveData<Batch> getByID(int id);
+
+    @Override
+    @Query("DELETE FROM batches")
+    long deleteAll();
+
     // @Query SELECT * FROM batches WHERE id LIKE :id
     // getBatchById("1*")
 }
