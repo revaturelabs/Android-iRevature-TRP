@@ -29,6 +29,7 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
         return inflater.inflate(R.layout.fragment_batches, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

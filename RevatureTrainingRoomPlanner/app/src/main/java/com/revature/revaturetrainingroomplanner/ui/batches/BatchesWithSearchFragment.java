@@ -41,6 +41,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
             "4150Backend"
     };
 
+
     private static final Comparator<Batch> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
     private static final String TAG = "BatchesSearchFragment";
