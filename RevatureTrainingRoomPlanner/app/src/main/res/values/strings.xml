@@ -29,7 +29,6 @@
     <string name="email">E-mail</string>
     <string name="reset_pw_title">Reset Password</string>
     <string name="reset_email_description">An e-mail with further instruction will be sent to your email address.</string>
-    <string name="submit">Submit</string>
     <string name="forgot_password_title">Forgot Password</string>
     <string name="reset_pass_title">Reset Password</string>
     <string name="login_reset">Forgot Password?</string>
@@ -60,6 +59,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="batches_details">Associates: ##</string>
     <string name="batch_info_skills_required">Skills Required:</string>
-    <string name="batch_info_assign_room">Assign Room</string>
+    <string name="batch_info_assign_room">Select Batch</string>
+    <string name="room_info_assign_room">Assign Room</string>
+    <string name="assign_trainer_submit">Assign to batch</string>
+    <string name="submit">submit</string>
 
 </resources>
