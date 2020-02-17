@@ -8,28 +8,28 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.data.model.TrainerModel;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 
 import java.util.Comparator;
 
-public class TrainersAdapter extends SortedListAdapter<TrainerModel> {
+public class TrainersAdapter extends SortedListAdapter<Trainer> {
 
     private OnItemListener mOnItemListener;
 
-    public TrainersAdapter(Context context, Comparator<TrainerModel> comparator, OnItemListener onItemListener) {
-        super(context, TrainerModel.class, comparator);
+    public TrainersAdapter(Context context, Comparator<Trainer> comparator, OnItemListener onItemListener) {
+        super(context, Trainer.class, comparator);
         mOnItemListener = onItemListener;
     }
 
     @NonNull
     @Override
-    protected SortedListAdapter.ViewHolder<? extends TrainerModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
+    protected SortedListAdapter.ViewHolder<? extends Trainer> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final TrainerRowBinding binding = TrainerRowBinding.inflate(inflater, parent, false);
         return new TrainerViewHolder(binding, mOnItemListener);
     }
 
-    public static class TrainerViewHolder extends ViewHolder<TrainerModel> implements View.OnClickListener {
+    public static class TrainerViewHolder extends ViewHolder<Trainer> implements View.OnClickListener {
 
         private final TrainerRowBinding mBinding;
         private OnItemListener mOnItemListener;
@@ -43,7 +43,7 @@ public class TrainersAdapter extends SortedListAdapter<TrainerModel> {
         }
 
         @Override
-        protected void performBind(@NonNull TrainerModel item) {
+        protected void performBind(@NonNull Trainer item) {
             mBinding.setModel(item);
         }
 

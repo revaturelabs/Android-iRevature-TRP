@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.TrainerModel;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter.OnItemListener;
@@ -40,9 +40,9 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
             "4150Backend"
     };
 
-    private static final Comparator<TrainerModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<Trainer> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
-    private List<TrainerModel> mModels;
+    private List<Trainer> mModels;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private TrainersAdapter mAdapter;
@@ -77,7 +77,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mModels = new ArrayList<>();
         int id = 0;
         for (String trainer: TRAINERS) {
-            mModels.add(new TrainerModel(id, trainer));
+            mModels.add(new Trainer(id, trainer));
             id++;
         }
         mAdapter.edit()
@@ -92,7 +92,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<TrainerModel> filteredModelList = filter(mModels, query);
+                final List<Trainer> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -156,11 +156,11 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.start();
     }
 
-    private static List<TrainerModel> filter(List<TrainerModel> models, String query) {
+    private static List<Trainer> filter(List<Trainer> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<TrainerModel> filteredModelList = new ArrayList<>();
-        for (TrainerModel model : models) {
+        final List<Trainer> filteredModelList = new ArrayList<>();
+        for (Trainer model : models) {
             final String text = model.getText().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);

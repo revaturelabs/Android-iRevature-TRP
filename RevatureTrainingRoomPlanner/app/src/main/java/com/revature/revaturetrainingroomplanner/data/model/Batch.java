@@ -1,16 +1,23 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-public class CampusModel implements SortedListAdapter.ViewModel {
+@Entity(tableName = "batches")
+public class Batch implements SortedListAdapter.ViewModel {
 
-    private final long mId;
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
+    private long mId;
+
+    @ColumnInfo
     private final String mText;
 
-    public CampusModel(long id, String text) {
-        mId = id;
+    public Batch(String text) {
         mText = text;
     }
 
@@ -24,8 +31,8 @@ public class CampusModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
-        if (model instanceof CampusModel) {
-            final CampusModel other = (CampusModel) model;
+        if (model instanceof Batch) {
+            final Batch other = (Batch) model;
             return other.mId == mId;
         }
         return false;
@@ -33,8 +40,8 @@ public class CampusModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isContentTheSameAs(@NonNull T model) {
-        if (model instanceof CampusModel) {
-            final CampusModel other = (CampusModel) model;
+        if (model instanceof Batch) {
+            final Batch other = (Batch) model;
             return mText != null ? mText.equals(other.mText) : other.mText == null;
         }
         return false;

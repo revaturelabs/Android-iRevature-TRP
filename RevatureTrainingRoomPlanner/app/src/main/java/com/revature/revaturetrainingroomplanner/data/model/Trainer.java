@@ -1,18 +1,15 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.SortedList;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-import java.util.Objects;
-
-public class BatchModel implements SortedListAdapter.ViewModel {
-
+public class Trainer implements SortedListAdapter.ViewModel {
+    
     private final long mId;
     private final String mText;
 
-    public BatchModel(long id, String text) {
+    public Trainer(long id, String text) {
         mId = id;
         mText = text;
     }
@@ -27,8 +24,8 @@ public class BatchModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
-        if (model instanceof BatchModel) {
-            final BatchModel other = (BatchModel) model;
+        if (model instanceof Trainer) {
+            final Trainer other = (Trainer) model;
             return other.mId == mId;
         }
         return false;
@@ -36,8 +33,8 @@ public class BatchModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isContentTheSameAs(@NonNull T model) {
-        if (model instanceof BatchModel) {
-            final BatchModel other = (BatchModel) model;
+        if (model instanceof Trainer) {
+            final Trainer other = (Trainer) model;
             return mText != null ? mText.equals(other.mText) : other.mText == null;
         }
         return false;

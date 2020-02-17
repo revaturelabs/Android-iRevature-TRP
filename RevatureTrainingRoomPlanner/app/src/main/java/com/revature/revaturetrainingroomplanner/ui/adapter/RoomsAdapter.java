@@ -8,28 +8,28 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.data.model.RoomModel;
+import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 
 import java.util.Comparator;
 
-public class RoomsAdapter extends SortedListAdapter<RoomModel> {
+public class RoomsAdapter extends SortedListAdapter<Room> {
 
     private OnItemListener mOnItemListener;
 
-    public RoomsAdapter(Context context, Comparator<RoomModel> comparator, OnItemListener onItemListener) {
-        super(context, RoomModel.class, comparator);
+    public RoomsAdapter(Context context, Comparator<Room> comparator, OnItemListener onItemListener) {
+        super(context, Room.class, comparator);
         mOnItemListener = onItemListener;
     }
 
     @NonNull
     @Override
-    protected SortedListAdapter.ViewHolder<? extends RoomModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
+    protected SortedListAdapter.ViewHolder<? extends Room> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final RoomRowBinding binding = RoomRowBinding.inflate(inflater, parent, false);
         return new RoomViewHolder(binding, mOnItemListener);
     }
 
-    public static class RoomViewHolder extends ViewHolder<RoomModel> implements View.OnClickListener {
+    public static class RoomViewHolder extends ViewHolder<Room> implements View.OnClickListener {
 
         private final RoomRowBinding mBinding;
         private OnItemListener mOnItemListener;
@@ -43,7 +43,7 @@ public class RoomsAdapter extends SortedListAdapter<RoomModel> {
         }
 
         @Override
-        protected void performBind(@NonNull RoomModel item) {
+        protected void performBind(@NonNull Room item) {
             mBinding.setModel(item);
         }
 

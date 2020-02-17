@@ -3,10 +3,13 @@ package com.revature.revaturetrainingroomplanner.ui;
 import android.os.Bundle;
 import android.view.Menu;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         logoutSetup();
 
-        hideKeyboardBetweenDestinations();
+        hideKeyboardWhenDestinationChanges();
 
 //        navController.navigate(R.id.nav_batches);
     }
@@ -58,8 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+        KeyboardUtil.hideKeyboard(this);
+//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+//        View currentFragment = navHostFragment.getChildFragmentManager().getFragments().get(0).getView();
+//        currentFragment.clearFocus();
+
+        return NavigationUI.navigateUp(mNavController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
@@ -70,9 +77,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void hideKeyboardBetweenDestinations() {
-        mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            KeyboardUtil.hideSoftKeyboard(appCompatActivity);
+    private void hideKeyboardWhenDestinationChanges() {
+        mNavController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                KeyboardUtil.hideKeyboard(appCompatActivity);
+            }
         });
     }
 
