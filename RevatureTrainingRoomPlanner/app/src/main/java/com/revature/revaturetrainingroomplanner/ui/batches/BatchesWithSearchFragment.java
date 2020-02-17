@@ -75,7 +75,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
 
-        OnItemListener onItemListener = (OnItemListener) getParentFragment();
+        OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_batches_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);

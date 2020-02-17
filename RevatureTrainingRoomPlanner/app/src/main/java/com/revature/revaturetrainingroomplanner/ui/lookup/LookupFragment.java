@@ -16,6 +16,9 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragmentDirections;
+import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragmentDirections;
+import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersWithSearchFragmentDirections;
 
 import java.util.Objects;
 
@@ -37,6 +40,7 @@ public class LookupFragment extends Fragment implements TrainersAdapter.OnItemLi
     private TabLayout.Tab mRoomsTab;
     private TabLayout.Tab mBatchesTab;
     private View mNavHost;
+    private int mCurrentTab = 0;
 
     public LookupFragment() {
         // Required empty public constructor
@@ -74,31 +78,34 @@ public class LookupFragment extends Fragment implements TrainersAdapter.OnItemLi
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                 switch(mTabLayout.getSelectedTabPosition()) {
+                 switch(tab.getPosition()) {
                      case TRAINER_TAB_LOCATION: {
-                         if (tab.getPosition() == BATCH_TAB_LOCATION) {
-                             mSearchNavController.navigate(R.id.action_batchesFragment_to_trainersFragment);
-                         } else if (tab.getPosition() == ROOM_TAB_LOCATION) {
-                             mSearchNavController.navigate(R.id.action_roomsFragment_to_trainersFragment);
+                         if (mCurrentTab == BATCH_TAB_LOCATION) {
+                             mSearchNavController.navigate(BatchesWithSearchFragmentDirections.actionNavLookupBatchesToNavLookupTrainers());
+                         } else if (mCurrentTab == ROOM_TAB_LOCATION) {
+                             mSearchNavController.navigate(RoomsWithSearchFragmentDirections.actionNavLookupRoomsToNavLookupTrainers());
                          }
+                         mCurrentTab = 0;
                      }
                      break;
 
                      case BATCH_TAB_LOCATION: {
-                         if (tab.getPosition() == TRAINER_TAB_LOCATION) {
-                             mSearchNavController.navigate(R.id.action_trainersFragment_to_batchesFragment);
-                         } else if (tab.getPosition() == ROOM_TAB_LOCATION) {
-                             mSearchNavController.navigate(R.id.action_roomsFragment_to_batchesFragment);
+                         if (mCurrentTab == TRAINER_TAB_LOCATION) {
+                             mSearchNavController.navigate(TrainersWithSearchFragmentDirections.actionNavLookupTrainersToNavLookupBatches());
+                         } else if (mCurrentTab == ROOM_TAB_LOCATION) {
+                             mSearchNavController.navigate(RoomsWithSearchFragmentDirections.actionNavLookupRoomsToNavLookupBatches());
                          }
+                         mCurrentTab = 1;
                      }
                      break;
 
                      case ROOM_TAB_LOCATION: {
-                         if (tab.getPosition() == TRAINER_TAB_LOCATION) {
-                             mSearchNavController.navigate(R.id.action_trainersFragment_to_roomsFragment);
-                         } else if (tab.getPosition() == BATCH_TAB_LOCATION) {
-                             mSearchNavController.navigate(R.id.action_batchesFragment_to_roomsFragment);
+                         if (mCurrentTab == TRAINER_TAB_LOCATION) {
+                             mSearchNavController.navigate(TrainersWithSearchFragmentDirections.actionNavLookupTrainersToNavLookupRooms());
+                         } else if (mCurrentTab == BATCH_TAB_LOCATION) {
+                             mSearchNavController.navigate(BatchesWithSearchFragmentDirections.actionNavLookupBatchesToNavLookupRooms());
                          }
+                         mCurrentTab = 2;
                      }
                      break;
                  }
@@ -125,24 +132,24 @@ public class LookupFragment extends Fragment implements TrainersAdapter.OnItemLi
         outState.putInt("last tab", mTabLayout.getSelectedTabPosition());
     }
 
-
-
     @Override
     public void onTrainerClick(int position) {
-        LookupFragmentDirections.ActionNavLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavLookupToNavTrainerInfo();
+        LookupFragmentDirections.ActionNavCategoryLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavCategoryLookupToNavTrainerInfo();
         mMainNavController.navigate(actionNavLookupToNavTrainerInfo);
     }
 
     @Override
     public void onBatchClick(int position) {
 //        LookupFragmentDirections actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavLookupToNavBatchInfo();
-        mMainNavController.navigate(LookupFragmentDirections.actionNavLookupToNavBatchInfo());
+        mMainNavController.navigate(LookupFragmentDirections.actionNavCategoryLookupToNavBatchInfo());
+        mTabLayout.selectTab(mTabLayout.getTabAt(TRAINER_TAB_LOCATION));
     }
 
     @Override
     public void onRoomClick(int position) {
-        LookupFragmentDirections.ActionNavLookupToNavRoomInfo actionNavLookupToNavRoomInfo = LookupFragmentDirections.actionNavLookupToNavRoomInfo();
-        mMainNavController.navigate(actionNavLookupToNavRoomInfo);
+        LookupFragmentDirections.ActionNavCategoryLookupToNavRoomInfo actionNavCategoryLookupToNavRoomInfo = LookupFragmentDirections.actionNavCategoryLookupToNavRoomInfo();
+        mMainNavController.navigate(actionNavCategoryLookupToNavRoomInfo);
+        mTabLayout.selectTab(mTabLayout.getTabAt(TRAINER_TAB_LOCATION));
     }
 
 }

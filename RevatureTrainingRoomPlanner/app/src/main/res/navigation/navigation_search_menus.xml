@@ -3,58 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_search_menus"
-    app:startDestination="@id/trainersFragment">
-
+    app:startDestination="@id/nav_lookup_trainers">
     <fragment
-        android:id="@+id/trainersFragment"
-        android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersFragment"
-        android:label="fragment_trainers"
-        tools:layout="@layout/fragment_trainers" >
+        android:id="@+id/nav_lookup_rooms"
+        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragment"
+        android:label="fragment_rooms_with_search"
+        tools:layout="@layout/fragment_rooms_with_search" >
         <action
-            android:id="@+id/action_trainersFragment_to_roomsFragment"
-            app:destination="@id/roomsFragment"
+            android:id="@+id/action_nav_lookup_rooms_to_nav_lookup_batches"
+            app:destination="@id/nav_lookup_batches"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@+id/navigation_search_menus" />
         <action
-            android:id="@+id/action_trainersFragment_to_batchesFragment"
-            app:destination="@id/batchesFragment"
+            android:id="@+id/action_nav_lookup_rooms_to_nav_lookup_trainers"
+            app:destination="@id/nav_lookup_trainers"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@+id/navigation_search_menus" />
     </fragment>
     <fragment
-        android:id="@+id/batchesFragment"
-        android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragment"
-        android:label="fragment_batches"
-        tools:layout="@layout/fragment_batches" >
+        android:id="@+id/nav_lookup_trainers"
+        android:name="com.revature.revaturetrainingroomplanner.ui.trainers.TrainersWithSearchFragment"
+        android:label="fragment_trainers_with_search"
+        tools:layout="@layout/fragment_trainers_with_search" >
         <action
-            android:id="@+id/action_batchesFragment_to_roomsFragment"
-            app:destination="@id/roomsFragment"
+            android:id="@+id/action_nav_lookup_trainers_to_nav_lookup_batches"
+            app:destination="@id/nav_lookup_batches"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@+id/navigation_search_menus" />
         <action
-            android:id="@+id/action_batchesFragment_to_trainersFragment"
-            app:destination="@id/trainersFragment"
+            android:id="@+id/action_nav_lookup_trainers_to_nav_lookup_rooms"
+            app:destination="@id/nav_lookup_rooms"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@+id/navigation_search_menus" />
     </fragment>
     <fragment
-        android:id="@+id/roomsFragment"
-        android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment"
-        android:label="fragment_rooms"
-        tools:layout="@layout/fragment_rooms" >
+        android:id="@+id/nav_lookup_batches"
+        android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragment"
+        tools:layout="@layout/fragment_batches_with_search" >
         <action
-            android:id="@+id/action_roomsFragment_to_batchesFragment"
-            app:destination="@id/batchesFragment"
+            android:id="@+id/action_nav_lookup_batches_to_nav_lookup_trainers"
+            app:destination="@id/nav_lookup_trainers"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@+id/navigation_search_menus" />
         <action
-            android:id="@+id/action_roomsFragment_to_trainersFragment"
-            app:destination="@id/trainersFragment"
+            android:id="@+id/action_nav_lookup_batches_to_nav_lookup_rooms"
+            app:destination="@id/nav_lookup_rooms"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popUpTo="@+id/navigation_search_menus" />

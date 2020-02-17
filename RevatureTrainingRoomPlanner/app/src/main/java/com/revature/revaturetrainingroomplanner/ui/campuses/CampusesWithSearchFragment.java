@@ -70,7 +70,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.campus_row, container, false);
 
-        OnItemListener onItemListener = (OnItemListener) getParentFragment();
+        OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_campuses_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_campuses_with_search_list_campuses);

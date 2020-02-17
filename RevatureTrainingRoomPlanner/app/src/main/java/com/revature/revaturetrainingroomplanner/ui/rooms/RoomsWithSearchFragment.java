@@ -67,7 +67,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.room_row, container, false);
 
-        OnItemListener onItemListener = (getParentFragment() instanceof OnItemListener) ? (OnItemListener) getParentFragment() : (OnItemListener) getParentFragment().getParentFragment();
+        OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_rooms_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);

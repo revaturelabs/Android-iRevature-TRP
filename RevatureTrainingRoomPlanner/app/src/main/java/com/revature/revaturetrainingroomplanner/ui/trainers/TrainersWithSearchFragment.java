@@ -68,7 +68,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.trainer_row, container, false);
 
-        OnItemListener onItemListener = (getParentFragment() instanceof OnItemListener) ? (OnItemListener) getParentFragment() : (OnItemListener) getParentFragment().getParentFragment();
+        OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_trainers_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);
