@@ -3,7 +3,7 @@
     <data>
         <variable
             name="model"
-            type="com.revature.revaturetrainingroomplanner.data.model.Campus"/>
+            type="com.revature.revaturetrainingroomplanner.data.model.CampusModel"/>
     </data>
 
     <FrameLayout

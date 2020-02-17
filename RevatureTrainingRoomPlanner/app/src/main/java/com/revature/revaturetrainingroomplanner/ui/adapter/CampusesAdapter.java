@@ -8,28 +8,28 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.model.CampusModel;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 
 import java.util.Comparator;
 
-public class CampusesAdapter extends SortedListAdapter<Campus> {
+public class CampusesAdapter extends SortedListAdapter<CampusModel> {
 
     private OnItemListener mOnItemListener;
 
-    public CampusesAdapter(Context context, Comparator<Campus> comparator, OnItemListener onItemListener) {
-        super(context, Campus.class, comparator);
+    public CampusesAdapter(Context context, Comparator<CampusModel> comparator, OnItemListener onItemListener) {
+        super(context, CampusModel.class, comparator);
         mOnItemListener = onItemListener;
     }
 
     @NonNull
     @Override
-    protected ViewHolder<? extends Campus> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
+    protected ViewHolder<? extends CampusModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final CampusRowBinding binding = CampusRowBinding.inflate(inflater, parent, false);
         return new CampusViewHolder(binding, mOnItemListener);
     }
 
-    public static class CampusViewHolder extends ViewHolder<Campus> implements View.OnClickListener {
+    public static class CampusViewHolder extends ViewHolder<CampusModel> implements View.OnClickListener {
 
         private final CampusRowBinding mBinding;
         private OnItemListener mOnItemListener;
@@ -43,7 +43,7 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
         }
 
         @Override
-        protected void performBind(@NonNull Campus item) {
+        protected void performBind(@NonNull CampusModel item) {
             mBinding.setModel(item);
         }
 
