@@ -28,11 +28,12 @@ public class LaunchActivity extends AppCompatActivity {
             Log.d("debug", "checking login info");
 
             if(sharedPreferences.getString("Email", "").isEmpty()){
+                Log.d("debug", "no login info");
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
             }
             else {
-                Log.d("debug", "no login saved");
+                Log.d("debug", "found login, to main page");
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

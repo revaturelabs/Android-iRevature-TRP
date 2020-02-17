@@ -3,6 +3,7 @@ package com.revature.revaturetrainingroomplanner.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     private void logoutSetup() {
         mNavigationView.getMenu().getItem(4).setOnMenuItemClickListener(item -> {
             saveSharedPreference.saveLoginDetails("","");
+            Log.d("debug", "deleting login info");
+
             mNavController.navigate(NavigationMainDirections.actionGlobalNavLoginActivity());
             return false;
         });
