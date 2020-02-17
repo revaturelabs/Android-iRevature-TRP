@@ -4,14 +4,22 @@ import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-public class TrainerModel implements SortedListAdapter.ViewModel {
-    
-    private final long mId;
+//@Entity(tableName = "trainers")
+public class Trainer implements SortedListAdapter.ViewModel {
+
+//    @ColumnInfo(name = "t_id")
+//    @PrimaryKey(autoGenerate = true)
+    private long mId;
+
+//    @ColumnInfo(name = "t_name")
     private final String mText;
 
-    public TrainerModel(long id, String text) {
-        mId = id;
+    public Trainer(String text) {
         mText = text;
+    }
+
+    public void setId(long id) {
+        this.mId = id;
     }
 
     public long getId() {
@@ -24,8 +32,8 @@ public class TrainerModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
-        if (model instanceof TrainerModel) {
-            final TrainerModel other = (TrainerModel) model;
+        if (model instanceof Trainer) {
+            final Trainer other = (Trainer) model;
             return other.mId == mId;
         }
         return false;
@@ -33,8 +41,8 @@ public class TrainerModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isContentTheSameAs(@NonNull T model) {
-        if (model instanceof TrainerModel) {
-            final TrainerModel other = (TrainerModel) model;
+        if (model instanceof Trainer) {
+            final Trainer other = (Trainer) model;
             return mText != null ? mText.equals(other.mText) : other.mText == null;
         }
         return false;

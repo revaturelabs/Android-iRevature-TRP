@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.RoomModel;
+import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter.OnItemListener;
@@ -40,9 +40,9 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
             "Boobs"
     };
 
-    private static final Comparator<RoomModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<Room> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
-    private List<RoomModel> mModels;
+    private List<Room> mModels;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RoomsAdapter mAdapter;
@@ -77,7 +77,9 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mModels = new ArrayList<>();
         int id = 0;
         for (String room: ROOMS) {
-            mModels.add(new RoomModel(id, room));
+            Room room1 = new Room(room);
+            room1.setId(id);
+            mModels.add(room1);
             id++;
         }
         mAdapter.edit()
@@ -92,7 +94,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<RoomModel> filteredModelList = filter(mModels, query);
+                final List<Room> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -156,11 +158,11 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mAnimator.start();
     }
 
-    private static List<RoomModel> filter(List<RoomModel> models, String query) {
+    private static List<Room> filter(List<Room> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<RoomModel> filteredModelList = new ArrayList<>();
-        for (RoomModel model : models) {
+        final List<Room> filteredModelList = new ArrayList<>();
+        for (Room model : models) {
             final String text = model.getText().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);

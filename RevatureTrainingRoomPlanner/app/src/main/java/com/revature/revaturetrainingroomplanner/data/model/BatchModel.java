@@ -1,20 +1,25 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.SortedList;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-import java.util.Objects;
+//@Entity(tableName = "batches")
+public class Batch implements SortedListAdapter.ViewModel {
 
-public class BatchModel implements SortedListAdapter.ViewModel {
+//    @ColumnInfo(name = "b_id")
+//    @PrimaryKey(autoGenerate = true)
+    private long mId;
 
-    private final long mId;
+//    @ColumnInfo(name = "b_name")
     private final String mText;
 
-    public BatchModel(long id, String text) {
-        mId = id;
+    public Batch(String text) {
         mText = text;
+    }
+
+    public void setId(long id) {
+        this.mId = id;
     }
 
     public long getId() {
@@ -27,8 +32,8 @@ public class BatchModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
-        if (model instanceof BatchModel) {
-            final BatchModel other = (BatchModel) model;
+        if (model instanceof Batch) {
+            final Batch other = (Batch) model;
             return other.mId == mId;
         }
         return false;
@@ -36,14 +41,10 @@ public class BatchModel implements SortedListAdapter.ViewModel {
 
     @Override
     public <T> boolean isContentTheSameAs(@NonNull T model) {
-        if (model instanceof BatchModel) {
-            final BatchModel other = (BatchModel) model;
+        if (model instanceof Batch) {
+            final Batch other = (Batch) model;
             return mText != null ? mText.equals(other.mText) : other.mText == null;
         }
         return false;
-    }
-
-    public void setmId(long mId) {
-        this.mId = mId;
     }
 }

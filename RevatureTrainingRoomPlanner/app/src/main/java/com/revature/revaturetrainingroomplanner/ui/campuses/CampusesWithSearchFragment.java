@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.CampusModel;
+import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter.OnItemListener;
@@ -38,10 +38,10 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
             "UTA"
     };
 
-    private static final Comparator<CampusModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<Campus> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
 //    private CampusesViewModel campusesViewModel;
-    private List<CampusModel> mModels;
+    private List<Campus> mModels;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private CampusesAdapter mAdapter;
@@ -78,7 +78,9 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mModels = new ArrayList<>();
         int id = 0;
         for (String campus: CAMPUSES) {
-            mModels.add(new CampusModel(id, campus));
+            Campus campus1 = new Campus(campus);
+            campus1.setId(id);
+            mModels.add(campus1);
             id++;
         }
         mAdapter.edit()
@@ -93,7 +95,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<CampusModel> filteredModelList = filter(mModels, query);
+                final List<Campus> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -156,11 +158,11 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.start();
     }
 
-    private static List<CampusModel> filter(List<CampusModel> models, String query) {
+    private static List<Campus> filter(List<Campus> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<CampusModel> filteredModelList = new ArrayList<>();
-        for (CampusModel model : models) {
+        final List<Campus> filteredModelList = new ArrayList<>();
+        for (Campus model : models) {
             final String text = model.getText().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);

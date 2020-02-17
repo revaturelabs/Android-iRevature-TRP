@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.TrainerModel;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter.OnItemListener;
@@ -40,17 +40,15 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
             "4150Backend"
     };
 
-    private static final Comparator<TrainerModel> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<Trainer> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
 
-    private List<TrainerModel> mModels;
+    private List<Trainer> mModels;
     private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private TrainersAdapter mAdapter;
     private TrainerRowBinding mBinding;
     private Animator mAnimator;
-    private SearchView searchView;
+    private SearchView mSearchView;
     private ProgressBar mProgressBar;
-    private OnItemListener mOnItemListener;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -58,18 +56,18 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.trainer_row, container, false);
 
-        mOnItemListener = (getParentFragment() instanceof OnItemListener)? (OnItemListener) getParentFragment() : (OnItemListener) getParentFragment().getParentFragment();
+        OnItemListener onItemListener = (getParentFragment() instanceof OnItemListener) ? (OnItemListener) getParentFragment() : (OnItemListener) getParentFragment().getParentFragment();
 
         View root = inflater.inflate(R.layout.fragment_trainers_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);
-        searchView = root.findViewById(R.id.searchview_trainers_with_search_search_trainer);
+        mSearchView = root.findViewById(R.id.searchview_trainers_with_search_search_trainer);
         mProgressBar = root.findViewById(R.id.progressbar_trainers_with_search_progress);
 
-        mAdapter = new TrainersAdapter(getContext(), ALPHABETICAL_COMPARATOR, mOnItemListener);
+        mAdapter = new TrainersAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mAdapter.addCallback(this);
 
-        layoutManager = new LinearLayoutManager(root.getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -77,14 +75,16 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mModels = new ArrayList<>();
         int id = 0;
         for (String trainer: TRAINERS) {
-            mModels.add(new TrainerModel(id, trainer));
+            Trainer trainer1 = new Trainer(trainer);
+            trainer1.setId(id);
+            mModels.add(trainer1);
             id++;
         }
         mAdapter.edit()
                 .add(mModels)
                 .commit();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -92,7 +92,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<TrainerModel> filteredModelList = filter(mModels, query);
+                final List<Trainer> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -100,7 +100,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
                 return true;
             }
         });
-        searchView.setQueryHint("Look for trainer");
+        mSearchView.setQueryHint("Look for trainer");
 
 
         return root;
@@ -156,11 +156,11 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.start();
     }
 
-    private static List<TrainerModel> filter(List<TrainerModel> models, String query) {
+    private static List<Trainer> filter(List<Trainer> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<TrainerModel> filteredModelList = new ArrayList<>();
-        for (TrainerModel model : models) {
+        final List<Trainer> filteredModelList = new ArrayList<>();
+        for (Trainer model : models) {
             final String text = model.getText().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
