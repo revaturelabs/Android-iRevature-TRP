@@ -59,6 +59,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         super.onCreate(savedInstanceState);
 
         mTrainerRepository = new TrainerRepository(getContext());
+        mModels = new ArrayList<>();
     }
 
     @Override
