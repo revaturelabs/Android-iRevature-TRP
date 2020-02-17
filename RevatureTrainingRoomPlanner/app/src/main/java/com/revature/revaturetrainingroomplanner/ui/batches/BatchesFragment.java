@@ -22,7 +22,6 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 
     private BatchesViewModel batchesViewModel;
     private NavController mNavController;
-    private View batchInfo;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,24 +40,15 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        batchInfo = view.findViewById(R.id.include_batches_batch_info);
         mNavController = Navigation.findNavController(view);
 
         Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        batchInfo.setVisibility(View.GONE);
-
-        view.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) ->
-                mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms()));
     }
 
     @Override
     public void onBatchClick(int position) {
-        batchInfo.setVisibility(View.VISIBLE);
 
-        // set number of associates based on whats clicked
-        TextView associates = batchInfo.findViewById(R.id.tv_batch_info_associates);
-        String associatesNum = "Associates: " + 0; // parse endpoint
-        associates.setText(associatesNum);
+        mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms());
 
     }
 }
