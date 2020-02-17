@@ -21,6 +21,6 @@ public interface TrainerDAO extends BaseDAO<Trainer> {
 
     @Override
     @Query("DELETE FROM trainers")
-    long deleteAll();
+    int deleteAll();
     
 }

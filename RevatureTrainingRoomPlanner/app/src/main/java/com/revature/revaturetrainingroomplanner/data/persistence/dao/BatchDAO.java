@@ -21,7 +21,7 @@ public interface BatchDAO extends BaseDAO<Batch> {
 
     @Override
     @Query("DELETE FROM batches")
-    long deleteAll();
+    int deleteAll();
 
     // @Query SELECT * FROM batches WHERE id LIKE :id
     // getBatchById("1*")

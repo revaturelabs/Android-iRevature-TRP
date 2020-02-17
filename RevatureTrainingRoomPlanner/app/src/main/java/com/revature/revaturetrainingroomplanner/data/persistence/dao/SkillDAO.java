@@ -21,6 +21,6 @@ public interface SkillDAO extends BaseDAO<Skill> {
 
     @Override
     @Query("DELETE FROM skills")
-    long deleteAll();
+    int deleteAll();
     
 }

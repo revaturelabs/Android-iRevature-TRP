@@ -22,11 +22,11 @@ public interface BaseDAO<T> {
     LiveData<T> getByID(int id);
 
     @Update
-    long update(T... objects);
+    int update(T... objects);
 
     @Delete
-    long delete(T... objects);
+    int delete(T... objects);
 
-    long deleteAll();
+    int deleteAll();
 
 }

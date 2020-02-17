@@ -21,6 +21,6 @@ public interface RoomDAO extends BaseDAO<Room> {
 
     @Override
     @Query("DELETE FROM rooms")
-    long deleteAll();
+    int deleteAll();
 
 }

@@ -21,6 +21,6 @@ public interface CampusDAO extends BaseDAO<Campus> {
 
     @Override
     @Query("DELETE FROM campuses")
-    long deleteAll();
+    int deleteAll();
 
 }
