@@ -15,19 +15,30 @@
 
         <ImageView
             android:id="@+id/img_campus_row_icon"
-            android:layout_width="40dp"
-            android:layout_height="38dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             app:srcCompat="@drawable/campus_icon_foreground" />
 
         <TextView
+            android:id="@+id/campus_row_campus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="42dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
             android:padding="8dp"
             android:text="@{model.text}" />
+
+
+        <TextView
+            android:id="@+id/campus_row_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:text="City, State"
+            android:textColor="#999999" />
 
     </FrameLayout>
 
