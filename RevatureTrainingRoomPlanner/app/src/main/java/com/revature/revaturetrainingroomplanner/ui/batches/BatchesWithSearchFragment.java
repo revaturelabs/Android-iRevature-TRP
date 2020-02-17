@@ -15,12 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter.OnItemListener;
@@ -52,13 +55,13 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private List<Batch> mModels;
     private BatchesAdapter mAdapter;
     private Animator mAnimator;
-//    private BatchRepository mAppRepository;
+    private BatchRepository mAppRepository;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        mAppRepository = new BatchRepository<Batch>(getContext());
+        mAppRepository = new BatchRepository(getContext());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -85,14 +88,11 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        int id = 0;
+//        insertFakeData();
         mModels = new ArrayList<>();
-        for (String batch: BATCHES) {
-            Batch batch1 = new Batch(batch);
-            batch1.setId(id);
-            mModels.add(batch1);
-            id++;
-        }
+        retrieveBatches();
+
+
         mAdapter.edit()
                 .add(mModels)
                 .commit();
@@ -182,20 +182,51 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         return filteredModelList;
     }
 
-//    private void retrieveBatches() {
-//        mAppRepository.retrieveTask().observe(this, new Observer<List<Batch>>() {
-//            @Override
-//            public void onChanged(List<Batch> batches) {
-//                if (!mModels.isEmpty()) {
-//                    mModels.clear();
-//                }
-//
-//                if (batches != null) {
-//                    mModels.addAll(batches);
-//                }
-//
+    private void retrieveBatches() {
+        LiveData liveData = mAppRepository.retrieveAllTask();
+        liveData.observe(getViewLifecycleOwner(), new Observer<List<Batch>>() {
+            @Override
+            public void onChanged(List<Batch> batches) {
+                if (batches != null) {
+                    mAdapter.edit()
+                            .replaceAll(batches)
+                            .commit();
+                }
+
 //                mAdapter.notifyDataSetChanged();
-//            }
-//        });
-//    }
+            }
+        });
+    }
+
+    public void insertFakeData() {
+        int id = 0;
+        mModels = new ArrayList<>();
+        for (String batch: BATCHES) {
+            mAppRepository.insertBatchTask(new Batch(batch));
+//            Batch batch1 = new Batch(batch);
+//            batch1.setId(id);
+//            mModels.add(batch1);
+//            id++;
+        }
+
+//        mAppRepository.insertBatchTask(mModels.toArray(new Batch[mModels.size()]));
+    }
+
+    public void insertFakeData(Batch batch) {
+//        int id = 0;
+//        mModels = new ArrayList<>();
+//        for (String batch: BATCHES) {
+//            mAppRepository.insertBatchTask(new Batch(batch));
+////            Batch batch1 = new Batch(batch);
+////            batch1.setId(id);
+////            mModels.add(batch1);
+////            id++;
+//        }
+//
+////        mAppRepository.insertBatchTask(mModels.toArray(new Batch[mModels.size()]));
+
+        mAdapter.edit()
+                .add(batch)
+                .commit();
+    }
 }

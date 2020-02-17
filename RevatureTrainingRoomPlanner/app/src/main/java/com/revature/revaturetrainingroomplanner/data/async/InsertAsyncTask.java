@@ -17,8 +17,11 @@ public class InsertAsyncTask<T, DAOT extends BaseDAO<T>> extends AsyncTask<T, Vo
 
     @Override
     protected Void doInBackground(T... objects) {
-        Log.d(TAG, "doInBackground: thread: " + Thread.currentThread().getName());
+//        Log.d(TAG, "doInBackground: thread: " + Thread.currentThread().getName());
         mDAO.insert(objects);
+        for (int i = 0; i < objects.length; i++) {
+            Log.d(TAG, "doInBackground: inserting object " + objects.toString());
+        }
         return null;
     }
 

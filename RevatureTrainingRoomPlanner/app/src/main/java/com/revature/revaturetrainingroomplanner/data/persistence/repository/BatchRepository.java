@@ -1,6 +1,7 @@
 package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -14,6 +15,8 @@ import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDat
 import java.util.List;
 
 public class BatchRepository {
+
+    private static final String TAG = "BatchRepository";
 
     private AppDatabase mAppDatabase;
     private BaseDAO<Batch> mDao;
@@ -32,6 +35,7 @@ public class BatchRepository {
     }
 
     public LiveData<List<Batch>> retrieveAllTask() {
+        Log.d(TAG, "retrieveAllTask: retrieved all batches");
         return mDao.getAll();
     }
 

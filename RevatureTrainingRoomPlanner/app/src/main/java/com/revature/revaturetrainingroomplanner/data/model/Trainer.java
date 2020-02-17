@@ -34,6 +34,14 @@ public class Trainer implements SortedListAdapter.ViewModel {
     }
 
     @Override
+    public String toString() {
+        return "Trainer{" +
+                "mId=" + mId +
+                ", mText='" + mText + '\'' +
+                '}';
+    }
+
+    @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof Trainer) {
             final Trainer other = (Trainer) model;

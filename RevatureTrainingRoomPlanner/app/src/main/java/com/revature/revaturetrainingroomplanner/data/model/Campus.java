@@ -34,6 +34,14 @@ public class Campus implements SortedListAdapter.ViewModel {
     }
 
     @Override
+    public String toString() {
+        return "Campus{" +
+                "mId=" + mId +
+                ", mText='" + mText + '\'' +
+                '}';
+    }
+
+    @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof Campus) {
             final Campus other = (Campus) model;

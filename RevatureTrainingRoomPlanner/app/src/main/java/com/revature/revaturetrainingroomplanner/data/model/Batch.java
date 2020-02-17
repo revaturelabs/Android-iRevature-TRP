@@ -34,6 +34,14 @@ public class Batch implements SortedListAdapter.ViewModel {
     }
 
     @Override
+    public String toString() {
+        return "Batch{" +
+                "mId=" + mId +
+                ", mText='" + mText + '\'' +
+                '}';
+    }
+
+    @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof Batch) {
             final Batch other = (Batch) model;

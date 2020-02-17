@@ -34,6 +34,14 @@ public class Room implements SortedListAdapter.ViewModel {
     }
 
     @Override
+    public String toString() {
+        return "Room{" +
+                "mId=" + mId +
+                ", mText='" + mText + '\'' +
+                '}';
+    }
+
+    @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof Room) {
             final Room other = (Room) model;

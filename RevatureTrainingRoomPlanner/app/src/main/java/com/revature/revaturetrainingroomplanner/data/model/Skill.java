@@ -34,6 +34,14 @@ public class Skill implements SortedListAdapter.ViewModel {
     }
 
     @Override
+    public String toString() {
+        return "Skill{" +
+                "mId=" + mId +
+                ", mText='" + mText + '\'' +
+                '}';
+    }
+
+    @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof Skill) {
             final Skill other = (Skill) model;

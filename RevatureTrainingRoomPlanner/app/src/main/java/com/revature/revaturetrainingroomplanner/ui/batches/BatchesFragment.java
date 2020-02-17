@@ -47,7 +47,8 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
         Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         batchInfo.setVisibility(View.GONE);
 
-        view.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) -> mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms()));
+        view.findViewById(R.id.btn_batch_info_assign_room).setOnClickListener((v) ->
+                mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms()));
     }
 
     @Override
