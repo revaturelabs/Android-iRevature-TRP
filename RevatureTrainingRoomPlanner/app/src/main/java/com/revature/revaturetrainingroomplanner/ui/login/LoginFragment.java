@@ -3,9 +3,11 @@ package com.revature.revaturetrainingroomplanner.ui.login;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class LoginFragment extends Fragment {
     private EditText passwordEditText;
     private Button loginButton;
     private ProgressBar loadingProgressBar;
+    SaveSharedPreference saveSharedPreferences;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -56,6 +59,8 @@ public class LoginFragment extends Fragment {
         loginButton = root.findViewById(R.id.btn_login_signin);
         Button forgotButton = root.findViewById(R.id.btn_login_forgot);
         loadingProgressBar = root.findViewById(R.id.loading);
+        saveSharedPreferences = new SaveSharedPreference(getContext());
+
 
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), loginFormState -> {
             if (loginFormState == null) {
@@ -121,7 +126,11 @@ public class LoginFragment extends Fragment {
             loadingProgressBar.setVisibility(View.VISIBLE);
             loginViewModel.login(usernameEditText.getText().toString(),
                     passwordEditText.getText().toString());
+            saveSharedPreferences.saveLoginDetails(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            Log.d("debug", "Saving login info");
             mNavController.navigate(LoginFragmentDirections.actionLoginFragmentToNavMainActivity());
+
+
         });
 
         forgotButton.setOnClickListener(v -> {

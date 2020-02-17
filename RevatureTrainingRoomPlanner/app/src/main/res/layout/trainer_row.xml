@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="com.revature.revaturetrainingroomplanner.data.model.TrainerModel"/>
+            type="com.revature.revaturetrainingroomplanner.data.model.Trainer"/>
 
     </data>
 
