@@ -71,6 +71,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/assign_button_style"
         android:ems="7"
-        android:text="Assign Room" />
+        android:text="@string/room_info_assign_room"
+        android:textColor="@color/revature_orange"/>
 
 </RelativeLayout>
