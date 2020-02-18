@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 
@@ -38,6 +39,7 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
+            mBinding.getRoot().findViewById(R.id.frameLayout_trainer_row).setOnClickListener(this);
 
             mBinding.getRoot().setOnClickListener(this);
         }

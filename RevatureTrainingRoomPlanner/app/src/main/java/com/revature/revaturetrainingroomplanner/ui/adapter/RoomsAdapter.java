@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 
@@ -38,6 +39,7 @@ public class RoomsAdapter extends SortedListAdapter<Room> {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
+            mBinding.getRoot().findViewById(R.id.frameLayout_room_row).setOnClickListener(this);
 
             mBinding.getRoot().setOnClickListener(this);
         }
