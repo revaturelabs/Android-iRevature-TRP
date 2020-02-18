@@ -9,14 +9,10 @@
         android:id="@+id/searchview_rooms_with_search_search_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:queryHint="@string/search_room_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_select_building_campus">
-
-    </SearchView>
-
+        app:layout_constraintTop_toTopOf="parent"></SearchView>
     <Button
         android:id="@+id/btn_rooms_with_search_add_fake_data"
         android:layout_width="wrap_content"
@@ -40,30 +36,29 @@
         android:text="@string/clear_fake_data_button"
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/searchview_rooms_with_search_search_room"
+        app:layout_constraintBottom_toBottomOf="@+id/img_select_building_campus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchview_rooms_with_search_search_room" />
+        app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room"
+        app:layout_constraintTop_toBottomOf="@+id/img_select_building_campus"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_rooms_with_search_list_rooms"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
         <ProgressBar
             android:id="@+id/progressbar_rooms_with_search_progress"
@@ -71,7 +66,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone" />
-
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/img_select_building_campus"
+        android:layout_width="120dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room"
+        app:srcCompat="@drawable/tampa" />
+    <TextView
+        android:id="@+id/tv_select_building_campus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="USF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/img_select_building_campus"
+        app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
+    <TextView
+        android:id="@+id/tv_select_building_campus_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Tampa, FL"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_select_building_campus"
+        app:layout_constraintTop_toBottomOf="@+id/tv_select_building_campus" />
 </androidx.constraintlayout.widget.ConstraintLayout>

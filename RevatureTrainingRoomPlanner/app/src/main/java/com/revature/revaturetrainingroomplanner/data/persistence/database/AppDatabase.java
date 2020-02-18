@@ -17,7 +17,7 @@ import com.revature.revaturetrainingroomplanner.data.persistence.dao.RoomDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.SkillDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.TrainerDAO;
 
-@Database(entities = {Batch.class, Campus.class, com.revature.revaturetrainingroomplanner.data.model.Room.class, Skill.class, Trainer.class}, version = 1)
+@Database(entities = {Batch.class, Campus.class, com.revature.revaturetrainingroomplanner.data.model.Room.class, Skill.class, Trainer.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "revature_training_room_planner_db";
