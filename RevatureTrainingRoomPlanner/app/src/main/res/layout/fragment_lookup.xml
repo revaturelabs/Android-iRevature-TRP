@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.lookup.LookupFragment">
+    tools:context=".ui.lookup.LookupFragment"
+    android:background="@color/cardview_shadow_end_color" >
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_lookup_categories"

@@ -7,40 +7,54 @@
             type="com.revature.revaturetrainingroomplanner.data.model.Campus"/>
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true">
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="5dp">
 
-        <ImageView
-            android:id="@+id/img_campus_row_icon"
-            android:layout_width="50dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="5dp"
-            app:srcCompat="@drawable/campus_icon_foreground" />
-
-        <TextView
-            android:id="@+id/campus_row_campus"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="4dp"
-            android:padding="8dp"
-            android:text="@{model.text}" />
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true">
 
+            <TextView
+                android:id="@+id/campus_row_campus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="4dp"
+                android:padding="8dp"
+                android:text="@{model.text}" />
 
-        <TextView
-            android:id="@+id/campus_row_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="28dp"
-            android:text="City, State"
-            android:textColor="#999999" />
+            <TextView
+                android:id="@+id/campus_row_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="138dp"
+                android:layout_marginTop="28dp"
+                android:text="City, State"
+                android:textColor="#999999" />
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/img_campus_row_icon"
+                android:layout_width="120dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/dallas" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </layout>
 
