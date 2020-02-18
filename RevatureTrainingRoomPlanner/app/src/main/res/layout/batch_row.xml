@@ -11,63 +11,77 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout3"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_batch_row"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true">
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
-        <TextView
-            android:id="@+id/tv_batch_row"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:padding="8dp"
-            android:text="@{model.text}"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textview_batch_info_batch_details"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_batchrow"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Details:"
-            android:textAlignment="center"
-            android:textColor="#999999"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_batch_row" />
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:paddingBottom="10dp">
 
-        <TextView
-            android:id="@+id/tv_batch_info_associates"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top"
-            android:text="@string/batches_details"
-            android:textAlignment="center"
-            android:textColor="#999999"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/textview_batch_info_batch_details"
-            app:layout_constraintTop_toBottomOf="@+id/textview_batch_info_batch_details" />
+            <TextView
+                android:id="@+id/tv_batch_row"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:padding="8dp"
+                android:text="@{model.text}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_batch_info_skills"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:text="@string/batch_info_skills_required"
-            android:textAlignment="center"
-            android:textColor="#999999"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_batch_info_associates"
-            app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_associates" />
+            <TextView
+                android:id="@+id/textview_batch_info_batch_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Details:"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_batch_info_associates"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:text="@string/batches_details"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textview_batch_info_batch_details"
+                app:layout_constraintTop_toBottomOf="@+id/textview_batch_info_batch_details" />
+
+            <TextView
+                android:id="@+id/tv_batch_info_skills"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="@string/batch_info_skills_required"
+                android:textAlignment="center"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_batch_info_associates"
+                app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_associates" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </layout>
 

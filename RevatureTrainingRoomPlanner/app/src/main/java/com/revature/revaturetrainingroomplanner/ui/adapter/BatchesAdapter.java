@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 
@@ -38,7 +39,7 @@ public class BatchesAdapter extends SortedListAdapter<Batch> {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
-
+            mBinding.getRoot().findViewById(R.id.constraintlayout_batchrow).setOnClickListener(this);
             mBinding.getRoot().setOnClickListener(this);
         }
 
