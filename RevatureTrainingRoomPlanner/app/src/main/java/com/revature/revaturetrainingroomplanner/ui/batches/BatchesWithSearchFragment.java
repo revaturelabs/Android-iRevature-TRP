@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -173,7 +173,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
             case R.id.btn_batches_with_search_add_fake_data: {
                 insertFakeData(new Batch("Fake Batch #" + counter));
                 counter++;
-                testRetrofitRequest();
+//                testRetrofitRequest();
             }
             break;
 
@@ -202,26 +202,25 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
     private void retrieveBatches() {
 
-        mBatchesRepository.retrieveAllTask().observe(getViewLifecycleOwner(), new Observer<List<Batch>>() {
-            @Override
-            public void onChanged(List<Batch> batches) {
-                if (batches != null) {
-                    mModels = batches;
-                    mAdapter.edit()
-                            .replaceAll(batches)
-                            .commit();
-                } else {
-                    mModels = new ArrayList<>();
-                }
+        mBatchesRepository.retrieveAllTask().observe(getViewLifecycleOwner(), batches -> {
+            if (batches != null) {
+                mModels = batches;
+                mAdapter.edit()
+                        .replaceAll(batches)
+                        .commit();
+
+                Log.d(TAG, "onChanged: " + mModels.size());
+            } else {
+                mModels = new ArrayList<>();
             }
         });
     }
 
-    public void insertFakeData(Batch batch) {
+    private void insertFakeData(Batch batch) {
         mBatchesRepository.insertBatchTask(batch);
     }
 
-    public void clearFakeData() {
+    private void clearFakeData() {
         mBatchesRepository.deleteAllTask(new Batch(""));
     }
 

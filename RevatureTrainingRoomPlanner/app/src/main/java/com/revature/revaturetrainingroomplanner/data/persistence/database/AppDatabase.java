@@ -31,7 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     context.getApplicationContext(),
                     AppDatabase.class,
                     DATABASE_NAME
-            ).build();
+            ).fallbackToDestructiveMigration().build();
         }
 
         return instance;
@@ -61,4 +61,5 @@ public abstract class AppDatabase extends RoomDatabase {
     abstract SkillDAO getSkillDAO();
 
     abstract TrainerDAO getTrainerDAO();
+
 }

@@ -14,7 +14,7 @@ public class Skill implements SortedListAdapter.ViewModel {
     @PrimaryKey(autoGenerate = true)
     private long mId;
 
-//    @ColumnInfo(name = "s_name")
+    @ColumnInfo(name = "s_name")
     private final String mText;
 
     public Skill(String text) {
@@ -33,6 +33,7 @@ public class Skill implements SortedListAdapter.ViewModel {
         return mText;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Skill{" +

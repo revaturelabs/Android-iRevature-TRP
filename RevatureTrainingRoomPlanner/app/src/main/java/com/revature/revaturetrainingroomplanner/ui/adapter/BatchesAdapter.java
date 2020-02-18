@@ -40,7 +40,6 @@ public class BatchesAdapter extends SortedListAdapter<Batch> {
             mBinding = binding;
             mOnItemListener = onItemListener;
             mBinding.getRoot().findViewById(R.id.constraintlayout_batchrow).setOnClickListener(this);
-            mBinding.getRoot().setOnClickListener(this);
         }
 
         @Override
