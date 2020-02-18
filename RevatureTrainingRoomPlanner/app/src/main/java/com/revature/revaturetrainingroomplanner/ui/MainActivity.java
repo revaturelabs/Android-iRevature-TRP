@@ -21,6 +21,7 @@ import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private final int LOGOUT_MENU_LOCATION = 3;
 
     private AppCompatActivity appCompatActivity;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         logoutSetup();
 
         hideKeyboardBetweenDestinations();
-        
+
 //        navController.navigate(R.id.nav_batches);
     }
 

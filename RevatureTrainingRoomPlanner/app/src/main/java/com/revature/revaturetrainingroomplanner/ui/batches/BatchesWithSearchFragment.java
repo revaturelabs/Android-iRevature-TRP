@@ -42,7 +42,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     };
 
 
-    private static final Comparator<Batch> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<Batch> ALPHABETICAL_COMPARATOR = (a, b) -> a.getBatch_name().compareTo(b.getBatch_name());
 
     private static final String TAG = "BatchesSearchFragment";
 
@@ -173,6 +173,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
             case R.id.btn_batches_with_search_add_fake_data: {
                 insertFakeData(new Batch("Fake Batch #" + counter));
                 counter++;
+                testRetrofitRequest();
             }
             break;
 
@@ -191,7 +192,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         final List<Batch> filteredModelList = new ArrayList<>();
         for (Batch model : models) {
-            final String text = model.getText().toLowerCase();
+            final String text = model.getBatch_name().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
             }
@@ -222,6 +223,38 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
     public void clearFakeData() {
         mBatchesRepository.deleteAllTask(new Batch(""));
+    }
+
+    private void testRetrofitRequest() {
+//        BatchesAPI batchesAPI = ServiceGenerator.getBatchesAPI();
+//
+//        Call<BatchesGETResponse> responseCall = batchesAPI.getBatches();
+//
+//        responseCall.enqueue(new Callback<BatchesGETResponse>() {
+//            @Override
+//            public void onResponse(Call<BatchesGETResponse> call, Response<BatchesGETResponse> response) {
+//                Log.d(TAG, "onResponse: server response: " + response.toString());
+//                if (response.code() == 200) {
+//                    Log.d(TAG, "onResponse: " + response.body().toString());
+//                    List<Batch> batches = new ArrayList<>(response.body().getBatches());
+//
+//                    for(Batch batch: batches) {
+//                        Log.d(TAG, "onResponse: " + batch.getText());
+//                    }
+//                } else {
+//                    try {
+//                        Log.d(TAG, "onResponse:  " + response.errorBody().string());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BatchesGETResponse> call, Throwable t) {
+//                Log.d(TAG, "onFailure: " + t.getMessage());
+//            }
+//        });
     }
 
 }
