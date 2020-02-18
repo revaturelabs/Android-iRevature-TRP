@@ -1,9 +1,18 @@
 package com.revature.revaturetrainingroomplanner.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -54,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         hideKeyboardBetweenDestinations();
 
+        // call requires API level 23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkConnection();
+        }
+
 //        navController.navigate(R.id.nav_batches);
     }
 
@@ -98,6 +112,38 @@ public class MainActivity extends AppCompatActivity {
         mNavController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             KeyboardUtil.hideSoftKeyboard(appCompatActivity);
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void checkConnection() {
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(CONNECTIVITY_SERVICE);
+
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(isConnected){
+            Toast.makeText(this, "CONNECTED TO INTERNET!!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "NOOOO INTERNET!!", Toast.LENGTH_LONG).show();
+        }
+
+// NOT DEPRECATED BUT REQUIRES Higher API lvl
+//        assert cm != null;
+//        Network nw = cm.getActiveNetwork();
+//        NetworkCapabilities actNw = cm.getNetworkCapabilities(nw);
+//
+//        assert actNw != null;
+//        if(actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)){
+//            Toast.makeText(this, "CONNECTED TO WIFI!!", Toast.LENGTH_LONG).show();
+//        }
+//        else if(actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)){
+//            Toast.makeText(this, "CONNECTED TO CELLULAR DATA!!", Toast.LENGTH_LONG).show();
+//        }
+
+
     }
 
 }

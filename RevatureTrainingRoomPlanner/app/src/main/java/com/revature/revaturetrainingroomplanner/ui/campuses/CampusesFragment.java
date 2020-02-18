@@ -50,7 +50,6 @@ public class CampusesFragment extends Fragment implements CampusesAdapter.OnItem
 
     @Override
     public void onClick(View v) {
-        Log.d("debug", "on click");
         mNavController.navigate(CampusesFragmentDirections.actionCampusesFragmentToNavLookup());
     }
 }

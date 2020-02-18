@@ -43,16 +43,16 @@
         android:textSize="18sp"
         android:paddingTop="4dp"/>
 
-    <TextView
-        android:id="@+id/tv_room_info_calender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="32dp"
-        android:text="Calender: "
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_room_info_calender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:text="Room Availability"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <CalendarView
             android:id="@+id/calendarView"
@@ -64,14 +64,16 @@
 
     <Button
         android:id="@+id/btn_room_info_assign"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/assign_button_style"
         android:ems="7"
         android:text="@string/room_info_assign_room"
-        android:textColor="@color/revature_orange"/>
+        android:textColor="@color/revature_orange" />
 
 </RelativeLayout>
