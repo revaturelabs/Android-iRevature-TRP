@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirections;
@@ -22,7 +24,7 @@ import com.revature.revaturetrainingroomplanner.ui.batches.BatchesFragmentDirect
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CampusesFragment extends Fragment implements CampusesAdapter.OnItemListener {
+public class CampusesFragment extends Fragment implements CampusesAdapter.OnItemListener, View.OnClickListener {
 
     private NavController mNavController;
 
@@ -41,7 +43,14 @@ public class CampusesFragment extends Fragment implements CampusesAdapter.OnItem
     @Override
     public void onCampusClick(int position) {
 //        CampusesFragmentDirections.actionCampusesFragmentToNavLookup();
+        Log.d("debug", "on campus click");
+        mNavController.navigate(CampusesFragmentDirections.actionCampusesFragmentToNavLookup());
+    }
 
+
+    @Override
+    public void onClick(View v) {
+        Log.d("debug", "on click");
         mNavController.navigate(CampusesFragmentDirections.actionCampusesFragmentToNavLookup());
     }
 }

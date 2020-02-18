@@ -1,13 +1,21 @@
 package com.revature.revaturetrainingroomplanner.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 
@@ -20,12 +28,14 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
     public CampusesAdapter(Context context, Comparator<Campus> comparator, OnItemListener onItemListener) {
         super(context, Campus.class, comparator);
         mOnItemListener = onItemListener;
+
     }
 
     @NonNull
     @Override
     protected ViewHolder<? extends Campus> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final CampusRowBinding binding = CampusRowBinding.inflate(inflater, parent, false);
+
         return new CampusViewHolder(binding, mOnItemListener);
     }
 
@@ -33,19 +43,21 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
 
         private final CampusRowBinding mBinding;
         private OnItemListener mOnItemListener;
+        private NavController mNavController;
 
         CampusViewHolder(CampusRowBinding binding, OnItemListener onItemListener) {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
-
-            mBinding.getRoot().setOnClickListener(this);
+            mBinding.getRoot().findViewById(R.id.framelayout_campus_row).setOnClickListener(this);
         }
 
         @Override
         protected void performBind(@NonNull Campus item) {
             mBinding.setModel(item);
+
         }
+
 
         @Override
         public void onClick(View v) {
@@ -56,5 +68,6 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
     public interface OnItemListener {
         void onCampusClick(int position);
     }
+
 }
 

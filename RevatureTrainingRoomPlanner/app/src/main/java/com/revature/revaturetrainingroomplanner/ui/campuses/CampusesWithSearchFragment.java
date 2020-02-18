@@ -71,8 +71,10 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mBinding = DataBindingUtil.inflate(inflater, R.layout.campus_row, container, false);
 
         OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
-
         View root = inflater.inflate(R.layout.fragment_campuses_with_search, container, false);
+
+        mBinding.getRoot().findViewById(R.id.framelayout_campus_row).setOnClickListener((View.OnClickListener) onItemListener);
+
         mRecyclerView = root.findViewById(R.id.recyclerview_campuses_with_search_list_campuses);
         mSearchView = root.findViewById(R.id.searchview_campuses_with_search_search_campus);
         mProgressBar = root.findViewById(R.id.progressbar_campuses_with_search_progress);
@@ -179,6 +181,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
         }
     }
+
 
     private static List<Campus> filter(List<Campus> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();

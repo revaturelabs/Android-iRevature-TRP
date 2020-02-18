@@ -33,6 +33,6 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 
     @Override
     public void onBatchClick(int position) {
-        mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToNavRooms());
+//        mNavController.navigate(BatchesFragmentDirections.actionBatchesFragmentToRoomsFragment());
     }
 }
