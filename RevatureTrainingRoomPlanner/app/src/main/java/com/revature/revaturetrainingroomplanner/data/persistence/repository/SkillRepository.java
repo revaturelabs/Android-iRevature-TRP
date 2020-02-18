@@ -28,10 +28,6 @@ public class SkillRepository {
         new InsertAsyncTask(mDao).execute(skills);
     }
 
-    public LiveData<Skill> retrieveByIDTask(int id) {
-        return mDao.getByID(id);
-    }
-
     public LiveData<List<Skill>> retrieveAllTask() {
         return mDao.getAll();
     }

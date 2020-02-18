@@ -15,7 +15,6 @@ public interface TrainerDAO extends BaseDAO<Trainer> {
     @Query("SELECT * FROM trainers")
     LiveData<List<Trainer>> getAll();
 
-    @Override
     @Query("SELECT * FROM trainers WHERE t_id = :id")
     LiveData<Trainer> getByID(int id);
 

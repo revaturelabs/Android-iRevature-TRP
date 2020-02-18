@@ -23,13 +23,22 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
+import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
+import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
+import com.revature.revaturetrainingroomplanner.data.requests.responses.BatchesGETResponse;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter.OnItemListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback, View.OnClickListener {
 
@@ -173,7 +182,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
             case R.id.btn_batches_with_search_add_fake_data: {
                 insertFakeData(new Batch("Fake Batch #" + counter));
                 counter++;
-//                testRetrofitRequest();
+                testRetrofitRequest();
             }
             break;
 
@@ -225,35 +234,35 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     }
 
     private void testRetrofitRequest() {
-//        BatchesAPI batchesAPI = ServiceGenerator.getBatchesAPI();
-//
-//        Call<BatchesGETResponse> responseCall = batchesAPI.getBatches();
-//
-//        responseCall.enqueue(new Callback<BatchesGETResponse>() {
-//            @Override
-//            public void onResponse(Call<BatchesGETResponse> call, Response<BatchesGETResponse> response) {
-//                Log.d(TAG, "onResponse: server response: " + response.toString());
-//                if (response.code() == 200) {
-//                    Log.d(TAG, "onResponse: " + response.body().toString());
-//                    List<Batch> batches = new ArrayList<>(response.body().getBatches());
-//
-//                    for(Batch batch: batches) {
-//                        Log.d(TAG, "onResponse: " + batch.getText());
-//                    }
-//                } else {
-//                    try {
-//                        Log.d(TAG, "onResponse:  " + response.errorBody().string());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<BatchesGETResponse> call, Throwable t) {
-//                Log.d(TAG, "onFailure: " + t.getMessage());
-//            }
-//        });
+        TRPAPI batchesAPI = ServiceGenerator.getBatchesAPI();
+
+        Call<BatchesGETResponse> responseCall = batchesAPI.getBatches();
+
+        responseCall.enqueue(new Callback<BatchesGETResponse>() {
+            @Override
+            public void onResponse(Call<BatchesGETResponse> call, Response<BatchesGETResponse> response) {
+                Log.d(TAG, "onResponse: server response: " + response.toString());
+                if (response.code() == 200) {
+                    Log.d(TAG, "onResponse: " + response.body().toString());
+                    List<Batch> batches = new ArrayList<>(response.body().getBatches());
+
+                    for(Batch batch: batches) {
+                        Log.d(TAG, "onResponse: " + batch.toString());
+                    }
+                } else {
+                    try {
+                        Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BatchesGETResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
 }

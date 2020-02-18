@@ -14,9 +14,9 @@ public class ServiceGenerator {
 
     private static Retrofit retrofit = retrofitBuilder.build();
 
-    private static BatchesAPI batchesAPI = retrofit.create(BatchesAPI.class);
+    private static TRPAPI batchesAPI = retrofit.create(TRPAPI.class);
 
-    public static BatchesAPI getBatchesAPI() {
+    public static TRPAPI getBatchesAPI() {
         return batchesAPI;
     }
 }

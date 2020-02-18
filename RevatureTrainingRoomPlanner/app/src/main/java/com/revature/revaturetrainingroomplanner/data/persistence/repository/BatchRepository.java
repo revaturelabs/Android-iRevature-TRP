@@ -11,6 +11,7 @@ import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class BatchRepository {
     }
 
     public LiveData<Batch> retrieveByIDTask(int id) {
-        return mDao.getByID(id);
+        return ((BatchDAO)mDao).getByID(id);
     }
 
     public LiveData<List<Batch>> retrieveAllTask() {

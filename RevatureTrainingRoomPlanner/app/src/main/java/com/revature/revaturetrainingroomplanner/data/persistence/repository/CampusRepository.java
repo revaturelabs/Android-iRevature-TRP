@@ -10,6 +10,7 @@ import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class CampusRepository {
     }
 
     public LiveData<Campus> retrieveByIDTask(int id) {
-        return mDao.getByID(id);
+        return ((CampusDAO)mDao).getByID(id);
     }
 
     public LiveData<List<Campus>> retrieveAllTask() {

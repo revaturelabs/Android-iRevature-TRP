@@ -15,8 +15,7 @@ public interface BatchDAO extends BaseDAO<Batch> {
     @Query("SELECT * FROM batches")
     LiveData<List<Batch>> getAll();
 
-    @Override
-    @Query("SELECT * FROM batches WHERE b_id = :id")
+    @Query("SELECT * FROM batches WHERE ba_id = :id")
     LiveData<Batch> getByID(int id);
 
     @Override

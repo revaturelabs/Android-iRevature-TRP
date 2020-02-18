@@ -5,7 +5,7 @@ import com.revature.revaturetrainingroomplanner.data.requests.responses.BatchesG
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface BatchesAPI {
+public interface TRPAPI {
 
     @GET("batches")
     Call<BatchesGETResponse> getBatches();

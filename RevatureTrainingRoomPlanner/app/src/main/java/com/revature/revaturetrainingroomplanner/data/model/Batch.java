@@ -3,35 +3,46 @@ package com.revature.revaturetrainingroomplanner.data.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
-@Entity(tableName = "batches")
-public class Batch implements SortedListAdapter.ViewModel{
+import java.util.List;
 
-    @ColumnInfo(name = "b_id")
+@Entity(tableName = "batches")
+public class
+Batch implements SortedListAdapter.ViewModel {
+
+    @ColumnInfo(name = "ba_id")
     @PrimaryKey(autoGenerate = true)
     private long batch_id;
 
-    @ColumnInfo(name = "b_name")
+    @ColumnInfo(name = "ba_name")
     private String batch_name;
 
-    @ColumnInfo(name = "b_start_date")
+    @ColumnInfo(name = "ba_start_date")
     private String start_date;
 
-    @ColumnInfo(name = "b_end_date")
+    @ColumnInfo(name = "ba_end_date")
     private String end_date;
 
-    @ColumnInfo(name = "b_is_assigned")
+    @ColumnInfo(name = "ba_is_assigned")
     private boolean is_assigned;
 
-    @ColumnInfo(name = "b_associates")
+    @ColumnInfo(name = "ba_associates")
     private int associates;
 
-//    @ColumnInfo(name = "b_skills_required")
-//    private List<Skill> skills_required;
+    @Ignore
+    private List<Skill> skills;
 
+    @Ignore
+    private List<String> skills_required;
+
+    public Batch() {
+    }
+
+    @Ignore
     public Batch(String batch_name) {
         this.batch_name = batch_name;
     }
@@ -102,11 +113,33 @@ public class Batch implements SortedListAdapter.ViewModel{
         this.associates = associates;
     }
 
-//    public List<Skill> getSkills_required() {
-//        return skills_required;
-//    }
-//
-//    public void setSkills_required(List<Skill> skills_required) {
-//        this.skills_required = skills_required;
-//    }
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public List<String> getSkills_required() {
+        return skills_required;
+    }
+
+    public void setSkills_required(List<String> skills_required) {
+        this.skills_required = skills_required;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Batch{" +
+                "batch_id=" + batch_id +
+                ", batch_name='" + batch_name + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
+                ", is_assigned=" + is_assigned +
+                ", associates=" + associates +
+                ", skills_required=" + skills_required +
+                '}';
+    }
 }
