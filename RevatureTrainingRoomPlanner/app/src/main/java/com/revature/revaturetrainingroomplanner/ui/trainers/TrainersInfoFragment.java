@@ -19,6 +19,7 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -64,14 +65,12 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         email.setText(mTrainerSelected.getTrainer_email());
         location.setText(mTrainerSelected.getTrainer_location());
 
-//        Picasso.get().load(imgURL).into(profile);
+        Picasso.get().load(imgURL).into(profile);
 
-//        String skill = "";
-//        for (int i = 1; i <= TrainersAdapter.skills.size(); i++) {
-//            skill = TrainersAdapter.skills.get(i) + ", ";
-//        }
-//        TrainersAdapter.currSkills;
-//        skills.setText(skill);
+
+        // for fun
+        if(name.getText().toString().equals("John Cena"))
+            profile.setImageResource(R.drawable.thiago);
 
 
         if (!TrainersInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {

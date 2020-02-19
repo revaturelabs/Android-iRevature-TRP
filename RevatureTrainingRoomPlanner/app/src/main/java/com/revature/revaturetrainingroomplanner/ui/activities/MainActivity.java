@@ -144,20 +144,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "NOOOO INTERNET!!", Toast.LENGTH_LONG).show();
         }
 
-// NOT DEPRECATED BUT REQUIRES Higher API lvl
-//        assert cm != null;
-//        Network nw = cm.getActiveNetwork();
-//        NetworkCapabilities actNw = cm.getNetworkCapabilities(nw);
-//
-//        assert actNw != null;
-//        if(actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)){
-//            Toast.makeText(this, "CONNECTED TO WIFI!!", Toast.LENGTH_LONG).show();
-//        }
-//        else if(actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)){
-//            Toast.makeText(this, "CONNECTED TO CELLULAR DATA!!", Toast.LENGTH_LONG).show();
-//        }
-
-
     }
 
 }
