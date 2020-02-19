@@ -146,6 +146,11 @@
                 app:argType="boolean" />
             <argument android:name="roomSelected"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment"
+                app:nullable="true"
+                android:defaultValue="@null" />
 
         </fragment>
         <fragment
@@ -161,6 +166,11 @@
             <argument
                 android:name="trainerSelected"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.Trainer" />
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </fragment>
         <fragment
             android:id="@+id/nav_lookup"
@@ -185,6 +195,11 @@
             <argument
                 android:name="batchSelected"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.Batch" />
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </fragment>
     </navigation>
 

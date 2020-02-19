@@ -33,6 +33,8 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
 
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
 
+        mBatchAssignment = TrainersFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
+
 
 //        final TextView textView = root.findViewById(R.id.text_send);
 //        trainersViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
@@ -43,7 +45,6 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mBatchAssignment = TrainersFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
     }
 
     @Override

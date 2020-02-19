@@ -1,6 +1,5 @@
 package com.revature.revaturetrainingroomplanner.ui.trainers;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +17,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
-import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
-import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Objects;
 
 /**
@@ -38,6 +34,7 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
     private TextView location;
     private TextView skills;
     private Trainer mTrainerSelected;
+    private BatchAssignment mBatchAssignment;
 
 
     public TrainersInfoFragment() {
@@ -57,14 +54,17 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         location = rootView.findViewById(R.id.tv_trainers_location);
         skills = rootView.findViewById(R.id.tv_trainers_skills);
 
-        String imgURL = TrainersAdapter.currProfileURL;
+        mBatchAssignment = TrainersInfoFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
+        mTrainerSelected = TrainersInfoFragmentArgs.fromBundle(getArguments()).getTrainerSelected();
+
+        String imgURL = mTrainerSelected.getTrainer_profile_picture_url();
         Log.d("URL", imgURL);
 
-        name.setText(TrainersAdapter.currName);
-        email.setText(TrainersAdapter.currEmail);
-        location.setText(TrainersAdapter.currLocation);
+        name.setText(mTrainerSelected.getTrainer_name());
+        email.setText(mTrainerSelected.getTrainer_email());
+        location.setText(mTrainerSelected.getTrainer_location());
 
-        Picasso.get().load(imgURL).into(profile);
+//        Picasso.get().load(imgURL).into(profile);
 
 //        String skill = "";
 //        for (int i = 1; i <= TrainersAdapter.skills.size(); i++) {
@@ -77,8 +77,6 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         if (!TrainersInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {
             assignBtn.setVisibility(View.GONE);
         }
-
-        mTrainerSelected = TrainersInfoFragmentArgs.fromBundle(getArguments()).getTrainerSelected();
 
         assignBtn.setOnClickListener(this);
 
