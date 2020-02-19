@@ -4,9 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAllAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
@@ -23,6 +20,10 @@ import com.revature.revaturetrainingroomplanner.data.requests.responses.Trainers
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TrainerRepository {
 
@@ -59,8 +60,8 @@ public class TrainerRepository {
         new DeleteAllAsyncTask(mDao).execute(trainers);
     }
 
-    public void retrieveTrainerFromAPI() {
-        TRPAPI trainersAPI = ServiceGenerator.getBatchesAPI();
+    public void retrieveTrainersFromAPI() {
+        TRPAPI trainersAPI = ServiceGenerator.getAPI();
 
         Call<TrainersGETResponse> responseCall = trainersAPI.getTrainers();
 

@@ -52,7 +52,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="40dp"
                 android:gravity="start|top"
-                android:text="@string/batches_details"
+                android:text="@{@string/batches_details_associates(model.associates)}"
                 android:textAlignment="textStart"
                 android:textColor="#999999"
                 android:textSize="14sp"
@@ -71,19 +71,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_batch_row" />
-
-            <TextView
-                android:id="@+id/tv_batch_info_associate_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:gravity="start|top"
-                android:text="@{String.valueOf(model.associates)}"
-                android:textAlignment="center"
-                android:textColor="#999999"
-                android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_batch_info_associates_text"
-                app:layout_constraintStart_toEndOf="@+id/tv_batch_info_associates_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

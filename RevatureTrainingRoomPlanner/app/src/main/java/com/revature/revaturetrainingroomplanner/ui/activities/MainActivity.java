@@ -23,6 +23,7 @@ import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 import com.revature.revaturetrainingroomplanner.ui.login.SaveSharedPreference;
 import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BatchRepository mBatchRepository;
     private CampusRepository mCampusRepository;
+    private TrainerRepository mTrainerRepository;
     private AppCompatActivity appCompatActivity;
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         mBatchRepository.retrieveBatchesFromAPI();
         mCampusRepository = new CampusRepository(this);
         mCampusRepository.retrieveCampusesFromAPI();
+        mTrainerRepository = new TrainerRepository(this);
+        mTrainerRepository.retrieveTrainersFromAPI();
     }
 
     @Override
