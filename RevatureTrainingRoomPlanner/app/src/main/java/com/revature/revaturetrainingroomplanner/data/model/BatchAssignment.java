@@ -7,14 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
 @Entity(tableName = "batch_assignments")
 public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable {
 
-    @Ignore
-    private int mID;
+    @PrimaryKey(autoGenerate = true)
+    private int batch_assignment_id;
 
     @ForeignKey(entity = Batch.class, parentColumns = "b_id", childColumns = "b_id")
     private
@@ -37,15 +38,15 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
     }
 
     @Ignore
-    public BatchAssignment(int mID, int batch_id, int trainer_id) {
-        this.mID = mID;
+    public BatchAssignment(int batch_assignment_id, int batch_id, int trainer_id) {
+        this.batch_assignment_id = batch_assignment_id;
         this.batch_id = batch_id;
         this.trainer_id = trainer_id;
     }
 
     @Ignore
     protected BatchAssignment(Parcel in) {
-        mID = in.readInt();
+        batch_assignment_id = in.readInt();
         batch_id = in.readInt();
         trainer_id = in.readInt();
     }
@@ -54,7 +55,7 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof BatchAssignment) {
             final BatchAssignment other = (BatchAssignment) model;
-            return other.mID == mID;
+            return other.batch_assignment_id == batch_assignment_id;
         }
         return false;
     }
@@ -70,7 +71,7 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mID);
+        dest.writeInt(batch_assignment_id);
         dest.writeInt(batch_id);
         dest.writeInt(trainer_id);
     }
@@ -92,12 +93,12 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
         }
     };
 
-    public int getmID() {
-        return mID;
+    public int getBatch_assignment_id() {
+        return batch_assignment_id;
     }
 
-    public void setmID(int mID) {
-        this.mID = mID;
+    public void setBatch_assignment_id(int batch_assignment_id) {
+        this.batch_assignment_id = batch_assignment_id;
     }
 
     public int getBatch_id() {
@@ -124,10 +125,11 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
         this.room_id = room_id;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "BatchAssignment{" +
-                "mID=" + mID +
+                "batch_assignment_id=" + batch_assignment_id +
                 ", batch_id=" + batch_id +
                 ", trainer_id=" + trainer_id +
                 '}';

@@ -7,17 +7,21 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
+import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchAssignmentDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.BuildingDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.RoomDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.SkillDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.TrainerDAO;
 
-@Database(entities = {Batch.class, Campus.class, com.revature.revaturetrainingroomplanner.data.model.Room.class, Skill.class, Trainer.class}, version = 1, exportSchema = false)
+@Database(entities = {Batch.class, Campus.class, Building.class, com.revature.revaturetrainingroomplanner.data.model.Room.class, Skill.class, Trainer.class, BatchAssignment.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "revature_training_room_planner_db";
@@ -44,10 +48,14 @@ public abstract class AppDatabase extends RoomDatabase {
             return getCampusDAO();
         } else if (t.equals(com.revature.revaturetrainingroomplanner.data.model.Room.class)) {
             return getRoomDAO();
+        } else if (t.equals(Building.class)) {
+            return getBuildingDAO();
         } else if (t.equals(Skill.class)) {
             return getSkillDAO();
         } else if (t.equals(Trainer.class)) {
             return getTrainerDAO();
+        } else if (t.equals(BatchAssignment.class)) {
+            return getBatchAssignmentDAO();
         }
         return null;
     }
@@ -55,6 +63,10 @@ public abstract class AppDatabase extends RoomDatabase {
     abstract BatchDAO getBatchDAO();
 
     abstract CampusDAO getCampusDAO();
+
+    abstract BuildingDAO getBuildingDAO();
+
+    abstract BatchAssignmentDAO getBatchAssignmentDAO();
 
     abstract RoomDAO getRoomDAO();
 

@@ -1,6 +1,7 @@
 package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -16,6 +17,8 @@ import java.util.List;
 
 public class SkillRepository {
 
+    private static final String TAG = "SkillRepository";
+
     private AppDatabase mAppDatabase;
     private BaseDAO<Skill> mDao;
 
@@ -25,6 +28,7 @@ public class SkillRepository {
     }
 
     public void insertSkillTask(Skill... skills) {
+        Log.d(TAG, "insertCampusTask: inserting " + skills.toString());
         new InsertAsyncTask(mDao).execute(skills);
     }
 

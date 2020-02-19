@@ -13,9 +13,12 @@ import java.util.List;
 public interface BaseDAO<T> {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long[] insert(T... objects);
+    long[] insert(T... object);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(T object);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertAll(List<T> objects);
 
     LiveData<List<T>> getAll();

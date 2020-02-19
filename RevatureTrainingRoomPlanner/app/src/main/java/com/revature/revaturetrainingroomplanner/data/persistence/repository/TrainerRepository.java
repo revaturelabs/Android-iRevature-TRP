@@ -27,9 +27,11 @@ import retrofit2.Response;
 
 public class TrainerRepository {
 
+    private static final String TAG = "TrainerRepository";
+
     private AppDatabase mAppDatabase;
     private BaseDAO<Trainer> mDao;
-    private static final String TAG = "TrainerRepository";
+
 
     public TrainerRepository(Context context) {
         mAppDatabase = AppDatabase.getInstance(context);
@@ -37,6 +39,7 @@ public class TrainerRepository {
     }
 
     public void insertTrainerTask(Trainer... trainers) {
+        Log.d(TAG, "insertCampusTask: inserting " + trainers.toString());
         new InsertAsyncTask(mDao).execute(trainers);
     }
 

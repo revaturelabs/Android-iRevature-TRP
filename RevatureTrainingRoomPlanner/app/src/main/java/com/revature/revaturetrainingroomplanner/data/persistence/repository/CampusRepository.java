@@ -1,7 +1,6 @@
 package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteConstraintException;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -10,7 +9,10 @@ import com.revature.revaturetrainingroomplanner.data.async.DeleteAllAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
+import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
+import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
@@ -32,13 +34,16 @@ public class CampusRepository {
 
     private AppDatabase mAppDatabase;
     private BaseDAO<Campus> mDao;
+    private Context mContext;
 
     public CampusRepository(Context context) {
+        mContext = context;
         mAppDatabase = AppDatabase.getInstance(context);
         mDao = mAppDatabase.getDAO(Campus.class);
     }
 
     public void insertCampusTask(Campus... campuses) {
+        Log.d(TAG, "insertCampusTask: inserting " + campuses.toString());
         new InsertAsyncTask(mDao).execute(campuses);
     }
 
@@ -76,20 +81,56 @@ public class CampusRepository {
                 if (response.code() == 200) {
                     Log.d(TAG, "onResponse: " + response.body().toString());
 
-                    List<Campus>  campuses = response.body().getLocations();
+                    List<Campus> campuses = response.body().getLocations();
 
-                    try {
+                    int length = campuses.size();
+
+                    if (campuses != null) {
+
                         insertCampusTask(campuses.toArray(new Campus[0]));
-                    } catch (SQLiteConstraintException e) {
-                        updateTask(campuses.toArray(new Campus[0]));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                        BuildingRepository buildingRepository = new BuildingRepository(mContext);
+                        RoomRepository roomRepository = new RoomRepository(mContext);
+                        BatchAssignmentRepository batchAssignmentRepository = new BatchAssignmentRepository(mContext);
+
+                        List<Building> buildings;
+                        List<Room> rooms;
+                        List<BatchAssignment> batchAssignments;
+
+                        for (Campus campus : campuses) {
+
+                            buildings = campus.getBuildings();
+
+                            if (buildings != null) {
+
+                                buildingRepository.insertBuildingTask(buildings.toArray(new Building[0]));
+
+                                for (Building building : buildings) {
+
+                                    rooms = building.getRooms();
+
+                                    if (rooms != null) {
+
+                                        roomRepository.insertRoomTask(rooms.toArray(new Room[0]));
+
+                                        for (Room room : rooms) {
+
+                                            batchAssignments = room.getBatches_assigned();
+
+                                            if (batchAssignments != null) {
+                                                batchAssignmentRepository.insertBatchAssignmentTask(batchAssignments.toArray(new BatchAssignment[0]));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        try {
+                            Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

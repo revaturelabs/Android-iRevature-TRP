@@ -1,6 +1,7 @@
 package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -17,6 +18,8 @@ import java.util.List;
 
 public class RoomRepository {
 
+    private static final String TAG = "RoomRepository";
+
     private AppDatabase mAppDatabase;
     private BaseDAO<Room> mDao;
 
@@ -26,6 +29,7 @@ public class RoomRepository {
     }
 
     public void insertRoomTask(Room... rooms) {
+        Log.d(TAG, "insertCampusTask: inserting " + rooms.toString());
         new InsertAsyncTask(mDao).execute(rooms);
     }
 

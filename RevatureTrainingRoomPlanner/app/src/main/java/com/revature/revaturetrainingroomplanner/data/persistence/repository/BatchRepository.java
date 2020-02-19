@@ -1,7 +1,6 @@
 package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteConstraintException;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -39,6 +38,7 @@ public class BatchRepository {
     }
 
     public void insertBatchTask(Batch... batches) {
+        Log.d(TAG, "insertCampusTask: inserting " + batches.toString());
         new InsertAsyncTask(mDao).execute(batches);
     }
 
@@ -75,17 +75,12 @@ public class BatchRepository {
             public void onResponse(Call<BatchesGETResponse> call, Response<BatchesGETResponse> response) {
                 Log.d(TAG, "onResponse: server response: " + response.toString());
                 if (response.code() == 200) {
-                    Log.d(TAG, "onResponse: " + response.body().toString());
+                    Log.d(TAG, "onResponse: " + Objects.requireNonNull(response.body()).toString());
 
                     List<Batch>  batches = response.body().getBatches();
+                    insertBatchTask(batches.toArray(new Batch[0]));
+                    updateTask(batches.toArray(new Batch[0]));
 
-                    try {
-                        insertBatchTask(batches.toArray(new Batch[0]));
-                    } catch (SQLiteConstraintException e) {
-                        updateTask(batches.toArray(new Batch[0]));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 } else {
                     try {
                         Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());
