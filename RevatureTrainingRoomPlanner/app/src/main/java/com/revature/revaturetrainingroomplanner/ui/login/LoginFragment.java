@@ -30,6 +30,9 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -127,9 +130,9 @@ public class LoginFragment extends Fragment {
 
         loginButton.setOnClickListener(v -> {
 
-            if(TextUtils.isEmpty(usernameEditText.getText().toString())) {
-                usernameEditText.setError("Email cannot be empty");
-                return;
+            String email = usernameEditText.getText().toString();
+            if(isValidEmail(email)){
+                usernameEditText.setError("Invalid Email");
             }
             else {
                 loadingProgressBar.setVisibility(View.VISIBLE);
@@ -166,6 +169,10 @@ public class LoginFragment extends Fragment {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches() && (!target.toString().isEmpty());
     }
 
 }

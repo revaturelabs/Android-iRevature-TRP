@@ -45,16 +45,17 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         email = rootView.findViewById(R.id.tv_trainers_email);
         location = rootView.findViewById(R.id.tv_trainers_location);
         skills = rootView.findViewById(R.id.tv_trainers_skills);
-        String skill = "";
-//        for (int i = 1; i <= TrainersAdapter.skills.size(); i++) {
-//            skill = TrainersAdapter.skills.get(i) + ", ";
-//        }
 
         name.setText(TrainersAdapter.currName);
         email.setText(TrainersAdapter.currEmail);
-//        location.setText("Tampa, Florida");
+        location.setText(TrainersAdapter.currLocation);
+
+//        String skill = "";
+//        for (int i = 1; i <= TrainersAdapter.skills.size(); i++) {
+//            skill = TrainersAdapter.skills.get(i) + ", ";
+//        }
 //        TrainersAdapter.currSkills;
-        skills.setText(skill);
+//        skills.setText(skill);
 
 
         if(!TrainersInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {

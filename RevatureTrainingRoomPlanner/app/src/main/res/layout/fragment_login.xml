@@ -43,7 +43,7 @@
         android:autofillHints=""
         android:background="@drawable/login_et_style"
         android:hint="@string/prompt_username"
-        android:inputType="textEmailAddress"
+        android:inputType="textWebEmailAddress"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
         android:textAlignment="textStart"

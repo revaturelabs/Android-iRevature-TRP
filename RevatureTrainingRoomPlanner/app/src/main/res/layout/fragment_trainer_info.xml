@@ -41,6 +41,7 @@
         android:text="@string/trainerlookup_defaultname"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_trainers_profile" />
@@ -80,11 +81,12 @@
         android:id="@+id/tv_trainers_location_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:text="@string/location_header"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardview_trainer_info" />
 
@@ -92,23 +94,22 @@
         android:id="@+id/tv_trainers_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:text="@string/trainerlookup_default_location"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_trainers_location_header"
         app:layout_constraintTop_toTopOf="@+id/tv_trainers_location_header" />
 
     <TextView
         android:id="@+id/tv_trainers_emailheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
         android:layout_marginTop="32dp"
         android:text="@string/email_header"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_trainers_location_header"
         app:layout_constraintTop_toBottomOf="@+id/tv_trainers_location" />
 
     <TextView
@@ -134,12 +135,12 @@
         android:id="@+id/tv_trainers_skillsheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
         android:layout_marginTop="32dp"
         android:text="@string/skills_header"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_trainers_emailheader"
         app:layout_constraintTop_toBottomOf="@+id/tv_trainers_email" />
 
     <Button
@@ -150,7 +151,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/assign_button_style"
-        android:ems="5"
         android:text="@string/submit"
         android:textColor="@color/revature_orange"
         app:layout_constraintBottom_toBottomOf="@+id/img_trainer_info"

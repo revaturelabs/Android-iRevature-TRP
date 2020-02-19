@@ -43,13 +43,10 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
         assignBtn.setOnClickListener(this);
 
         TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
-        TextView confirmed = rootView.findViewById(R.id.tv_room_info_confirmed);
 
         // TODO: set seats and room confirmation based on room
         String max = "Max seats: " + "##";
         maxSeats.setText(max);
-        String confirmation = "Confirmed: " + "##";
-        confirmed.setText(confirmation);
 
         return rootView;
     }

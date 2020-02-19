@@ -21,6 +21,7 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
     private OnItemListener mOnItemListener;
     public static String currName;
     public static String currEmail;
+    public static String currLocation;
     public static List<String> currSkills;
 
     public TrainersAdapter(Context context, Comparator<Trainer> comparator, OnItemListener onItemListener) {
@@ -58,9 +59,11 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
         public void onClick(View v) {
 
             currName = getCurrentItem().getTrainer_name();
-            currName = getCurrentItem().getTrainer_email();
+            currEmail = getCurrentItem().getTrainer_email();
             currSkills = getCurrentItem().getTrainer_skills();
-            Log.d("trainer", currName);
+            currLocation = getCurrentItem().getTrainer_location();
+            Log.d("trainer", getCurrentItem().toString());
+
             mOnItemListener.onTrainerClick(getAdapterPosition());
 
         }
