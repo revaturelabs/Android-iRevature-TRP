@@ -90,7 +90,8 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(getContext(), "Trainer/room assigned to batch", Toast.LENGTH_SHORT).show();
+        mBatchAssignment.setTrainer_id(mTrainerSelected.getTrainer_id());
+        Toast.makeText(getContext(), "Batch" + mBatchAssignment.toString() + "assigned", Toast.LENGTH_LONG).show();
         mNavController.navigate(R.id.action_nav_trainer_info_to_nav_batches);
     }
 

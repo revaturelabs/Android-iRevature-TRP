@@ -125,14 +125,15 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
         this.room_id = room_id;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "BatchAssignment{" +
                 "batch_assignment_id=" + batch_assignment_id +
                 ", batch_id=" + batch_id +
                 ", trainer_id=" + trainer_id +
+                ", room_id=" + room_id +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
                 '}';
     }
-
 }
