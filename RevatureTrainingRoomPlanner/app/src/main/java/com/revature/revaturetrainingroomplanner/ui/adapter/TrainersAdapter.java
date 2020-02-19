@@ -14,10 +14,14 @@ import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 
 import java.util.Comparator;
+import java.util.List;
 
 public class TrainersAdapter extends SortedListAdapter<Trainer> {
 
     private OnItemListener mOnItemListener;
+    public static String currName;
+    public static String currEmail;
+    public static List<String> currSkills;
 
     public TrainersAdapter(Context context, Comparator<Trainer> comparator, OnItemListener onItemListener) {
         super(context, Trainer.class, comparator);
@@ -53,8 +57,10 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
         @Override
         public void onClick(View v) {
 
-            String name = getCurrentItem().getTrainer_name();
-            Log.d("trainer", name);
+            currName = getCurrentItem().getTrainer_name();
+            currName = getCurrentItem().getTrainer_email();
+            currSkills = getCurrentItem().getTrainer_skills();
+            Log.d("trainer", currName);
             mOnItemListener.onTrainerClick(getAdapterPosition());
 
         }
