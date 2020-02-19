@@ -1,21 +1,14 @@
 package com.revature.revaturetrainingroomplanner.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 
@@ -49,7 +42,7 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
-            mBinding.getRoot().findViewById(R.id.framelayout_campus_row).setOnClickListener(this);
+            mBinding.getRoot().setOnClickListener(this);
         }
 
         @Override

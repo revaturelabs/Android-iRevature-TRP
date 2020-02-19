@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.ui.login.SaveSharedPreference;
 import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private final int LOGOUT_MENU_LOCATION = 3;
 
     private BatchRepository mBatchRepository;
+    private CampusRepository mCampusRepository;
     private AppCompatActivity appCompatActivity;
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mBatchRepository = new BatchRepository(this);
         mBatchRepository.retrieveBatchesFromAPI();
+        mCampusRepository = new CampusRepository(this);
+        mCampusRepository.retrieveCampusesFromAPI();
     }
 
     @Override

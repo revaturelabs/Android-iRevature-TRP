@@ -28,7 +28,7 @@ public class Room implements SortedListAdapter.ViewModel {
     private int building_id;
 
     @Ignore
-    private List<BatchAssignment> batchAssignments;
+    private List<BatchAssignment> batches_assigned;
 
     public Room() {
     }
@@ -44,7 +44,7 @@ public class Room implements SortedListAdapter.ViewModel {
         this.room_name = room_name;
         this.occupancy = occupancy;
         this.building_id = building_id;
-        this.batchAssignments = batchAssignments;
+        this.batches_assigned = batchAssignments;
     }
 
     public long getRoom_id() {
@@ -79,12 +79,12 @@ public class Room implements SortedListAdapter.ViewModel {
         this.building_id = building_id;
     }
 
-    public List<BatchAssignment> getBatchAssignments() {
-        return batchAssignments;
+    public List<BatchAssignment> getBatches_assigned() {
+        return batches_assigned;
     }
 
-    public void setBatchAssignments(List<BatchAssignment> batchAssignments) {
-        this.batchAssignments = batchAssignments;
+    public void setBatches_assigned(List<BatchAssignment> batches_assigned) {
+        this.batches_assigned = batches_assigned;
     }
 
     public String getText() {
@@ -99,7 +99,7 @@ public class Room implements SortedListAdapter.ViewModel {
                 ", room_name='" + room_name + '\'' +
                 ", occupancy=" + occupancy +
                 ", building_id=" + building_id +
-                ", batchAssignments=" + batchAssignments +
+                ", batches_assigned=" + batches_assigned +
                 '}';
     }
 

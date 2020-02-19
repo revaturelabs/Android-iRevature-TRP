@@ -234,7 +234,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     }
 
     private void testRetrofitRequest() {
-        TRPAPI batchesAPI = ServiceGenerator.getBatchesAPI();
+        TRPAPI batchesAPI = ServiceGenerator.getAPI();
 
         Call<BatchesGETResponse> responseCall = batchesAPI.getBatches();
 

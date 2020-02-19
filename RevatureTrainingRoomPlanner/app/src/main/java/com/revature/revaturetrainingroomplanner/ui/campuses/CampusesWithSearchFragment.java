@@ -73,7 +73,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
         View root = inflater.inflate(R.layout.fragment_campuses_with_search, container, false);
 
-        mBinding.getRoot().findViewById(R.id.framelayout_campus_row).setOnClickListener((View.OnClickListener) onItemListener);
+//        mBinding.getRoot().setOnClickListener((View.OnClickListener) onItemListener);
 
         mRecyclerView = root.findViewById(R.id.recyclerview_campuses_with_search_list_campuses);
         mSearchView = root.findViewById(R.id.searchview_campuses_with_search_search_campus);
@@ -210,11 +210,11 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         });
     }
 
-    public void insertFakeData(Campus campus) {
+    private void insertFakeData(Campus campus) {
         mCampusRepository.insertCampusTask(campus);
     }
 
-    public void clearFakeData() {
+    private void clearFakeData() {
         mCampusRepository.deleteAllTask(new Campus(""));
     }
 }

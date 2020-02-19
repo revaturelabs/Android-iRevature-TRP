@@ -1,6 +1,7 @@
 package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -63,10 +64,12 @@ public class BatchRepository {
     }
 
     public void retrieveBatchesFromAPI() {
-        TRPAPI batchesAPI = ServiceGenerator.getBatchesAPI();
+        TRPAPI api = ServiceGenerator.getAPI();
 
-        Call<BatchesGETResponse> responseCall = batchesAPI.getBatches();
+        Call<BatchesGETResponse> responseCall = api.getBatches();
 
+        Log.d(TAG, "retrieveBatchesFromAPI: requesting batches from API...");
+        
         responseCall.enqueue(new Callback<BatchesGETResponse>() {
             @Override
             public void onResponse(Call<BatchesGETResponse> call, Response<BatchesGETResponse> response) {
@@ -76,7 +79,13 @@ public class BatchRepository {
 
                     List<Batch>  batches = response.body().getBatches();
 
-                    insertBatchTask(batches.toArray(new Batch[0]));
+                    try {
+                        insertBatchTask(batches.toArray(new Batch[0]));
+                    } catch (SQLiteConstraintException e) {
+                        updateTask(batches.toArray(new Batch[0]));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     try {
                         Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());

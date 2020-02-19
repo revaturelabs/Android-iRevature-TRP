@@ -105,12 +105,14 @@ public class Campus implements SortedListAdapter.ViewModel, Parcelable {
         return campus_name;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Campus{" +
                 "campus_id=" + campus_id +
                 ", campus_name='" + campus_name + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", buildings=" + buildings +
                 '}';
     }
 

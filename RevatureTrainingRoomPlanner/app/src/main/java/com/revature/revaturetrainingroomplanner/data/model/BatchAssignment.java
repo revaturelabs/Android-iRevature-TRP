@@ -27,6 +27,12 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
     @ForeignKey(entity = Room.class, parentColumns = "r_id", childColumns = "r_id")
     private int room_id;
 
+    @Ignore
+    private String start_date;
+
+    @Ignore
+    private String end_date;
+
     public BatchAssignment() {
     }
 
