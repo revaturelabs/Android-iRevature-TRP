@@ -1,6 +1,7 @@
 package com.revature.revaturetrainingroomplanner.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,8 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
 
         @Override
         public void onClick(View v) {
+            String name = getCurrentItem().getTrainer_name();
+            Log.d("trainer", name);
             mOnItemListener.onTrainerClick(getAdapterPosition());
         }
     }

@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 
 import java.util.List;
 
@@ -15,24 +15,24 @@ public class TrainersGETResponse {
     @Expose
     private int count;
 
-    @SerializedName("batches")
+    @SerializedName("trainers")
     @Expose
-    private List<Batch> batches;
+    private List<Trainer> trainers;
 
     public int getCount() {
         return count;
     }
 
-    public List<Batch> getBatches() {
-        return batches;
+    public List<Trainer> getTrainers() {
+        return trainers;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "BatchesGETResponse{" +
+        return "TrainersGETResponse{" +
                 "count=" + count +
-                ", batches=" + batches +
+                ", trainers=" + trainers +
                 '}';
     }
 }
