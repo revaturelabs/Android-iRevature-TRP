@@ -13,6 +13,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
+import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
 
 import java.util.Objects;
 
@@ -25,6 +27,9 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
     private NavController mNavController;
     private TextView name;
     private TextView email;
+    private TextView location;
+    private TextView skills;
+
 
     public TrainersInfoFragment() {
         // Required empty public constructor
@@ -38,9 +43,19 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         assignBtn = rootView.findViewById(R.id.btn_trainer_info_assign);
         name = rootView.findViewById(R.id.tv_trainers_name);
         email = rootView.findViewById(R.id.tv_trainers_email);
+        location = rootView.findViewById(R.id.tv_trainers_location);
+        skills = rootView.findViewById(R.id.tv_trainers_skills);
+        String skill = "";
+//        for (int i = 1; i <= TrainersAdapter.skills.size(); i++) {
+//            skill = TrainersAdapter.skills.get(i) + ", ";
+//        }
 
-        name.setText("Phirom Peterschmidt");
-        email.setText("phiromp@gmail.com");
+        name.setText(TrainersAdapter.currName);
+        email.setText(TrainersAdapter.currEmail);
+//        location.setText("Tampa, Florida");
+//        TrainersAdapter.currSkills;
+        skills.setText(skill);
+
 
         if(!TrainersInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {
             assignBtn.setVisibility(View.GONE);
