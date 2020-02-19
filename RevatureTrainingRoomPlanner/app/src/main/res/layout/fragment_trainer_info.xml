@@ -5,42 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_trainers_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/trainerlookup_default_email"
-        android:textSize="16sp"
+    <ImageView
+        android:id="@+id/img_trainer_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_trainers_location_header"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_emailheader" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@color/app_background" />
+
+    <ImageView
+        android:id="@+id/cardview_trainer_info"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/design_default_color_background">
+
+    </ImageView>
 
     <TextView
-        android:id="@+id/tv_trainers_location"
+        android:id="@+id/tv_trainers_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/trainerlookup_default_location"
-        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:text="@string/trainerlookup_defaultname"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_trainers_profile" />
+
+    <ImageView
+        android:id="@+id/cardview_trainer_info2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_trainer_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_trainer_info"
+        app:srcCompat="@color/design_default_color_background">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_trainers_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="Trainer"
+        android:textColor="#999999"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/cardview_trainer_info"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_location_header" />
-
-    <TextView
-        android:id="@+id/tv_trainers_skills"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/trainerlookup_default_skills"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_skillsheader" />
-
+        app:layout_constraintStart_toEndOf="@+id/cardview_trainer_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_name" />
 
     <TextView
         android:id="@+id/tv_trainers_location_header"
@@ -52,15 +86,25 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trainers_name" />
+        app:layout_constraintTop_toBottomOf="@+id/cardview_trainer_info" />
 
+    <TextView
+        android:id="@+id/tv_trainers_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trainerlookup_default_location"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_trainers_location_header" />
 
     <TextView
         android:id="@+id/tv_trainers_emailheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/email_header"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
@@ -68,11 +112,30 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_trainers_location" />
 
     <TextView
+        android:id="@+id/tv_trainers_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trainerlookup_default_email"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_trainers_location"
+        app:layout_constraintTop_toTopOf="@+id/tv_trainers_emailheader" />
+
+    <TextView
+        android:id="@+id/tv_trainers_skills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trainerlookup_default_skills"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_trainers_email"
+        app:layout_constraintTop_toTopOf="@+id/tv_trainers_skillsheader" />
+
+
+    <TextView
         android:id="@+id/tv_trainers_skillsheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/skills_header"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
@@ -81,57 +144,35 @@
 
     <Button
         android:id="@+id/btn_trainer_info_assign"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/assign_button_style"
         android:ems="5"
         android:text="@string/submit"
         android:textColor="@color/revature_orange"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/img_trainer_info"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/tv_trainers_location_header"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_trainers_profile"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/thiago"
+        app:civ_border_color="@color/cardview_light_background"
+        app:civ_border_width="3dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_trainers_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/darker_gray" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_trainers_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/trainerlookup_defaultname"
-        android:textColor="@color/app_background"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_trainers_profile" />
-
-        <ImageView
-            android:id="@+id/img_trainers_profile"
-            android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_trainers_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/thiago"
-            />
 </androidx.constraintlayout.widget.ConstraintLayout>

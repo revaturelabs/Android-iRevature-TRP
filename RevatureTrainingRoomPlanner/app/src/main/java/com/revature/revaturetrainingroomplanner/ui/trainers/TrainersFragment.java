@@ -12,6 +12,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
 
 import java.util.Objects;
@@ -37,8 +38,10 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
 
     @Override
     public void onTrainerClick(int position) {
+
         TrainersFragmentDirections.ActionNavTrainersToNavTrainerInfo actionNavTrainersToNavTrainerInfo = TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo();
         actionNavTrainersToNavTrainerInfo.setDisplayButton(true);
         mNavController.navigate(actionNavTrainersToNavTrainerInfo);
+
     }
 }

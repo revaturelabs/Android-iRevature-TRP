@@ -52,9 +52,11 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
 
         @Override
         public void onClick(View v) {
+
             String name = getCurrentItem().getTrainer_name();
             Log.d("trainer", name);
             mOnItemListener.onTrainerClick(getAdapterPosition());
+
         }
     }
 

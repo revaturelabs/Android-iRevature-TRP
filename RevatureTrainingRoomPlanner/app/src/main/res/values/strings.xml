@@ -36,9 +36,9 @@
     <string name="trainerlookup_default_email">Email default</string>
     <string name="trainerlookup_default_location">Location default</string>
     <string name="trainerlookup_default_skills">trainer_skills default</string>
-    <string name="location_header">Location</string>
-    <string name="email_header">Email</string>
-    <string name="skills_header">Skills</string>
+    <string name="location_header">Location:</string>
+    <string name="email_header">Email:</string>
+    <string name="skills_header">Skills:</string>
     <string name="trainer_room_lookup_header">Trainer/Room Lookup</string>
     <string name="select_trainer_header">Revature Trainers</string>
     <string name="plus">+</string>

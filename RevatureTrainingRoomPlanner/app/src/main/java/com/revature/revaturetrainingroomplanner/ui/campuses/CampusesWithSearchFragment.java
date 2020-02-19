@@ -3,11 +3,13 @@ package com.revature.revaturetrainingroomplanner.ui.campuses;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -54,6 +56,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
     private ProgressBar mProgressBar;
     private CampusRepository mCampusRepository;
     private static int counter = 1;
+    private ImageView campusImg;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +83,8 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mProgressBar = root.findViewById(R.id.progressbar_campuses_with_search_progress);
         root.findViewById(R.id.btn_campuses_with_search_add_fake_data).setOnClickListener(this);
         root.findViewById(R.id.btn_campuses_with_search_clear_fake_data).setOnClickListener(this);
+//        campusImg = root.findViewById(R.id.img_campus_row_icon);
+//        campusImg.setImageResource(R.drawable.tampa);
 
         mAdapter = new CampusesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
