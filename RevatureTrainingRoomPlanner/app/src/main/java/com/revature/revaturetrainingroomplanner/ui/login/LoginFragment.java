@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -126,19 +127,23 @@ public class LoginFragment extends Fragment {
 
         loginButton.setOnClickListener(v -> {
 
-            loadingProgressBar.setVisibility(View.VISIBLE);
-            loginViewModel.login(usernameEditText.getText().toString(),
-                    passwordEditText.getText().toString());
-
-            if(checkBox.isChecked()) {
-                saveSharedPreferences.saveLoginDetails(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+            if(TextUtils.isEmpty(usernameEditText.getText().toString())) {
+                usernameEditText.setError("Email cannot be empty");
+                return;
             }
+            else {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loginViewModel.login(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
 
-            Log.d("debug", "Saving login info");
-            mNavController.navigate(LoginFragmentDirections.actionLoginFragmentToNavMainActivity());
+                if (checkBox.isChecked()) {
+                    saveSharedPreferences.saveLoginDetails(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                }
 
-
-        });
+                Log.d("debug", "Saving login info");
+                mNavController.navigate(LoginFragmentDirections.actionLoginFragmentToNavMainActivity());
+            }
+            });
 
         forgotButton.setOnClickListener(v -> {
             mNavController.navigate(LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment());
