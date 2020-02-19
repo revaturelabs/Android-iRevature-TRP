@@ -30,10 +30,10 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
     private String trainer_profile_picture_url;
 
     @Ignore
-    private List<Skill> trainer_skills;
+    private List<Skill> skills;
 
     @Ignore
-    private List<String> skills;
+    private List<String> trainer_skills;
 
     public Trainer() {
     }
@@ -49,8 +49,8 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         trainer_name = in.readString();
         trainer_email = in.readString();
         trainer_profile_picture_url = in.readString();
-        trainer_skills = in.createTypedArrayList(Skill.CREATOR);
-        skills = in.createStringArrayList();
+        skills = in.createTypedArrayList(Skill.CREATOR);
+        trainer_skills = in.createStringArrayList();
     }
 
     public static final Creator<Trainer> CREATOR = new Creator<Trainer>() {
@@ -97,20 +97,20 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         this.trainer_profile_picture_url = trainer_profile_picture_url;
     }
 
-    public List<Skill> getTrainer_skills() {
-        return trainer_skills;
-    }
-
-    public void setTrainer_skills(List<Skill> trainer_skills) {
-        this.trainer_skills = trainer_skills;
-    }
-
-    public List<String> getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<String> skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+    public List<String> getTrainer_skills() {
+        return trainer_skills;
+    }
+
+    public void setTrainer_skills(List<String> trainer_skills) {
+        this.trainer_skills = trainer_skills;
     }
 
     public String getText() {
@@ -155,7 +155,7 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         dest.writeString(trainer_name);
         dest.writeString(trainer_email);
         dest.writeString(trainer_profile_picture_url);
-        dest.writeTypedList(trainer_skills);
-        dest.writeStringList(skills);
+        dest.writeTypedList(skills);
+        dest.writeStringList(trainer_skills);
     }
 }

@@ -1,5 +1,8 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -12,7 +15,7 @@ import java.util.List;
 
 @Entity(tableName = "batches")
 public class
-Batch implements SortedListAdapter.ViewModel {
+Batch implements SortedListAdapter.ViewModel, Parcelable {
 
     @ColumnInfo(name = "ba_id")
     @PrimaryKey(autoGenerate = true)
@@ -46,6 +49,29 @@ Batch implements SortedListAdapter.ViewModel {
     public Batch(String batch_name) {
         this.batch_name = batch_name;
     }
+
+    protected Batch(Parcel in) {
+        batch_id = in.readLong();
+        batch_name = in.readString();
+        start_date = in.readString();
+        end_date = in.readString();
+        is_assigned = in.readByte() != 0;
+        associates = in.readInt();
+        skills = in.createTypedArrayList(Skill.CREATOR);
+        skills_required = in.createStringArrayList();
+    }
+
+    public static final Creator<Batch> CREATOR = new Creator<Batch>() {
+        @Override
+        public Batch createFromParcel(Parcel in) {
+            return new Batch(in);
+        }
+
+        @Override
+        public Batch[] newArray(int size) {
+            return new Batch[size];
+        }
+    };
 
     @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
@@ -141,5 +167,22 @@ Batch implements SortedListAdapter.ViewModel {
                 ", associates=" + associates +
                 ", skills_required=" + skills_required +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(batch_id);
+        dest.writeString(batch_name);
+        dest.writeString(start_date);
+        dest.writeString(end_date);
+        dest.writeByte((byte) (is_assigned ? 1 : 0));
+        dest.writeInt(associates);
+        dest.writeTypedList(skills);
+        dest.writeStringList(skills_required);
     }
 }
