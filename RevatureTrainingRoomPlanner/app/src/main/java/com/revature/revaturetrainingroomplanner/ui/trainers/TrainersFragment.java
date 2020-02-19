@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
 
@@ -19,6 +21,7 @@ import java.util.Objects;
 
 public class TrainersFragment extends Fragment implements TrainersAdapter.OnItemListener {
 
+    private BatchAssignment mBatchAssignment;
     private TrainersViewModel trainersViewModel;
     private NavController mNavController;
 
@@ -37,9 +40,16 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
     }
 
     @Override
-    public void onTrainerClick(int position) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        TrainersFragmentDirections.ActionNavTrainersToNavTrainerInfo actionNavTrainersToNavTrainerInfo = TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo();
+        mBatchAssignment = TrainersFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
+    }
+
+    @Override
+    public void onTrainerClick(Trainer trainerClicked) {
+
+        TrainersFragmentDirections.ActionNavTrainersToNavTrainerInfo actionNavTrainersToNavTrainerInfo = TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo(mBatchAssignment, trainerClicked);
         actionNavTrainersToNavTrainerInfo.setDisplayButton(true);
         mNavController.navigate(actionNavTrainersToNavTrainerInfo);
 

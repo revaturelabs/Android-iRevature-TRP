@@ -1,5 +1,8 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -12,7 +15,7 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import java.util.List;
 
 @Entity(tableName = "rooms")
-public class Room implements SortedListAdapter.ViewModel {
+public class Room implements SortedListAdapter.ViewModel, Parcelable {
 
     @ColumnInfo(name = "r_id")
     @PrimaryKey(autoGenerate = true)
@@ -46,6 +49,26 @@ public class Room implements SortedListAdapter.ViewModel {
         this.building_id = building_id;
         this.batches_assigned = batchAssignments;
     }
+
+    protected Room(Parcel in) {
+        room_id = in.readLong();
+        room_name = in.readString();
+        occupancy = in.readInt();
+        building_id = in.readInt();
+        batches_assigned = in.createTypedArrayList(BatchAssignment.CREATOR);
+    }
+
+    public static final Creator<Room> CREATOR = new Creator<Room>() {
+        @Override
+        public Room createFromParcel(Parcel in) {
+            return new Room(in);
+        }
+
+        @Override
+        public Room[] newArray(int size) {
+            return new Room[size];
+        }
+    };
 
     public long getRoom_id() {
         return room_id;
@@ -121,4 +144,17 @@ public class Room implements SortedListAdapter.ViewModel {
         return false;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(room_id);
+        dest.writeString(room_name);
+        dest.writeInt(occupancy);
+        dest.writeInt(building_id);
+        dest.writeTypedList(batches_assigned);
+    }
 }

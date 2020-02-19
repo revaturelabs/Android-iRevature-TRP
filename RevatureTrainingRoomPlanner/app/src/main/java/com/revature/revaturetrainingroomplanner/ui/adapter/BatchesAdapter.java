@@ -1,7 +1,6 @@
 package com.revature.revaturetrainingroomplanner.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,12 +49,12 @@ public class BatchesAdapter extends SortedListAdapter<Batch> {
 
         @Override
         public void onClick(View v) {
-            mOnItemListener.onBatchClick(getAdapterPosition());
+            mOnItemListener.onBatchClick(getCurrentItem());
         }
     }
 
     public interface OnItemListener {
-        void onBatchClick(int position);
+        void onBatchClick(Batch batchClicked);
     }
 }
 

@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,6 +31,7 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
     private TextView email;
     private TextView location;
     private TextView skills;
+    private Trainer mTrainerSelected;
 
 
     public TrainersInfoFragment() {
@@ -61,9 +64,16 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
             assignBtn.setVisibility(View.GONE);
         }
 
+        mTrainerSelected = TrainersInfoFragmentArgs.fromBundle(getArguments()).getTrainerSelected();
+
         assignBtn.setOnClickListener(this);
 
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

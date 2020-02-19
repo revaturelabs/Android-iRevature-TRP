@@ -32,6 +32,9 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
         </fragment>
         <fragment
             android:id="@+id/nav_room_info"
@@ -52,6 +55,12 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@id/nav_rooms" />
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
+            <argument
+                android:name="roomSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
 
         </fragment>
         <fragment
@@ -67,6 +76,9 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" >
             </action>
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
         </fragment>
         <fragment
             android:id="@+id/nav_trainer_info"
@@ -81,6 +93,12 @@
             <action
                 android:id="@+id/action_nav_trainer_info_to_nav_batches"
                 app:popUpTo="@id/nav_batches" />
+            <argument
+                android:name="batchAssignment"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
+            <argument
+                android:name="trainerSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Trainer" />
 
         </fragment>
     </navigation>
@@ -112,6 +130,9 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
+            <argument
+                android:name="campusSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Campus" />
         </fragment>
         <fragment
             android:id="@+id/nav_room_info"
@@ -123,6 +144,8 @@
                 android:name="displayButton"
                 android:defaultValue="false"
                 app:argType="boolean" />
+            <argument android:name="roomSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
 
         </fragment>
         <fragment
@@ -135,6 +158,9 @@
                 android:name="displayButton"
                 android:defaultValue="false"
                 app:argType="boolean" />
+            <argument
+                android:name="trainerSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Trainer" />
         </fragment>
         <fragment
             android:id="@+id/nav_lookup"
@@ -155,7 +181,11 @@
             android:id="@+id/nav_batch_info"
             android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchInfo"
             android:label="fragment_batch_info"
-            tools:layout="@layout/fragment_batch_info" />
+            tools:layout="@layout/fragment_batch_info" >
+            <argument
+                android:name="batchSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Batch" />
+        </fragment>
     </navigation>
 
     <activity

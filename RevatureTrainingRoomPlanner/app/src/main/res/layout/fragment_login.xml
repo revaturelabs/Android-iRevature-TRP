@@ -43,7 +43,7 @@
         android:autofillHints=""
         android:background="@drawable/login_et_style"
         android:hint="@string/prompt_username"
-        android:inputType="textEmailAddress"
+        android:inputType="textWebEmailAddress"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
         android:textAlignment="textStart"
@@ -64,17 +64,18 @@
         android:autofillHints=""
         android:background="@drawable/login_et_style"
         android:ems="12"
-        android:maxLength="12"
         android:hint="@string/prompt_password"
-        android:textColor="#999999"
-        android:inputType="textPassword"
+        android:inputType="textWebPassword"
+        android:maxLength="12"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
         android:textAlignment="textStart"
+        android:textColor="#999999"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/et_login_email"
         app:layout_constraintStart_toStartOf="@+id/et_login_email"
-        app:layout_constraintTop_toBottomOf="@+id/et_login_email" tools:targetApi="o" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_email"
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/btn_login_signin"

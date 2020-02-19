@@ -61,12 +61,12 @@ public class TrainersAdapter extends SortedListAdapter<Trainer> {
             currName = getCurrentItem().getTrainer_email();
             currSkills = getCurrentItem().getTrainer_skills();
             Log.d("trainer", currName);
-            mOnItemListener.onTrainerClick(getAdapterPosition());
+            mOnItemListener.onTrainerClick(getCurrentItem());
 
         }
     }
 
     public interface OnItemListener {
-        void onTrainerClick(int position);
+        void onTrainerClick(Trainer trainerClicked);
     }
 }

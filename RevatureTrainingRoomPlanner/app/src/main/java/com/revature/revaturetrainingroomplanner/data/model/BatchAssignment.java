@@ -15,18 +15,18 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    private int batch_assignment_id;
+    private long batch_assignment_id;
 
     @ForeignKey(entity = Batch.class, parentColumns = "b_id", childColumns = "b_id")
     private
-    int batch_id;
+    long batch_id;
 
     @ForeignKey(entity = Trainer.class, parentColumns = "t_id", childColumns = "t_id")
     private
-    int trainer_id;
+    long trainer_id;
 
     @ForeignKey(entity = Room.class, parentColumns = "r_id", childColumns = "r_id")
-    private int room_id;
+    private long room_id;
 
     @Ignore
     private String start_date;
@@ -71,9 +71,9 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(batch_assignment_id);
-        dest.writeInt(batch_id);
-        dest.writeInt(trainer_id);
+        dest.writeLong(batch_assignment_id);
+        dest.writeLong(batch_id);
+        dest.writeLong(trainer_id);
     }
 
     @Override
@@ -93,35 +93,35 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
         }
     };
 
-    public int getBatch_assignment_id() {
+    public long getBatch_assignment_id() {
         return batch_assignment_id;
     }
 
-    public void setBatch_assignment_id(int batch_assignment_id) {
+    public void setBatch_assignment_id(long batch_assignment_id) {
         this.batch_assignment_id = batch_assignment_id;
     }
 
-    public int getBatch_id() {
+    public long getBatch_id() {
         return batch_id;
     }
 
-    public void setBatch_id(int batch_id) {
+    public void setBatch_id(long batch_id) {
         this.batch_id = batch_id;
     }
 
-    public int getTrainer_id() {
+    public long getTrainer_id() {
         return trainer_id;
     }
 
-    public void setTrainer_id(int trainer_id) {
+    public void setTrainer_id(long trainer_id) {
         this.trainer_id = trainer_id;
     }
 
-    public int getRoom_id() {
+    public long getRoom_id() {
         return room_id;
     }
 
-    public void setRoom_id(int room_id) {
+    public void setRoom_id(long room_id) {
         this.room_id = room_id;
     }
 

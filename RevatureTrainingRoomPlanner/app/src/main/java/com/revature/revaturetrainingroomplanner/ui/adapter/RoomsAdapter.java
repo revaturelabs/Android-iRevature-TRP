@@ -51,11 +51,11 @@ public class RoomsAdapter extends SortedListAdapter<Room> {
 
         @Override
         public void onClick(View v) {
-            mOnItemListener.onRoomClick(getAdapterPosition());
+            mOnItemListener.onRoomClick(getCurrentItem());
         }
     }
 
     public interface OnItemListener {
-        void onRoomClick(int position);
+        void onRoomClick(Room roomClicked);
     }
 }

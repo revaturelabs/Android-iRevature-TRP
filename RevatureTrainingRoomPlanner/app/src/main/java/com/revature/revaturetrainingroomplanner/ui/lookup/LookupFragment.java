@@ -13,6 +13,9 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.tabs.TabLayout;
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
@@ -133,21 +136,21 @@ public class LookupFragment extends Fragment implements TrainersAdapter.OnItemLi
     }
 
     @Override
-    public void onTrainerClick(int position) {
-        LookupFragmentDirections.ActionNavCategoryLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavCategoryLookupToNavTrainerInfo();
+    public void onTrainerClick(Trainer trainerClicked) {
+        LookupFragmentDirections.ActionNavCategoryLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavCategoryLookupToNavTrainerInfo(trainerClicked);
         mMainNavController.navigate(actionNavLookupToNavTrainerInfo);
     }
 
     @Override
-    public void onBatchClick(int position) {
-//        LookupFragmentDirections actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavLookupToNavBatchInfo();
-        mMainNavController.navigate(LookupFragmentDirections.actionNavCategoryLookupToNavBatchInfo());
+    public void onBatchClick(Batch batch) {
+        LookupFragmentDirections.ActionNavCategoryLookupToNavBatchInfo actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavCategoryLookupToNavBatchInfo(batch);
+        mMainNavController.navigate(actionNavLookupToNavBatchInfo);
         mTabLayout.selectTab(mTabLayout.getTabAt(TRAINER_TAB_LOCATION));
     }
 
     @Override
-    public void onRoomClick(int position) {
-        LookupFragmentDirections.ActionNavCategoryLookupToNavRoomInfo actionNavCategoryLookupToNavRoomInfo = LookupFragmentDirections.actionNavCategoryLookupToNavRoomInfo();
+    public void onRoomClick(Room roomClicked) {
+        LookupFragmentDirections.ActionNavCategoryLookupToNavRoomInfo actionNavCategoryLookupToNavRoomInfo = LookupFragmentDirections.actionNavCategoryLookupToNavRoomInfo(roomClicked);
         mMainNavController.navigate(actionNavCategoryLookupToNavRoomInfo);
         mTabLayout.selectTab(mTabLayout.getTabAt(TRAINER_TAB_LOCATION));
     }

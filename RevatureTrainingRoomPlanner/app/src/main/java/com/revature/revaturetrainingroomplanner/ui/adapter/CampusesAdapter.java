@@ -54,12 +54,12 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
 
         @Override
         public void onClick(View v) {
-            mOnItemListener.onCampusClick(getAdapterPosition());
+            mOnItemListener.onCampusClick(getCurrentItem());
         }
     }
 
     public interface OnItemListener {
-        void onCampusClick(int position);
+        void onCampusClick(Campus campusClicked);
     }
 
 }

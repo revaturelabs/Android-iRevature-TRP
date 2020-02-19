@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
+import com.revature.revaturetrainingroomplanner.data.model.Room;
 
 import java.util.Objects;
 
@@ -21,6 +24,8 @@ import java.util.Objects;
  */
 public class RoomInfoFragment extends Fragment implements View.OnClickListener{
 
+    private Room mRoomSelected;
+    private BatchAssignment mBatchAssignment;
     private Button assignBtn;
     private NavController mNavController;
 
@@ -51,12 +56,25 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
         String confirmation = "Confirmed: " + "##";
         confirmed.setText(confirmation);
 
+        mRoomSelected = RoomInfoFragmentArgs.fromBundle(getArguments()).getRoomSelected();
+        mBatchAssignment = getArguments().getParcelable("batchAssignment");
+
         return rootView;
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+
+    }
+
+    @Override
     public void onClick(View v) {
-        // Once Trainers Fragment ready navigate there
-        mNavController.navigate(R.id.action_nav_room_info_to_nav_trainers);
+        mBatchAssignment.setRoom_id(mRoomSelected.getRoom_id());
+        Bundle args = new Bundle();
+        args.putParcelable("batchAssignments", mBatchAssignment);
+        mNavController.navigate(R.id.action_nav_room_info_to_nav_trainers, args);
     }
 }
