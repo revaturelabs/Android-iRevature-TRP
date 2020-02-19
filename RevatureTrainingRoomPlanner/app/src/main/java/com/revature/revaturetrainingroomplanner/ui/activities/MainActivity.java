@@ -1,10 +1,6 @@
-package com.revature.revaturetrainingroomplanner.ui;
+package com.revature.revaturetrainingroomplanner.ui.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.ui.login.SaveSharedPreference;
 import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
@@ -33,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private final int LOGOUT_MENU_LOCATION = 3;
 
+    private BatchRepository mBatchRepository;
     private AppCompatActivity appCompatActivity;
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
@@ -72,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mBatchRepository = new BatchRepository(this);
+        mBatchRepository.retrieveBatchesFromAPI();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         saveSharedPreference.saveLoginDetails("","");
                         Log.d("debug", "deleting login info");
                         mNavController.navigate(NavigationMainDirections.actionGlobalNavLoginActivity());
+                        finish();
                     });
 
             AlertDialog dialog = builder.create();

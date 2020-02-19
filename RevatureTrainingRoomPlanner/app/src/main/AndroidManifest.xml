@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.LaunchActivity"
+        <activity android:name=".ui.activities.LaunchActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:label="@string/title_activity_main"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">

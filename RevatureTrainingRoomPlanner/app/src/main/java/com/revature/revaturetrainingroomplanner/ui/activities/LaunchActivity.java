@@ -1,4 +1,4 @@
-package com.revature.revaturetrainingroomplanner.ui;
+package com.revature.revaturetrainingroomplanner.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 
