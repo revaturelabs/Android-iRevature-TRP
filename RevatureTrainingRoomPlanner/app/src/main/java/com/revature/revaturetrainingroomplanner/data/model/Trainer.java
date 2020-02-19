@@ -26,6 +26,9 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
     @ColumnInfo(name = "t_email")
     private String trainer_email;
 
+    @ColumnInfo(name = "t_location")
+    private String trainer_location;
+
     @ColumnInfo(name = "t_pic_url")
     private String trainer_profile_picture_url;
 
@@ -48,6 +51,7 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         trainer_id = in.readLong();
         trainer_name = in.readString();
         trainer_email = in.readString();
+        trainer_location = in.readString();
         trainer_profile_picture_url = in.readString();
         skills = in.createTypedArrayList(Skill.CREATOR);
         trainer_skills = in.createStringArrayList();
@@ -87,6 +91,14 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
 
     public void setTrainer_email(String trainer_email) {
         this.trainer_email = trainer_email;
+    }
+
+    public String getTrainer_location() {
+        return trainer_location;
+    }
+
+    public void setTrainer_location(String trainer_location) {
+        this.trainer_location = trainer_location;
     }
 
     public String getTrainer_profile_picture_url() {
@@ -154,6 +166,7 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         dest.writeLong(trainer_id);
         dest.writeString(trainer_name);
         dest.writeString(trainer_email);
+        dest.writeString(trainer_location);
         dest.writeString(trainer_profile_picture_url);
         dest.writeTypedList(skills);
         dest.writeStringList(trainer_skills);

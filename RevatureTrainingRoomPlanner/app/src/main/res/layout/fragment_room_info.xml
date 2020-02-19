@@ -33,16 +33,6 @@
         android:textSize="18sp"
         android:paddingTop="32dp" />
 
-    <TextView
-        android:id="@+id/tv_room_info_confirmed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirmed: No"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:paddingTop="4dp"/>
-
         <TextView
             android:id="@+id/tv_room_info_calender"
             android:layout_width="match_parent"
