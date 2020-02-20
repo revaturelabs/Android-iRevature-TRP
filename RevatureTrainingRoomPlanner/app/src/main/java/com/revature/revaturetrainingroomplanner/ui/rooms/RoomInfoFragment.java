@@ -1,10 +1,12 @@
 package com.revature.revaturetrainingroomplanner.ui.rooms;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,11 +14,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import sun.bob.mcalendarview.MCalendarView;
+import sun.bob.mcalendarview.MarkStyle;
+import sun.bob.mcalendarview.vo.DateData;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -28,7 +34,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
     private BatchAssignment mBatchAssignment;
     private Button assignBtn;
     private NavController mNavController;
-
+    private MCalendarView calendarView;
     public RoomInfoFragment() {
         // Required empty public constructor
     }
@@ -39,7 +45,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_room_info, container, false);
 
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-
+        calendarView = rootView.findViewById(R.id.calendarView);
         assignBtn = rootView.findViewById(R.id.btn_room_info_assign);
         if(!RoomInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {
             assignBtn.setVisibility(View.GONE);
@@ -58,8 +64,12 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         TextView room = rootView.findViewById(R.id.tv_room_info_header);
         room.setText(roomNumber);
 
+        markCalender();
+
         return rootView;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,4 +83,23 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         args.putParcelable("batchAssignment", mBatchAssignment);
         mNavController.navigate(R.id.action_nav_room_info_to_nav_trainers, args);
     }
+
+    private void markCalender() {
+        ArrayList<DateData> dates = new ArrayList<>();
+
+        for (int j = 1; j < 32; j++) {
+            for (int k = 1; k < 13; k++){
+                if(k%2==0)
+                    dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+                else
+                    dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.RED)));
+            }
+        }
+
+
+        for (int i = 0; i < dates.size(); i++) {
+            calendarView.markDate(dates.get(i));
+        }
+    }
+
 }

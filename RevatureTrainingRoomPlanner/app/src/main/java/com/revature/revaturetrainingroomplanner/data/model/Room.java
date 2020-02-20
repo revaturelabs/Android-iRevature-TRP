@@ -105,6 +105,11 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
         return building_id;
     }
 
+    public String getBuilding_idString() {
+        return Integer.toString(building_id);
+    }
+
+
     public void setBuilding_id(int building_id) {
         this.building_id = building_id;
     }

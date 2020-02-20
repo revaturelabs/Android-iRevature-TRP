@@ -38,7 +38,7 @@
                 android:text="@string/room_row_building_header"
                 android:textSize="16sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
-                app:layout_constraintEnd_toEndOf="@+id/textView4" />
+                app:layout_constraintStart_toStartOf="@+id/textView4" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:padding="3dp"
-                android:text="@{building.building_name}"
+                android:text="@{room.building_idString}"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="parent" />
