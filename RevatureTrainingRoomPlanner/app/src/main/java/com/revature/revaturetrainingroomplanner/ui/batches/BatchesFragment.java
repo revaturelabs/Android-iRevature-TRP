@@ -39,7 +39,7 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
 
         batchAssignment.setBatch_id(batch.getBatch_id());
 
-        BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment);
+        BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment, batch);
         mNavController.navigate(actionNavBatchesToNavRooms);
     }
 

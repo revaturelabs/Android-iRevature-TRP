@@ -74,5 +74,9 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="new_password">New Password</string>
     <string name="campus_location">%1$s, %2$s</string>
+    <string name="room_row_building_header">Building:</string>
+    <string name="room_row_room_header">Room Number:</string>
+    <string name="room_info_max_seats">Max Seats: ##</string>
+    <string name="room_info_calender_header">Room Availability</string>
 
 </resources>

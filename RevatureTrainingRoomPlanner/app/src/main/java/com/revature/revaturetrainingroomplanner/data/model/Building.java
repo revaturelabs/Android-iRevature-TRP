@@ -61,7 +61,10 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
     }
 
     public String getBuilding_name() {
-        return building_name;
+        if(!building_name.isEmpty())
+            return building_name;
+        else
+            return "idk";
     }
 
     public void setBuilding_name(String building_name) {

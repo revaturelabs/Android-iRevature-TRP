@@ -162,7 +162,7 @@ public class LoginFragment extends Fragment {
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
+        // TO DO : initiate successful logged in experience
         Toast.makeText(getContext(), welcome, Toast.LENGTH_LONG).show();
     }
 

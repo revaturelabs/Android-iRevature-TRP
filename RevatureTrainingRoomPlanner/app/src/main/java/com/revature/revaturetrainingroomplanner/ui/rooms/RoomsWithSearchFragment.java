@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.RoomRepository;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.campuses.CampusesFragment;
+import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragmentArgs;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -52,7 +57,10 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private SearchView mSearchView;
     private ProgressBar mProgressBar;
     private RoomRepository mRoomRepository;
+    private BatchRepository mBatchSelected;
     private static int counter = 1;
+    private TextView campus;
+    private TextView location;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,9 +83,10 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mProgressBar = root.findViewById(R.id.progressbar_rooms_with_search_progress);
         root.findViewById(R.id.btn_rooms_with_search_add_fake_data).setOnClickListener(this);
         root.findViewById(R.id.btn_rooms_with_search_clear_fake_data).setOnClickListener(this);
+        campus = root.findViewById(R.id.tv_select_building_campus);
+        location = root.findViewById(R.id.tv_select_building_campus_location);
 
         mAdapter = new RoomsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
-
         mAdapter.addCallback(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
@@ -189,6 +198,12 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
             }
         }
         return filteredModelList;
+    }
+
+    public void setCampus(String campus){
+        this.campus.setText(campus);
+
+        this.location.setText("");
     }
 
     private void retrieveRooms() {

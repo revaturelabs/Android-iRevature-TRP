@@ -50,7 +50,7 @@ public class ForgotPasswordFragment extends Fragment {
         buttonSubmit = view.findViewById(R.id.btn_forgot_password_submit);
         buttonSubmit.setOnClickListener(v -> {
             EditText email = view.findViewById(R.id.et_forgot_password_input);
-            // TODO: send reset password link to email
+            // TO DO: send reset password link to email
             String emailMsg = "An e-mail with further instruction will be sent to your email address.";
             Snackbar.make(v, emailMsg, Snackbar.LENGTH_LONG).show();
             mNavController.navigate(ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToResetPasswordFragment());

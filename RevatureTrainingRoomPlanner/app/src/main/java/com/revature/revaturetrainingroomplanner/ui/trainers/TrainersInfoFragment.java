@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
@@ -92,6 +94,14 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         mBatchAssignment.setTrainer_id(mTrainerSelected.getTrainer_id());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
+        builder.setCancelable(true);
+        builder.setTitle("Batch Assignment Created");
+        builder.setPositiveButton("Okay", (dialog, which) -> { });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
         Toast.makeText(getContext(), "Batch" + mBatchAssignment.toString() + "assigned", Toast.LENGTH_LONG).show();
         String filename = "BatchAssignment";
         String fileContents = mBatchAssignment.toString();
