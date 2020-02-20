@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBindingImpl;
+import com.revature.revaturetrainingroomplanner.databinding.SkillRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBindingImpl;
 import java.lang.IllegalArgumentException;
 import java.lang.Integer;
@@ -27,14 +28,17 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   private static final int LAYOUT_ROOMROW = 3;
 
-  private static final int LAYOUT_TRAINERROW = 4;
+  private static final int LAYOUT_SKILLROW = 4;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(4);
+  private static final int LAYOUT_TRAINERROW = 5;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(5);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.batch_row, LAYOUT_BATCHROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.campus_row, LAYOUT_CAMPUSROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.room_row, LAYOUT_ROOMROW);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.skill_row, LAYOUT_SKILLROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.trainer_row, LAYOUT_TRAINERROW);
   }
 
@@ -64,6 +68,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new RoomRowBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for room_row is invalid. Received: " + tag);
+        }
+        case  LAYOUT_SKILLROW: {
+          if ("layout/skill_row_0".equals(tag)) {
+            return new SkillRowBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for skill_row is invalid. Received: " + tag);
         }
         case  LAYOUT_TRAINERROW: {
           if ("layout/trainer_row_0".equals(tag)) {
@@ -116,23 +126,23 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerBrLookup {
-    static final SparseArray<String> sKeys = new SparseArray<String>(5);
+    static final SparseArray<String> sKeys = new SparseArray<String>(4);
 
     static {
       sKeys.put(0, "_all");
       sKeys.put(1, "model");
-      sKeys.put(2, "building");
-      sKeys.put(3, "room");
+      sKeys.put(2, "SkillAdapter");
     }
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(4);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(5);
 
     static {
       sKeys.put("layout/batch_row_0", com.revature.revaturetrainingroomplanner.R.layout.batch_row);
       sKeys.put("layout/campus_row_0", com.revature.revaturetrainingroomplanner.R.layout.campus_row);
       sKeys.put("layout/room_row_0", com.revature.revaturetrainingroomplanner.R.layout.room_row);
+      sKeys.put("layout/skill_row_0", com.revature.revaturetrainingroomplanner.R.layout.skill_row);
       sKeys.put("layout/trainer_row_0", com.revature.revaturetrainingroomplanner.R.layout.trainer_row);
     }
   }

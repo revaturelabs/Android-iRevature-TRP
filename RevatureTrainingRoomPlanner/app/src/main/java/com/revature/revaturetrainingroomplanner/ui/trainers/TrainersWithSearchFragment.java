@@ -20,11 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
+import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
-import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter.OnItemListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -33,7 +36,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TrainersWithSearchFragment extends Fragment implements SortedListAdapter.Callback, View.OnClickListener {
+public class TrainersWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
+
+    private static final String TAG = "TrainersWithSearchFragm";
 
     private static final String[] TRAINERS = new String[]{
             "2001Mobile",
@@ -42,12 +47,13 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
             "4150Backend"
     };
 
-    private static final Comparator<Trainer> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<TrainerWithSkills> ALPHABETICAL_COMPARATOR = (a, b) -> a.getTrainer().getTrainer_name().compareTo(b.getTrainer().getTrainer_name());
+    private static final Comparator<Skill> ALPHABETICAL_COMPARATOR_SKILLS = (a, b) -> a.getText().compareTo(b.getText());
 
-    private List<Trainer> mModels;
-    private RecyclerView mRecyclerView;
-    private TrainersAdapter mAdapter;
-    private TrainerRowBinding mBinding;
+    private List<TrainerWithSkills> mTrainerWithSkillsModels;
+    private RecyclerView mTrainerRecyclerView;
+    private TrainerWithSkillsAdapter mTrainerWithSkillsAdapter;
+    private TrainerRowBinding mTrainerRowBinding;
     private Animator mAnimator;
     private SearchView mSearchView;
     private ProgressBar mProgressBar;
@@ -59,32 +65,30 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         super.onCreate(savedInstanceState);
 
         mTrainerRepository = new TrainerRepository(getContext());
-        mModels = new ArrayList<>();
+        mTrainerWithSkillsModels = new ArrayList<>();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.trainer_row, container, false);
+        mTrainerRowBinding = DataBindingUtil.inflate(inflater, R.layout.trainer_row, container, false);
 
         OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_trainers_with_search, container, false);
-        mRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);
+        mTrainerRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);
         mSearchView = root.findViewById(R.id.searchview_trainers_with_search_search_trainer);
         mProgressBar = root.findViewById(R.id.progressbar_trainers_with_search_progress);
-        root.findViewById(R.id.btn_trainers_with_search_add_fake_data).setOnClickListener(this);
-        root.findViewById(R.id.btn_trainers_with_search_clear_fake_data).setOnClickListener(this);
 
-        mAdapter = new TrainersAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
+        mTrainerWithSkillsAdapter = new TrainerWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
-        mAdapter.addCallback(this);
+        mTrainerWithSkillsAdapter.addCallback(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
 
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mTrainerRecyclerView.setLayoutManager(layoutManager);
+        mTrainerRecyclerView.setAdapter(mTrainerWithSkillsAdapter);
 
         retrieveTrainers();
 
@@ -96,11 +100,11 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<Trainer> filteredModelList = filter(mModels, query);
-                mAdapter.edit()
+                final List<TrainerWithSkills> filteredModelList = filter(mTrainerWithSkillsModels, query);
+                mTrainerWithSkillsAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
-                mRecyclerView.scrollToPosition(0);
+                mTrainerRecyclerView.scrollToPosition(0);
                 return true;
             }
         });
@@ -125,13 +129,13 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         mAnimator.start();
 
-        mRecyclerView.animate().alpha(0.5f);
+        mTrainerRecyclerView.animate().alpha(0.5f);
     }
 
     @Override
     public void onEditFinished() {
-        mRecyclerView.scrollToPosition(0);
-        mRecyclerView.animate().alpha(1.0f);
+        mTrainerRecyclerView.scrollToPosition(0);
+        mTrainerRecyclerView.animate().alpha(1.0f);
 
         if (mAnimator != null) {
             mAnimator.cancel();
@@ -160,31 +164,12 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mAnimator.start();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_trainers_with_search_add_fake_data: {
-                insertFakeData(new Trainer("Fake Trainer #" + counter));
-                counter++;
-            }
-            break;
-
-            case R.id.btn_trainers_with_search_clear_fake_data: {
-                clearFakeData();
-            }
-            break;
-
-            default:
-
-        }
-    }
-
-    private static List<Trainer> filter(List<Trainer> models, String query) {
+    private static List<TrainerWithSkills> filter(List<TrainerWithSkills> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<Trainer> filteredModelList = new ArrayList<>();
-        for (Trainer model : models) {
-            final String text = model.getText().toLowerCase();
+        final List<TrainerWithSkills> filteredModelList = new ArrayList<>();
+        for (TrainerWithSkills model : models) {
+            final String text = model.getTrainer().getTrainer_name().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
             }
@@ -196,22 +181,18 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         mTrainerRepository.retrieveAllTask().observe(getViewLifecycleOwner(), trainers -> {
             if (trainers != null) {
-                mModels = trainers;
-                mAdapter.edit()
+                for (TrainerWithSkills trainerWithSkills: trainers) {
+                    Trainer trainer = trainerWithSkills.getTrainer();
+                    trainer.setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                }
+
+                mTrainerWithSkillsAdapter.edit()
                         .replaceAll(trainers)
                         .commit();
+                mTrainerWithSkillsModels = trainers;
             } else {
-                mModels = new ArrayList<>();
+                mTrainerWithSkillsModels = new ArrayList<>();
             }
         });
     }
-
-    public void insertFakeData(Trainer trainer) {
-        mTrainerRepository.insertTrainerTask(trainer);
-    }
-
-    public void clearFakeData() {
-        mTrainerRepository.deleteAllTask(new Trainer(""));
-    }
-
 }

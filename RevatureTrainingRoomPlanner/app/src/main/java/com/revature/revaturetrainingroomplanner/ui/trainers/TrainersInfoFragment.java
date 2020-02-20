@@ -1,7 +1,7 @@
 package com.revature.revaturetrainingroomplanner.ui.trainers;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,9 @@ import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
 import com.squareup.picasso.Picasso;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -61,14 +64,13 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         mTrainerSelected = TrainersInfoFragmentArgs.fromBundle(getArguments()).getTrainerSelected();
 
         String imgURL = mTrainerSelected.getTrainer_profile_picture_url();
-        Log.d("URL", imgURL);
+//        Log.d("URL", imgURL);
 
         name.setText(mTrainerSelected.getTrainer_name());
         email.setText(mTrainerSelected.getTrainer_email());
         location.setText(mTrainerSelected.getTrainer_location());
 
         Picasso.get().load(imgURL).into(profile);
-
 
         // for fun
         if(name.getText().toString().equals("John Cena"))
@@ -101,6 +103,15 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         dialog.show();
 
         Toast.makeText(getContext(), "Batch" + mBatchAssignment.toString() + "assigned", Toast.LENGTH_LONG).show();
+        String filename = "BatchAssignment";
+        String fileContents = mBatchAssignment.toString();
+        try (FileOutputStream fos = getActivity().getApplicationContext().openFileOutput(filename, Context.MODE_APPEND)) {
+            fos.write(fileContents.getBytes());
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mNavController.navigate(R.id.action_nav_trainer_info_to_nav_batches);
     }
 
