@@ -23,22 +23,22 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_room_info_seats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Max Seats: ##"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:paddingTop="32dp" />
+        <TextView
+            android:id="@+id/tv_room_info_seats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:text="@string/room_info_max_seats"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_room_info_calender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="32dp"
-            android:text="Room Availability"
+            android:text="@string/room_info_calender_header"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
@@ -47,8 +47,9 @@
         <sun.bob.mcalendarview.MCalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp" />
 
     </LinearLayout>
 

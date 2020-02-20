@@ -93,6 +93,7 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
         return room_name;
     }
 
+
     public int getOccupancy() {
         return occupancy;
     }

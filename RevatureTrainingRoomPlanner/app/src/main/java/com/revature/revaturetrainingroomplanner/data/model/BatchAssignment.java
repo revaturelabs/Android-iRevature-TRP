@@ -136,4 +136,12 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
                 ", end_date='" + end_date + '\'' +
                 '}';
     }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
 }

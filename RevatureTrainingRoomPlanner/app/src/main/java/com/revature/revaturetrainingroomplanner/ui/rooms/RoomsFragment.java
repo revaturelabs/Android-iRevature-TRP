@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -20,7 +18,6 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 
 import java.util.Objects;
@@ -56,6 +53,21 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
         return root;
     }
 
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mBatchAssignment = RoomsFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
+    }
+
+    @Override
+    public void onRoomClick(Room roomClicked) {
+        RoomsFragmentDirections.ActionNavRoomsToNavRoomsInfo actionNavRoomsToNavRoomsInfo = RoomsFragmentDirections.actionNavRoomsToNavRoomsInfo(mBatchAssignment, roomClicked);
+        actionNavRoomsToNavRoomsInfo.setDisplayButton(true);
+        mNavController.navigate(actionNavRoomsToNavRoomsInfo);
+    }
+
     private String setLocation(String campus) {
 
         switch (campus) {
@@ -75,20 +87,5 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
                 return "N/A";
         }
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        mBatchAssignment = RoomsFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
-    }
-
-    @Override
-    public void onRoomClick(Room roomClicked) {
-        RoomsFragmentDirections.ActionNavRoomsToNavRoomsInfo actionNavRoomsToNavRoomsInfo = RoomsFragmentDirections.actionNavRoomsToNavRoomsInfo(mBatchAssignment, roomClicked);
-        actionNavRoomsToNavRoomsInfo.setDisplayButton(true);
-        mNavController.navigate(actionNavRoomsToNavRoomsInfo);
-    }
-
 
 }

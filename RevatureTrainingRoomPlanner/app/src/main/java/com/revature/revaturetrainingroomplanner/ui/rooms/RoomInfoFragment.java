@@ -1,13 +1,16 @@
 package com.revature.revaturetrainingroomplanner.ui.rooms;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,13 +19,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import sun.bob.mcalendarview.MCalendarView;
 import sun.bob.mcalendarview.MarkStyle;
+import sun.bob.mcalendarview.listeners.OnDateClickListener;
 import sun.bob.mcalendarview.vo.DateData;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -64,6 +71,25 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         TextView room = rootView.findViewById(R.id.tv_room_info_header);
         room.setText(roomNumber);
 
+        calendarView.setOnDateClickListener(new OnDateClickListener() {
+            @Override
+            public void onDateClick(View view, DateData date) {
+
+                String dateStr = date.getMonthString()+date.getDayString()+date.getYear();
+                String dateNiceString = "Start date selected: " + date.getMonthString()+"/"+date.getDayString()+"/"+date.getYear();
+                Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
+                LocalDate localDate = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+                }
+                mBatchAssignment.setStart_date(localDate.toString());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    localDate = localDate.plusWeeks(10);
+                }
+                mBatchAssignment.setEnd_date(localDate.toString());
+            }
+        });
+
         markCalender();
 
         return rootView;
@@ -87,6 +113,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
     private void markCalender() {
         ArrayList<DateData> dates = new ArrayList<>();
 
+        // TODO: filter date marking for room avaliability
         for (int j = 1; j < 32; j++) {
             for (int k = 1; k < 13; k++){
                 if(k%2==0)
@@ -95,7 +122,6 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
                     dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.RED)));
             }
         }
-
 
         for (int i = 0; i < dates.size(); i++) {
             calendarView.markDate(dates.get(i));
