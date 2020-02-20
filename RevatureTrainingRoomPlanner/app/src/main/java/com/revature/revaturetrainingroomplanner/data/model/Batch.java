@@ -37,9 +37,6 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
     private int associates;
 
     @Ignore
-    private List<Skill> skills;
-
-    @Ignore
     private List<String> skills_required;
 
     public Batch() {
@@ -57,7 +54,6 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
         end_date = in.readString();
         is_assigned = in.readByte() != 0;
         associates = in.readInt();
-        skills = in.createTypedArrayList(Skill.CREATOR);
         skills_required = in.createStringArrayList();
     }
 
@@ -139,14 +135,6 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
         this.associates = associates;
     }
 
-    public List<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
     public List<String> getSkills_required() {
         return skills_required;
     }
@@ -182,7 +170,6 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
         dest.writeString(end_date);
         dest.writeByte((byte) (is_assigned ? 1 : 0));
         dest.writeInt(associates);
-        dest.writeTypedList(skills);
         dest.writeStringList(skills_required);
     }
 }

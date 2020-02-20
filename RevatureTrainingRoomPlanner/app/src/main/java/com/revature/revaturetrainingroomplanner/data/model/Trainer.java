@@ -10,13 +10,14 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 
 import java.util.List;
 
 @Entity(tableName = "trainers")
 public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
 
-    @ColumnInfo(name = "t_id")
+    @ColumnInfo(name = "t_id", index = true)
     @PrimaryKey(autoGenerate = true)
     private long trainer_id;
 
@@ -33,10 +34,10 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
     private String trainer_profile_picture_url;
 
     @Ignore
-    private List<Skill> skills;
+    private List<String> trainer_skills;
 
     @Ignore
-    private List<String> trainer_skills;
+    private SkillsAdapter skillsAdapter;
 
     public Trainer() {
     }
@@ -53,7 +54,6 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         trainer_email = in.readString();
         trainer_location = in.readString();
         trainer_profile_picture_url = in.readString();
-        skills = in.createTypedArrayList(Skill.CREATOR);
         trainer_skills = in.createStringArrayList();
     }
 
@@ -109,20 +109,20 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         this.trainer_profile_picture_url = trainer_profile_picture_url;
     }
 
-    public List<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
     public List<String> getTrainer_skills() {
         return trainer_skills;
     }
 
     public void setTrainer_skills(List<String> trainer_skills) {
         this.trainer_skills = trainer_skills;
+    }
+
+    public SkillsAdapter getSkillsAdapter() {
+        return skillsAdapter;
+    }
+
+    public void setSkillsAdapter(SkillsAdapter skillsAdapter) {
+        this.skillsAdapter = skillsAdapter;
     }
 
     public String getText() {
@@ -168,7 +168,6 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         dest.writeString(trainer_email);
         dest.writeString(trainer_location);
         dest.writeString(trainer_profile_picture_url);
-        dest.writeTypedList(skills);
         dest.writeStringList(trainer_skills);
     }
 }

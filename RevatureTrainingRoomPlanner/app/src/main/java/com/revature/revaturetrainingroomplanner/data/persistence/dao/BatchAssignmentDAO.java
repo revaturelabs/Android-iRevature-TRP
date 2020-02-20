@@ -3,6 +3,7 @@ package com.revature.revaturetrainingroomplanner.data.persistence.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 
@@ -12,10 +13,12 @@ import java.util.List;
 public interface BatchAssignmentDAO extends BaseDAO<BatchAssignment> {
 
     @Override
+    @Transaction
     @Query("SELECT * FROM batch_assignments")
     LiveData<List<BatchAssignment>> getAll();
 
     @Override
+    @Transaction
     @Query("DELETE FROM batch_assignments")
     int deleteAll();
 

@@ -15,10 +15,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
-import com.revature.revaturetrainingroomplanner.data.model.Trainer;
+import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragmentDirections;
 import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragmentDirections;
 import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersWithSearchFragmentDirections;
@@ -30,7 +30,7 @@ import static com.revature.revaturetrainingroomplanner.R.id.navhost_lookup_searc
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LookupFragment extends Fragment implements TrainersAdapter.OnItemListener, BatchesAdapter.OnItemListener, RoomsAdapter.OnItemListener {
+public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener, BatchesAdapter.OnItemListener, RoomsAdapter.OnItemListener {
 
     private final int TRAINER_TAB_LOCATION = 0;
     private final int BATCH_TAB_LOCATION = 1;
@@ -136,8 +136,8 @@ public class LookupFragment extends Fragment implements TrainersAdapter.OnItemLi
     }
 
     @Override
-    public void onTrainerClick(Trainer trainerClicked) {
-        LookupFragmentDirections.ActionNavCategoryLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavCategoryLookupToNavTrainerInfo(trainerClicked);
+    public void onTrainerClick(TrainerWithSkills trainerWithSkillsClicked) {
+        LookupFragmentDirections.ActionNavCategoryLookupToNavTrainerInfo actionNavLookupToNavTrainerInfo = LookupFragmentDirections.actionNavCategoryLookupToNavTrainerInfo(trainerWithSkillsClicked.getTrainer());
         mMainNavController.navigate(actionNavLookupToNavTrainerInfo);
     }
 

@@ -14,12 +14,12 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
-import com.revature.revaturetrainingroomplanner.data.model.Trainer;
-import com.revature.revaturetrainingroomplanner.ui.adapter.TrainersAdapter;
+import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
+import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 
 import java.util.Objects;
 
-public class TrainersFragment extends Fragment implements TrainersAdapter.OnItemListener {
+public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener {
 
     private BatchAssignment mBatchAssignment;
     private TrainersViewModel trainersViewModel;
@@ -48,9 +48,9 @@ public class TrainersFragment extends Fragment implements TrainersAdapter.OnItem
     }
 
     @Override
-    public void onTrainerClick(Trainer trainerClicked) {
+    public void onTrainerClick(TrainerWithSkills trainerWithSkillsClicked) {
 
-        TrainersFragmentDirections.ActionNavTrainersToNavTrainerInfo actionNavTrainersToNavTrainerInfo = TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo(mBatchAssignment, trainerClicked);
+        TrainersFragmentDirections.ActionNavTrainersToNavTrainerInfo actionNavTrainersToNavTrainerInfo = TrainersFragmentDirections.actionNavTrainersToNavTrainerInfo(mBatchAssignment, trainerWithSkillsClicked.getTrainer());
         actionNavTrainersToNavTrainerInfo.setDisplayButton(true);
         mNavController.navigate(actionNavTrainersToNavTrainerInfo);
 

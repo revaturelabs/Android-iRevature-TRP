@@ -17,20 +17,20 @@ import java.util.Objects;
 public class Skill implements SortedListAdapter.ViewModel, Parcelable {
 
     @NonNull
-    @ColumnInfo(name = "s_name")
+    @ColumnInfo(name = "s_name", index = true)
     @PrimaryKey
-    private String s_name;
+    private String skill;
 
     public Skill() {
     }
 
     @Ignore
-    public Skill(@NonNull String s_name) {
-        this.s_name = s_name;
+    public Skill(@NonNull String skill) {
+        this.skill = skill;
     }
 
     protected Skill(Parcel in) {
-        s_name = Objects.requireNonNull(in.readString());
+        skill = Objects.requireNonNull(in.readString());
     }
 
     public static final Creator<Skill> CREATOR = new Creator<Skill>() {
@@ -46,31 +46,44 @@ public class Skill implements SortedListAdapter.ViewModel, Parcelable {
     };
 
     public String getText() {
-        return s_name;
+        return skill;
     }
 
     @NonNull
     @Override
     public String toString() {
         return "Skill{" +
-                "s_name='" + s_name + '\'' +
+                "skill='" + skill + '\'' +
                 '}';
     }
 
-    public void setS_name(@NonNull String s_name) {
-        this.s_name = s_name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Skill skill1 = (Skill) o;
+        return skill.equals(skill1.skill);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(skill);
+    }
+
+    public void setSkill(@NonNull String skill) {
+        this.skill = skill;
     }
 
     @NonNull
-    public String getS_name() {
-        return s_name;
+    public String getSkill() {
+        return skill;
     }
 
     @Override
     public <T> boolean isSameModelAs(@NonNull T model) {
         if (model instanceof Skill) {
             final Skill other = (Skill) model;
-            return other.s_name.equals(s_name);
+            return other.skill.equals(skill);
         }
         return false;
     }
@@ -79,7 +92,7 @@ public class Skill implements SortedListAdapter.ViewModel, Parcelable {
     public <T> boolean isContentTheSameAs(@NonNull T model) {
         if (model instanceof Skill) {
             final Skill other = (Skill) model;
-            return Objects.equals(s_name, other.s_name);
+            return Objects.equals(skill, other.skill);
         }
         return false;
     }
@@ -91,6 +104,6 @@ public class Skill implements SortedListAdapter.ViewModel, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(s_name);
+        dest.writeString(skill);
     }
 }

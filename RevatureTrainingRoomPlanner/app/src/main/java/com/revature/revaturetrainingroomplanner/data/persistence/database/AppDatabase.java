@@ -12,6 +12,7 @@ import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
+import com.revature.revaturetrainingroomplanner.data.model.TrainerSkillCrossRef;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchAssignmentDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchDAO;
@@ -20,8 +21,9 @@ import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.RoomDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.SkillDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.TrainerDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.TrainerSkillCrossRefDAO;
 
-@Database(entities = {Batch.class, Campus.class, Building.class, com.revature.revaturetrainingroomplanner.data.model.Room.class, Skill.class, Trainer.class, BatchAssignment.class}, version = 1, exportSchema = false)
+@Database(entities = {Batch.class, Campus.class, Building.class, com.revature.revaturetrainingroomplanner.data.model.Room.class, Skill.class, Trainer.class, BatchAssignment.class, TrainerSkillCrossRef.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "revature_training_room_planner_db";
@@ -56,6 +58,8 @@ public abstract class AppDatabase extends RoomDatabase {
             return getTrainerDAO();
         } else if (t.equals(BatchAssignment.class)) {
             return getBatchAssignmentDAO();
+        } else if (t.equals(TrainerSkillCrossRef.class)) {
+            return getTrainerSkillCrossRefDAO();
         }
         return null;
     }
@@ -73,5 +77,7 @@ public abstract class AppDatabase extends RoomDatabase {
     abstract SkillDAO getSkillDAO();
 
     abstract TrainerDAO getTrainerDAO();
+
+    abstract TrainerSkillCrossRefDAO getTrainerSkillCrossRefDAO();
 
 }

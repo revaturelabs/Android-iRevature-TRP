@@ -9,7 +9,10 @@ import com.revature.revaturetrainingroomplanner.data.async.DeleteAllAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
+import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
+import com.revature.revaturetrainingroomplanner.data.model.TrainerSkillCrossRef;
+import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.TrainerDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
@@ -18,6 +21,7 @@ import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
 import com.revature.revaturetrainingroomplanner.data.requests.responses.TrainersGETResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,15 +44,42 @@ public class TrainerRepository {
 
     public void insertTrainerTask(Trainer... trainers) {
         Log.d(TAG, "insertCampusTask: inserting " + trainers.toString());
+
+        List<Skill> skills = new ArrayList<>();
+        List<String> skillList;
+
+        BaseDAO trainerSkillCrossRefDAO = mAppDatabase.getDAO(TrainerSkillCrossRef.class);
+        BaseDAO skillDAO = mAppDatabase.getDAO(Skill.class);
+
+        List<TrainerSkillCrossRef> trainerSkillCrossRefs = new ArrayList<>();
+
+        for (Trainer trainer: trainers) {
+            skillList = trainer.getTrainer_skills();
+
+            for(String skill: skillList) {
+                trainerSkillCrossRefs.add(new TrainerSkillCrossRef(trainer.getTrainer_id(), skill));
+
+                Skill trainer_skill= new Skill(skill);
+
+                if (!skills.contains(trainer_skill)) {
+                    skills.add(trainer_skill);
+                }
+            }
+        }
+
         new InsertAsyncTask(mDao).execute(trainers);
+
+        new InsertAsyncTask<>(skillDAO).execute(skills.toArray(new Skill[0]));
+
+        new InsertAsyncTask(trainerSkillCrossRefDAO).execute(trainerSkillCrossRefs.toArray(new TrainerSkillCrossRef[0]));
     }
 
     public LiveData<Trainer> retrieveByIDTask(int id) {
         return ((TrainerDAO)mDao).getByID(id);
     }
 
-    public LiveData<List<Trainer>> retrieveAllTask() {
-        return mDao.getAll();
+    public LiveData<List<TrainerWithSkills>> retrieveAllTask() {
+        return ((TrainerDAO)mDao).getAllTrainers();
     }
 
     public void updateTask(Trainer... trainers) {
