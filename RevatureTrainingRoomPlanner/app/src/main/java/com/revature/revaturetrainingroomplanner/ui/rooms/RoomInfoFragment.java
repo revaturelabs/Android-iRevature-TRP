@@ -77,17 +77,21 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDateClick(View view, DateData date) {
                 // check if date is already booked
+                LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+                LocalDate endDate = localDate.plusWeeks(12);
+                DateData endDateData = new DateData(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth());
+
                 if (calendarView.getMarkedDates().check(date).getColor() == Color.RED)
-                    Snackbar.make(view, "Date unavailable", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Start date unavailable", Snackbar.LENGTH_SHORT).show();
+                else if (calendarView.getMarkedDates().check(endDateData).getColor() == Color.RED){
+                    Snackbar.make(view, "End date unavailable", Snackbar.LENGTH_SHORT).show();
+                }
                 else {
                     // date format thats in API
                     //String dateStr = date.getMonthString() + date.getDayString() + date.getYear();
                     String dateNiceString = "Start date selected: " + date.getMonthString() + "/" + date.getDayString() + "/" + date.getYear();
                     Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
-                    LocalDate localDate = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
-                    }
+
                     mBatchAssignment.setStart_date(localDate.toString());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         // assume room gets booked for 12 weeks of training
@@ -126,11 +130,18 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
 
         // set everyday available except in the past
         for (int j = 1; j < 32; j++) {
-            for (int k = 1; k < 13; k++){
-                if( (k> date.getMonthValue()) || (k==date.getMonthValue() && j>date.getDayOfMonth()))
+            for (int k = 1; k < 13; k++) {
+                if ((k > date.getMonthValue()) || (k == date.getMonthValue() && j > date.getDayOfMonth())){
                     dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
-                else
+                    dates.add(new DateData(2019, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+
+                }
+                else {
                     dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.RED)));
+                    dates.add(new DateData(2019, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+
+                }
+
             }
         }
 
