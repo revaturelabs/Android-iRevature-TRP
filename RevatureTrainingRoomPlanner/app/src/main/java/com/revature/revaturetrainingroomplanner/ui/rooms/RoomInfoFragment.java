@@ -112,7 +112,6 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
 
     private void markCalender() {
         ArrayList<DateData> dates = new ArrayList<>();
-
         // TODO: filter date marking for room avaliability
         for (int j = 1; j < 32; j++) {
             for (int k = 1; k < 13; k++){
