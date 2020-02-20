@@ -22,7 +22,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RoomInfoFragment extends Fragment implements View.OnClickListener{
+public class RoomInfoFragment extends Fragment implements View.OnClickListener {
 
     private Room mRoomSelected;
     private BatchAssignment mBatchAssignment;
@@ -32,7 +32,6 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
     public RoomInfoFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,14 +46,17 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
         }
         assignBtn.setOnClickListener(this);
 
-        TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
-
-        // TODO: set seats and room confirmation based on room
-        String max = "Max seats: " + "##";
-        maxSeats.setText(max);
-
         mRoomSelected = RoomInfoFragmentArgs.fromBundle(getArguments()).getRoomSelected();
         mBatchAssignment = getArguments().getParcelable("batchAssignment");
+
+
+        TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
+        String max = "Max seats: " + mRoomSelected.getOccupancy();
+        maxSeats.setText(max);
+
+        String roomNumber = "Room Number: " + mRoomSelected.getRoom_name();
+        TextView room = rootView.findViewById(R.id.tv_room_info_header);
+        room.setText(roomNumber);
 
         return rootView;
     }
@@ -62,9 +64,6 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
     }
 
     @Override

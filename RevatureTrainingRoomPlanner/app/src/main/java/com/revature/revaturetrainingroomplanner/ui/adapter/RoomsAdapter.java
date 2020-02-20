@@ -39,14 +39,14 @@ public class RoomsAdapter extends SortedListAdapter<Room> {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
-            mBinding.getRoot().findViewById(R.id.frameLayout_room_row).setOnClickListener(this);
+            mBinding.getRoot().findViewById(R.id.constraintLayout_room_row).setOnClickListener(this);
 
             mBinding.getRoot().setOnClickListener(this);
         }
 
         @Override
         protected void performBind(@NonNull Room item) {
-            mBinding.setModel(item);
+            mBinding.setRoom(item);
         }
 
         @Override

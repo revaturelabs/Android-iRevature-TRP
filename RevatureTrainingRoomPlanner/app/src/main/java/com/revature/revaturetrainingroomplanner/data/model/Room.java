@@ -1,9 +1,11 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -11,8 +13,13 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BuildingRepository;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity(tableName = "rooms")
 public class Room implements SortedListAdapter.ViewModel, Parcelable {

@@ -83,11 +83,8 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mProgressBar = root.findViewById(R.id.progressbar_campuses_with_search_progress);
         root.findViewById(R.id.btn_campuses_with_search_add_fake_data).setOnClickListener(this);
         root.findViewById(R.id.btn_campuses_with_search_clear_fake_data).setOnClickListener(this);
-//        campusImg = root.findViewById(R.id.img_campus_row_icon);
-//        campusImg.setImageResource(R.drawable.tampa);
 
         mAdapter = new CampusesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
-
         mAdapter.addCallback(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());

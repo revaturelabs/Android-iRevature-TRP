@@ -29,6 +29,8 @@
                 android:layout_width="120dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,8 +40,10 @@
                 android:id="@+id/campus_row_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
                 android:text="@{@string/campus_location(model.city, model.state)}"
                 android:textColor="#999999"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@+id/campus_row_campus"
                 app:layout_constraintTop_toBottomOf="@+id/campus_row_campus" />
 
@@ -47,9 +51,12 @@
                 android:id="@+id/campus_row_campus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:padding="3dp"
                 android:text="@{model.campus_name}"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/img_campus_row_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
