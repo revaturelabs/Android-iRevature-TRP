@@ -38,8 +38,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:background="@drawable/login_et_style"
         android:hint="@string/prompt_username"
@@ -81,7 +81,7 @@
         android:id="@+id/btn_login_signin"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/revature_orange"
         android:text="@string/login_signin"
         android:textColor="#FFFFFF"
@@ -96,44 +96,32 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/login_checkbox"
-        android:textColor="#999999"
+        android:textColor="#5F5F5F"
         app:layout_constraintStart_toStartOf="@+id/et_login_password"
         app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
     <ImageView
         android:id="@+id/img_login_pass_icon"
-        android:layout_width="25dp"
+        android:layout_width="20dp"
         android:layout_height="25dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/et_login_password"
         app:layout_constraintEnd_toEndOf="@+id/img_login_user_icon"
         app:layout_constraintStart_toStartOf="@+id/img_login_user_icon"
         app:layout_constraintTop_toTopOf="@+id/et_login_password"
-        app:srcCompat="@drawable/lock"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/lock" />
 
     <ImageView
         android:id="@+id/img_login_user_icon"
-        android:layout_width="25dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="24dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/et_login_email"
-        app:layout_constraintStart_toStartOf="@+id/tv_login_header"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_login_email"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/human" />
-
-    <TextView
-        android:id="@+id/tv_login_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/action_sign_in_short"
-        android:textColor="#999999"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_login_logo" />
 
     <TextView
         android:id="@+id/btn_login_forgot"
@@ -142,7 +130,7 @@
         android:background="@drawable/forgot_pass_button"
         android:clickable="true"
         android:text="@string/login_forgot_password"
-        android:textColor="#999999"
+        android:textColor="#5C5C5C"
         android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/checkbox_login_remember_me"
         app:layout_constraintEnd_toEndOf="@+id/et_login_password" />

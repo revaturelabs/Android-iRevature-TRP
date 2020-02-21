@@ -52,7 +52,7 @@
                 android:gravity="start|top"
                 android:text="@{@string/batches_details_associates(model.associates)}"
                 android:textAlignment="textStart"
-                android:textColor="#999999"
+                android:textColor="@color/dark_gray"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

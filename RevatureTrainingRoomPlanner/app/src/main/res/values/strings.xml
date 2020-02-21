@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">RevatureTrainingRoomPlanner</string>
+    <string name="app_name">RoomPlanner</string>
     <!-- Strings related to login -->
     <string name="prompt_username"> Enter Email</string>
     <string name="prompt_password"> Enter Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome "</string>
     <string name="invalid_username">Not a valid email</string>
     <string name="invalid_password">Password must be 6–12 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -18,11 +18,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_assign_batch">Assign Batch</string>
-    <string name="menu_batches">Select a batch</string>
-    <string name="menu_rooms">Select a room</string>
-    <string name="menu_trainers">Select a trainer</string>
+    <string name="menu_batches">Select a Batch</string>
+    <string name="menu_rooms">Select a Room</string>
+    <string name="menu_trainers">Select a Trainer</string>
     <string name="menu_trainer_info">Trainer Info</string>
-    <string name="menu_lookup">Select a campus</string>
+    <string name="menu_lookup">Select a Campus</string>
     <string name="menu_help">Help</string>
     <string name="menu_logout">Logout</string>
     <string name="email">E-mail</string>
@@ -53,7 +53,7 @@
     <string name="login_checkbox">Keep me logged In</string>
     <string name="room_info_header">ROOM 12</string>
     <string name="menu_rooms_info">Room Info</string>
-    <string name="search_room_hint">Search for a room</string>
+    <string name="search_room_hint">Search for a room number</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="batches_details_associates">Associates: %1$s </string>
@@ -62,8 +62,8 @@
     <string name="room_info_assign_room">Assign Room</string>
     <string name="assign_trainer_submit">Assign to batch</string>
     <string name="submit">submit</string>
-    <string name="select_a_location">Select a location</string>
-    <string name="trainer_title">Select a trainer</string>
+    <string name="select_a_location">Select a Location</string>
+    <string name="trainer_title">Select a Trainer</string>
     <string name="add_fake_data_btn">Add Fake Data</string>
     <string name="clear_fake_data_button">Clear Fake Data</string>
     <string name="campus_title">Select a Campus</string>
@@ -79,5 +79,7 @@
     <string name="room_info_max_seats">Max Seats: ##</string>
     <string name="room_info_calender_header">Room Availability</string>
     <string name="batchinfo_skill">Skill Focus:</string>
+    <string name="app_version">Version 1.0</string>
+    <string name="launch_title">TrainingRoomPlanner</string>
 
 </resources>

@@ -6,6 +6,16 @@
     android:orientation="vertical"
     android:id="@+id/batches_layout">
 
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="0dp"
+        android:layout_height="179dp"
+        android:src="@drawable/rev_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <SearchView
         android:id="@+id/searchview_batches_with_search_search_batch"
         android:layout_width="match_parent"

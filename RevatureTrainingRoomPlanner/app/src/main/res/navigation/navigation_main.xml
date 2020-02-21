@@ -113,8 +113,8 @@
         <fragment
             android:id="@+id/nav_category_lookup"
             android:name="com.revature.revaturetrainingroomplanner.ui.lookup.LookupFragment"
-            tools:layout="@layout/fragment_lookup"
-            android:label="Trainer/Room Lookup">
+            android:label="Lookup"
+            tools:layout="@layout/fragment_lookup">
             <action
                 android:id="@+id/action_nav_category_lookup_to_nav_batch_info"
                 app:destination="@id/nav_batch_info"
