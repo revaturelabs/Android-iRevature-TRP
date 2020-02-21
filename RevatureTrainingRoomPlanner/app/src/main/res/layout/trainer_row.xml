@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="@+id/img_trainer_row_icon" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_room_row_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -75,9 +75,9 @@
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
+                app:layout_constraintEnd_toEndOf="@+id/tv_room_row_label"
                 app:layout_constraintStart_toStartOf="@+id/tv_trainer_row_name"
-                app:layout_constraintTop_toBottomOf="@+id/textView4">
+                app:layout_constraintTop_toBottomOf="@+id/tv_room_row_label">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_trainer_row_skills"

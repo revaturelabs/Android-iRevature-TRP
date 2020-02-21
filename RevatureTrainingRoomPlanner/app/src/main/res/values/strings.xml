@@ -78,5 +78,6 @@
     <string name="room_row_room_header">Room Number:</string>
     <string name="room_info_max_seats">Max Seats: ##</string>
     <string name="room_info_calender_header">Room Availability</string>
+    <string name="batchinfo_skill">Skill Focus:</string>
 
 </resources>

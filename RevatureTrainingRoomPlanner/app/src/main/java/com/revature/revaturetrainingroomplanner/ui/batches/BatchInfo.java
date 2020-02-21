@@ -59,7 +59,7 @@ public class BatchInfo extends Fragment {
         e_date.setText(dateFormat(mBatchSelected.getEnd_date()));
         number.setText(Integer.toString(mBatchSelected.getAssociates()));
         String[] skillArr = mBatchSelected.getBatch_name().split("_");
-        skills.setText(skillArr[skillArr.length-1]);
+        skills.setText(skillArr[skillArr.length-1].toLowerCase());
 
         return view;
 
