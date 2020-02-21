@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
@@ -39,6 +40,9 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
 
     @Ignore
     private List<String> skills_required;
+
+    @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
+    private long campus_id;
 
     @Ignore
     private SkillsAdapter skillsAdapter;
@@ -141,6 +145,14 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
 
     public List<String> getSkills_required() {
         return skills_required;
+    }
+
+    public long getCampus_id() {
+        return campus_id;
+    }
+
+    public void setCampus_id(long campus_id) {
+        this.campus_id = campus_id;
     }
 
     public SkillsAdapter getSkillsAdapter() {

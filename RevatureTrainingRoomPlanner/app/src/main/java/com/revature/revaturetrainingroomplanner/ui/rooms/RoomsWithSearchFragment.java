@@ -56,6 +56,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private RoomRepository mRoomRepository;
     private BatchRepository mBatchSelected;
     private static int counter = 1;
+    private long mCampusSelectedID;
     private TextView campus;
     private TextView location;
 
@@ -187,22 +188,26 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mRoomRepository.retrieveAllTask().observe(getViewLifecycleOwner(), rooms -> {
 
             if (rooms != null) {
-                mModels = rooms;
+                List<Room> filteredRooms = new ArrayList<>();
+
+                for (Room room: rooms) {
+                    if (room.getCampus_id() == mCampusSelectedID) {
+                        filteredRooms.add(room);
+                    }
+                }
 
                 mAdapter.edit()
-                        .replaceAll(rooms)
+                        .replaceAll(filteredRooms)
                         .commit();
+
+                mModels = filteredRooms;
             } else {
                 mModels = new ArrayList<>();
             }
         });
     }
 
-    public void insertFakeData(Room room) {
-        mRoomRepository.insertRoomTask(room);
-    }
-
-    public void clearFakeData() {
-        mRoomRepository.deleteAllTask(new Room(""));
+    public void setCampusIDFilter(long campusIDFilter) {
+        mCampusSelectedID = campusIDFilter;
     }
 }
