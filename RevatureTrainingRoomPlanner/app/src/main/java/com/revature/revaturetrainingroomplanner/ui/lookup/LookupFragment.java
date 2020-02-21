@@ -16,6 +16,9 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
@@ -126,6 +129,17 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
         });
 
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        BatchRepository batchRepository = new BatchRepository(getContext());
+        batchRepository.retrieveBatchesFromAPI();
+        TrainerRepository trainerRepository = new TrainerRepository(getContext());
+        trainerRepository.retrieveTrainersFromAPI();
+        CampusRepository campusRepository = new CampusRepository(getContext());
+        campusRepository.retrieveCampusesFromAPI();
     }
 
     @Override

@@ -17,16 +17,17 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 
 import java.util.Objects;
 
 public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListener {
 
-    private static final long USFID = 1;
-    private static final long UTAID = 2;
-    private static final long WVUID = 3;
-    private static final long RestonID = 4;
+    private static final long USF_ID = 1;
+    private static final long UTA_ID = 2;
+    private static final long WVU_ID = 3;
+    private static final long Reston_ID = 4;
 
     RoomsWithSearchFragment searchFragment;
     private BatchAssignment mBatchAssignment;
@@ -67,6 +68,13 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        CampusRepository campusRepository = new CampusRepository(getContext());
+        campusRepository.retrieveCampusesFromAPI();
+    }
+
+    @Override
     public void onRoomClick(Room roomClicked) {
         RoomsFragmentDirections.ActionNavRoomsToNavRoomsInfo actionNavRoomsToNavRoomsInfo = RoomsFragmentDirections.actionNavRoomsToNavRoomsInfo(mBatchAssignment, roomClicked);
         actionNavRoomsToNavRoomsInfo.setDisplayButton(true);
@@ -75,16 +83,16 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
 
     private String setLocation(long campusID) {
 
-        if (campusID == USFID) {
+        if (campusID == USF_ID) {
             campusImg.setImageResource(R.drawable.tampa);
             return "Tampa, FL";
-        } else if (campusID == UTAID) {
+        } else if (campusID == UTA_ID) {
             campusImg.setImageResource(R.drawable.dallas);
             return "Arlington, TX";
-        } else if (campusID == RestonID) {
+        } else if (campusID == Reston_ID) {
             campusImg.setImageResource(R.drawable.reston);
             return "Reston, VA";
-        } else if (campusID == WVUID) {
+        } else if (campusID == WVU_ID) {
             campusImg.setImageResource(R.drawable.morgantown);
             return "Morgantown, WVU";
         } else {

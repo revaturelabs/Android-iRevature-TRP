@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
@@ -30,6 +31,9 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
     @ColumnInfo(name = "t_location")
     private String trainer_location;
 
+    @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
+    private long campus_id;
+
     @ColumnInfo(name = "t_pic_url")
     private String trainer_profile_picture_url;
 
@@ -47,12 +51,12 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         this.trainer_name = trainer_name;
     }
 
-    @Ignore
     protected Trainer(Parcel in) {
         trainer_id = in.readLong();
         trainer_name = in.readString();
         trainer_email = in.readString();
         trainer_location = in.readString();
+        campus_id = in.readLong();
         trainer_profile_picture_url = in.readString();
         trainer_skills = in.createStringArrayList();
     }
@@ -101,6 +105,14 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         this.trainer_location = trainer_location;
     }
 
+    public long getCampus_id() {
+        return campus_id;
+    }
+
+    public void setCampus_id(long campus_id) {
+        this.campus_id = campus_id;
+    }
+
     public String getTrainer_profile_picture_url() {
         return trainer_profile_picture_url;
     }
@@ -123,10 +135,6 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
 
     public void setSkillsAdapter(SkillsAdapter skillsAdapter) {
         this.skillsAdapter = skillsAdapter;
-    }
-
-    public String getText() {
-        return trainer_name;
     }
 
     @NonNull
@@ -167,6 +175,7 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
         dest.writeString(trainer_name);
         dest.writeString(trainer_email);
         dest.writeString(trainer_location);
+        dest.writeLong(campus_id);
         dest.writeString(trainer_profile_picture_url);
         dest.writeStringList(trainer_skills);
     }

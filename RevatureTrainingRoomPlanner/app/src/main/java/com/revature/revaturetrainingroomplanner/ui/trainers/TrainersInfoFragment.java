@@ -2,14 +2,12 @@ package com.revature.revaturetrainingroomplanner.ui.trainers;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,8 +15,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.revature.revaturetrainingroomplanner.NavigationMainDirections;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Trainer;
@@ -39,7 +38,6 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
     private TextView name;
     private TextView email;
     private TextView location;
-    private TextView skills;
     private Trainer mTrainerSelected;
     private BatchAssignment mBatchAssignment;
 
@@ -55,11 +53,11 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
         assignBtn = rootView.findViewById(R.id.btn_trainer_info_assign);
         ImageView profile = rootView.findViewById(R.id.img_trainers_profile);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recyclerview_trainer_info_skills);
 
         name = rootView.findViewById(R.id.tv_trainers_name);
         email = rootView.findViewById(R.id.tv_trainers_email);
         location = rootView.findViewById(R.id.tv_trainers_location);
-        skills = rootView.findViewById(R.id.tv_trainers_skills);
 
         mBatchAssignment = TrainersInfoFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
         mTrainerSelected = TrainersInfoFragmentArgs.fromBundle(getArguments()).getTrainerSelected();
@@ -71,12 +69,9 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         email.setText(mTrainerSelected.getTrainer_email());
         location.setText(mTrainerSelected.getTrainer_location());
 
-        // Log.d("skill", mTrainerSelected.getTrainer_skills().get(0));
-        String t_skills = "";
-        for(int i=0; i<mTrainerSelected.getSkillsAdapter().getItemCount(); i++){
-            t_skills = t_skills.concat(mTrainerSelected.getSkillsAdapter().getItem(i).getSkill() + "\n");
-        }
-        skills.setText( t_skills );
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mTrainerSelected.getSkillsAdapter());
 
         Picasso.get().load(imgURL).into(profile);
 

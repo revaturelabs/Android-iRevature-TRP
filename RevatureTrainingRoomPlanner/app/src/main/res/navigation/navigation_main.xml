@@ -82,6 +82,9 @@
             <argument
                 android:name="batchAssignment"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
+            <argument
+                android:name="roomSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
         </fragment>
         <fragment
             android:id="@+id/nav_trainer_info"

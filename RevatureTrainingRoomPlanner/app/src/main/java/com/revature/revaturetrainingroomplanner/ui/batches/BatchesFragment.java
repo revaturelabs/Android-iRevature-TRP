@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 
 public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.OnItemListener {
@@ -31,6 +32,13 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mNavController = Navigation.findNavController(view);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        BatchRepository batchRepository = new BatchRepository(getContext());
+        batchRepository.retrieveBatchesFromAPI();
     }
 
     @Override

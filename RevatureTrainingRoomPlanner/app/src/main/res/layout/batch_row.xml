@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -15,9 +14,9 @@
         android:id="@+id/cardview_batch_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="3dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="3dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp">
@@ -79,7 +78,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_batch_info_associates_text"
+                app:layout_constraintEnd_toEndOf="@+id/tv_batch_info_associates_text"
                 app:layout_constraintStart_toStartOf="@+id/tv_batch_info_skills"
                 app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_skills">
 
@@ -88,7 +87,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
+                    android:fadeScrollbars="false"
                     android:focusable="true"
+                    android:scrollbars="horizontal"
+                    android:scrollbarSize="1dp"
                     app:adapter="@{model.skillsAdapter}">
 
 

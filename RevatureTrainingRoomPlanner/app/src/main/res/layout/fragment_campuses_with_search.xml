@@ -21,8 +21,6 @@
         android:id="@+id/framelayout_campuses_holdRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +30,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_campuses_with_search_list_campuses"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:scrollbars="vertical">
 
         </androidx.recyclerview.widget.RecyclerView>
 

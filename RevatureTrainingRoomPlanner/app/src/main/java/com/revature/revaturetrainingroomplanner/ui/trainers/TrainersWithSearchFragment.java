@@ -59,6 +59,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
     private ProgressBar mProgressBar;
     private TrainerRepository mTrainerRepository;
     private static int counter = 1;
+    private long mCampusSelectedID;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -181,18 +182,30 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         mTrainerRepository.retrieveAllTask().observe(getViewLifecycleOwner(), trainers -> {
             if (trainers != null) {
+
+                List<TrainerWithSkills> filteredTrainers = new ArrayList<>();
+
+                Trainer trainer;
+
                 for (TrainerWithSkills trainerWithSkills: trainers) {
-                    Trainer trainer = trainerWithSkills.getTrainer();
-                    trainer.setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                    trainer = trainerWithSkills.getTrainer();
+                    if (trainer.getCampus_id() == mCampusSelectedID) {
+                        trainer.setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                        filteredTrainers.add(trainerWithSkills);
+                    }
                 }
 
                 mTrainerWithSkillsAdapter.edit()
-                        .replaceAll(trainers)
+                        .replaceAll(filteredTrainers)
                         .commit();
-                mTrainerWithSkillsModels = trainers;
+                mTrainerWithSkillsModels = filteredTrainers;
             } else {
                 mTrainerWithSkillsModels = new ArrayList<>();
             }
         });
+    }
+
+    public void setCampusIDFilter(long campusIDFilter) {
+        mCampusSelectedID = campusIDFilter;
     }
 }
