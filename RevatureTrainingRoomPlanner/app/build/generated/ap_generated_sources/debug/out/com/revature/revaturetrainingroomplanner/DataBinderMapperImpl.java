@@ -130,8 +130,8 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
     static {
       sKeys.put(0, "_all");
-      sKeys.put(1, "model");
-      sKeys.put(2, "building");
+      sKeys.put(1, "buildingDAO");
+      sKeys.put(2, "model");
       sKeys.put(3, "room");
       sKeys.put(4, "SkillAdapter");
     }

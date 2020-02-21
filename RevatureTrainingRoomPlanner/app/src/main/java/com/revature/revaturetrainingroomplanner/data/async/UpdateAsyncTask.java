@@ -7,7 +7,7 @@ import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 
 public class UpdateAsyncTask<T, DAOT extends BaseDAO<T>> extends AsyncTask<T, Void, Void> {
 
-    private static final String TAG = "InsertAsyncTask";
+    private static final String TAG = "UpdateAsyncTask";
 
     private DAOT mDAO;
 

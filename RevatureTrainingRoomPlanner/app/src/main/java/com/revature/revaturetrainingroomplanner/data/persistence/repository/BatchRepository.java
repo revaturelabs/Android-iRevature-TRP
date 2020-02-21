@@ -10,6 +10,9 @@ import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.model.BatchSkillCrossRef;
+import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
@@ -18,6 +21,7 @@ import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
 import com.revature.revaturetrainingroomplanner.data.requests.responses.BatchesGETResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,16 +43,43 @@ public class BatchRepository {
 
     public void insertBatchTask(Batch... batches) {
         Log.d(TAG, "insertCampusTask: inserting " + batches.toString());
+
+        List<Skill> skills = new ArrayList<>();
+        List<String> skillList;
+
+        BaseDAO batchSkillCrossRefDAO = mAppDatabase.getDAO(BatchSkillCrossRef.class);
+        BaseDAO skillDAO = mAppDatabase.getDAO(Skill.class);
+
+        List<BatchSkillCrossRef> batchSkillCrossRefs = new ArrayList<>();
+
+        for (Batch batch: batches) {
+            skillList = batch.getSkills_required();
+
+            for(String skill: skillList) {
+                batchSkillCrossRefs.add(new BatchSkillCrossRef(batch.getBatch_id(), skill));
+
+                Skill batch_skill= new Skill(skill);
+
+                if (!skills.contains(batch_skill)) {
+                    skills.add(batch_skill);
+                }
+            }
+        }
+
         new InsertAsyncTask(mDao).execute(batches);
+
+        new InsertAsyncTask<>(skillDAO).execute(skills.toArray(new Skill[0]));
+
+        new InsertAsyncTask(batchSkillCrossRefDAO).execute(batchSkillCrossRefs.toArray(new BatchSkillCrossRef[0]));
     }
 
     public LiveData<Batch> retrieveByIDTask(int id) {
         return ((BatchDAO)mDao).getByID(id);
     }
 
-    public LiveData<List<Batch>> retrieveAllTask() {
+    public LiveData<List<BatchWithSkills>> retrieveAllTask() {
         Log.d(TAG, "retrieveAllTask: retrieved all batches");
-        return mDao.getAll();
+        return ((BatchDAO)mDao).getAllBatches();
     }
 
     public void updateTask(Batch... batches) {
@@ -78,9 +109,8 @@ public class BatchRepository {
                     Log.d(TAG, "onResponse: " + Objects.requireNonNull(response.body()).toString());
 
                     List<Batch>  batches = response.body().getBatches();
-                    insertBatchTask(batches.toArray(new Batch[0]));
-                    updateTask(batches.toArray(new Batch[0]));
 
+                    insertBatchTask(batches.toArray(new Batch[0]));
                 } else {
                     try {
                         Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());

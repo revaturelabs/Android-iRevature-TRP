@@ -103,26 +103,34 @@ public class CampusRepository {
 
                             if (buildings != null) {
 
-                                buildingRepository.insertBuildingTask(buildings.toArray(new Building[0]));
-
                                 for (Building building : buildings) {
 
+                                    building.setCampus_id(campus.getCampus_id());
                                     rooms = building.getRooms();
 
                                     if (rooms != null) {
 
-                                        roomRepository.insertRoomTask(rooms.toArray(new Room[0]));
-
                                         for (Room room : rooms) {
 
+                                            room.setBuilding_id(building.getBuilding_id());
                                             batchAssignments = room.getBatches_assigned();
 
                                             if (batchAssignments != null) {
+
+                                                for (BatchAssignment batchAssignment: batchAssignments) {
+                                                    batchAssignment.setRoom_id(room.getRoom_id());
+                                                }
+
                                                 batchAssignmentRepository.insertBatchAssignmentTask(batchAssignments.toArray(new BatchAssignment[0]));
                                             }
                                         }
+
+                                        roomRepository.insertRoomTask(rooms.toArray(new Room[0]));
+
                                     }
                                 }
+
+                                buildingRepository.insertBuildingTask(buildings.toArray(new Building[0]));
                             }
                         }
                     } else {

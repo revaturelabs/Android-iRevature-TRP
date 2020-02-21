@@ -3,7 +3,6 @@ package com.revature.revaturetrainingroomplanner.ui.campuses;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback, View.OnClickListener {
+public class CampusesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     private static final String[] CAMPUSES = new String[]{
             "USF",
@@ -81,8 +80,6 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         mRecyclerView = root.findViewById(R.id.recyclerview_campuses_with_search_list_campuses);
         mSearchView = root.findViewById(R.id.searchview_campuses_with_search_search_campus);
         mProgressBar = root.findViewById(R.id.progressbar_campuses_with_search_progress);
-        root.findViewById(R.id.btn_campuses_with_search_add_fake_data).setOnClickListener(this);
-        root.findViewById(R.id.btn_campuses_with_search_clear_fake_data).setOnClickListener(this);
 
         mAdapter = new CampusesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
         mAdapter.addCallback(this);
@@ -164,26 +161,6 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
         });
         mAnimator.start();
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_campuses_with_search_add_fake_data: {
-                insertFakeData(new Campus("Fake Campus #" + counter));
-                counter++;
-            }
-            break;
-
-            case R.id.btn_campuses_with_search_clear_fake_data: {
-                clearFakeData();
-            }
-            break;
-
-            default:
-
-        }
-    }
-
 
     private static List<Campus> filter(List<Campus> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();

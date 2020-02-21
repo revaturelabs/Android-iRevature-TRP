@@ -22,13 +22,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
 import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
 import com.revature.revaturetrainingroomplanner.data.requests.responses.BatchesGETResponse;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
-import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback, View.OnClickListener {
+public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     /* Constants */
     private static final String[] BATCHES = new String[]{
@@ -51,7 +54,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     };
 
 
-    private static final Comparator<Batch> ALPHABETICAL_COMPARATOR = (a, b) -> a.getBatch_name().compareTo(b.getBatch_name());
+    private static final Comparator<BatchWithSkills> ALPHABETICAL_COMPARATOR = (a, b) -> a.getBatch().getBatch_name().compareTo(b.getBatch().getBatch_name());
+    private static final Comparator<Skill> ALPHABETICAL_COMPARATOR_SKILLS = (a, b) -> a.getSkill().compareTo(b.getSkill());
 
     private static final String TAG = "BatchesSearchFragment";
 
@@ -63,8 +67,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
     /* Variables */
     private BatchesViewModel batchesViewModel;
-    private List<Batch> mModels;
-    private BatchesAdapter mAdapter;
+    private List<BatchWithSkills> mModels;
+    private BatchWithSkillsAdapter mAdapter;
     private Animator mAnimator;
     private BatchRepository mBatchesRepository;
     private static int counter = 1;
@@ -84,18 +88,13 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
 
-        mBinding.getRoot().setOnClickListener(this);
-
         OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_batches_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
         mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
-        root.findViewById(R.id.btn_batches_with_search_add_fake_data).setOnClickListener(this);
-        root.findViewById(R.id.btn_batches_with_search_clear_fake_data).setOnClickListener(this);
-
-        mAdapter = new BatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
+        mAdapter = new BatchWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mAdapter.addCallback(this);
 
@@ -114,7 +113,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<Batch> filteredModelList = filter(mModels, query);
+                final List<BatchWithSkills> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -178,32 +177,12 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         mAnimator.start();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_batches_with_search_add_fake_data: {
-                insertFakeData(new Batch("Fake Batch #" + counter));
-                counter++;
-                testRetrofitRequest();
-            }
-            break;
-
-            case R.id.btn_batches_with_search_clear_fake_data: {
-                clearFakeData();
-            }
-            break;
-
-            default:
-
-        }
-    }
-
-    private static List<Batch> filter(List<Batch> models, String query) {
+    private static List<BatchWithSkills> filter(List<BatchWithSkills> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<Batch> filteredModelList = new ArrayList<>();
-        for (Batch model : models) {
-            final String text = model.getBatch_name().toLowerCase();
+        final List<BatchWithSkills> filteredModelList = new ArrayList<>();
+        for (BatchWithSkills model : models) {
+            final String text = model.getBatch().getBatch_name().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
             }
@@ -215,10 +194,16 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         mBatchesRepository.retrieveAllTask().observe(getViewLifecycleOwner(), batches -> {
             if (batches != null) {
-                mModels = batches;
+                for (BatchWithSkills batchWithSkills: batches) {
+                    Batch batch = batchWithSkills.getBatch();
+                    batch.setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                }
+
                 mAdapter.edit()
                         .replaceAll(batches)
                         .commit();
+
+                mModels = batches;
 
                 Log.d(TAG, "onChanged: " + mModels.size());
             } else {

@@ -19,7 +19,7 @@ public interface BuildingDAO extends BaseDAO<Building> {
 
     @Transaction
     @Query("SELECT * FROM buildings WHERE bu_id = :id")
-    LiveData<Building> getByID(int id);
+    Building getByID(long id);
 
     @Override
     @Transaction

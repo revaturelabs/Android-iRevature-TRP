@@ -13,10 +13,10 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.tabs.TabLayout;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.Batch;
+import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
-import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragmentDirections;
@@ -30,7 +30,7 @@ import static com.revature.revaturetrainingroomplanner.R.id.navhost_lookup_searc
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener, BatchesAdapter.OnItemListener, RoomsAdapter.OnItemListener {
+public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener, BatchWithSkillsAdapter.OnItemListener, RoomsAdapter.OnItemListener {
 
     private final int TRAINER_TAB_LOCATION = 0;
     private final int BATCH_TAB_LOCATION = 1;
@@ -142,8 +142,8 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
     }
 
     @Override
-    public void onBatchClick(Batch batch) {
-        LookupFragmentDirections.ActionNavCategoryLookupToNavBatchInfo actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavCategoryLookupToNavBatchInfo(batch);
+    public void onBatchClick(BatchWithSkills batchWithSkills) {
+        LookupFragmentDirections.ActionNavCategoryLookupToNavBatchInfo actionNavLookupToNavBatchInfo = LookupFragmentDirections.actionNavCategoryLookupToNavBatchInfo(batchWithSkills.getBatch());
         mMainNavController.navigate(actionNavLookupToNavBatchInfo);
         mTabLayout.selectTab(mTabLayout.getTabAt(TRAINER_TAB_LOCATION));
     }

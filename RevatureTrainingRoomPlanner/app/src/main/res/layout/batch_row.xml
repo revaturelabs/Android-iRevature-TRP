@@ -13,7 +13,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_batch_row"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
         android:layout_marginTop="3dp"
@@ -29,7 +29,6 @@
             android:background="?attr/selectableItemBackground"
             android:backgroundTint="@android:color/background_light"
             android:clickable="true"
-            android:paddingBottom="10dp"
             android:focusable="true">
 
             <TextView
@@ -72,13 +71,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_batch_row" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_batch_info_associates_text"
                 app:layout_constraintStart_toStartOf="@+id/tv_batch_info_skills"
                 app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_skills">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_batch_row_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:adapter="@{model.skillsAdapter}">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

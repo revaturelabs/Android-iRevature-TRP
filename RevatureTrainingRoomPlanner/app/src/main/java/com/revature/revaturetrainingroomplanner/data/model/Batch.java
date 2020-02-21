@@ -10,6 +10,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 
 import java.util.List;
 
@@ -38,6 +39,9 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
 
     @Ignore
     private List<String> skills_required;
+
+    @Ignore
+    private SkillsAdapter skillsAdapter;
 
     public Batch() {
     }
@@ -137,6 +141,14 @@ Batch implements SortedListAdapter.ViewModel, Parcelable {
 
     public List<String> getSkills_required() {
         return skills_required;
+    }
+
+    public SkillsAdapter getSkillsAdapter() {
+        return skillsAdapter;
+    }
+
+    public void setSkillsAdapter(SkillsAdapter skillsAdapter) {
+        this.skillsAdapter = skillsAdapter;
     }
 
     public void setSkills_required(List<String> skills_required) {
