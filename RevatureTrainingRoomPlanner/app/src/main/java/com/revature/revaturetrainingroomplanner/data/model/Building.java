@@ -25,7 +25,7 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
     private String building_name;
 
     @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
-    private int campus_id;
+    private long campus_id;
 
     @Ignore
     private List<Room> rooms;
@@ -71,11 +71,11 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
         this.building_name = building_name;
     }
 
-    public int getCampus_id() {
+    public long getCampus_id() {
         return campus_id;
     }
 
-    public void setCampus_id(int campus_id) {
+    public void setCampus_id(long campus_id) {
         this.campus_id = campus_id;
     }
 
@@ -117,6 +117,6 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(building_id);
         dest.writeString(building_name);
-        dest.writeInt(campus_id);
+        dest.writeLong(campus_id);
     }
 }

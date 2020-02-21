@@ -15,36 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></SearchView>
 
-    <Button
-        android:id="@+id/btn_rooms_with_search_add_fake_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/assign_button_style"
-        android:text="@string/add_fake_data_btn"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_rooms_with_search_clear_fake_data"
-        app:layout_constraintEnd_toEndOf="@+id/btn_rooms_with_search_clear_fake_data"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_rooms_with_search_clear_fake_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/assign_button_style"
-        android:text="@string/clear_fake_data_button"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_select_building_campus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"

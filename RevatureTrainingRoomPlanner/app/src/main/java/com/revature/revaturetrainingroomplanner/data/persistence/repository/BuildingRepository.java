@@ -11,7 +11,6 @@ import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
-import com.revature.revaturetrainingroomplanner.data.persistence.dao.BuildingDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 
 import java.util.List;
@@ -31,10 +30,6 @@ public class BuildingRepository {
     public void insertBuildingTask(Building... buildings) {
         Log.d(TAG, "insertCampusTask: inserting " + buildings.toString());
         new InsertAsyncTask(mDao).execute(buildings);
-    }
-
-    public LiveData<Building> retrieveByIDTask(int id) {
-        return ((BuildingDAO)mDao).getByID(id);
     }
 
     public LiveData<List<Building>> retrieveAllTask() {

@@ -10,15 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
 import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 
 import java.util.Comparator;
 
 public class TrainerWithSkillsAdapter extends SortedListAdapter<TrainerWithSkills> {
-
-    private static final Comparator<Skill> ALPHABETICAL_COMPARATOR_SKILLS = (a, b) -> a.getText().compareTo(b.getText());
 
     private Context mContext;
     private OnItemListener mOnItemListener;

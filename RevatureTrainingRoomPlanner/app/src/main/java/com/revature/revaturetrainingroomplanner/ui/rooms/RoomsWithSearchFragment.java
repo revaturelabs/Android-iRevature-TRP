@@ -23,13 +23,10 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.RoomRepository;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter.OnItemListener;
-import com.revature.revaturetrainingroomplanner.ui.campuses.CampusesFragment;
-import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersInfoFragmentArgs;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -38,7 +35,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback, View.OnClickListener {
+public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     private static final String[] ROOMS = new String[]{
             "Phirom",
@@ -81,8 +78,6 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);
         mSearchView = root.findViewById(R.id.searchview_rooms_with_search_search_room);
         mProgressBar = root.findViewById(R.id.progressbar_rooms_with_search_progress);
-        root.findViewById(R.id.btn_rooms_with_search_add_fake_data).setOnClickListener(this);
-        root.findViewById(R.id.btn_rooms_with_search_clear_fake_data).setOnClickListener(this);
         campus = root.findViewById(R.id.tv_select_building_campus);
         location = root.findViewById(R.id.tv_select_building_campus_location);
 
@@ -168,25 +163,6 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mAnimator.start();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_rooms_with_search_add_fake_data: {
-                insertFakeData(new Room("Fake Room #" + counter));
-                counter++;
-            }
-            break;
-
-            case R.id.btn_rooms_with_search_clear_fake_data: {
-                clearFakeData();
-            }
-            break;
-
-            default:
-
-        }
-    }
-
     private static List<Room> filter(List<Room> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
@@ -209,8 +185,10 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private void retrieveRooms() {
 
         mRoomRepository.retrieveAllTask().observe(getViewLifecycleOwner(), rooms -> {
+
             if (rooms != null) {
                 mModels = rooms;
+
                 mAdapter.edit()
                         .replaceAll(rooms)
                         .commit();

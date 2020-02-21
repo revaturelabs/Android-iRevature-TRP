@@ -5,31 +5,31 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Index;
 
-@Entity(indices = {@Index("t_id"), @Index("s_name")}, primaryKeys = {"t_id", "s_name"})
+@Entity(indices = {@Index("ba_id"), @Index("s_name")}, primaryKeys = {"ba_id", "s_name"})
 public class
-TrainerSkillCrossRef {
+BatchSkillCrossRef {
 
-    private long t_id;
+    private long ba_id;
 
      @NonNull
     private String s_name;
 
 
-    public TrainerSkillCrossRef() {
+    public BatchSkillCrossRef() {
     }
 
     @Ignore
-    public TrainerSkillCrossRef(long t_id, @NonNull String s_name) {
-        this.t_id = t_id;
+    public BatchSkillCrossRef(long t_id, @NonNull String s_name) {
+        this.ba_id = t_id;
         this.s_name = s_name;
     }
 
-    public long getT_id() {
-        return t_id;
+    public long getBa_id() {
+        return ba_id;
     }
 
-    public void setT_id(long t_id) {
-        this.t_id = t_id;
+    public void setBa_id(long ba_id) {
+        this.ba_id = ba_id;
     }
 
     @NonNull
@@ -44,8 +44,8 @@ TrainerSkillCrossRef {
     @NonNull
     @Override
     public String toString() {
-        return "TrainerSkillCrossRef{" +
-                "t_id=" + t_id +
+        return "BatchSkillCrossRef{" +
+                "ba_id=" + ba_id +
                 ", s_name='" + s_name + '\'' +
                 '}';
     }

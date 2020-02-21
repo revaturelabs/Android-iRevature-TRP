@@ -12,11 +12,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
-import com.revature.revaturetrainingroomplanner.ui.adapter.BatchesAdapter;
+import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 
-public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemListener {
+public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.OnItemListener {
 
     private NavController mNavController;
 
@@ -34,12 +34,12 @@ public class BatchesFragment extends Fragment implements BatchesAdapter.OnItemLi
     }
 
     @Override
-    public void onBatchClick(Batch batch) {
+    public void onBatchClick(BatchWithSkills batchWithSkills) {
         BatchAssignment batchAssignment = new BatchAssignment();
 
-        batchAssignment.setBatch_id(batch.getBatch_id());
+        batchAssignment.setBatch_id(batchWithSkills.getBatch().getBatch_id());
 
-        BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment, batch);
+        BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment, batchWithSkills.getBatch());
         mNavController.navigate(actionNavBatchesToNavRooms);
     }
 

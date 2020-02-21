@@ -1,11 +1,9 @@
 package com.revature.revaturetrainingroomplanner.data.model;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -13,13 +11,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
-import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
-import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.BuildingRepository;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity(tableName = "rooms")
 public class Room implements SortedListAdapter.ViewModel, Parcelable {
@@ -35,7 +28,10 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
     private int occupancy;
 
     @ForeignKey(entity = Building.class, parentColumns = "bu_id", childColumns = "bu_id")
-    private int building_id;
+    private long building_id;
+
+    @Ignore
+    private String building_name;
 
     @Ignore
     private List<BatchAssignment> batches_assigned;
@@ -49,7 +45,7 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
     }
 
     @Ignore
-    public Room(long room_id, String room_name, int occupancy, int building_id, List<BatchAssignment> batchAssignments) {
+    public Room(long room_id, String room_name, int occupancy, long building_id, List<BatchAssignment> batchAssignments) {
         this.room_id = room_id;
         this.room_name = room_name;
         this.occupancy = occupancy;
@@ -93,7 +89,6 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
         return room_name;
     }
 
-
     public int getOccupancy() {
         return occupancy;
     }
@@ -102,21 +97,24 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
         this.occupancy = occupancy;
     }
 
-    public int getBuilding_id() {
+    public long getBuilding_id() {
         return building_id;
     }
 
-    public String getBuilding_idString() {
-        return Integer.toString(building_id);
-    }
-
-
-    public void setBuilding_id(int building_id) {
+    public void setBuilding_id(long building_id) {
         this.building_id = building_id;
     }
 
     public List<BatchAssignment> getBatches_assigned() {
         return batches_assigned;
+    }
+
+    public String getBuilding_name() {
+        return building_name;
+    }
+
+    public void setBuilding_name(String building_name) {
+        this.building_name = building_name;
     }
 
     public void setBatches_assigned(List<BatchAssignment> batches_assigned) {
@@ -167,7 +165,7 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
         dest.writeLong(room_id);
         dest.writeString(room_name);
         dest.writeInt(occupancy);
-        dest.writeInt(building_id);
+        dest.writeLong(building_id);
         dest.writeTypedList(batches_assigned);
     }
 }
