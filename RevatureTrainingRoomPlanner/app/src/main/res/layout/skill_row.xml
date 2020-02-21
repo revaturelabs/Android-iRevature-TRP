@@ -13,22 +13,34 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp">
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/skill_row"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/revature_orange"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textiew_skill_row_skill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{model.skill}"
+                android:layout_gravity="end"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:clickable="true"
-                android:focusable="true"/>
+                android:focusable="true"
+                android:text="@{model.skill}"
+                android:textColor="@color/design_default_color_background" />
 
-        </FrameLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </layout>

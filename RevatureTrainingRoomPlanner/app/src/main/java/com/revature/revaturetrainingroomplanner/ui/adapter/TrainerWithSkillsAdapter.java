@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
@@ -46,7 +46,10 @@ public class TrainerWithSkillsAdapter extends SortedListAdapter<TrainerWithSkill
         TrainerWithSkillsViewHolder(TrainerRowBinding trainerRowBinding, Context context, OnItemListener onItemListener) {
             super(trainerRowBinding.getRoot());
             mTrainerRowBinding = trainerRowBinding;
-            mTrainerRowBinding.recyclerviewTrainerRowSkills.setLayoutManager(new GridLayoutManager(context, 3));
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            layoutManager.setStackFromEnd(true);
+            mTrainerRowBinding.recyclerviewTrainerRowSkills.setLayoutManager(layoutManager);
             mOnItemListener = onItemListener;
             mTrainerRowBinding.getRoot().findViewById(R.id.framelayout_trainer_row).setOnClickListener(this);
 
