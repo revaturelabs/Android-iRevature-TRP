@@ -130,7 +130,7 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(v -> {
 
             String email = usernameEditText.getText().toString();
-            if(isValidEmail(email)){
+            if(email.isEmpty() || !isValidEmail(email)){
                 usernameEditText.setError("Invalid Email");
             }
             else {
@@ -171,7 +171,7 @@ public class LoginFragment extends Fragment {
     }
 
     public final static boolean isValidEmail(CharSequence target) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches() && (!target.toString().isEmpty());
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
 }
