@@ -28,9 +28,9 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     private RoomsViewModel roomsViewModel;
     private NavController mNavController;
     private Batch mBatchSelected;
-
-    TextView campus, location;
-    ImageView campusImg;
+    private String batchCampus;
+    private TextView campus, location;
+    private ImageView campusImg;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,9 +39,7 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
         View fragment = root.findViewById(R.id.fragment_rooms_search_fragment);
 
         mBatchSelected = RoomsFragmentArgs.fromBundle(getArguments()).getBatchSelected();
-        String batchCampus = mBatchSelected.getBatch_name().substring(3,6);
-        if(batchCampus.equals("Res"))
-            batchCampus = "DC";
+        batchCampus = mBatchSelected.getBatch_name().substring(3,6);
 
         campus = fragment.findViewById(R.id.tv_select_building_campus);
         location = fragment.findViewById(R.id.tv_select_building_campus_location);
@@ -69,7 +67,8 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     }
 
     private String setLocation(String campus) {
-
+        if(batchCampus.equals("Res"))
+            batchCampus = "DC";
         switch (campus) {
             case "USF":
                 campusImg.setImageResource(R.drawable.tampa);

@@ -57,6 +57,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         calendarView = rootView.findViewById(R.id.calendarView);
         assignBtn = rootView.findViewById(R.id.btn_room_info_assign);
         if(!RoomInfoFragmentArgs.fromBundle(getArguments()).getDisplayButton()) {
+            calendarView.setClickable(false);
             assignBtn.setVisibility(View.GONE);
         }
         assignBtn.setOnClickListener(this);
@@ -73,35 +74,35 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         TextView room = rootView.findViewById(R.id.tv_room_info_header);
         room.setText(roomNumber);
 
-        calendarView.setOnDateClickListener(new OnDateClickListener() {
-            @Override
-            public void onDateClick(View view, DateData date) {
-                // check if date is already booked
-                LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
-                LocalDate endDate = localDate.plusWeeks(12);
-                DateData endDateData = new DateData(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth());
+        if(mBatchAssignment!=null) {
+            calendarView.setOnDateClickListener(new OnDateClickListener() {
+                @Override
+                public void onDateClick(View view, DateData date) {
+                    // check if date is already booked
+                    LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+                    LocalDate endDate = localDate.plusWeeks(12);
+                    DateData endDateData = new DateData(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth());
 
-                if (calendarView.getMarkedDates().check(date).getColor() == Color.RED)
-                    Snackbar.make(view, "Start date unavailable", Snackbar.LENGTH_SHORT).show();
-                else if (calendarView.getMarkedDates().check(endDateData).getColor() == Color.RED){
-                    Snackbar.make(view, "End date unavailable", Snackbar.LENGTH_SHORT).show();
-                }
-                else {
-                    // date format thats in API
-                    //String dateStr = date.getMonthString() + date.getDayString() + date.getYear();
-                    String dateNiceString = "Start date selected: " + date.getMonthString() + "/" + date.getDayString() + "/" + date.getYear();
-                    Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
+                    if (calendarView.getMarkedDates().check(date).getColor() == Color.RED)
+                        Snackbar.make(view, "Start date unavailable", Snackbar.LENGTH_SHORT).show();
+                    else if (calendarView.getMarkedDates().check(endDateData).getColor() == Color.RED) {
+                        Snackbar.make(view, "End date unavailable", Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        // date format thats in API
+                        //String dateStr = date.getMonthString() + date.getDayString() + date.getYear();
+                        String dateNiceString = "Start date selected: " + date.getMonthString() + "/" + date.getDayString() + "/" + date.getYear();
+                        Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
 
-                    mBatchAssignment.setStart_date(localDate.toString());
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        // assume room gets booked for 12 weeks of training
-                        localDate = localDate.plusWeeks(12);
+                        mBatchAssignment.setStart_date(localDate.toString());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            // assume room gets booked for 12 weeks of training
+                            localDate = localDate.plusWeeks(12);
+                        }
+                        mBatchAssignment.setEnd_date(localDate.toString());
                     }
-                    mBatchAssignment.setEnd_date(localDate.toString());
                 }
-            }
-        });
-
+            });
+        }
         markCalender();
 
         return rootView;
