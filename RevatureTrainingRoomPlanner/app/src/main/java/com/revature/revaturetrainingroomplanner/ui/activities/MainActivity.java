@@ -137,11 +137,12 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
+        // don't need to know internet connectiong right now
         if(isConnected){
-            Toast.makeText(this, "CONNECTED TO INTERNET!!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "CONNECTED TO INTERNET!!", Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(this, "NOOOO INTERNET!!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "NOOOO INTERNET!!", Toast.LENGTH_LONG).show();
         }
 
     }

@@ -71,7 +71,6 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         email.setText(mTrainerSelected.getTrainer_email());
         location.setText(mTrainerSelected.getTrainer_location());
 
-        // Log.d("skill", mTrainerSelected.getTrainer_skills().get(0));
         String t_skills = "";
         for(int i=0; i<mTrainerSelected.getSkillsAdapter().getItemCount(); i++){
             t_skills = t_skills.concat(mTrainerSelected.getSkillsAdapter().getItem(i).getSkill() + "\n");
@@ -105,8 +104,8 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
         builder.setCancelable(true);
-        builder.setTitle("Batch Assignment Created");
-        builder.setPositiveButton("Okay", (dialog, which) -> { });
+        builder.setTitle("Batch assigned successfully");
+        builder.setPositiveButton("ok", (dialog, which) -> { });
         AlertDialog dialog = builder.create();
         dialog.show();
 

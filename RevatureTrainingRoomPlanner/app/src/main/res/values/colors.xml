@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#F26925</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#1B80D8</color>
     <color name="revature_orange">#F26925</color>
     <color name="app_background">#D3D2D2</color>
+    <color name="dark_gray">#525252</color>
 </resources>
