@@ -6,12 +6,14 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 
 @Entity(indices = {@Index("t_id"), @Index("s_name")}, primaryKeys = {"t_id", "s_name"})
-public class TrainerSkillCrossRef {
+public class
+TrainerSkillCrossRef {
 
     private long t_id;
 
     @NonNull
     private String s_name;
+
 
     public TrainerSkillCrossRef() {
     }

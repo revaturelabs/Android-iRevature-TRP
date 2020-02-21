@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -46,6 +47,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,19 +76,29 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         calendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(View view, DateData date) {
+                // check if date is already booked
+                LocalDate localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+                LocalDate endDate = localDate.plusWeeks(12);
+                DateData endDateData = new DateData(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth());
 
-                String dateStr = date.getMonthString()+date.getDayString()+date.getYear();
-                String dateNiceString = "Start date selected: " + date.getMonthString()+"/"+date.getDayString()+"/"+date.getYear();
-                Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
-                LocalDate localDate = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    localDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+                if (calendarView.getMarkedDates().check(date).getColor() == Color.RED)
+                    Snackbar.make(view, "Start date unavailable", Snackbar.LENGTH_SHORT).show();
+                else if (calendarView.getMarkedDates().check(endDateData).getColor() == Color.RED){
+                    Snackbar.make(view, "End date unavailable", Snackbar.LENGTH_SHORT).show();
                 }
-                mBatchAssignment.setStart_date(localDate.toString());
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    localDate = localDate.plusWeeks(10);
+                else {
+                    // date format thats in API
+                    //String dateStr = date.getMonthString() + date.getDayString() + date.getYear();
+                    String dateNiceString = "Start date selected: " + date.getMonthString() + "/" + date.getDayString() + "/" + date.getYear();
+                    Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
+
+                    mBatchAssignment.setStart_date(localDate.toString());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        // assume room gets booked for 12 weeks of training
+                        localDate = localDate.plusWeeks(12);
+                    }
+                    mBatchAssignment.setEnd_date(localDate.toString());
                 }
-                mBatchAssignment.setEnd_date(localDate.toString());
             }
         });
 
@@ -110,15 +122,26 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         mNavController.navigate(R.id.action_nav_room_info_to_nav_trainers, args);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void markCalender() {
         ArrayList<DateData> dates = new ArrayList<>();
-        // TODO: filter date marking for room avaliability
+        // TODO: filter date marking for room availability
+        LocalDate date = LocalDate.now();
+
+        // set everyday available except in the past
         for (int j = 1; j < 32; j++) {
-            for (int k = 1; k < 13; k++){
-                if(k%2==0)
+            for (int k = 1; k < 13; k++) {
+                if ((k > date.getMonthValue()) || (k == date.getMonthValue() && j > date.getDayOfMonth())){
                     dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
-                else
+                    dates.add(new DateData(2019, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+
+                }
+                else {
                     dates.add(new DateData(2020, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.RED)));
+                    dates.add(new DateData(2019, k, j).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+
+                }
+
             }
         }
 

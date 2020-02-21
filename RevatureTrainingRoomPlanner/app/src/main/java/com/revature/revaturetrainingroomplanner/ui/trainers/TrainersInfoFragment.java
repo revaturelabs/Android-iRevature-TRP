@@ -102,7 +102,9 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        Toast.makeText(getContext(), "Batch" + mBatchAssignment.toString() + "assigned", Toast.LENGTH_LONG).show();
+//        For developing
+//        Toast.makeText(getContext(), "Batch" + mBatchAssignment.toString() + "assigned", Toast.LENGTH_LONG).show();
+
         String filename = "BatchAssignment";
         String fileContents = mBatchAssignment.toString();
         try (FileOutputStream fos = getActivity().getApplicationContext().openFileOutput(filename, Context.MODE_APPEND)) {
