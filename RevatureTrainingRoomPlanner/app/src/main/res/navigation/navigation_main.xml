@@ -63,7 +63,7 @@
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
             <argument
                 android:name="roomSelected"
-                app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments" />
 
         </fragment>
         <fragment
@@ -84,7 +84,7 @@
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment" />
             <argument
                 android:name="roomSelected"
-                app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments" />
         </fragment>
         <fragment
             android:id="@+id/nav_trainer_info"
@@ -151,7 +151,7 @@
                 android:defaultValue="false"
                 app:argType="boolean" />
             <argument android:name="roomSelected"
-                app:argType="com.revature.revaturetrainingroomplanner.data.model.Room" />
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments" />
             <argument
                 android:name="batchAssignment"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment"

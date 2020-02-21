@@ -16,13 +16,13 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
-import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
-import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 
 import java.util.Objects;
 
-public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListener {
+public class RoomsFragment extends Fragment implements RoomsWithBatchAssignmentsAdapter.OnItemListener {
 
     private static final long USF_ID = 1;
     private static final long UTA_ID = 2;
@@ -75,7 +75,7 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
     }
 
     @Override
-    public void onRoomClick(Room roomClicked) {
+    public void onRoomClick(RoomWithBatchAssignments roomClicked) {
         RoomsFragmentDirections.ActionNavRoomsToNavRoomsInfo actionNavRoomsToNavRoomsInfo = RoomsFragmentDirections.actionNavRoomsToNavRoomsInfo(mBatchAssignment, roomClicked);
         actionNavRoomsToNavRoomsInfo.setDisplayButton(true);
         mNavController.navigate(actionNavRoomsToNavRoomsInfo);

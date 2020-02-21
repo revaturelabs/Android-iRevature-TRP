@@ -10,6 +10,7 @@ import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.RoomDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 
@@ -37,8 +38,8 @@ public class RoomRepository {
         return mDao.getByID(id);
     }
 
-    public LiveData<List<Room>> retrieveAllTask() {
-        return mDao.getAll();
+    public LiveData<List<RoomWithBatchAssignments>> retrieveAllTask() {
+        return mDao.getAllRooms();
     }
 
     public void updateTask(Room... rooms) {

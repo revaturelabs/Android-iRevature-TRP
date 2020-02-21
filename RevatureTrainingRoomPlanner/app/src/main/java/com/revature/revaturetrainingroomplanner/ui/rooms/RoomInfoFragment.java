@@ -19,7 +19,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.snackbar.Snackbar;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
-import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import sun.bob.mcalendarview.vo.DateData;
  */
 public class RoomInfoFragment extends Fragment implements View.OnClickListener {
 
-    private Room mRoomSelected;
+    private RoomWithBatchAssignments mRoomSelected;
     private BatchAssignment mBatchAssignment;
     private Button assignBtn;
     private NavController mNavController;
@@ -64,10 +64,10 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
 
 
         TextView maxSeats = rootView.findViewById(R.id.tv_room_info_seats);
-        String max = "Max seats: " + mRoomSelected.getOccupancy();
+        String max = "Max seats: " + mRoomSelected.getRoom().getOccupancy();
         maxSeats.setText(max);
 
-        String roomNumber = "Room Number: " + mRoomSelected.getRoom_name();
+        String roomNumber = "Room Number: " + mRoomSelected.getRoom().getRoom_name();
         TextView room = rootView.findViewById(R.id.tv_room_info_header);
         room.setText(roomNumber);
 
@@ -114,7 +114,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        mBatchAssignment.setRoom_id(mRoomSelected.getRoom_id());
+        mBatchAssignment.setRoom_id(mRoomSelected.getRoom().getRoom_id());
         Bundle args = new Bundle();
         args.putParcelable("batchAssignment", mBatchAssignment);
         args.putParcelable("roomSelected", mRoomSelected);

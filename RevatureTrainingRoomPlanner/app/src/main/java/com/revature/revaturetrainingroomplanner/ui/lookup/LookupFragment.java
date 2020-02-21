@@ -14,13 +14,14 @@ import androidx.navigation.Navigation;
 import com.google.android.material.tabs.TabLayout;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
-import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragmentDirections;
 import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragmentDirections;
@@ -33,7 +34,7 @@ import static com.revature.revaturetrainingroomplanner.R.id.navhost_lookup_searc
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener, BatchWithSkillsAdapter.OnItemListener, RoomsAdapter.OnItemListener {
+public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener, BatchWithSkillsAdapter.OnItemListener, RoomsWithBatchAssignmentsAdapter.OnItemListener {
 
     private final int TRAINER_TAB_LOCATION = 0;
     private final int BATCH_TAB_LOCATION = 1;
@@ -47,6 +48,7 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
     private TabLayout.Tab mBatchesTab;
     private View mNavHost;
     private int mCurrentTab = 0;
+    private Campus mCampusSelected;
 
     public LookupFragment() {
         // Required empty public constructor
@@ -63,6 +65,8 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
         mTabLayout = root.findViewById(R.id.tablayout_lookup_categories);
         mSearchNavController = Navigation.findNavController(root.findViewById(navhost_lookup_search_fragment));
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
+
+        mCampusSelected = LookupFragmentArgs.fromBundle(getArguments()).getCampusSelected();
 
         mTrainersTab = mTabLayout.newTab();
         mTrainersTab.setText(R.string.tab_trainers);
@@ -163,7 +167,7 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
     }
 
     @Override
-    public void onRoomClick(Room roomClicked) {
+    public void onRoomClick(RoomWithBatchAssignments roomClicked) {
         LookupFragmentDirections.ActionNavCategoryLookupToNavRoomInfo actionNavCategoryLookupToNavRoomInfo = LookupFragmentDirections.actionNavCategoryLookupToNavRoomInfo(roomClicked);
         mMainNavController.navigate(actionNavCategoryLookupToNavRoomInfo);
         mTabLayout.selectTab(mTabLayout.getTabAt(TRAINER_TAB_LOCATION));

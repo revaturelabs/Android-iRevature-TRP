@@ -13,8 +13,8 @@ import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchSkillCrossRef;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
-import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchSkillCrossRefDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.SkillDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
@@ -48,7 +48,7 @@ public class BatchRepository {
         List<Skill> skills = new ArrayList<>();
         List<String> skillList;
 
-        BaseDAO batchSkillCrossRefDAO = mAppDatabase.getDAO(BatchSkillCrossRef.class);
+        BatchSkillCrossRefDAO batchSkillCrossRefDAO = (BatchSkillCrossRefDAO) mAppDatabase.getDAO(BatchSkillCrossRef.class);
         SkillDAO skillDAO = (SkillDAO) mAppDatabase.getDAO(Skill.class);
 
         List<BatchSkillCrossRef> batchSkillCrossRefs = new ArrayList<>();

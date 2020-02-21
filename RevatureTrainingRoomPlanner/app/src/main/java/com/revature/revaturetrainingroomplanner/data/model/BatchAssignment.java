@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -14,6 +15,7 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 @Entity(tableName = "batch_assignments")
 public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable {
 
+    @ColumnInfo(name = "bas_id")
     @PrimaryKey(autoGenerate = true)
     private long batch_assignment_id;
 

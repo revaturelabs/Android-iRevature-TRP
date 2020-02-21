@@ -21,12 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.RoomRepository;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
-import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter;
-import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter.OnItemListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -44,11 +44,11 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
             "Boobs"
     };
 
-    private static final Comparator<Room> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<RoomWithBatchAssignments> ALPHABETICAL_COMPARATOR = (a, b) -> a.getRoom().getRoom_name().compareTo(b.getRoom().getRoom_name());
 
-    private List<Room> mModels;
+    private List<RoomWithBatchAssignments> mModels;
     private RecyclerView mRecyclerView;
-    private RoomsAdapter mAdapter;
+    private RoomsWithBatchAssignmentsAdapter mAdapter;
     private RoomRowBinding mBinding;
     private Animator mAnimator;
     private SearchView mSearchView;
@@ -82,7 +82,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         campus = root.findViewById(R.id.tv_select_building_campus);
         location = root.findViewById(R.id.tv_select_building_campus_location);
 
-        mAdapter = new RoomsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
+        mAdapter = new RoomsWithBatchAssignmentsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
         mAdapter.addCallback(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
@@ -100,7 +100,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<Room> filteredModelList = filter(mModels, query);
+                final List<RoomWithBatchAssignments> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -164,12 +164,12 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mAnimator.start();
     }
 
-    private static List<Room> filter(List<Room> models, String query) {
+    private static List<RoomWithBatchAssignments> filter(List<RoomWithBatchAssignments> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<Room> filteredModelList = new ArrayList<>();
-        for (Room model : models) {
-            final String text = model.getText().toLowerCase();
+        final List<RoomWithBatchAssignments> filteredModelList = new ArrayList<>();
+        for (RoomWithBatchAssignments model : models) {
+            final String text = model.getRoom().getRoom_name().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
             }
@@ -188,11 +188,11 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mRoomRepository.retrieveAllTask().observe(getViewLifecycleOwner(), rooms -> {
 
             if (rooms != null) {
-                List<Room> filteredRooms = new ArrayList<>();
+                List<RoomWithBatchAssignments> filteredRooms = new ArrayList<>();
 
-                for (Room room: rooms) {
-                    if (room.getCampus_id() == mCampusSelectedID) {
-                        filteredRooms.add(room);
+                for (RoomWithBatchAssignments roomWithBatchAssignments: rooms) {
+                    if (roomWithBatchAssignments.getRoom().getCampus_id() == mCampusSelectedID) {
+                        filteredRooms.add(roomWithBatchAssignments);
                     }
                 }
 

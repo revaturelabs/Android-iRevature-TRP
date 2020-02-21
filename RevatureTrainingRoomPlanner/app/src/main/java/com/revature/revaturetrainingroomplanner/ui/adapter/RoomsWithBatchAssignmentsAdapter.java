@@ -9,28 +9,28 @@ import androidx.annotation.NonNull;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
 
 import java.util.Comparator;
 
-public class RoomsAdapter extends SortedListAdapter<Room> {
+public class RoomsWithBatchAssignmentsAdapter extends SortedListAdapter<RoomWithBatchAssignments> {
 
     private OnItemListener mOnItemListener;
 
-    public RoomsAdapter(Context context, Comparator<Room> comparator, OnItemListener onItemListener) {
-        super(context, Room.class, comparator);
+    public RoomsWithBatchAssignmentsAdapter(Context context, Comparator<RoomWithBatchAssignments> comparator, OnItemListener onItemListener) {
+        super(context, RoomWithBatchAssignments.class, comparator);
         mOnItemListener = onItemListener;
     }
 
     @NonNull
     @Override
-    protected SortedListAdapter.ViewHolder<? extends Room> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
+    protected SortedListAdapter.ViewHolder<? extends RoomWithBatchAssignments> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         final RoomRowBinding binding = RoomRowBinding.inflate(inflater, parent, false);
         return new RoomViewHolder(binding, mOnItemListener);
     }
 
-    public static class RoomViewHolder extends ViewHolder<Room> implements View.OnClickListener {
+    public static class RoomViewHolder extends ViewHolder<RoomWithBatchAssignments> implements View.OnClickListener {
 
         private final RoomRowBinding mBinding;
         private OnItemListener mOnItemListener;
@@ -45,8 +45,8 @@ public class RoomsAdapter extends SortedListAdapter<Room> {
         }
 
         @Override
-        protected void performBind(@NonNull Room item) {
-            mBinding.setRoom(item);
+        protected void performBind(@NonNull RoomWithBatchAssignments item) {
+            mBinding.setRoom(item.getRoom());
         }
 
         @Override
@@ -56,6 +56,6 @@ public class RoomsAdapter extends SortedListAdapter<Room> {
     }
 
     public interface OnItemListener {
-        void onRoomClick(Room roomClicked);
+        void onRoomClick(RoomWithBatchAssignments roomClicked);
     }
 }

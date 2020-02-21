@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
-import com.revature.revaturetrainingroomplanner.data.model.Room;
+import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
@@ -24,7 +24,7 @@ import java.util.Objects;
 public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener {
 
     private BatchAssignment mBatchAssignment;
-    private Room mRoomSelected;
+    private RoomWithBatchAssignments mRoomSelected;
     private TrainersViewModel trainersViewModel;
     private NavController mNavController;
 
@@ -41,7 +41,7 @@ public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapt
         mBatchAssignment = TrainersFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
         mRoomSelected = TrainersFragmentArgs.fromBundle(getArguments()).getRoomSelected();
 
-        searchFragment.setCampusIDFilter(mRoomSelected.getCampus_id());
+        searchFragment.setCampusIDFilter(mRoomSelected.getRoom().getCampus_id());
 
 
 //        final TextView textView = root.findViewById(R.id.text_send);
