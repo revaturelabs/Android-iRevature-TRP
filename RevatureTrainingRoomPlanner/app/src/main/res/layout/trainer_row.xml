@@ -36,8 +36,8 @@
 
             <ImageView
                 android:id="@+id/img_trainer_row_icon"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/tv_trainer_row_name"
@@ -50,9 +50,11 @@
                 android:id="@+id/tv_trainer_row_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:padding="8dp"
                 android:text="@{model.trainer_name}"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/img_trainer_row_icon"
                 app:layout_constraintStart_toEndOf="@+id/img_trainer_row_icon"
                 app:layout_constraintTop_toTopOf="@+id/img_trainer_row_icon" />
@@ -81,6 +83,7 @@
                     android:id="@+id/recyclerview_trainer_row_skills"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
                     android:clickable="true"
                     android:focusable="true"
                     app:adapter="@{model.skillsAdapter}" />

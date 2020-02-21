@@ -2,6 +2,7 @@ package com.revature.revaturetrainingroomplanner.ui.trainers;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,13 @@ public class TrainersInfoFragment extends Fragment implements View.OnClickListen
         name.setText(mTrainerSelected.getTrainer_name());
         email.setText(mTrainerSelected.getTrainer_email());
         location.setText(mTrainerSelected.getTrainer_location());
+
+        // Log.d("skill", mTrainerSelected.getTrainer_skills().get(0));
+        String t_skills = "";
+        for(int i=0; i<mTrainerSelected.getSkillsAdapter().getItemCount(); i++){
+            t_skills = t_skills.concat(mTrainerSelected.getSkillsAdapter().getItem(i).getSkill() + "\n");
+        }
+        skills.setText( t_skills );
 
         Picasso.get().load(imgURL).into(profile);
 

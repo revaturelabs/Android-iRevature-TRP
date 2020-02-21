@@ -20,7 +20,7 @@
             android:text="@string/room_info_header"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:paddingTop="2dp"
             android:text="@string/room_info_max_seats"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_room_info_calender"
@@ -40,7 +40,7 @@
             android:text="@string/room_info_calender_header"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:paddingTop="2dp"
             android:text="Select start date"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <sun.bob.mcalendarview.MCalendarView
             android:id="@+id/calendarView"
@@ -60,7 +60,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="100dp" />
+            android:layout_marginBottom="110dp" />
 
     </LinearLayout>
 
@@ -70,12 +70,13 @@
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/assign_button_style"
         android:ems="7"
         android:text="@string/room_info_assign_room"
-        android:textColor="@color/revature_orange" />
+        android:textColor="@android:color/background_light"
+        android:textSize="15sp" />
 
 </RelativeLayout>

@@ -193,16 +193,16 @@
         <fragment
             android:id="@+id/nav_batch_info"
             android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchInfo"
-            android:label="fragment_batch_info"
-            tools:layout="@layout/fragment_batch_info" >
+            android:label="Batches Info"
+            tools:layout="@layout/fragment_batch_info">
             <argument
                 android:name="batchSelected"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.Batch" />
             <argument
                 android:name="batchAssignment"
+                android:defaultValue="@null"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.BatchAssignment"
-                app:nullable="true"
-                android:defaultValue="@null" />
+                app:nullable="true" />
         </fragment>
     </navigation>
 
