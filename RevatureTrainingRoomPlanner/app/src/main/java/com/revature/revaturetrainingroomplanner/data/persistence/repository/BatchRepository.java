@@ -15,6 +15,7 @@ import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BatchDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.SkillDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
 import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
@@ -34,11 +35,11 @@ public class BatchRepository {
     private static final String TAG = "BatchRepository";
 
     private AppDatabase mAppDatabase;
-    private BaseDAO<Batch> mDao;
+    private BatchDAO mDao;
 
     public BatchRepository(Context context) {
         mAppDatabase = AppDatabase.getInstance(context);
-        mDao = mAppDatabase.getDAO(Batch.class);
+        mDao = (BatchDAO) mAppDatabase.getDAO(Batch.class);
     }
 
     public void insertBatchTask(Batch... batches) {
@@ -48,7 +49,7 @@ public class BatchRepository {
         List<String> skillList;
 
         BaseDAO batchSkillCrossRefDAO = mAppDatabase.getDAO(BatchSkillCrossRef.class);
-        BaseDAO skillDAO = mAppDatabase.getDAO(Skill.class);
+        SkillDAO skillDAO = (SkillDAO) mAppDatabase.getDAO(Skill.class);
 
         List<BatchSkillCrossRef> batchSkillCrossRefs = new ArrayList<>();
 
@@ -66,11 +67,11 @@ public class BatchRepository {
             }
         }
 
-        new InsertAsyncTask(mDao).execute(batches);
+        new InsertAsyncTask<>(mDao).execute(batches);
 
         new InsertAsyncTask<>(skillDAO).execute(skills.toArray(new Skill[0]));
 
-        new InsertAsyncTask(batchSkillCrossRefDAO).execute(batchSkillCrossRefs.toArray(new BatchSkillCrossRef[0]));
+        new InsertAsyncTask<>(batchSkillCrossRefDAO).execute(batchSkillCrossRefs.toArray(new BatchSkillCrossRef[0]));
     }
 
     public LiveData<Batch> retrieveByIDTask(int id) {
@@ -83,15 +84,15 @@ public class BatchRepository {
     }
 
     public void updateTask(Batch... batches) {
-        new UpdateAsyncTask(mDao).execute(batches);
+        new UpdateAsyncTask<>(mDao).execute(batches);
     }
 
     public void deleteTask(Batch... batches) {
-        new DeleteAsyncTask(mDao).execute(batches);
+        new DeleteAsyncTask<>(mDao).execute(batches);
     }
 
     public void deleteAllTask(Batch... batches) {
-        new DeleteAllAsyncTask(mDao).execute(batches);
+        new DeleteAllAsyncTask<>(mDao).execute(batches);
     }
 
     public void retrieveBatchesFromAPI() {

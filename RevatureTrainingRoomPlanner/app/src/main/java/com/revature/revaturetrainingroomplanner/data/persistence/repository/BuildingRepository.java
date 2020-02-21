@@ -11,6 +11,7 @@ import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
+import com.revature.revaturetrainingroomplanner.data.persistence.dao.BuildingDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 
 import java.util.List;
@@ -20,16 +21,16 @@ public class BuildingRepository {
     private static final String TAG = "BuildingRepository";
 
     private AppDatabase mAppDatabase;
-    private BaseDAO<Building> mDao;
+    private BuildingDAO mDao;
 
     public BuildingRepository(Context context) {
         mAppDatabase = AppDatabase.getInstance(context);
-        mDao = mAppDatabase.getDAO(Building.class);
+        mDao = (BuildingDAO) mAppDatabase.getDAO(Building.class);
     }
 
     public void insertBuildingTask(Building... buildings) {
         Log.d(TAG, "insertCampusTask: inserting " + buildings.toString());
-        new InsertAsyncTask(mDao).execute(buildings);
+        new InsertAsyncTask<>(mDao).execute(buildings);
     }
 
     public LiveData<List<Building>> retrieveAllTask() {
@@ -38,15 +39,15 @@ public class BuildingRepository {
     }
 
     public void updateTask(Building... buildings) {
-        new UpdateAsyncTask(mDao).execute(buildings);
+        new UpdateAsyncTask<>(mDao).execute(buildings);
     }
 
     public void deleteTask(Building... buildings) {
-        new DeleteAsyncTask(mDao).execute(buildings);
+        new DeleteAsyncTask<>(mDao).execute(buildings);
     }
 
     public void deleteAllTask(Building... buildings) {
-        new DeleteAllAsyncTask(mDao).execute(buildings);
+        new DeleteAllAsyncTask<>(mDao).execute(buildings);
     }
 
 }
