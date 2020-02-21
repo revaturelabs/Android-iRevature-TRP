@@ -1,7 +1,6 @@
 package com.revature.revaturetrainingroomplanner.ui.rooms;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,12 @@ import java.util.Objects;
 
 public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListener {
 
+    private static final long USFID = 1;
+    private static final long UTAID = 2;
+    private static final long WVUID = 3;
+    private static final long RestonID = 4;
+
+    RoomsWithSearchFragment searchFragment;
     private BatchAssignment mBatchAssignment;
     private RoomsViewModel roomsViewModel;
     private NavController mNavController;
@@ -37,15 +42,17 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_rooms, container, false);
         View fragment = root.findViewById(R.id.fragment_rooms_search_fragment);
+        searchFragment = (RoomsWithSearchFragment) getChildFragmentManager().findFragmentById(R.id.fragment_rooms_search_fragment);
 
         mBatchSelected = RoomsFragmentArgs.fromBundle(getArguments()).getBatchSelected();
         batchCampus = mBatchSelected.getBatch_name().substring(3,6);
+        searchFragment.setCampusIDFilter(mBatchSelected.getCampus_id());
 
         campus = fragment.findViewById(R.id.tv_select_building_campus);
         location = fragment.findViewById(R.id.tv_select_building_campus_location);
         campusImg = fragment.findViewById(R.id.img_select_building_campus);
         campus.setText(batchCampus);
-        location.setText(setLocation(batchCampus));
+        location.setText(setLocation(mBatchSelected.getCampus_id()));
 
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
         return root;
@@ -66,24 +73,22 @@ public class RoomsFragment extends Fragment implements RoomsAdapter.OnItemListen
         mNavController.navigate(actionNavRoomsToNavRoomsInfo);
     }
 
-    private String setLocation(String campus) {
-        if(batchCampus.equals("Res"))
-            batchCampus = "DC";
-        switch (campus) {
-            case "USF":
-                campusImg.setImageResource(R.drawable.tampa);
-                return "Tampa, FL";
-            case "UTA":
-                campusImg.setImageResource(R.drawable.dallas);
-                return "Arlington, TX";
-            case "DC":
-                campusImg.setImageResource(R.drawable.reston);
-                return "Reston, VA";
-            case "WVU":
-                campusImg.setImageResource(R.drawable.morgantown);
-                return "Morgantown, WVU";
-            default:
-                return "N/A";
+    private String setLocation(long campusID) {
+
+        if (campusID == USFID) {
+            campusImg.setImageResource(R.drawable.tampa);
+            return "Tampa, FL";
+        } else if (campusID == UTAID) {
+            campusImg.setImageResource(R.drawable.dallas);
+            return "Arlington, TX";
+        } else if (campusID == RestonID) {
+            campusImg.setImageResource(R.drawable.reston);
+            return "Reston, VA";
+        } else if (campusID == WVUID) {
+            campusImg.setImageResource(R.drawable.morgantown);
+            return "Morgantown, WVU";
+        } else {
+            return "N/A";
         }
     }
 

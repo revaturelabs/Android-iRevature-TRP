@@ -27,6 +27,9 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
     @ColumnInfo(name = "r_occupancy")
     private int occupancy;
 
+    @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
+    private long campus_id;
+
     @ForeignKey(entity = Building.class, parentColumns = "bu_id", childColumns = "bu_id")
     private long building_id;
 
@@ -119,6 +122,14 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
 
     public void setBatches_assigned(List<BatchAssignment> batches_assigned) {
         this.batches_assigned = batches_assigned;
+    }
+
+    public long getCampus_id() {
+        return campus_id;
+    }
+
+    public void setCampus_id(long campus_id) {
+        this.campus_id = campus_id;
     }
 
     public String getText() {

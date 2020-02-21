@@ -113,6 +113,7 @@ public class CampusRepository {
                                         for (Room room : rooms) {
 
                                             room.setBuilding_id(building.getBuilding_id());
+                                            room.setCampus_id(campus.getCampus_id());
                                             batchAssignments = room.getBatches_assigned();
 
                                             if (batchAssignments != null) {
