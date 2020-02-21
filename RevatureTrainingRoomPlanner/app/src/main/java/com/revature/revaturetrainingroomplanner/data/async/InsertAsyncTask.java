@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 
+import java.util.Arrays;
+
 public class InsertAsyncTask<T, DAOT extends BaseDAO<T>> extends AsyncTask<T, Void, Void> {
 
     private static final String TAG = "InsertAsyncTask";
@@ -15,9 +17,10 @@ public class InsertAsyncTask<T, DAOT extends BaseDAO<T>> extends AsyncTask<T, Vo
         mDAO = dao;
     }
 
+    @SafeVarargs
     @Override
-    protected Void doInBackground(T... objects) {
-        Log.d(TAG, "doInBackground: insert " + objects);
+    protected final Void doInBackground(T... objects) {
+        Log.d(TAG, "doInBackground: insert " + Arrays.toString(objects));
         mDAO.insert(objects);
         return null;
     }

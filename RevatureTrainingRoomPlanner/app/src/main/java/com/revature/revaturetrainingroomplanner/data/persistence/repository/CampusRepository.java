@@ -3,6 +3,7 @@ package com.revature.revaturetrainingroomplanner.data.persistence.repository;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.revature.revaturetrainingroomplanner.data.async.DeleteAllAsyncTask;
@@ -13,7 +14,6 @@ import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
-import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
@@ -21,6 +21,7 @@ import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
 import com.revature.revaturetrainingroomplanner.data.requests.responses.LocationsGETResponse;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,22 +34,22 @@ public class CampusRepository {
     private static final String TAG = "CampusRepository";
 
     private AppDatabase mAppDatabase;
-    private BaseDAO<Campus> mDao;
+    private CampusDAO mDao;
     private Context mContext;
 
     public CampusRepository(Context context) {
         mContext = context;
         mAppDatabase = AppDatabase.getInstance(context);
-        mDao = mAppDatabase.getDAO(Campus.class);
+        mDao = (CampusDAO) mAppDatabase.getDAO(Campus.class);
     }
 
     public void insertCampusTask(Campus... campuses) {
-        Log.d(TAG, "insertCampusTask: inserting " + campuses.toString());
-        new InsertAsyncTask(mDao).execute(campuses);
+        Log.d(TAG, "insertCampusTask: inserting " + Arrays.toString(campuses));
+        new InsertAsyncTask<>(mDao).execute(campuses);
     }
 
     public LiveData<Campus> retrieveByIDTask(int id) {
-        return ((CampusDAO)mDao).getByID(id);
+        return mDao.getByID(id);
     }
 
     public LiveData<List<Campus>> retrieveAllTask() {
@@ -56,15 +57,15 @@ public class CampusRepository {
     }
 
     public void updateTask(Campus... campuses) {
-        new UpdateAsyncTask(mDao).execute(campuses);
+        new UpdateAsyncTask<>(mDao).execute(campuses);
     }
 
     public void deleteTask(Campus... campuses) {
-        new DeleteAsyncTask(mDao).execute(campuses);
+        new DeleteAsyncTask<>(mDao).execute(campuses);
     }
 
     public void deleteAllTask(Campus... campuses) {
-        new DeleteAllAsyncTask(mDao).execute(campuses);
+        new DeleteAllAsyncTask<>(mDao).execute(campuses);
     }
 
     public void retrieveCampusesFromAPI() {
@@ -76,14 +77,12 @@ public class CampusRepository {
 
         responseCall.enqueue(new Callback<LocationsGETResponse>() {
             @Override
-            public void onResponse(Call<LocationsGETResponse> call, Response<LocationsGETResponse> response) {
+            public void onResponse(@NonNull Call<LocationsGETResponse> call, @NonNull Response<LocationsGETResponse> response) {
                 Log.d(TAG, "onResponse: server response: " + response.toString());
                 if (response.code() == 200) {
-                    Log.d(TAG, "onResponse: " + response.body().toString());
+                    Log.d(TAG, "onResponse: " + Objects.requireNonNull(response.body()).toString());
 
                     List<Campus> campuses = response.body().getLocations();
-
-                    int length = campuses.size();
 
                     if (campuses != null) {
 
@@ -145,7 +144,7 @@ public class CampusRepository {
             }
 
             @Override
-            public void onFailure(Call<LocationsGETResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<LocationsGETResponse> call, @NonNull Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

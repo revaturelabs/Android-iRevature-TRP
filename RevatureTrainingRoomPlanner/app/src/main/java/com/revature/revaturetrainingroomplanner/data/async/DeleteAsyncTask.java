@@ -15,8 +15,9 @@ public class DeleteAsyncTask<T, DAOT extends BaseDAO<T>> extends AsyncTask<T, Vo
         mDAO = dao;
     }
 
+    @SafeVarargs
     @Override
-    protected Void doInBackground(T... objects) {
+    protected final Void doInBackground(T... objects) {
         Log.d(TAG, "doInBackground: thread: " + Thread.currentThread().getName());
         mDAO.delete(objects);
         return null;

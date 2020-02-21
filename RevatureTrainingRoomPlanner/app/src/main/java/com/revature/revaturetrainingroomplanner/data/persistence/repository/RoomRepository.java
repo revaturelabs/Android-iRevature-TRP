@@ -10,10 +10,10 @@ import com.revature.revaturetrainingroomplanner.data.async.DeleteAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.InsertAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
-import com.revature.revaturetrainingroomplanner.data.persistence.dao.BaseDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.RoomDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RoomRepository {
@@ -21,20 +21,20 @@ public class RoomRepository {
     private static final String TAG = "RoomRepository";
 
     private AppDatabase mAppDatabase;
-    private BaseDAO<Room> mDao;
+    private RoomDAO mDao;
 
     public RoomRepository(Context context) {
         mAppDatabase = AppDatabase.getInstance(context);
-        mDao = mAppDatabase.getDAO(Room.class);
+        mDao = (RoomDAO) mAppDatabase.getDAO(Room.class);
     }
 
     public void insertRoomTask(Room... rooms) {
-        Log.d(TAG, "insertCampusTask: inserting " + rooms.toString());
-        new InsertAsyncTask(mDao).execute(rooms);
+        Log.d(TAG, "insertCampusTask: inserting " + Arrays.toString(rooms));
+        new InsertAsyncTask<>(mDao).execute(rooms);
     }
 
     public LiveData<Room> retrieveByIDTask(int id) {
-        return ((RoomDAO)mDao).getByID(id);
+        return mDao.getByID(id);
     }
 
     public LiveData<List<Room>> retrieveAllTask() {
@@ -42,15 +42,15 @@ public class RoomRepository {
     }
 
     public void updateTask(Room... rooms) {
-        new UpdateAsyncTask(mDao).execute(rooms);
+        new UpdateAsyncTask<>(mDao).execute(rooms);
     }
 
     public void deleteTask(Room... rooms) {
-        new DeleteAsyncTask(mDao).execute(rooms);
+        new DeleteAsyncTask<>(mDao).execute(rooms);
     }
 
     public void deleteAllTask(Room... rooms) {
-        new DeleteAllAsyncTask(mDao).execute(rooms);
+        new DeleteAllAsyncTask<>(mDao).execute(rooms);
     }
 
 }
