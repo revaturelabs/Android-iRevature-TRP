@@ -6,16 +6,22 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import com.revature.revaturetrainingroomplanner.data.model.Building;
+import com.revature.revaturetrainingroomplanner.data.model.BuildingWithRooms;
 
 import java.util.List;
 
 @Dao
 public interface BuildingDAO extends BaseDAO<Building> {
 
+    @Deprecated
     @Override
     @Transaction
     @Query("SELECT * FROM buildings")
     LiveData<List<Building>> getAll();
+
+    @Transaction
+    @Query("SELECT * FROM buildings")
+    LiveData<List<BuildingWithRooms>> getAllBuildings();
 
     @Transaction
     @Query("SELECT * FROM buildings WHERE bu_id = :id")

@@ -6,12 +6,12 @@
 
         <variable
             name="model"
-            type="com.revature.revaturetrainingroomplanner.data.model.Trainer"/>
+            type="com.revature.revaturetrainingroomplanner.data.model.Building"/>
 
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_trainer_row"
+        android:id="@+id/cardview_building_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -22,69 +22,48 @@
         app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/framelayout_trainer_row"
+            android:id="@+id/constraintlayout_building_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true">
 
-            <ImageView
-                android:id="@+id/img_trainer_row_icon"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
+            <TextView
+                android:id="@+id/tv_building_row_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/tv_trainer_row_name"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/human" />
-
-            <TextView
-                android:id="@+id/tv_trainer_row_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:padding="8dp"
-                android:text="@{model.trainer_name}"
+                android:text="@{model.building_name}"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/img_trainer_row_icon"
-                app:layout_constraintStart_toEndOf="@+id/img_trainer_row_icon"
-                app:layout_constraintTop_toTopOf="@+id/img_trainer_row_icon" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/select_trainer_skillset"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_trainer_row_name"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="@+id/img_trainer_row_icon"
-                app:layout_constraintTop_toBottomOf="@+id/img_trainer_row_icon">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_building_row_name">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_trainer_row_skills"
+                    android:id="@+id/recyclerview_building_row_rooms"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
                     android:fadeScrollbars="false"
                     android:focusable="true"
-                    android:scrollbarSize="1dp"
-                    android:scrollbars="horizontal"
-                    app:adapter="@{model.skillsAdapter}" />
+                    app:adapter="@{model.roomsWithBatchAssignmentsAdapter}" />
             </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

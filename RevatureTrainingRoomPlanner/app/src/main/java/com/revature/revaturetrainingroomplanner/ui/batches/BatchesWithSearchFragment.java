@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +26,7 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
@@ -46,24 +50,23 @@ import retrofit2.Response;
 public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     /* Constants */
-    private static final String[] BATCHES = new String[]{
-            "2001Mobile",
-            "2100FullStack",
-            "2200FrontEnd",
-            "4150Backend"
-    };
-
+    private static final String TAG = "BatchesSearchFragment";
 
     private static final Comparator<BatchWithSkills> ALPHABETICAL_COMPARATOR = (a, b) -> a.getBatch().getBatch_name().compareTo(b.getBatch().getBatch_name());
     private static final Comparator<Skill> ALPHABETICAL_COMPARATOR_SKILLS = (a, b) -> a.getSkill().compareTo(b.getSkill());
 
-    private static final String TAG = "BatchesSearchFragment";
+    private static final long USF_ID = 1;
+    private static final long UTA_ID = 2;
+    private static final long WVU_ID = 3;
+    private static final long Reston_ID = 4;
 
     /* UI Components */
     private RecyclerView mRecyclerView;
     private BatchRowBinding mBinding;
     private SearchView mSearchView;
     private ProgressBar mProgressBar;
+    private ConstraintLayout mCampusLayout;
+    private ImageView mCapusImageView;
 
     /* Variables */
     private BatchesViewModel batchesViewModel;
@@ -71,7 +74,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private BatchWithSkillsAdapter mAdapter;
     private Animator mAnimator;
     private BatchRepository mBatchesRepository;
-    private static int counter = 1;
+    private Campus mCampusSelected;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +97,16 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
         mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
+        mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
+
+        if(mCampusSelected != null) {
+            mCampusLayout.setVisibility(View.VISIBLE);
+
+            mCapusImageView = root.findViewById(R.id.img_select_building_campus);
+            TextView textViewCampusName = root.findViewById(R.id.tv_select_building_campus);
+            textViewCampusName.setText(mCampusSelected.getCampus_name());
+        }
+
         mAdapter = new BatchWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mAdapter.addCallback(this);
@@ -250,6 +263,23 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    public void setCampusSelected(Campus campusSelected) {
+        mCampusSelected = campusSelected;
+    }
+
+    private void setLocation(long campusID) {
+
+        if (campusID == USF_ID) {
+            mCapusImageView.setImageResource(R.drawable.tampa);
+        } else if (campusID == UTA_ID) {
+            mCapusImageView.setImageResource(R.drawable.dallas);
+        } else if (campusID == Reston_ID) {
+            mCapusImageView.setImageResource(R.drawable.reston);
+        } else if (campusID == WVU_ID) {
+            mCapusImageView.setImageResource(R.drawable.morgantown);
+        }
     }
 
 }

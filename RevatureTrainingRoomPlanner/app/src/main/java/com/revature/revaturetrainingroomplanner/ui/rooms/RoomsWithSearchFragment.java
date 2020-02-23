@@ -21,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
+import com.revature.revaturetrainingroomplanner.data.model.BuildingWithRooms;
 import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.RoomRepository;
-import com.revature.revaturetrainingroomplanner.databinding.RoomRowBinding;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BuildingRepository;
+import com.revature.revaturetrainingroomplanner.databinding.BuildingRowBinding;
+import com.revature.revaturetrainingroomplanner.ui.adapter.BuildingWithRoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter.OnItemListener;
 
@@ -35,7 +37,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
+public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback,BuildingWithRoomsAdapter.OnItemListener {
 
     private static final String[] ROOMS = new String[]{
             "Phirom",
@@ -44,36 +46,38 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
             "Boobs"
     };
 
-    private static final Comparator<RoomWithBatchAssignments> ALPHABETICAL_COMPARATOR = (a, b) -> a.getRoom().getRoom_name().compareTo(b.getRoom().getRoom_name());
+    private static final Comparator<BuildingWithRooms> BUILDING_WITH_ROOMS_COMPARATOR = (a, b) -> a.getBuilding().getBuilding_name().compareTo(b.getBuilding().getBuilding_name());
+    private static final Comparator<RoomWithBatchAssignments> ROOM_WITH_BATCH_ASSIGNMENTS_COMPARATOR = (a, b) -> a.getRoom().getRoom_name().compareTo(b.getRoom().getRoom_name());
 
-    private List<RoomWithBatchAssignments> mModels;
+    private List<BuildingWithRooms> mModels;
     private RecyclerView mRecyclerView;
-    private RoomsWithBatchAssignmentsAdapter mAdapter;
-    private RoomRowBinding mBinding;
+    private BuildingWithRoomsAdapter mAdapter;
+    private BuildingRowBinding mBinding;
     private Animator mAnimator;
     private SearchView mSearchView;
     private ProgressBar mProgressBar;
-    private RoomRepository mRoomRepository;
+    private BuildingRepository mBuildingRepository;
     private BatchRepository mBatchSelected;
     private static int counter = 1;
     private long mCampusSelectedID;
     private TextView campus;
     private TextView location;
+    private OnItemListener mOnItemListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mRoomRepository = new RoomRepository(getContext());
+        mBuildingRepository = new BuildingRepository(getContext());
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.room_row, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.building_row, container, false);
 
-        OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
+        mOnItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_rooms_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);
@@ -82,7 +86,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         campus = root.findViewById(R.id.tv_select_building_campus);
         location = root.findViewById(R.id.tv_select_building_campus_location);
 
-        mAdapter = new RoomsWithBatchAssignmentsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
+        mAdapter = new BuildingWithRoomsAdapter(getContext(), BUILDING_WITH_ROOMS_COMPARATOR, this);
         mAdapter.addCallback(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
@@ -90,7 +94,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        retrieveRooms();
+        retrieveBuildingsAndRooms();
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -100,7 +104,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<RoomWithBatchAssignments> filteredModelList = filter(mModels, query);
+                final List<BuildingWithRooms> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -164,14 +168,16 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mAnimator.start();
     }
 
-    private static List<RoomWithBatchAssignments> filter(List<RoomWithBatchAssignments> models, String query) {
+    private static List<BuildingWithRooms> filter(List<BuildingWithRooms> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<RoomWithBatchAssignments> filteredModelList = new ArrayList<>();
-        for (RoomWithBatchAssignments model : models) {
-            final String text = model.getRoom().getRoom_name().toLowerCase();
-            if (text.contains(lowerCaseQuery)) {
-                filteredModelList.add(model);
+        final List<BuildingWithRooms> filteredModelList = new ArrayList<>();
+        for (BuildingWithRooms model : models) {
+            for (RoomWithBatchAssignments room: model.getRooms()) {
+                final String text = room.getRoom().getRoom_name().toLowerCase();
+                if (text.contains(lowerCaseQuery)) {
+                    filteredModelList.add(model);
+                }
             }
         }
         return filteredModelList;
@@ -183,24 +189,25 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         this.location.setText("");
     }
 
-    private void retrieveRooms() {
+    private void retrieveBuildingsAndRooms() {
 
-        mRoomRepository.retrieveAllTask().observe(getViewLifecycleOwner(), rooms -> {
+        mBuildingRepository.retrieveAllTask().observe(getViewLifecycleOwner(), buildings -> {
 
-            if (rooms != null) {
-                List<RoomWithBatchAssignments> filteredRooms = new ArrayList<>();
+            if (buildings != null) {
+                List<BuildingWithRooms> filteredBuildings = new ArrayList<>();
 
-                for (RoomWithBatchAssignments roomWithBatchAssignments: rooms) {
-                    if (roomWithBatchAssignments.getRoom().getCampus_id() == mCampusSelectedID) {
-                        filteredRooms.add(roomWithBatchAssignments);
+                for (BuildingWithRooms buildingWithRooms: buildings) {
+                    if (buildingWithRooms.getBuilding().getCampus_id() == mCampusSelectedID) {
+                        buildingWithRooms.getBuilding().setRoomsWithBatchAssignmentsAdapter(new RoomsWithBatchAssignmentsAdapter(getContext(), ROOM_WITH_BATCH_ASSIGNMENTS_COMPARATOR, mOnItemListener));
+                        filteredBuildings.add(buildingWithRooms);
                     }
                 }
 
                 mAdapter.edit()
-                        .replaceAll(filteredRooms)
+                        .replaceAll(filteredBuildings)
                         .commit();
 
-                mModels = filteredRooms;
+                mModels = filteredBuildings;
             } else {
                 mModels = new ArrayList<>();
             }
@@ -210,4 +217,22 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     public void setCampusIDFilter(long campusIDFilter) {
         mCampusSelectedID = campusIDFilter;
     }
+
+    @Override
+    public void onBuildingClick(BuildingWithRooms buildingClicked) {
+        if (buildingClicked.isRoomsVisible()) {
+            buildingClicked.getBuilding().getRoomsWithBatchAssignmentsAdapter().edit()
+                    .removeAll()
+                    .commit();
+
+            buildingClicked.setRoomsVisible(false);
+        } else {
+            buildingClicked.getBuilding().getRoomsWithBatchAssignmentsAdapter().edit()
+                    .replaceAll(buildingClicked.getRooms())
+                    .commit();
+
+            buildingClicked.setRoomsVisible(true);
+        }
+    }
+
 }

@@ -23,6 +23,7 @@ import com.revature.revaturetrainingroomplanner.data.persistence.repository.Trai
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragment;
 import com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragmentDirections;
 import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsWithSearchFragmentDirections;
 import com.revature.revaturetrainingroomplanner.ui.trainers.TrainersWithSearchFragmentDirections;
@@ -49,6 +50,7 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
     private View mNavHost;
     private int mCurrentTab = 0;
     private Campus mCampusSelected;
+    private BatchesWithSearchFragment mBatchesSearchFragment;
 
     public LookupFragment() {
         // Required empty public constructor
@@ -67,6 +69,7 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
 
         mCampusSelected = LookupFragmentArgs.fromBundle(getArguments()).getCampusSelected();
+//        mBatchesSearchFragment = (BatchesWithSearchFragment) getChildFragmentManager().getPrimaryNavigationFragment();
 
         mTrainersTab = mTabLayout.newTab();
         mTrainersTab.setText(R.string.tab_trainers);

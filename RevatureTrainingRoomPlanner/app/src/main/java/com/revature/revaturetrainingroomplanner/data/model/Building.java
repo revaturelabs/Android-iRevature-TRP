@@ -11,6 +11,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
 
     @Ignore
     private List<Room> rooms;
+
+    @Ignore
+    private RoomsWithBatchAssignmentsAdapter roomsWithBatchAssignmentsAdapter;
 
     public Building() {
     }
@@ -85,6 +89,14 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public RoomsWithBatchAssignmentsAdapter getRoomsWithBatchAssignmentsAdapter() {
+        return roomsWithBatchAssignmentsAdapter;
+    }
+
+    public void setRoomsWithBatchAssignmentsAdapter(RoomsWithBatchAssignmentsAdapter roomsWithBatchAssignmentsAdapter) {
+        this.roomsWithBatchAssignmentsAdapter = roomsWithBatchAssignmentsAdapter;
     }
 
     @NonNull

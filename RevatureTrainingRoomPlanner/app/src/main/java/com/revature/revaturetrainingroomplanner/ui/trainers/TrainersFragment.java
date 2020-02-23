@@ -14,17 +14,17 @@ import androidx.navigation.Navigation;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
-import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
 import com.revature.revaturetrainingroomplanner.data.model.TrainerWithSkills;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.TrainerRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 
 import java.util.Objects;
 
 public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapter.OnItemListener {
 
+    private static final String TAG = "TrainersFragment";
+
     private BatchAssignment mBatchAssignment;
-    private RoomWithBatchAssignments mRoomSelected;
+    private long mCampusSelectedID;
     private TrainersViewModel trainersViewModel;
     private NavController mNavController;
 
@@ -39,9 +39,9 @@ public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapt
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
 
         mBatchAssignment = TrainersFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
-        mRoomSelected = TrainersFragmentArgs.fromBundle(getArguments()).getRoomSelected();
+        mCampusSelectedID = TrainersFragmentArgs.fromBundle(getArguments()).getCampusID();
 
-        searchFragment.setCampusIDFilter(mRoomSelected.getRoom().getCampus_id());
+        searchFragment.setCampusIDFilter(mCampusSelectedID);
 
 
 //        final TextView textView = root.findViewById(R.id.text_send);
@@ -58,8 +58,8 @@ public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapt
     @Override
     public void onStart() {
         super.onStart();
-        TrainerRepository trainerRepository = new TrainerRepository(getContext());
-        trainerRepository.retrieveTrainersFromAPI();
+//        TrainerRepository trainerRepository = new TrainerRepository(getContext());
+//        trainerRepository.retrieveTrainersFromAPI();
     }
 
     @Override

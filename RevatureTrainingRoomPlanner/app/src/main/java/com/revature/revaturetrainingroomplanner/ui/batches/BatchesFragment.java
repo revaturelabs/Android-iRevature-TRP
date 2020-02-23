@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,17 +15,19 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 
 public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.OnItemListener {
 
+    ConstraintLayout mCampusLayout;
     private NavController mNavController;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_batches, container, false);
+        View root = inflater.inflate(R.layout.fragment_batches, container, false);
+
+        return root;
     }
 
 
@@ -37,8 +40,8 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
     @Override
     public void onStart() {
         super.onStart();
-        BatchRepository batchRepository = new BatchRepository(getContext());
-        batchRepository.retrieveBatchesFromAPI();
+//        BatchRepository batchRepository = new BatchRepository(getContext());
+//        batchRepository.retrieveBatchesFromAPI();
     }
 
     @Override
@@ -51,5 +54,6 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
         mNavController.navigate(actionNavBatchesToNavRooms);
     }
 
+//    public void set
 
 }

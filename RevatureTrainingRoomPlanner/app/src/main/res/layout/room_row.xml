@@ -4,11 +4,8 @@
 
     <data>
         <variable
-            name="buildingDAO"
-            type="com.revature.revaturetrainingroomplanner.data.persistence.dao.BuildingDAO" />
-        <variable
             name="room"
-            type="com.revature.revaturetrainingroomplanner.data.model.Room"/>
+            type="com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -31,49 +28,16 @@
             android:focusable="true">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textview_room_row_room_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/room_row_building_header"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
-                app:layout_constraintStart_toStartOf="@+id/textView4" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/room_row_room_header"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="@{room.room_name}"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:padding="3dp"
-                android:text="@{room.building_name}"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/textView7"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{room.room.room_name}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

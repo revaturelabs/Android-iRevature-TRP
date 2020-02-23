@@ -53,7 +53,7 @@
     <string name="login_checkbox">Keep me logged In</string>
     <string name="room_info_header">ROOM 12</string>
     <string name="menu_rooms_info">Room Info</string>
-    <string name="search_room_hint">Search for a room number</string>
+    <string name="search_room_hint">Search for a building number</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="batches_details_associates">Associates: %1$s </string>

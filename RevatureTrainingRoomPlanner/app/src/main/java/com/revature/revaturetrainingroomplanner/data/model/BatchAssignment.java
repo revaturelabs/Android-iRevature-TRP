@@ -30,10 +30,10 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
     @ForeignKey(entity = Room.class, parentColumns = "r_id", childColumns = "r_id")
     private long room_id;
 
-    @Ignore
+    @ColumnInfo(name = "bas_start_date")
     private String start_date;
 
-    @Ignore
+    @ColumnInfo(name = "bas_end_date")
     private String end_date;
 
     public BatchAssignment() {
@@ -125,6 +125,14 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
 
     public void setRoom_id(long room_id) {
         this.room_id = room_id;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
     }
 
     @Override

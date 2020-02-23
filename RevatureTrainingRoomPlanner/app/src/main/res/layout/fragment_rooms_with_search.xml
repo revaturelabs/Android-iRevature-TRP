@@ -28,24 +28,65 @@
 
     </SearchView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room">
+
+        <ImageView
+            android:id="@+id/img_select_building_campus"
+            android:layout_width="120dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/tampa" />
+
+        <TextView
+            android:id="@+id/tv_select_building_campus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="USF"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/img_select_building_campus"
+            app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
+
+        <TextView
+            android:id="@+id/tv_select_building_campus_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Tampa, FL"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_select_building_campus"
+            app:layout_constraintTop_toBottomOf="@+id/tv_select_building_campus" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_select_building_campus"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_rooms_with_search_list_rooms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:fadeScrollbars="false">
+            android:fadeScrollbars="false"
+            android:scrollbars="vertical">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -55,37 +96,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone" />
+
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/img_select_building_campus"
-        android:layout_width="120dp"
-        android:layout_height="65dp"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:text="First, select a building"
+        android:textColor="@color/revature_orange"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room"
-        app:srcCompat="@drawable/tampa" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <TextView
-        android:id="@+id/tv_select_building_campus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="USF"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/img_select_building_campus"
-        app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
-
-    <TextView
-        android:id="@+id/tv_select_building_campus_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Tampa, FL"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_select_building_campus"
-        app:layout_constraintTop_toBottomOf="@+id/tv_select_building_campus" />
 </androidx.constraintlayout.widget.ConstraintLayout>

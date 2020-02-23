@@ -46,7 +46,7 @@ public class RoomsWithBatchAssignmentsAdapter extends SortedListAdapter<RoomWith
 
         @Override
         protected void performBind(@NonNull RoomWithBatchAssignments item) {
-            mBinding.setRoom(item.getRoom());
+            mBinding.setRoom(item);
         }
 
         @Override
