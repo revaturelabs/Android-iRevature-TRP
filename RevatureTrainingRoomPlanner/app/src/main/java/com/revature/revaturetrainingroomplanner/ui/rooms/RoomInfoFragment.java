@@ -89,7 +89,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
                         //String dateStr = date.getMonthString() + date.getDayString() + date.getYear();
                         String dateNiceString = "Start date selected: " + date.getMonthString() + "/" + date.getDayString() + "/" + date.getYear();
                         Snackbar.make(view, dateNiceString, Snackbar.LENGTH_SHORT).show();
-
+                        date.setMarkStyle(MarkStyle.BACKGROUND, Color.BLUE);
                         mBatchAssignment.setStart_date(localDate.toString());
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             // assume room gets booked for 12 weeks of training

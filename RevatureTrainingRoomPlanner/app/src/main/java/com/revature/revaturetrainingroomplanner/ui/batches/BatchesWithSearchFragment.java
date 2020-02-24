@@ -33,6 +33,7 @@ import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter.OnItemListener;
 import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment;
 import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private ConstraintLayout mCampusLayout;
     private ImageView mCapusImageView;
     private TextView mTextViewCampusName;
+    private TextView mTextViewCampusLocation;
 
     /* Variables */
     private BatchesViewModel batchesViewModel;
@@ -91,13 +93,13 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
         View root = inflater.inflate(R.layout.fragment_batches_with_search, container, false);
+        mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
+        mTextViewCampusLocation = root.findViewById(R.id.tv_select_batches_campus_location);
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
         mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
         mCampusLayout = root.findViewById(R.id.constraintlayout_campus_selected);
         mCapusImageView = root.findViewById(R.id.img_select_building_campus);
-        mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-
         mAdapter = new BatchWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mAdapter.addCallback(this);
@@ -213,6 +215,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
                                     .commit();
 
                             mModels = filteredBatches;
+                            setLocation(mCampusSelected.getCampus_id());
                         }
                     } else {
                         batchWithSkills.getBatch().setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
@@ -256,16 +259,21 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     }
 
     private void setLocation(long campusID) {
-
         if (campusID == USF_ID) {
+            mTextViewCampusLocation.setText("Tampa, FL");
             mCapusImageView.setImageResource(R.drawable.tampa);
         } else if (campusID == UTA_ID) {
+            mTextViewCampusLocation.setText("Arlington, TX");
             mCapusImageView.setImageResource(R.drawable.dallas);
         } else if (campusID == Reston_ID) {
+            mTextViewCampusLocation.setText("Reston, VA");
             mCapusImageView.setImageResource(R.drawable.reston);
         } else if (campusID == WVU_ID) {
+            mTextViewCampusLocation.setText("Morgantown, WVU");
             mCapusImageView.setImageResource(R.drawable.morgantown);
         }
     }
+
+
 
 }

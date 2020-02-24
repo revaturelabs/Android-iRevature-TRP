@@ -68,12 +68,12 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private Campus mCampusSelected;
     private TextView campus;
     private TextView location;
-    private MyViewModel model;
     private OnItemListener mOnItemListener;
     private ImageView mCapusImageView;
     private TextView mTextViewCampusName;
     private ConstraintLayout mCampusLayout;
     private CampusSelectedViewModel mCampusSelectedViewModel;
+    private TextView mTextViewCampusLocation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,10 +99,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mCampusLayout = root.findViewById(R.id.constraintlayout_campus_selected);
         mCapusImageView = root.findViewById(R.id.img_select_building_campus);
         mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-
-        model = new ViewModelProvider(requireActivity()).get(MyViewModel.class);
-        campus.setText(model.getSelectedCampus().getValue());
-
+        mTextViewCampusLocation = root.findViewById(R.id.tv_select_building_campus_location);
         mAdapter = new BuildingWithRoomsAdapter(getContext(), BUILDING_WITH_ROOMS_COMPARATOR, this);
         mAdapter.addCallback(this);
 
@@ -204,7 +201,6 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
     public void setCampus(String campus){
         this.campus.setText(campus);
-
         this.location.setText("");
     }
 
@@ -266,18 +262,21 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         });
     }
 
-
     private void setLocation(long campusID) {
-
         if (campusID == USF_ID) {
+            mTextViewCampusLocation.setText("Tampa, FL");
             mCapusImageView.setImageResource(R.drawable.tampa);
         } else if (campusID == UTA_ID) {
+            mTextViewCampusLocation.setText("Arlington, TX");
             mCapusImageView.setImageResource(R.drawable.dallas);
         } else if (campusID == Reston_ID) {
+            mTextViewCampusLocation.setText("Reston, VA");
             mCapusImageView.setImageResource(R.drawable.reston);
         } else if (campusID == WVU_ID) {
+            mTextViewCampusLocation.setText("Morgantown, WVU");
             mCapusImageView.setImageResource(R.drawable.morgantown);
         }
     }
+
 
 }

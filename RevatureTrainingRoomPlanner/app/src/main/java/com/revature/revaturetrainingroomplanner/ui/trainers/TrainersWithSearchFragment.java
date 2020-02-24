@@ -33,6 +33,7 @@ import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment;
 import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
     private Campus mCampusSelected;
     private ImageView mCapusImageView;
     private TextView mTextViewCampusName;
+    private TextView mTextViewLocation;
     private ConstraintLayout mCampusLayout;
     private CampusSelectedViewModel mCampusSelectedViewModel;
 
@@ -93,11 +95,10 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mCampusLayout = root.findViewById(R.id.constraintlayout_campus_selected);
         mCapusImageView = root.findViewById(R.id.img_select_building_campus);
         mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-
+        mTextViewLocation = root.findViewById(R.id.tv_select_trainers_campus_location);
         mTrainerWithSkillsAdapter = new TrainerWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
         mTrainerWithSkillsAdapter.addCallback(this);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
 
         mTrainerRecyclerView.setLayoutManager(layoutManager);
@@ -127,6 +128,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         return root;
     }
+
 
     @Override
     public void onEditStarted() {
@@ -234,12 +236,16 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         if (campusID == USF_ID) {
             mCapusImageView.setImageResource(R.drawable.tampa);
+            mTextViewLocation.setText("Tampa, FL");
         } else if (campusID == UTA_ID) {
             mCapusImageView.setImageResource(R.drawable.dallas);
+            mTextViewLocation.setText("Arlington, TX");
         } else if (campusID == Reston_ID) {
             mCapusImageView.setImageResource(R.drawable.reston);
+            mTextViewLocation.setText("Reston, VA");
         } else if (campusID == WVU_ID) {
             mCapusImageView.setImageResource(R.drawable.morgantown);
+            mTextViewLocation.setText("Morgantown, WV");
         }
     }
 }
