@@ -77,7 +77,7 @@ public class TrainerRepository {
         new InsertAsyncTask<>(trainerSkillCrossRefDAO).execute(trainerSkillCrossRefs.toArray(new TrainerSkillCrossRef[0]));
     }
 
-    public LiveData<Trainer> retrieveByIDTask(int id) {
+    public Trainer retrieveByIDTask(int id) {
         return mDao.getByID(id);
     }
 

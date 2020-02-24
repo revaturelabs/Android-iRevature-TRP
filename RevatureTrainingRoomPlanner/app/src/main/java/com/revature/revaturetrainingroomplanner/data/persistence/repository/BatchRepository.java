@@ -74,7 +74,7 @@ public class BatchRepository {
         new InsertAsyncTask<>(batchSkillCrossRefDAO).execute(batchSkillCrossRefs.toArray(new BatchSkillCrossRef[0]));
     }
 
-    public LiveData<Batch> retrieveByIDTask(int id) {
+    public Batch retrieveByIDTask(long id) {
         return ((BatchDAO)mDao).getByID(id);
     }
 

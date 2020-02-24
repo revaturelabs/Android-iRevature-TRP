@@ -16,19 +16,22 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
 public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.OnItemListener {
 
-    ConstraintLayout mCampusLayout;
+    private ConstraintLayout mCampusLayout;
     private NavController mNavController;
     private CampusSelectedViewModel mCampusSelectedViewModel;
+    private CampusRepository mCampusRepository;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mCampusRepository = new CampusRepository(getContext());
         mCampusSelectedViewModel = new ViewModelProvider(requireActivity()).get(CampusSelectedViewModel.class);
     }
 
@@ -59,13 +62,11 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
     @Override
     public void onBatchClick(BatchWithSkills batchWithSkills) {
         BatchAssignment batchAssignment = new BatchAssignment();
-
         batchAssignment.setBatch_id(batchWithSkills.getBatch().getBatch_id());
 
+        mCampusSelectedViewModel.setCampusSelected(mCampusRepository.retrieveByIDTask(batchWithSkills.getBatch().getCampus_id()));
         BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment, batchWithSkills.getBatch());
         mNavController.navigate(actionNavBatchesToNavRooms);
     }
-
-//    public void set
 
 }

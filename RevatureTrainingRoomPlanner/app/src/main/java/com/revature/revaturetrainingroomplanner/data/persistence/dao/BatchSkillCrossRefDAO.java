@@ -16,6 +16,10 @@ public interface BatchSkillCrossRefDAO extends BaseDAO<BatchSkillCrossRef> {
     LiveData<List<BatchSkillCrossRef>> getAll();
 
     @Override
+    @Query("SELECT * FROM batchskillcrossref WHERE ba_id = :ID")
+    BatchSkillCrossRef getByID(long ID);
+
+    @Override
     @Query("DELETE FROM batchskillcrossref")
     int deleteAll();
 }

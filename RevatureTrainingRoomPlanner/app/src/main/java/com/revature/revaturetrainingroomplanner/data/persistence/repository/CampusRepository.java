@@ -48,7 +48,7 @@ public class CampusRepository {
         new InsertAsyncTask<>(mDao).execute(campuses);
     }
 
-    public LiveData<Campus> retrieveByIDTask(int id) {
+    public Campus retrieveByIDTask(long id) {
         return mDao.getByID(id);
     }
 

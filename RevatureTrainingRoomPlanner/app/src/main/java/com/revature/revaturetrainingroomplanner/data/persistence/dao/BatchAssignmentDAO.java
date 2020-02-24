@@ -19,6 +19,11 @@ public interface BatchAssignmentDAO extends BaseDAO<BatchAssignment> {
 
     @Override
     @Transaction
+    @Query("SELECT * FROM batch_assignments WHERE bas_id = :ID")
+    BatchAssignment getByID(long ID);
+
+    @Override
+    @Transaction
     @Query("DELETE FROM batch_assignments")
     int deleteAll();
 

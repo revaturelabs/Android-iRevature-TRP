@@ -18,6 +18,10 @@ public interface SkillDAO extends BaseDAO<Skill> {
     LiveData<List<Skill>> getAll();
 
     @Override
+    @Query("SELECT * FROM skills where s_name = :ID")
+    Skill getByID(long ID);
+
+    @Override
     @Transaction
     @Query("DELETE FROM skills")
     int deleteAll();

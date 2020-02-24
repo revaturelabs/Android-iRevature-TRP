@@ -90,7 +90,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mTrainerRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);
         mSearchView = root.findViewById(R.id.searchview_trainers_with_search_search_trainer);
         mProgressBar = root.findViewById(R.id.progressbar_trainers_with_search_progress);
-        mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
+        mCampusLayout = root.findViewById(R.id.constraintlayout_campus_selected);
         mCapusImageView = root.findViewById(R.id.img_select_building_campus);
         mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
 
@@ -123,6 +123,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         });
         mSearchView.setQueryHint("Look for trainer");
 
+        subscribeObservers();
 
         return root;
     }
@@ -219,11 +220,13 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
     private void subscribeObservers() {
         mCampusSelectedViewModel.getCampusSelected().observe(getViewLifecycleOwner(), campus -> {
-            mCampusSelected = campus;
-            mCampusLayout.setVisibility(View.VISIBLE);
+            if (campus != null) {
+                mCampusSelected = campus;
+                mCampusLayout.setVisibility(View.VISIBLE);
 
-            setLocation(mCampusSelected.getCampus_id());
-            mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+                setLocation(mCampusSelected.getCampus_id());
+                mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+            }
         });
     }
 
