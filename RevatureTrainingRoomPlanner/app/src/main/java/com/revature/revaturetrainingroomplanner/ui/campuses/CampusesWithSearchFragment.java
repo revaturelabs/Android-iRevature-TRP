@@ -57,6 +57,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
     private static int counter = 1;
     private ImageView campusImg;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
             name="model"
-            type="com.revature.revaturetrainingroomplanner.data.model.Building"/>
+            type="com.revature.revaturetrainingroomplanner.data.model.BuildingWithRooms"/>
 
     </data>
 
@@ -36,13 +37,15 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:padding="8dp"
-                android:text="@{model.building_name}"
+                android:text="@{model.building.building_name}"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <FrameLayout
+                android:id="@+id/frameLayout3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,8 +66,29 @@
                     android:clickable="true"
                     android:fadeScrollbars="false"
                     android:focusable="true"
-                    app:adapter="@{model.roomsWithBatchAssignmentsAdapter}" />
+                    app:adapter="@{model.building.roomsWithBatchAssignmentsAdapter}" />
             </FrameLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(model.rooms.size())}"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="2dp"
+                android:text="Number of rooms: "
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

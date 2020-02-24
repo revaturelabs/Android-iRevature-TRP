@@ -51,7 +51,7 @@ public class BuildingWithRoomsAdapter extends SortedListAdapter<BuildingWithRoom
 
         @Override
         protected void performBind(@NonNull BuildingWithRooms item) {
-            mBinding.setModel(item.getBuilding());
+            mBinding.setModel(item);
         }
 
         @Override

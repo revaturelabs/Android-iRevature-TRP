@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBinding;
 
@@ -17,6 +18,10 @@ import java.util.Comparator;
 public class CampusesAdapter extends SortedListAdapter<Campus> {
 
     private OnItemListener mOnItemListener;
+    final static String USF_CAMPUS = "USF";
+    final static String UTA_CAMPUS = "UTA";
+    final static String WVU_CAMPUS = "WVU";
+    final static String DC_CAMPUS = "DC";
 
     public CampusesAdapter(Context context, Comparator<Campus> comparator, OnItemListener onItemListener) {
         super(context, Campus.class, comparator);
@@ -48,7 +53,25 @@ public class CampusesAdapter extends SortedListAdapter<Campus> {
         @Override
         protected void performBind(@NonNull Campus item) {
             mBinding.setModel(item);
+            setCampusImage(item.getCampus_name());
 
+        }
+
+        private void setCampusImage(String campus_name) {
+            switch (campus_name){
+                case USF_CAMPUS:
+                    mBinding.imgCampusRowIcon.setImageResource(R.drawable.tampa);
+                    break;
+                case UTA_CAMPUS:
+                    mBinding.imgCampusRowIcon.setImageResource(R.drawable.dallas);
+                    break;
+                case WVU_CAMPUS:
+                    mBinding.imgCampusRowIcon.setImageResource(R.drawable.morgantown);
+                    break;
+                case DC_CAMPUS:
+                    mBinding.imgCampusRowIcon.setImageResource(R.drawable.reston);
+                    break;
+            }
         }
 
 

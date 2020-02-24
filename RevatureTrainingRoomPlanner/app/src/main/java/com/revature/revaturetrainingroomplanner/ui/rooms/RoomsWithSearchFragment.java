@@ -68,6 +68,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private Campus mCampusSelected;
     private TextView campus;
     private TextView location;
+    private MyViewModel model;
     private OnItemListener mOnItemListener;
     private ImageView mCapusImageView;
     private TextView mTextViewCampusName;
@@ -98,6 +99,9 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
         mCapusImageView = root.findViewById(R.id.img_select_building_campus);
         mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
+
+        model = new ViewModelProvider(requireActivity()).get(MyViewModel.class);
+        campus.setText(model.getSelectedCampus().getValue());
 
         mAdapter = new BuildingWithRoomsAdapter(getContext(), BUILDING_WITH_ROOMS_COMPARATOR, this);
         mAdapter.addCallback(this);

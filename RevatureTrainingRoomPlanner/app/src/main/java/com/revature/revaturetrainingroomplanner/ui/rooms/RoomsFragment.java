@@ -88,6 +88,7 @@ public class RoomsFragment extends Fragment implements RoomsWithBatchAssignments
             campusImg.setImageResource(R.drawable.dallas);
             return "Arlington, TX";
         } else if (campusID == Reston_ID) {
+            campus.setText(R.string.campus_dc);
             campusImg.setImageResource(R.drawable.reston);
             return "Reston, VA";
         } else if (campusID == WVU_ID) {

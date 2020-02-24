@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +31,7 @@ import com.revature.revaturetrainingroomplanner.util.KeyboardUtil;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private static final String TAG = "MainActivity";
     private final int LOGOUT_MENU_LOCATION = 3;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         saveSharedPreference = new SaveSharedPreference(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
