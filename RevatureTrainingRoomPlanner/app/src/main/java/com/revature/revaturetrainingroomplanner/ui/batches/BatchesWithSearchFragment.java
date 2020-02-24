@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +59,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private ProgressBar mProgressBar;
     private ConstraintLayout mCampusLayout;
     private ImageView mCapusImageView;
+    private TextView mTextViewCampusName;
 
     /* Variables */
     private BatchesViewModel batchesViewModel;
@@ -65,7 +67,6 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private BatchWithSkillsAdapter mAdapter;
     private Animator mAnimator;
     private BatchRepository mBatchesRepository;
-    private long mCampusSelectedID;
     private Campus mCampusSelected;
     private CampusSelectedViewModel mCampusSelectedViewModel;
 
@@ -76,7 +77,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         mBatchesRepository = new BatchRepository(getContext());
 
-//        mCampusSelectedViewModel = new ViewModelProvider(getViewModelStore());
+        mCampusSelectedViewModel = new ViewModelProvider(requireActivity()).get(CampusSelectedViewModel.class);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -94,14 +95,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
         mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
-
-        if(mCampusSelected != null) {
-            mCampusLayout.setVisibility(View.VISIBLE);
-
-            mCapusImageView = root.findViewById(R.id.img_select_building_campus);
-            TextView textViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-            textViewCampusName.setText(mCampusSelected.getCampus_name());
-        }
+        mCapusImageView = root.findViewById(R.id.img_select_building_campus);
+        mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
 
         mAdapter = new BatchWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
@@ -132,6 +127,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         });
 
         mSearchView.setQueryHint("Look for batch");
+
+        subscribeObservers();
 
         return root;
     }
@@ -207,7 +204,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
                 for (BatchWithSkills batchWithSkills: batches) {
                     if (mCampusSelected != null) {
-                        if (batchWithSkills.getBatch().getCampus_id() == mCampusSelectedID) {
+                        if (batchWithSkills.getBatch().getCampus_id() == mCampusSelected.getCampus_id()) {
                             batchWithSkills.getBatch().setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
                             filteredBatches.add(batchWithSkills);
 
@@ -244,12 +241,18 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         });
     }
 
-    public void setCampusIDFilter(long campusIDFilter) {
-        mCampusSelectedID = campusIDFilter;
-    }
+    private void subscribeObservers() {
+        mCampusSelectedViewModel.getCampusSelected().observe(getViewLifecycleOwner(), campus -> {
+            if (campus == null) {
+                mCampusLayout.setVisibility(View.GONE);
+            } else {
+                mCampusSelected = campus;
+                mCampusLayout.setVisibility(View.VISIBLE);
 
-    public void setCampusSelected(Campus campusSelected) {
-        mCampusSelected = campusSelected;
+                setLocation(mCampusSelected.getCampus_id());
+                mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+            }
+        });
     }
 
     private void setLocation(long campusID) {

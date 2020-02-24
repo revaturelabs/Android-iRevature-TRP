@@ -13,6 +13,10 @@ public class CampusSelectedViewModel extends ViewModel {
     public CampusSelectedViewModel() {
     }
 
+    public void setCampusSelected(Campus campusSelected) {
+        mCampusSelected.setValue(campusSelected);
+    }
+
     public LiveData<Campus> getCampusSelected() {
         return mCampusSelected;
     }
