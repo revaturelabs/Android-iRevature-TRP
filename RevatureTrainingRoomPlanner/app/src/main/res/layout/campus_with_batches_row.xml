@@ -23,8 +23,9 @@
             android:id="@+id/constraintlayout_campus_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
             android:clickable="true"
-            android:focusable="true">
+            android:background="?attr/selectableItemBackground">
 
             <ImageView
                 android:id="@+id/img_campus_row_icon"

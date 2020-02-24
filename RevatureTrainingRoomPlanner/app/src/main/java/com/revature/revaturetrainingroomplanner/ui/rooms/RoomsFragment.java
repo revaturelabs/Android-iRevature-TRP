@@ -17,6 +17,7 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.RoomWithBatchAssignments;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 
 import java.util.Objects;
@@ -68,8 +69,8 @@ public class RoomsFragment extends Fragment implements RoomsWithBatchAssignments
     @Override
     public void onStart() {
         super.onStart();
-//        CampusRepository campusRepository = new CampusRepository(getContext());
-//        campusRepository.retrieveCampusesFromAPI();
+        CampusRepository campusRepository = new CampusRepository(getContext());
+        campusRepository.retrieveCampusesFromAPI();
     }
 
     @Override

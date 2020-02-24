@@ -181,6 +181,7 @@ public class CampusWithBatchesSearchFragment extends Fragment implements SortedL
         final String lowerCaseQuery = query.toLowerCase();
 
         final List<CampusWithBatches> filteredModelList = new ArrayList<>();
+        final List<BatchWithSkills> filteredBatchList = new ArrayList<>();
         for (CampusWithBatches model : models) {
             for (BatchWithSkills batchWithSkills: model.getBatchWithSkills()) {
                 final String text = batchWithSkills.getBatch().getBatch_name().toLowerCase();

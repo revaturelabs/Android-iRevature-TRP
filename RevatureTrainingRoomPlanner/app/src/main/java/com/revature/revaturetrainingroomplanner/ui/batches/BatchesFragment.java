@@ -17,6 +17,7 @@ import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.CampusWithBatches;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusWithBatchesAdapter;
@@ -57,8 +58,8 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
     @Override
     public void onStart() {
         super.onStart();
-//        BatchRepository batchRepository = new BatchRepository(getContext());
-//        batchRepository.retrieveBatchesFromAPI();
+        BatchRepository batchRepository = new BatchRepository(getContext());
+        batchRepository.retrieveBatchesFromAPI();
     }
 
     @Override
