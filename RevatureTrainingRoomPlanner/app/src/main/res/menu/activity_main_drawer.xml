@@ -14,12 +14,12 @@
             android:title="@string/nav_menu_lookup" />
 
     </group>
-    <group
-        android:id="@+id/nav_menu_group_middle">
-        <item
-            android:id="@+id/nav_help"
-            android:title="@string/menu_help" />
-    </group>
+<!--    <group-->
+<!--        android:id="@+id/nav_menu_group_middle">-->
+<!--        <item-->
+<!--            android:id="@+id/nav_help"-->
+<!--            android:title="@string/menu_help" />-->
+<!--    </group>-->
     <group
         android:id="@+id/nav_menu_group_bottom">
         <item
