@@ -70,7 +70,6 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 //        campusesViewModel =
 //                ViewModelProviders.of(this).get(CampusesViewModel.class);
 //        View root = inflater.inflate(R.layout.fragment_campuses, container, false);
-
         mBinding = DataBindingUtil.inflate(inflater, R.layout.campus_row, container, false);
 
         OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());

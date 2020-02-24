@@ -36,7 +36,6 @@ public class CampusesFragment extends Fragment implements CampusesAdapter.OnItem
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mNavController = Navigation.findNavController(view);
-        model = new ViewModelProvider(requireActivity()).get(MyViewModel.class);
     }
 
     @Override
