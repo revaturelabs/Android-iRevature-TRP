@@ -41,7 +41,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
             "UTA"
     };
 
-    private static final Comparator<Campus> ALPHABETICAL_COMPARATOR = (a, b) -> a.getText().compareTo(b.getText());
+    private static final Comparator<Campus> ALPHABETICAL_COMPARATOR = (a, b) -> a.getCampus_name().compareTo(b.getCampus_name());
 
     private static final String TAG = "CampusesSearchFragment";
 
@@ -107,7 +107,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
                 return true;
             }
         });
-        mSearchView.setQueryHint("Look for campus");
+        mSearchView.setQueryHint("Search by campus's name");
 
         return root;
     }
@@ -167,7 +167,7 @@ public class CampusesWithSearchFragment extends Fragment implements SortedListAd
 
         final List<Campus> filteredModelList = new ArrayList<>();
         for (Campus model : models) {
-            final String text = model.getText().toLowerCase();
+            final String text = model.getCampus_name().toLowerCase();
             if (text.contains(lowerCaseQuery)) {
                 filteredModelList.add(model);
             }

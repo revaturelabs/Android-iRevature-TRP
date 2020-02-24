@@ -6,6 +6,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.model.CampusWithBatches;
 
 import java.util.List;
 
@@ -16,6 +17,10 @@ public interface CampusDAO extends BaseDAO<Campus> {
     @Transaction
     @Query("SELECT * FROM campuses")
     LiveData<List<Campus>> getAll();
+
+    @Transaction
+    @Query("SELECT * FROM campuses")
+    LiveData<List<CampusWithBatches>> getAllCampusesWithBatches();
 
     @Override
     @Transaction

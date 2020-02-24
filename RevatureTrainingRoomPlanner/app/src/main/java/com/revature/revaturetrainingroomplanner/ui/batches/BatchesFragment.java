@@ -16,11 +16,13 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
+import com.revature.revaturetrainingroomplanner.data.model.CampusWithBatches;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.adapter.CampusWithBatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
-public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.OnItemListener {
+public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.OnItemListener, CampusWithBatchesAdapter.OnItemListener {
 
     private ConstraintLayout mCampusLayout;
     private NavController mNavController;
@@ -67,6 +69,23 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
         mCampusSelectedViewModel.setCampusSelected(mCampusRepository.retrieveByIDTask(batchWithSkills.getBatch().getCampus_id()));
         BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment, batchWithSkills.getBatch());
         mNavController.navigate(actionNavBatchesToNavRooms);
+//        mCampusSelectedViewModel.setCampusSelected(mCampusRepository.retrieveByIDTask(batchWithSkills.getBatch().getCampus_id()));
     }
 
+    @Override
+    public void onCampusClick(CampusWithBatches campusClicked) {
+        if (campusClicked.isBatchesVisible()) {
+            campusClicked.getCampus().getBatchWithSkillsAdapter().edit()
+                    .removeAll()
+                    .commit();
+
+            campusClicked.setBatchesVisible(false);
+        } else {
+            campusClicked.getCampus().getBatchWithSkillsAdapter().edit()
+                    .replaceAll(campusClicked.getBatchWithSkills())
+                    .commit();
+
+            campusClicked.setBatchesVisible(true);
+        }
+    }
 }

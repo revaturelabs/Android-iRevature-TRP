@@ -54,7 +54,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'sun.bob:mcalendarview:1.0.0'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
 
     def room_version = "2.2.4"
 

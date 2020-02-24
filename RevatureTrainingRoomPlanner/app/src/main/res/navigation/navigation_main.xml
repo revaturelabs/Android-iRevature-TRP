@@ -23,8 +23,8 @@
         <fragment
             android:id="@+id/nav_rooms"
             android:name="com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment"
-            tools:layout="@layout/fragment_rooms"
-            android:label="@string/menu_rooms">
+            android:label="@string/menu_rooms"
+            tools:layout="@layout/fragment_rooms">
             <action
                 android:id="@+id/action_nav_rooms_to_nav_rooms_info"
                 app:destination="@id/nav_room_info"

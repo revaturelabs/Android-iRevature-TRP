@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.BuildingRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.CampusRowBindingImpl;
+import com.revature.revaturetrainingroomplanner.databinding.CampusWithBatchesRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.FragmentTrainersWithSearchBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.RoomRowBindingImpl;
 import com.revature.revaturetrainingroomplanner.databinding.SkillRowBindingImpl;
@@ -30,20 +31,23 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   private static final int LAYOUT_CAMPUSROW = 3;
 
-  private static final int LAYOUT_FRAGMENTTRAINERSWITHSEARCH = 4;
+  private static final int LAYOUT_CAMPUSWITHBATCHESROW = 4;
 
-  private static final int LAYOUT_ROOMROW = 5;
+  private static final int LAYOUT_FRAGMENTTRAINERSWITHSEARCH = 5;
 
-  private static final int LAYOUT_SKILLROW = 6;
+  private static final int LAYOUT_ROOMROW = 6;
 
-  private static final int LAYOUT_TRAINERROW = 7;
+  private static final int LAYOUT_SKILLROW = 7;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(7);
+  private static final int LAYOUT_TRAINERROW = 8;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(8);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.batch_row, LAYOUT_BATCHROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.building_row, LAYOUT_BUILDINGROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.campus_row, LAYOUT_CAMPUSROW);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.campus_with_batches_row, LAYOUT_CAMPUSWITHBATCHESROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.fragment_trainers_with_search, LAYOUT_FRAGMENTTRAINERSWITHSEARCH);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.room_row, LAYOUT_ROOMROW);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.revature.revaturetrainingroomplanner.R.layout.skill_row, LAYOUT_SKILLROW);
@@ -76,6 +80,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new CampusRowBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for campus_row is invalid. Received: " + tag);
+        }
+        case  LAYOUT_CAMPUSWITHBATCHESROW: {
+          if ("layout/campus_with_batches_row_0".equals(tag)) {
+            return new CampusWithBatchesRowBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for campus_with_batches_row is invalid. Received: " + tag);
         }
         case  LAYOUT_FRAGMENTTRAINERSWITHSEARCH: {
           if ("layout/fragment_trainers_with_search_0".equals(tag)) {
@@ -156,12 +166,13 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(7);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(8);
 
     static {
       sKeys.put("layout/batch_row_0", com.revature.revaturetrainingroomplanner.R.layout.batch_row);
       sKeys.put("layout/building_row_0", com.revature.revaturetrainingroomplanner.R.layout.building_row);
       sKeys.put("layout/campus_row_0", com.revature.revaturetrainingroomplanner.R.layout.campus_row);
+      sKeys.put("layout/campus_with_batches_row_0", com.revature.revaturetrainingroomplanner.R.layout.campus_with_batches_row);
       sKeys.put("layout/fragment_trainers_with_search_0", com.revature.revaturetrainingroomplanner.R.layout.fragment_trainers_with_search);
       sKeys.put("layout/room_row_0", com.revature.revaturetrainingroomplanner.R.layout.room_row);
       sKeys.put("layout/skill_row_0", com.revature.revaturetrainingroomplanner.R.layout.skill_row);

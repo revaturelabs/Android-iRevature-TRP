@@ -1,6 +1,5 @@
 package com.revature.revaturetrainingroomplanner.ui.campuses;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,33 +15,32 @@ import androidx.navigation.Navigation;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.ui.adapter.CampusesAdapter;
-
-
+import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CampusesFragment extends Fragment implements CampusesAdapter.OnItemListener {
-
     private NavController mNavController;
-    MyViewModel model;
-
+    private CampusSelectedViewModel mCampusSelectedViewModel;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCampusSelectedViewModel = new ViewModelProvider(requireActivity()).get(CampusSelectedViewModel.class);
+    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-        ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_campuses, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mNavController = Navigation.findNavController(view);
     }
-
     @Override
     public void onCampusClick(Campus campusClicked) {
-        model.select(campusClicked.getCampus_name());
+        mCampusSelectedViewModel.setCampusSelected(campusClicked);
         CampusesFragmentDirections.ActionCampusesFragmentToNavLookup actionCampusesFragmentToNavLookup = CampusesFragmentDirections.actionCampusesFragmentToNavLookup(campusClicked);
         mNavController.navigate(actionCampusesFragmentToNavLookup);
     }
-
 }

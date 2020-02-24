@@ -28,30 +28,30 @@ public class RoomsFragment extends Fragment implements RoomsWithBatchAssignments
     private static final long WVU_ID = 3;
     private static final long Reston_ID = 4;
 
-    RoomsWithSearchFragment mSearchFragment;
     private BatchAssignment mBatchAssignment;
-    private RoomsViewModel roomsViewModel;
     private NavController mNavController;
     private Batch mBatchSelected;
     private String batchCampus;
     private TextView campus, location;
     private ImageView campusImg;
 
+    public RoomsFragment() {
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_rooms, container, false);
-        View fragment = root.findViewById(R.id.fragment_rooms_search_fragment);
-        mSearchFragment = (RoomsWithSearchFragment) getChildFragmentManager().findFragmentById(R.id.fragment_rooms_search_fragment);
-
-        mBatchSelected = RoomsFragmentArgs.fromBundle(getArguments()).getBatchSelected();
-        batchCampus = mBatchSelected.getBatch_name().substring(3,6);
-
-        campus = fragment.findViewById(R.id.tv_select_building_campus);
-        location = fragment.findViewById(R.id.tv_select_building_campus_location);
-        campusImg = fragment.findViewById(R.id.img_select_building_campus);
-        campus.setText(batchCampus);
-        location.setText(setLocation(mBatchSelected.getCampus_id()));
+//        View fragment = root.findViewById(R.id.fragment_rooms_search_fragment);
+//
+//        mBatchSelected = RoomsFragmentArgs.fromBundle(getArguments()).getBatchSelected();
+//        batchCampus = mBatchSelected.getBatch_name().substring(3,6);
+//
+//        campus = fragment.findViewById(R.id.tv_select_building_campus);
+//        location = fragment.findViewById(R.id.tv_select_building_campus_location);
+//        campusImg = fragment.findViewById(R.id.img_select_building_campus);
+//        campus.setText(batchCampus);
+//        location.setText(setLocation(mBatchSelected.getCampus_id()));
 
         mNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
         return root;
@@ -88,7 +88,6 @@ public class RoomsFragment extends Fragment implements RoomsWithBatchAssignments
             campusImg.setImageResource(R.drawable.dallas);
             return "Arlington, TX";
         } else if (campusID == Reston_ID) {
-            campus.setText(R.string.campus_dc);
             campusImg.setImageResource(R.drawable.reston);
             return "Reston, VA";
         } else if (campusID == WVU_ID) {

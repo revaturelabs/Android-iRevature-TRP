@@ -13,6 +13,7 @@ import com.revature.revaturetrainingroomplanner.data.async.UpdateAsyncTask;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
 import com.revature.revaturetrainingroomplanner.data.model.Building;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.model.CampusWithBatches;
 import com.revature.revaturetrainingroomplanner.data.model.Room;
 import com.revature.revaturetrainingroomplanner.data.persistence.dao.CampusDAO;
 import com.revature.revaturetrainingroomplanner.data.persistence.database.AppDatabase;
@@ -54,6 +55,10 @@ public class CampusRepository {
 
     public LiveData<List<Campus>> retrieveAllTask() {
         return mDao.getAll();
+    }
+
+    public LiveData<List<CampusWithBatches>> retrieveAllCampusesWithBatchesTask() {
+        return mDao.getAllCampusesWithBatches();
     }
 
     public void updateTask(Campus... campuses) {

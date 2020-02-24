@@ -33,7 +33,6 @@ import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter.OnItemListener;
-import com.revature.revaturetrainingroomplanner.ui.rooms.RoomsFragment;
 import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
 import java.util.ArrayList;
@@ -122,7 +121,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
                 return true;
             }
         });
-        mSearchView.setQueryHint("Look for trainer");
+        mSearchView.setQueryHint("Search by trainer's name");
 
         subscribeObservers();
 

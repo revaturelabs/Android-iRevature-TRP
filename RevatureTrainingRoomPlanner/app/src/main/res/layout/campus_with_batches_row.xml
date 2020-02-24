@@ -1,0 +1,87 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="com.revature.revaturetrainingroomplanner.data.model.CampusWithBatches"/>
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_campus_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="3dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_campus_row"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/img_campus_row_icon"
+                android:layout_width="120dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/tampa" />
+
+            <TextView
+                android:id="@+id/campus_row_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@{@string/campus_location(model.campus.city, model.campus.state)}"
+                android:textColor="#999999"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/campus_row_campus"
+                app:layout_constraintTop_toBottomOf="@+id/campus_row_campus" />
+
+            <TextView
+                android:id="@+id/campus_row_campus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:padding="3dp"
+                android:text="@{model.campus.campus_name}"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/img_campus_row_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/img_campus_row_icon"
+                app:layout_constraintTop_toBottomOf="@+id/img_campus_row_icon">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_campus_with_batches_row_batches"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:adapter="@{model.campus.batchWithSkillsAdapter}">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

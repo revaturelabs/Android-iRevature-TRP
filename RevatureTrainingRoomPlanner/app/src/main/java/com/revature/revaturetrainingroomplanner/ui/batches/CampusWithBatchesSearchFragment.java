@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +26,13 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
+import com.revature.revaturetrainingroomplanner.data.model.CampusWithBatches;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
-import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
-import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
+import com.revature.revaturetrainingroomplanner.data.persistence.repository.CampusRepository;
+import com.revature.revaturetrainingroomplanner.databinding.CampusWithBatchesRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.adapter.CampusWithBatchesAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
@@ -39,12 +40,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
+public class CampusWithBatchesSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
     /* Constants */
     private static final String TAG = "BatchesSearchFragment";
 
-    private static final Comparator<BatchWithSkills> ALPHABETICAL_COMPARATOR = (a, b) -> a.getBatch().getBatch_name().compareTo(b.getBatch().getBatch_name());
+    private static final Comparator<CampusWithBatches> ALPHABETICAL_COMPARATOR_CAMPUSES = (a, b) -> a.getCampus().getCampus_name().compareTo(b.getCampus().getCampus_name());
+    private static final Comparator<BatchWithSkills> ALPHABETICAL_COMPARATOR_BATCHES = (a, b) -> a.getBatch().getBatch_name().compareTo(b.getBatch().getBatch_name());
     private static final Comparator<Skill> ALPHABETICAL_COMPARATOR_SKILLS = (a, b) -> a.getSkill().compareTo(b.getSkill());
 
     private static final long USF_ID = 1;
@@ -54,52 +56,45 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
     /* UI Components */
     private RecyclerView mRecyclerView;
-    private BatchRowBinding mBinding;
+    private CampusWithBatchesRowBinding mBinding;
     private SearchView mSearchView;
     private ProgressBar mProgressBar;
     private ConstraintLayout mCampusLayout;
     private ImageView mCapusImageView;
     private TextView mTextViewCampusName;
-    private TextView mTextViewCampusLocation;
 
     /* Variables */
-    private BatchesViewModel batchesViewModel;
-    private List<BatchWithSkills> mModels;
-    private BatchWithSkillsAdapter mAdapter;
+    private List<CampusWithBatches> mModels;
+    private CampusWithBatchesAdapter mAdapter;
     private Animator mAnimator;
-    private BatchRepository mBatchesRepository;
+    private CampusRepository mCampusesRepository;
     private Campus mCampusSelected;
     private CampusSelectedViewModel mCampusSelectedViewModel;
+    private OnItemListener mOnBatchListener;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBatchesRepository = new BatchRepository(getContext());
+        mCampusesRepository = new CampusRepository(getContext());
 
         mCampusSelectedViewModel = new ViewModelProvider(requireActivity()).get(CampusSelectedViewModel.class);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        batchesViewModel =
-//                ViewModelProviders.of(this).get(BatchesViewModel.class);
-//        View root = inflater.inflate(R.layout.fragment_batches, container, false);
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.batch_row, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.campus_with_batches_row, container, false);
 
-        OnItemListener onItemListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
+        CampusWithBatchesAdapter.OnItemListener onCampusListener = (CampusWithBatchesAdapter.OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
+        mOnBatchListener = (OnItemListener) ((getParentFragment() instanceof OnItemListener) ? getParentFragment() :  getParentFragment().getParentFragment());
 
-        View root = inflater.inflate(R.layout.fragment_batches_with_search, container, false);
-        mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-        mTextViewCampusLocation = root.findViewById(R.id.tv_select_batches_campus_location);
+        View root = inflater.inflate(R.layout.fragment_campuses_with_batches_with_search, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_batches_with_search_list_batches);
         mSearchView = root.findViewById(R.id.searchview_batches_with_search_search_batch);
         mProgressBar = root.findViewById(R.id.progressbar_batches_with_search_progress);
-        mCampusLayout = root.findViewById(R.id.constraintlayout_campus_selected);
-        mCapusImageView = root.findViewById(R.id.img_select_building_campus);
-        mAdapter = new BatchWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
+        mAdapter = new CampusWithBatchesAdapter(getContext(), ALPHABETICAL_COMPARATOR_CAMPUSES, onCampusListener);
 
         mAdapter.addCallback(this);
 
@@ -118,7 +113,7 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
             @Override
             public boolean onQueryTextChange(String query) {
-                final List<BatchWithSkills> filteredModelList = filter(mModels, query);
+                final List<CampusWithBatches> filteredModelList = filter(mModels, query);
                 mAdapter.edit()
                         .replaceAll(filteredModelList)
                         .commit();
@@ -128,8 +123,6 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         });
 
         mSearchView.setQueryHint("Search by batch's name");
-
-        subscribeObservers();
 
         return root;
     }
@@ -184,14 +177,16 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         mAnimator.start();
     }
 
-    private static List<BatchWithSkills> filter(List<BatchWithSkills> models, String query) {
+    private static List<CampusWithBatches> filter(List<CampusWithBatches> models, String query) {
         final String lowerCaseQuery = query.toLowerCase();
 
-        final List<BatchWithSkills> filteredModelList = new ArrayList<>();
-        for (BatchWithSkills model : models) {
-            final String text = model.getBatch().getBatch_name().toLowerCase();
-            if (text.contains(lowerCaseQuery)) {
-                filteredModelList.add(model);
+        final List<CampusWithBatches> filteredModelList = new ArrayList<>();
+        for (CampusWithBatches model : models) {
+            for (BatchWithSkills batchWithSkills: model.getBatchWithSkills()) {
+                final String text = batchWithSkills.getBatch().getBatch_name().toLowerCase();
+                if (text.contains(lowerCaseQuery)) {
+                    filteredModelList.add(model);
+                }
             }
         }
         return filteredModelList;
@@ -199,80 +194,40 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
     private void retrieveBatches() {
 
-        mBatchesRepository.retrieveAllTask().observe(getViewLifecycleOwner(), batches -> {
-            if (batches != null) {
-                List<BatchWithSkills> filteredBatches = new ArrayList<>();
+        mCampusesRepository.retrieveAllCampusesWithBatchesTask().observe(getViewLifecycleOwner(), campuses -> {
+            if (campuses != null) {
 
-                for (BatchWithSkills batchWithSkills: batches) {
-                    if (mCampusSelected != null) {
-                        if (batchWithSkills.getBatch().getCampus_id() == mCampusSelected.getCampus_id()) {
-                            batchWithSkills.getBatch().setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
-                            filteredBatches.add(batchWithSkills);
+                for (CampusWithBatches campusWithBatches: campuses) {
+                    campusWithBatches.getCampus().setBatchWithSkillsAdapter(new BatchWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_BATCHES, mOnBatchListener));
 
-                            mAdapter.edit()
-                                    .replaceAll(filteredBatches)
-                                    .commit();
-
-                            mModels = filteredBatches;
-                            setLocation(mCampusSelected.getCampus_id());
-                        }
-                    } else {
+                    for (BatchWithSkills batchWithSkills: campusWithBatches.getBatchWithSkills()) {
                         batchWithSkills.getBatch().setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
-                        filteredBatches.add(batchWithSkills);
                     }
                 }
 
-                if (mCampusSelected != null) {
-                    mAdapter.edit()
-                            .replaceAll(filteredBatches)
-                            .commit();
+                mAdapter.edit()
+                        .replaceAll(campuses)
+                        .commit();
 
-                    mModels = filteredBatches;
-                } else {
-                    mAdapter.edit()
-                            .replaceAll(batches)
-                            .commit();
+                mModels = campuses;
 
-                    mModels = batches;
-                }
-
-                Log.d(TAG, "onChanged: " + mModels.size());
             } else {
                 mModels = new ArrayList<>();
             }
         });
     }
 
-    private void subscribeObservers() {
-        mCampusSelectedViewModel.getCampusSelected().observe(getViewLifecycleOwner(), campus -> {
-            if (campus == null) {
-                mCampusLayout.setVisibility(View.GONE);
-            } else {
-                mCampusSelected = campus;
-                mCampusLayout.setVisibility(View.VISIBLE);
-
-                setLocation(mCampusSelected.getCampus_id());
-                mTextViewCampusName.setText(mCampusSelected.getCampus_name());
-            }
-        });
-    }
-
     private void setLocation(long campusID) {
+
         if (campusID == USF_ID) {
-            mTextViewCampusLocation.setText("Tampa, FL");
             mCapusImageView.setImageResource(R.drawable.tampa);
         } else if (campusID == UTA_ID) {
-            mTextViewCampusLocation.setText("Arlington, TX");
             mCapusImageView.setImageResource(R.drawable.dallas);
         } else if (campusID == Reston_ID) {
-            mTextViewCampusLocation.setText("Reston, VA");
             mCapusImageView.setImageResource(R.drawable.reston);
         } else if (campusID == WVU_ID) {
-            mTextViewCampusLocation.setText("Morgantown, WVU");
             mCapusImageView.setImageResource(R.drawable.morgantown);
         }
     }
-
-
 
 }

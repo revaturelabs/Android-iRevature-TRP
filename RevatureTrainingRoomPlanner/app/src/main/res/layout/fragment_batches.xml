@@ -7,8 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
-        android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchesWithSearchFragment"
+        android:name="com.revature.revaturetrainingroomplanner.ui.batches.CampusWithBatchesSearchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </FrameLayout>
