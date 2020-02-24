@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -51,6 +52,7 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
     private int mCurrentTab = 0;
     private Campus mCampusSelected;
     private BatchesWithSearchFragment mBatchesSearchFragment;
+    private TextView campus;
 
     public LookupFragment() {
         // Required empty public constructor
@@ -67,7 +69,6 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
         mTabLayout = root.findViewById(R.id.tablayout_lookup_categories);
         mSearchNavController = Navigation.findNavController(root.findViewById(navhost_lookup_search_fragment));
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-
         mCampusSelected = LookupFragmentArgs.fromBundle(getArguments()).getCampusSelected();
 //        mBatchesSearchFragment = (BatchesWithSearchFragment) getChildFragmentManager().getPrimaryNavigationFragment();
 
@@ -83,6 +84,9 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
         mTabLayout.addTab(mTrainersTab);
         mTabLayout.addTab(mBatchesTab);
         mTabLayout.addTab(mRoomsTab);
+
+        View child = root.findViewById(R.id.trainers_with_search_layout);
+//        campus = child.findViewById(R.id.trainers_with_search_layout);
 
         if (savedInstanceState != null) {
             mTabLayout.selectTab(mTabLayout.getTabAt(savedInstanceState.getInt("last tab")));

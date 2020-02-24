@@ -4,23 +4,14 @@
     android:id="@+id/room_with_search_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_icon_background"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="0dp"
-        android:layout_height="179dp"
-        android:src="@drawable/rev_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <SearchView
         android:id="@+id/searchview_rooms_with_search_search_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:queryHint="@string/search_room_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +23,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchview_rooms_with_search_search_room">
@@ -75,6 +67,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -85,6 +78,7 @@
             android:id="@+id/recyclerview_rooms_with_search_list_rooms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:fadeScrollbars="false"
             android:scrollbars="vertical">
 

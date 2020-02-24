@@ -6,20 +6,11 @@
     android:orientation="vertical"
     android:id="@+id/campuses_layout">
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="0dp"
-        android:layout_height="179dp"
-        android:src="@drawable/rev_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <SearchView
         android:id="@+id/searchview_campuses_with_search_search_campus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +32,7 @@
             android:id="@+id/recyclerview_campuses_with_search_list_campuses"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:fadeScrollbars="false"
             android:scrollbars="vertical">
 

@@ -39,13 +39,6 @@ import java.util.List;
  */
 public class RoomsWithSearchFragment extends Fragment implements SortedListAdapter.Callback,BuildingWithRoomsAdapter.OnItemListener {
 
-    private static final String[] ROOMS = new String[]{
-            "Phirom",
-            "Suck",
-            "My",
-            "Boobs"
-    };
-
     private static final Comparator<BuildingWithRooms> BUILDING_WITH_ROOMS_COMPARATOR = (a, b) -> a.getBuilding().getBuilding_name().compareTo(b.getBuilding().getBuilding_name());
     private static final Comparator<RoomWithBatchAssignments> ROOM_WITH_BATCH_ASSIGNMENTS_COMPARATOR = (a, b) -> a.getRoom().getRoom_name().compareTo(b.getRoom().getRoom_name());
 
