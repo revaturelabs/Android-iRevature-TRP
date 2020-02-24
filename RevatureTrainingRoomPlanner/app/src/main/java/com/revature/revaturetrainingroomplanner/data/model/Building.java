@@ -25,6 +25,7 @@ public class Building implements SortedListAdapter.ViewModel, Parcelable {
     @ColumnInfo(name = "bu_name")
     private String building_name;
 
+    @ColumnInfo(name = "c_id")
     @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
     private long campus_id;
 

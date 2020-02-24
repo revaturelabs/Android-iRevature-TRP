@@ -24,28 +24,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 import com.revature.revaturetrainingroomplanner.R;
-import com.revature.revaturetrainingroomplanner.data.model.Batch;
 import com.revature.revaturetrainingroomplanner.data.model.BatchWithSkills;
 import com.revature.revaturetrainingroomplanner.data.model.Campus;
 import com.revature.revaturetrainingroomplanner.data.model.Skill;
 import com.revature.revaturetrainingroomplanner.data.persistence.repository.BatchRepository;
-import com.revature.revaturetrainingroomplanner.data.requests.ServiceGenerator;
-import com.revature.revaturetrainingroomplanner.data.requests.TRPAPI;
-import com.revature.revaturetrainingroomplanner.data.requests.responses.BatchesGETResponse;
 import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BatchWithSkillsAdapter.OnItemListener;
 import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
+import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BatchesWithSearchFragment extends Fragment implements SortedListAdapter.Callback {
 
@@ -74,13 +65,18 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
     private BatchWithSkillsAdapter mAdapter;
     private Animator mAnimator;
     private BatchRepository mBatchesRepository;
+    private long mCampusSelectedID;
     private Campus mCampusSelected;
+    private CampusSelectedViewModel mCampusSelectedViewModel;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mBatchesRepository = new BatchRepository(getContext());
+
+//        mCampusSelectedViewModel = new ViewModelProvider(getViewModelStore());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -207,16 +203,39 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
 
         mBatchesRepository.retrieveAllTask().observe(getViewLifecycleOwner(), batches -> {
             if (batches != null) {
+                List<BatchWithSkills> filteredBatches = new ArrayList<>();
+
                 for (BatchWithSkills batchWithSkills: batches) {
-                    Batch batch = batchWithSkills.getBatch();
-                    batch.setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                    if (mCampusSelected != null) {
+                        if (batchWithSkills.getBatch().getCampus_id() == mCampusSelectedID) {
+                            batchWithSkills.getBatch().setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                            filteredBatches.add(batchWithSkills);
+
+                            mAdapter.edit()
+                                    .replaceAll(filteredBatches)
+                                    .commit();
+
+                            mModels = filteredBatches;
+                        }
+                    } else {
+                        batchWithSkills.getBatch().setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
+                        filteredBatches.add(batchWithSkills);
+                    }
                 }
 
-                mAdapter.edit()
-                        .replaceAll(batches)
-                        .commit();
+                if (mCampusSelected != null) {
+                    mAdapter.edit()
+                            .replaceAll(filteredBatches)
+                            .commit();
 
-                mModels = batches;
+                    mModels = filteredBatches;
+                } else {
+                    mAdapter.edit()
+                            .replaceAll(batches)
+                            .commit();
+
+                    mModels = batches;
+                }
 
                 Log.d(TAG, "onChanged: " + mModels.size());
             } else {
@@ -225,44 +244,8 @@ public class BatchesWithSearchFragment extends Fragment implements SortedListAda
         });
     }
 
-    private void insertFakeData(Batch batch) {
-        mBatchesRepository.insertBatchTask(batch);
-    }
-
-    private void clearFakeData() {
-        mBatchesRepository.deleteAllTask(new Batch(""));
-    }
-
-    private void testRetrofitRequest() {
-        TRPAPI batchesAPI = ServiceGenerator.getAPI();
-
-        Call<BatchesGETResponse> responseCall = batchesAPI.getBatches();
-
-        responseCall.enqueue(new Callback<BatchesGETResponse>() {
-            @Override
-            public void onResponse(Call<BatchesGETResponse> call, Response<BatchesGETResponse> response) {
-                Log.d(TAG, "onResponse: server response: " + response.toString());
-                if (response.code() == 200) {
-                    Log.d(TAG, "onResponse: " + response.body().toString());
-                    List<Batch> batches = new ArrayList<>(response.body().getBatches());
-
-                    for(Batch batch: batches) {
-                        Log.d(TAG, "onResponse: " + batch.toString());
-                    }
-                } else {
-                    try {
-                        Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BatchesGETResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getMessage());
-            }
-        });
+    public void setCampusIDFilter(long campusIDFilter) {
+        mCampusSelectedID = campusIDFilter;
     }
 
     public void setCampusSelected(Campus campusSelected) {

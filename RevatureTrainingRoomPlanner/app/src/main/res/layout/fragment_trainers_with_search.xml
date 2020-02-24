@@ -1,81 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/trainers_with_search_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
 
-    <SearchView
-        android:id="@+id/searchview_trainers_with_search_search_trainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <variable
+            name="model"
+            type="com.revature.revaturetrainingroomplanner.data.model.Campus" />
 
-    </SearchView>
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview_trainers_with_search_search_trainer">
-
-        <ImageView
-            android:id="@+id/img_select_building_campus"
-            android:layout_width="120dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/tampa" />
-
-        <TextView
-            android:id="@+id/tv_select_building_campus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@{model.campus_name}"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/img_select_building_campus"
-            app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_trainers_with_search_list_trainers"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/trainers_with_search_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fadeScrollbars="false"
-            android:scrollbars="vertical">
+            android:orientation="vertical">
 
-        </androidx.recyclerview.widget.RecyclerView>
 
-        <ProgressBar
-            android:id="@+id/progressbar_trainers_with_search_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+            <SearchView
+                android:id="@+id/searchview_trainers_with_search_search_trainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            </SearchView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchview_trainers_with_search_search_trainer">
+
+                <ImageView
+                    android:id="@+id/img_select_building_campus"
+                    android:layout_width="120dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/tampa" />
+
+                <TextView
+                    android:id="@+id/tv_select_building_campus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{model.campus_name}"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/img_select_building_campus"
+                    app:layout_constraintTop_toTopOf="@+id/img_select_building_campus" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_trainers_with_search_list_trainers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fadeScrollbars="false"
+                    android:scrollbars="vertical">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <ProgressBar
+                    android:id="@+id/progressbar_trainers_with_search_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

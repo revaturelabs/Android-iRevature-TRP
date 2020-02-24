@@ -35,7 +35,8 @@ public class BuildingRepository {
 
     public LiveData<List<BuildingWithRooms>> retrieveAllTask() {
         Log.d(TAG, "retrieveAllTask: retrieved all buildings");
-        return mDao.getAllBuildings();
+        LiveData liveData = mDao.getAllBuildings();
+        return liveData;
     }
 
     public void updateTask(Building... buildings) {

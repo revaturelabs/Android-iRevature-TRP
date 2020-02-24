@@ -18,7 +18,7 @@ public class RoomWithBatchAssignments implements SortedListAdapter.ViewModel, Pa
 
     @Relation(
             parentColumn = "r_id",
-            entityColumn = "bas_id"
+            entityColumn = "r_id"
     )
     private List<BatchAssignment> batchAssignments;
 

@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,15 +44,13 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
     private static final String TAG = "TrainersWithSearchFragm";
 
-    private static final String[] TRAINERS = new String[]{
-            "2001Mobile",
-            "2100FullStack",
-            "2200FrontEnd",
-            "4150Backend"
-    };
-
     private static final Comparator<TrainerWithSkills> ALPHABETICAL_COMPARATOR = (a, b) -> a.getTrainer().getTrainer_name().compareTo(b.getTrainer().getTrainer_name());
     private static final Comparator<Skill> ALPHABETICAL_COMPARATOR_SKILLS = (a, b) -> a.getText().compareTo(b.getText());
+
+    private static final long USF_ID = 1;
+    private static final long UTA_ID = 2;
+    private static final long WVU_ID = 3;
+    private static final long Reston_ID = 4;
 
     private List<TrainerWithSkills> mTrainerWithSkillsModels;
     private RecyclerView mTrainerRecyclerView;
@@ -61,7 +61,10 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
     private ProgressBar mProgressBar;
     private TrainerRepository mTrainerRepository;
     private static int counter = 1;
+    private Campus mCampusSelected;
     private long mCampusSelectedID;
+    private ImageView mCapusImageView;
+    private ConstraintLayout mCampusLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +86,15 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mTrainerRecyclerView = root.findViewById(R.id.recyclerview_trainers_with_search_list_trainers);
         mSearchView = root.findViewById(R.id.searchview_trainers_with_search_search_trainer);
         mProgressBar = root.findViewById(R.id.progressbar_trainers_with_search_progress);
+        mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
+
+        if(mCampusSelected != null) {
+            mCampusLayout.setVisibility(View.VISIBLE);
+
+            mCapusImageView = root.findViewById(R.id.img_select_building_campus);
+            TextView textViewCampusName = root.findViewById(R.id.tv_select_building_campus);
+            textViewCampusName.setText(mCampusSelected.getCampus_name());
+        }
 
         mTrainerWithSkillsAdapter = new TrainerWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
@@ -209,5 +221,22 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
     public void setCampusIDFilter(long campusIDFilter) {
         mCampusSelectedID = campusIDFilter;
+    }
+
+    public void setCampusSelected(Campus campusSelected) {
+        mCampusSelected = campusSelected;
+    }
+
+    private void setLocation(long campusID) {
+
+        if (campusID == USF_ID) {
+            mCapusImageView.setImageResource(R.drawable.tampa);
+        } else if (campusID == UTA_ID) {
+            mCapusImageView.setImageResource(R.drawable.dallas);
+        } else if (campusID == Reston_ID) {
+            mCapusImageView.setImageResource(R.drawable.reston);
+        } else if (campusID == WVU_ID) {
+            mCapusImageView.setImageResource(R.drawable.morgantown);
+        }
     }
 }

@@ -16,7 +16,7 @@ public class BuildingWithRooms implements SortedListAdapter.ViewModel {
 
     @Relation(
             parentColumn = "bu_id",
-            entityColumn = "r_id",
+            entityColumn = "bu_id",
             entity = Room.class
     )
     private List<RoomWithBatchAssignments> rooms;

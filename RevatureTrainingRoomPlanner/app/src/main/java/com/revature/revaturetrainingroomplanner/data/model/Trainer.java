@@ -31,6 +31,7 @@ public class Trainer implements SortedListAdapter.ViewModel, Parcelable {
     @ColumnInfo(name = "t_location")
     private String trainer_location;
 
+    @ColumnInfo(name = "c_id")
     @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
     private long campus_id;
 

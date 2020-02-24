@@ -19,14 +19,17 @@ public class BatchAssignment implements SortedListAdapter.ViewModel, Parcelable 
     @PrimaryKey(autoGenerate = true)
     private long batch_assignment_id;
 
+    @ColumnInfo(name = "ba_id")
     @ForeignKey(entity = Batch.class, parentColumns = "b_id", childColumns = "b_id")
     private
     long batch_id;
 
+    @ColumnInfo(name = "t_id")
     @ForeignKey(entity = Trainer.class, parentColumns = "t_id", childColumns = "t_id")
     private
     long trainer_id;
 
+    @ColumnInfo(name = "r_id")
     @ForeignKey(entity = Room.class, parentColumns = "r_id", childColumns = "r_id")
     private long room_id;
 

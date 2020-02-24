@@ -85,9 +85,6 @@ public class CampusRepository {
                     List<Campus> campuses = response.body().getLocations();
 
                     if (campuses != null) {
-
-                        insertCampusTask(campuses.toArray(new Campus[0]));
-
                         BuildingRepository buildingRepository = new BuildingRepository(mContext);
                         RoomRepository roomRepository = new RoomRepository(mContext);
                         BatchAssignmentRepository batchAssignmentRepository = new BatchAssignmentRepository(mContext);
@@ -133,6 +130,8 @@ public class CampusRepository {
                                 buildingRepository.insertBuildingTask(buildings.toArray(new Building[0]));
                             }
                         }
+
+                        insertCampusTask(campuses.toArray(new Campus[0]));
                     } else {
                         try {
                             Log.d(TAG, "onResponse:  " + Objects.requireNonNull(response.errorBody()).string());

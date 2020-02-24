@@ -27,9 +27,11 @@ public class Room implements SortedListAdapter.ViewModel, Parcelable {
     @ColumnInfo(name = "r_occupancy")
     private int occupancy;
 
+    @ColumnInfo(name = "c_id")
     @ForeignKey(entity = Campus.class, parentColumns = "c_id", childColumns = "c_id")
     private long campus_id;
 
+    @ColumnInfo(name = "bu_id")
     @ForeignKey(entity = Building.class, parentColumns = "bu_id", childColumns = "bu_id")
     private long building_id;
 
