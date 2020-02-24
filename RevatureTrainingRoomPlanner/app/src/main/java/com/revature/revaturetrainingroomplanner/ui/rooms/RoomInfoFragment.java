@@ -117,7 +117,7 @@ public class RoomInfoFragment extends Fragment implements View.OnClickListener {
         mBatchAssignment.setRoom_id(mRoomSelected.getRoom().getRoom_id());
         Bundle args = new Bundle();
         args.putParcelable("batchAssignment", mBatchAssignment);
-        args.putParcelable("roomSelected", mRoomSelected);
+        args.putLong("campusID", mRoomSelected.getRoom().getCampus_id());
         mNavController.navigate(R.id.action_nav_room_info_to_nav_trainers, args);
     }
 
