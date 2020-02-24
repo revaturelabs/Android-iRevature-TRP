@@ -96,7 +96,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mRecyclerView = root.findViewById(R.id.recyclerview_rooms_with_search_list_rooms);
         mSearchView = root.findViewById(R.id.searchview_rooms_with_search_search_room);
         mProgressBar = root.findViewById(R.id.progressbar_rooms_with_search_progress);
-        mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
+        mCampusLayout = root.findViewById(R.id.constraintlayout_campus_selected);
         mCapusImageView = root.findViewById(R.id.img_select_building_campus);
         mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
 
@@ -256,11 +256,13 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
 
     private void subscribeObservers() {
         mCampusSelectedViewModel.getCampusSelected().observe(getViewLifecycleOwner(), campus -> {
-            mCampusSelected = campus;
-            mCampusLayout.setVisibility(View.VISIBLE);
+            if (campus != null) {
+                mCampusSelected = campus;
+                mCampusLayout.setVisibility(View.VISIBLE);
 
-            setLocation(mCampusSelected.getCampus_id());
-            mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+                setLocation(mCampusSelected.getCampus_id());
+                mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+            }
         });
     }
 

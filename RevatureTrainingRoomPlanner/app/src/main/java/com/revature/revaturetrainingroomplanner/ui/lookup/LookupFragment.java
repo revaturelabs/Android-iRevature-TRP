@@ -69,8 +69,6 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
         mTabLayout = root.findViewById(R.id.tablayout_lookup_categories);
         mSearchNavController = Navigation.findNavController(root.findViewById(navhost_lookup_search_fragment));
         mMainNavController = Navigation.findNavController(Objects.requireNonNull(getActivity()), R.id.nav_host_fragment);
-        mCampusSelected = LookupFragmentArgs.fromBundle(getArguments()).getCampusSelected();
-//        mBatchesSearchFragment = (BatchesWithSearchFragment) getChildFragmentManager().getPrimaryNavigationFragment();
 
         mTrainersTab = mTabLayout.newTab();
         mTrainersTab.setText(R.string.tab_trainers);

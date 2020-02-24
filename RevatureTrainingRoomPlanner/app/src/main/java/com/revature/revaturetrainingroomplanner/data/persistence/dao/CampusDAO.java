@@ -17,9 +17,10 @@ public interface CampusDAO extends BaseDAO<Campus> {
     @Query("SELECT * FROM campuses")
     LiveData<List<Campus>> getAll();
 
+    @Override
     @Transaction
     @Query("SELECT * FROM campuses WHERE c_id = :id")
-    LiveData<Campus> getByID(int id);
+    Campus getByID(long id);
 
     @Override
     @Transaction

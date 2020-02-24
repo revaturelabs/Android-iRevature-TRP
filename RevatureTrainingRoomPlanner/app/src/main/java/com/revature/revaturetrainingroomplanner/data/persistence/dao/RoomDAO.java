@@ -23,9 +23,10 @@ public interface RoomDAO extends BaseDAO<Room> {
     @Query("SELECT * FROM rooms")
     LiveData<List<RoomWithBatchAssignments>> getAllRooms();
 
+    @Override
     @Transaction
     @Query("SELECT * FROM rooms WHERE r_id = :id")
-    LiveData<Room> getByID(int id);
+    Room getByID(long id);
 
     @Override
     @Transaction

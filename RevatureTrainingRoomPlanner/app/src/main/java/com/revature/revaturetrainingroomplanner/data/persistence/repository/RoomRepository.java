@@ -34,7 +34,7 @@ public class RoomRepository {
         new InsertAsyncTask<>(mDao).execute(rooms);
     }
 
-    public LiveData<Room> retrieveByIDTask(int id) {
+    public Room retrieveByIDTask(int id) {
         return mDao.getByID(id);
     }
 

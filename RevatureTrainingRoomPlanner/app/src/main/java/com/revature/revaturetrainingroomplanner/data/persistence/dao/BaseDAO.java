@@ -27,6 +27,8 @@ public interface BaseDAO<T> {
 
     LiveData<List<T>> getAll();
 
+    T getByID(long ID);
+
     @Transaction
     @Update
     int update(T... objects);

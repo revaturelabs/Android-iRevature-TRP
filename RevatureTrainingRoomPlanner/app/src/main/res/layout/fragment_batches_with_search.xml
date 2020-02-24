@@ -19,7 +19,7 @@
     </SearchView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_batches_with_search_campus_selected"
+        android:id="@+id/constraintlayout_campus_selected"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -61,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_batches_with_search_campus_selected">
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_campus_selected">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_batches_with_search_list_batches"
