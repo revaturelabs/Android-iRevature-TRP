@@ -46,7 +46,6 @@ public class RoomsFragment extends Fragment implements RoomsWithBatchAssignments
 
         mBatchSelected = RoomsFragmentArgs.fromBundle(getArguments()).getBatchSelected();
         batchCampus = mBatchSelected.getBatch_name().substring(3,6);
-        mSearchFragment.setCampusIDFilter(mBatchSelected.getCampus_id());
 
         campus = fragment.findViewById(R.id.tv_select_building_campus);
         location = fragment.findViewById(R.id.tv_select_building_campus_location);

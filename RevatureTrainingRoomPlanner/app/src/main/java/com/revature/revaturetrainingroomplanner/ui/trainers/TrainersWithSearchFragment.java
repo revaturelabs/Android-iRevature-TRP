@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,7 @@ import com.revature.revaturetrainingroomplanner.databinding.TrainerRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.SkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.TrainerWithSkillsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -62,9 +64,10 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
     private TrainerRepository mTrainerRepository;
     private static int counter = 1;
     private Campus mCampusSelected;
-    private long mCampusSelectedID;
     private ImageView mCapusImageView;
+    private TextView mTextViewCampusName;
     private ConstraintLayout mCampusLayout;
+    private CampusSelectedViewModel mCampusSelectedViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
         mTrainerRepository = new TrainerRepository(getContext());
         mTrainerWithSkillsModels = new ArrayList<>();
+        mCampusSelectedViewModel = new ViewModelProvider(requireActivity()).get(CampusSelectedViewModel.class);
     }
 
     @Override
@@ -87,14 +91,8 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         mSearchView = root.findViewById(R.id.searchview_trainers_with_search_search_trainer);
         mProgressBar = root.findViewById(R.id.progressbar_trainers_with_search_progress);
         mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
-
-        if(mCampusSelected != null) {
-            mCampusLayout.setVisibility(View.VISIBLE);
-
-            mCapusImageView = root.findViewById(R.id.img_select_building_campus);
-            TextView textViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-            textViewCampusName.setText(mCampusSelected.getCampus_name());
-        }
+        mCapusImageView = root.findViewById(R.id.img_select_building_campus);
+        mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
 
         mTrainerWithSkillsAdapter = new TrainerWithSkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR, onItemListener);
 
@@ -203,7 +201,7 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
 
                 for (TrainerWithSkills trainerWithSkills: trainers) {
                     trainer = trainerWithSkills.getTrainer();
-                    if (trainer.getCampus_id() == mCampusSelectedID) {
+                    if (trainer.getCampus_id() == mCampusSelected.getCampus_id()) {
                         trainer.setSkillsAdapter(new SkillsAdapter(getContext(), ALPHABETICAL_COMPARATOR_SKILLS));
                         filteredTrainers.add(trainerWithSkills);
                     }
@@ -219,12 +217,14 @@ public class TrainersWithSearchFragment extends Fragment implements SortedListAd
         });
     }
 
-    public void setCampusIDFilter(long campusIDFilter) {
-        mCampusSelectedID = campusIDFilter;
-    }
+    private void subscribeObservers() {
+        mCampusSelectedViewModel.getCampusSelected().observe(getViewLifecycleOwner(), campus -> {
+            mCampusSelected = campus;
+            mCampusLayout.setVisibility(View.VISIBLE);
 
-    public void setCampusSelected(Campus campusSelected) {
-        mCampusSelected = campusSelected;
+            setLocation(mCampusSelected.getCampus_id());
+            mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+        });
     }
 
     private void setLocation(long campusID) {

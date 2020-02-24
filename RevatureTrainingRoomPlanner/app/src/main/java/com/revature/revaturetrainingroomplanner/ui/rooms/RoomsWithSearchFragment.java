@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ import com.revature.revaturetrainingroomplanner.databinding.BuildingRowBinding;
 import com.revature.revaturetrainingroomplanner.ui.adapter.BuildingWithRoomsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter;
 import com.revature.revaturetrainingroomplanner.ui.adapter.RoomsWithBatchAssignmentsAdapter.OnItemListener;
+import com.revature.revaturetrainingroomplanner.ui.viewmodels.CampusSelectedViewModel;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -64,12 +66,13 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
     private RoomRepository mRoomRepository;
     private static int counter = 1;
     private Campus mCampusSelected;
-    private long mCampusSelectedID;
     private TextView campus;
     private TextView location;
     private OnItemListener mOnItemListener;
     private ImageView mCapusImageView;
+    private TextView mTextViewCampusName;
     private ConstraintLayout mCampusLayout;
+    private CampusSelectedViewModel mCampusSelectedViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,6 +80,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         
         mBuildingRepository = new BuildingRepository(getContext());
         mRoomRepository = new RoomRepository(getContext());
+        mCampusSelectedViewModel = new ViewModelProvider(requireActivity()).get(CampusSelectedViewModel.class);
     }
 
     @Override
@@ -92,14 +96,8 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         mSearchView = root.findViewById(R.id.searchview_rooms_with_search_search_room);
         mProgressBar = root.findViewById(R.id.progressbar_rooms_with_search_progress);
         mCampusLayout = root.findViewById(R.id.constraintLayout_batches_with_search_campus_selected);
-
-        if(mCampusSelected != null) {
-            mCampusLayout.setVisibility(View.VISIBLE);
-
-            mCapusImageView = root.findViewById(R.id.img_select_building_campus);
-            TextView textViewCampusName = root.findViewById(R.id.tv_select_building_campus);
-            textViewCampusName.setText(mCampusSelected.getCampus_name());
-        }
+        mCapusImageView = root.findViewById(R.id.img_select_building_campus);
+        mTextViewCampusName = root.findViewById(R.id.tv_select_building_campus);
 
         mAdapter = new BuildingWithRoomsAdapter(getContext(), BUILDING_WITH_ROOMS_COMPARATOR, this);
         mAdapter.addCallback(this);
@@ -129,6 +127,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         });
         mSearchView.setQueryHint("Look for room");
 
+        subscribeObservers();
 
         return root;
     }
@@ -217,7 +216,7 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
                 List<BuildingWithRooms> filteredBuildings = new ArrayList<>();
 
                 for (BuildingWithRooms buildingWithRooms: buildings) {
-                    if (buildingWithRooms.getBuilding().getCampus_id() == mCampusSelectedID) {
+                    if (buildingWithRooms.getBuilding().getCampus_id() == mCampusSelected.getCampus_id()) {
                         buildingWithRooms.getBuilding().setRoomsWithBatchAssignmentsAdapter(new RoomsWithBatchAssignmentsAdapter(getContext(), ROOM_WITH_BATCH_ASSIGNMENTS_COMPARATOR, mOnItemListener));
                         filteredBuildings.add(buildingWithRooms);
                     }
@@ -232,10 +231,6 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
                 mModels = new ArrayList<>();
             }
         });
-    }
-
-    public void setCampusIDFilter(long campusIDFilter) {
-        mCampusSelectedID = campusIDFilter;
     }
 
     @Override
@@ -255,9 +250,16 @@ public class RoomsWithSearchFragment extends Fragment implements SortedListAdapt
         }
     }
 
-    public void setCampusSelected(Campus campusSelected) {
-        mCampusSelected = campusSelected;
+    private void subscribeObservers() {
+        mCampusSelectedViewModel.getCampusSelected().observe(getViewLifecycleOwner(), campus -> {
+            mCampusSelected = campus;
+            mCampusLayout.setVisibility(View.VISIBLE);
+
+            setLocation(mCampusSelected.getCampus_id());
+            mTextViewCampusName.setText(mCampusSelected.getCampus_name());
+        });
     }
+
 
     private void setLocation(long campusID) {
 

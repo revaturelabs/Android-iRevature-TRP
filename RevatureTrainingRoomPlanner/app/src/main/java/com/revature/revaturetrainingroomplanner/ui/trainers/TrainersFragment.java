@@ -41,9 +41,6 @@ public class TrainersFragment extends Fragment implements TrainerWithSkillsAdapt
         mBatchAssignment = TrainersFragmentArgs.fromBundle(getArguments()).getBatchAssignment();
         mCampusSelectedID = TrainersFragmentArgs.fromBundle(getArguments()).getCampusID();
 
-        searchFragment.setCampusIDFilter(mCampusSelectedID);
-
-
 //        final TextView textView = root.findViewById(R.id.text_send);
 //        trainersViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
         return root;
