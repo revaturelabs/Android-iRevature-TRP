@@ -6,15 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAG = "MainActivity";
-    private final int LOGOUT_MENU_LOCATION = 3;
+    private final int LOGOUT_MENU_LOCATION = 2;
 
     private BatchRepository mBatchRepository;
     private CampusRepository mCampusRepository;
