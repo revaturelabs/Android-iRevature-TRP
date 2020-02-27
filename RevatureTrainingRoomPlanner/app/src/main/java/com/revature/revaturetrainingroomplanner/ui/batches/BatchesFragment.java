@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 
 import com.revature.revaturetrainingroomplanner.R;
 import com.revature.revaturetrainingroomplanner.data.model.BatchAssignment;
@@ -71,6 +73,15 @@ public class BatchesFragment extends Fragment implements BatchWithSkillsAdapter.
         BatchesFragmentDirections.ActionNavBatchesToNavRooms actionNavBatchesToNavRooms = BatchesFragmentDirections.actionNavBatchesToNavRooms(batchAssignment, batchWithSkills.getBatch());
         mNavController.navigate(actionNavBatchesToNavRooms);
 //        mCampusSelectedViewModel.setCampusSelected(mCampusRepository.retrieveByIDTask(batchWithSkills.getBatch().getCampus_id()));
+    }
+
+    @Override
+    public void onBatchLongClick(BatchWithSkills batchClicked, TextView tvBatchName) {
+//        Transition sharedElementTransition = TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move);
+        FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
+                .addSharedElement(tvBatchName, getString(R.string.transition_batch_to_batch_info_name, batchClicked.getBatch().getBatch_id()))
+                .build();
+        mNavController.navigate(BatchesFragmentDirections.actionNavBatchesToBatchInfo(batchClicked.getBatch()), extras);
     }
 
     @Override

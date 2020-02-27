@@ -81,5 +81,10 @@
     <string name="batchinfo_skill">Skill Focus:</string>
     <string name="app_version">Version 1.0</string>
     <string name="launch_title">TrainingRoomPlanner</string>
+    <string name="transition_batch_to_batch_info_name">batch name %d</string>
+    <string name="transition_batch_to_batch_info_associates">Associates</string>
+    <string name="transition_batch_to_batch_info_number_of_associates">Number of associates</string>
+    <string name="transition_batch_to_batch_info_skills_required">Skills Required</string>
+    <string name="transition_batch_to_batch_info_skills_required_recycler_view">Skills required recycler view</string>
 
 </resources>

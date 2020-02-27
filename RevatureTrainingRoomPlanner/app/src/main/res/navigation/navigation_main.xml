@@ -19,6 +19,13 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
+            <action
+                android:id="@+id/action_nav_batches_to_batchInfo"
+                app:destination="@id/batchInfo"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         </fragment>
         <fragment
             android:id="@+id/nav_rooms"
@@ -106,6 +113,15 @@
                 android:name="trainerSelected"
                 app:argType="com.revature.revaturetrainingroomplanner.data.model.Trainer" />
 
+        </fragment>
+        <fragment
+            android:id="@+id/batchInfo"
+            android:name="com.revature.revaturetrainingroomplanner.ui.batches.BatchInfo"
+            android:label="fragment_batch_info"
+            tools:layout="@layout/fragment_batch_info" >
+            <argument
+                android:name="batchSelected"
+                app:argType="com.revature.revaturetrainingroomplanner.data.model.Batch" />
         </fragment>
     </navigation>
     <navigation android:id="@+id/navigation_lookup"

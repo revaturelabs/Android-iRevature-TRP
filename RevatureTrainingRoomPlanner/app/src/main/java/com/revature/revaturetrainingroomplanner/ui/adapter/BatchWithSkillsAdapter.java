@@ -1,9 +1,11 @@
 package com.revature.revaturetrainingroomplanner.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +18,8 @@ import com.revature.revaturetrainingroomplanner.databinding.BatchRowBinding;
 import java.util.Comparator;
 
 public class BatchWithSkillsAdapter extends SortedListAdapter<BatchWithSkills> {
+
+    private static final String TAG = "BatchWithSkillsAdapter";
 
     private Context mContext;
     private OnItemListener mOnItemListener;
@@ -34,7 +38,7 @@ public class BatchWithSkillsAdapter extends SortedListAdapter<BatchWithSkills> {
         return new BatchWithSkillsViewHolder(binding, mContext, mOnItemListener);
     }
 
-    public static class BatchWithSkillsViewHolder extends ViewHolder<BatchWithSkills> implements View.OnClickListener {
+    public static class BatchWithSkillsViewHolder extends ViewHolder<BatchWithSkills> implements View.OnClickListener, View.OnLongClickListener {
 
         private final BatchRowBinding mBinding;
         private OnItemListener mOnItemListener;
@@ -43,7 +47,8 @@ public class BatchWithSkillsAdapter extends SortedListAdapter<BatchWithSkills> {
             super(binding.getRoot());
             mBinding = binding;
             mOnItemListener = onItemListener;
-            mBinding.getRoot().findViewById(R.id.constraintlayout_batchrow).setOnClickListener(this);
+            mBinding.getRoot().setOnClickListener(this);
+            mBinding.getRoot().setOnLongClickListener(this);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -53,6 +58,7 @@ public class BatchWithSkillsAdapter extends SortedListAdapter<BatchWithSkills> {
         @Override
         protected void performBind(@NonNull BatchWithSkills item) {
             mBinding.setModel(item.getBatch());
+            mBinding.getRoot().findViewById(R.id.tv_batch_row_batch_name).setTransitionName("name" + item.getBatch().getBatch_id());
             item.getBatch().getSkillsAdapter().edit()
                     .replaceAll(item.getSkills())
                     .commit();
@@ -60,12 +66,21 @@ public class BatchWithSkillsAdapter extends SortedListAdapter<BatchWithSkills> {
 
         @Override
         public void onClick(View v) {
+            Log.d(TAG, "onClick: " + v.toString());
             mOnItemListener.onBatchClick(getCurrentItem());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            Log.d(TAG, "onLongClick: " + v.toString());
+            mOnItemListener.onBatchLongClick(getCurrentItem(), mBinding.tvBatchRowBatchName);
+            return true;
         }
     }
 
     public interface OnItemListener {
         void onBatchClick(BatchWithSkills batchClicked);
+        void onBatchLongClick(BatchWithSkills batchClicked, TextView tvBatchName);
     }
 }
 

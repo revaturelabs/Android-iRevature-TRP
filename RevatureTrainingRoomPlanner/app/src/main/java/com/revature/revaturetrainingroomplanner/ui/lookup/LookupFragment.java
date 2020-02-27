@@ -172,6 +172,10 @@ public class LookupFragment extends Fragment implements TrainerWithSkillsAdapter
     }
 
     @Override
+    public void onBatchLongClick(BatchWithSkills batchClicked, TextView tvBatchName) {
+    }
+
+    @Override
     public void onRoomClick(RoomWithBatchAssignments roomClicked) {
         LookupFragmentDirections.ActionNavCategoryLookupToNavRoomInfo actionNavCategoryLookupToNavRoomInfo = LookupFragmentDirections.actionNavCategoryLookupToNavRoomInfo(roomClicked);
         mMainNavController.navigate(actionNavCategoryLookupToNavRoomInfo);

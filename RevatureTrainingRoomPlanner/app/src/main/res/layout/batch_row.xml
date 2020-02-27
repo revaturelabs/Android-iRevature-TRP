@@ -10,6 +10,7 @@
 
     </data>
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_batch_row"
         android:layout_width="match_parent"
@@ -18,8 +19,11 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="3dp"
+        android:clickable="true"
+        android:longClickable="true"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        app:cardElevation="5dp"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintlayout_batchrow"
@@ -27,11 +31,10 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:backgroundTint="@android:color/background_light"
-            android:clickable="true"
             android:focusable="true">
 
             <TextView
-                android:id="@+id/tv_batch_row"
+                android:id="@+id/tv_batch_row_batch_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -40,6 +43,7 @@
                 android:text="@{model.batch_name}"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:transitionName="@{@string/transition_batch_to_batch_info_name(model.batch_id)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,8 +71,9 @@
                 android:textColor="#999999"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:transitionName="@string/transition_batch_to_batch_info_skills_required"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_batch_name" />
 
             <FrameLayout
                 android:layout_width="0dp"
